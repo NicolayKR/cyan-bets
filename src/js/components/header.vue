@@ -12,34 +12,48 @@
         </a>
         <ul class="nav col-lg-8 bg-light">
             <li class="nav-item">
-                <i class="fas fa-cog"></i>
-                Версия 1.4.14
+                <span class="nav-link">
+                    <i class="fas fa-cog"></i>
+                    Версия 1.4.14
+                </span>
             </li>
             <li class="nav-item">
-                <i class="fas fa-clock"></i>
-                13:00 25.06.2021
+                <span class="nav-link">
+                    <i class="fas fa-clock"></i>
+                    13:00 25.06.2021
+                </span>
             </li>
             <li class="nav-item">
-                <i class="fas fa-gavel"></i>
-                13:00 25.06.2021
+                <span class="nav-link">
+                    <i class="fas fa-gavel"></i>
+                    13:00 25.06.2021
+                </span>
             </li>
             <li class="nav-item">
-                <i class="fas fa-search-plus"></i>
-                100% (55 из 100)
+                <span class="nav-link">
+                    <i class="fas fa-search-plus"></i>
+                    100% (55 из 100)
+                </span>
             </li> 
             <li class="nav-item">
-                <i class="fas fa-user-clock"></i>
-                19 мин
+                <span class="nav-link">
+                    <i class="fas fa-user-clock"></i>
+                    19 мин
+                </span>
             </li>
-            <li class="nav-item">  
-                <i class="fas fa-chart-bar"></i>
-                 0%
+            <li class="nav-item">
+                <span class="nav-link">  
+                    <i class="fas fa-chart-bar"></i>
+                    0%
+                </span>
             </li>
         </ul>
         <div class="nav bg-light col-lg-2 justify-content-end">
-            <div class="nav-item text-nowrap">
-                Здравствуйте, Пользователь
-            </div>
+            <span class="nav-link">
+                <div class="nav-item text-nowrap">
+                    Здравствуйте, Пользователь
+                </div>
+            </span>
         </div>
     </nav>
 </template>
