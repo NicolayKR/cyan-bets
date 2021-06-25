@@ -10,7 +10,7 @@
             </svg>
             Циан автомат
         </a>
-        <ul class="nav col-lg-8 bg-light">
+        <ul class="nav col-lg-8">
             <li class="nav-item">
                 <span class="nav-link">
                     <i class="fas fa-cog"></i>
@@ -48,7 +48,7 @@
                 </span>
             </li>
         </ul>
-        <div class="nav bg-light col-lg-2 justify-content-end">
+        <div class="nav col-lg-2 justify-content-end">
             <span class="nav-link">
                 <div class="nav-item text-nowrap">
                     Здравствуйте, Пользователь
