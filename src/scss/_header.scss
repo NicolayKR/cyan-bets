@@ -6,10 +6,16 @@ nav{
     li:first-child {
         margin-left: 0;
     }
-    a{
-        color:black;
-    }
+}
+.nav-item{
+    display: block;
+    padding: 0.5rem 1rem;
+    color: #918686;
 }
 .navbar{
     align-items: stretch !important;
+    &-brand{
+        font-size: 30px;
+        text-align: center;
+    }
 }

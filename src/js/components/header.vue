@@ -10,25 +10,36 @@
             </svg>
             Циан автомат
         </a>
-        <ul class="nav col-lg-10 bg-light">
+        <ul class="nav col-lg-8 bg-light">
             <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="#">Версия 1.4.14</a>
+                <i class="fas fa-cog"></i>
+                Версия 1.4.14
             </li>
             <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="#">13:00 25.06.2021</a>
+                <i class="fas fa-clock"></i>
+                13:00 25.06.2021
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">13:00 25.06.2021</a>
+                <i class="fas fa-gavel"></i>
+                13:00 25.06.2021
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">100% (55 из 100)</a>
-            </li>
+                <i class="fas fa-search-plus"></i>
+                100% (55 из 100)
+            </li> 
             <li class="nav-item">
-                <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">19 мин</a>
+                <i class="fas fa-user-clock"></i>
+                19 мин
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">0%</a>
+            <li class="nav-item">  
+                <i class="fas fa-chart-bar"></i>
+                 0%
             </li>
         </ul>
+        <div class="nav bg-light col-lg-2 justify-content-end">
+            <div class="nav-item text-nowrap">
+                Здравствуйте, Пользователь
+            </div>
+        </div>
     </nav>
 </template>
