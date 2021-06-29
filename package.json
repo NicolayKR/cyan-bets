@@ -31,10 +31,12 @@
         "vue-template-compiler": "^2.6.12"
     },
     "dependencies": {
+        "@fortawesome/fontawesome-free": "^5.15.3",
         "@popperjs/core": "^2.9.1",
         "axios": "^0.21",
         "bootstrap": "^5.0.2",
         "bootstrap-vue": "^2.21.2",
+        "fontawesome": "^5.6.3",
         "jquery": "^3.5.1",
         "lodash": "^4.17.21",
         "vue": "^2.6.14"

@@ -20,18 +20,18 @@
                     Топ
                 </label>
             </div>
-            <div class="col-1 flex" style="padding-left: 0; margin-left: -20px;">
+            <div class="col-1 ms-n3 flex">
                 <button type="button" class="btn btn-outline-dark">OK</button>
             </div>
         </div>
-        <div class="budge-block mt-4 flex">
+        <div class="budge-block mt-4">
             <div class=budge-item>
-                <button type="button" class="btn btn-primary">
+                <button type="button" class="btn btn-outline-dark">
                     ВСЕГО <span class="badge bg-secondary">251</span>
                 </button>
             </div>
             <div class=budge-item>
-                <button type="button" class="btn btn-primary">
+                <button type="button" class="btn btn-outline-dark">
                     АУКЦИОН <span class="badge bg-secondary">765</span>
                 </button>
             </div>
@@ -65,8 +65,8 @@
                 <td>text</td>
                 <td>
                     <div class ="flex">
-                        <input type="text" name="bets" class="form-control" placeholder="" id="bets" v-model="bets" style="margin-right: 15px;">
-                        <button type="button" class="btn btn-outline-dark">OK</button>
+                        <input type="text" name="bets" class="form-control me-2 form-control-sm" placeholder="" id="bets" v-model="bets">
+                        <button type="button" class="btn btn-sm btn-outline-dark">OK</button>
                     </div>
                 </td>
                 <td>text</td>
@@ -86,8 +86,8 @@
                 <td>layout</td>
                 <td>
                     <div class ="flex">
-                        <input type="text" name="bets" class="form-control" placeholder="" id="bets" v-model="bets" style="margin-right: 15px;">
-                        <button type="button" class="btn btn-outline-dark">OK</button>
+                        <input type="text" name="bets" class="form-control me-2 form-control-sm" placeholder="" id="bets" v-model="bets">
+                        <button type="button" class="btn btn-sm btn-outline-dark">OK</button>
                     </div>
                 </td>
                 <td>text</td>
@@ -107,8 +107,8 @@
                 <td>tabular</td>
                 <td>
                      <div class ="flex">
-                        <input type="text" name="bets" class="form-control" placeholder="" id="bets" v-model="bets" style="margin-right: 15px;">
-                        <button type="button" class="btn btn-outline-dark">OK</button>
+                        <input type="text" name="bets" class="form-control me-2 form-control-sm" placeholder="" id="bets" v-model="bets">
+                        <button type="button" class="btn btn-sm btn-outline-dark">OK</button>
                     </div>
                 </td>
                 <td>text</td>
@@ -128,8 +128,8 @@
                 <td>data</td>
                 <td >
                     <div class ="flex">
-                        <input type="text" name="bets" class="form-control" placeholder="" id="bets" v-model="bets" style="margin-right: 15px;">
-                        <button type="button" class="btn btn-outline-dark">OK</button>
+                        <input type="text" name="bets" class="form-control me-2 form-control-sm" placeholder="" id="bets" v-model="bets">
+                        <button type="button" class="btn btn-sm btn-outline-dark">OK</button>
                     </div>
                 </td>
                 <td>text</td>
@@ -149,8 +149,8 @@
                 <td>dashboard</td>
                 <td>
                      <div class ="flex">
-                        <input type="text" name="bets" class="form-control" placeholder="" id="bets" v-model="bets" style="margin-right: 15px;">
-                        <button type="button" class="btn btn-outline-dark">OK</button>
+                        <input type="text" name="bets" class="form-control me-2 form-control-sm" placeholder="" id="bets" v-model="bets">
+                        <button type="button" class="btn btn-sm btn-outline-dark">OK</button>
                     </div>
                 </td>
                 <td>text</td>
@@ -170,8 +170,8 @@
                 <td>placeholder</td>
                 <td>
                      <div class ="flex">
-                        <input type="text" name="bets" class="form-control" placeholder="" id="bets" v-model="bets" style="margin-right: 15px;">
-                        <button type="button" class="btn btn-outline-dark">OK</button>
+                        <input type="text" name="bets" class="form-control me-2 form-control-sm" placeholder="" id="bets" v-model="bets">
+                        <button type="button" class="btn btn-sm btn-outline-dark">OK</button>
                     </div>
                 </td>
                 <td>text</td>
@@ -191,8 +191,8 @@
                 <td>data</td>
                 <td >
                      <div class ="flex">
-                        <input type="text" name="bets" class="form-control" placeholder="" id="bets" v-model="bets" style="margin-right: 15px;">
-                        <button type="button" class="btn btn-outline-dark">OK</button>
+                        <input type="text" name="bets" class="form-control me-2 form-control-sm" placeholder="" id="bets" v-model="bets">
+                        <button type="button" class="btn btn-sm btn-outline-dark">OK</button>
                     </div>
                 </td>
                 <td>text</td>
@@ -212,8 +212,8 @@
                 <td>irrelevant</td>
                 <td >
                     <div class ="flex">
-                        <input type="text" name="bets" class="form-control" placeholder="" id="bets" v-model="bets" style="margin-right: 15px;">
-                        <button type="button" class="btn btn-outline-dark">OK</button>
+                        <input type="text" name="bets" class="form-control me-2 form-control-sm" placeholder="" id="bets" v-model="bets">
+                        <button type="button" class="btn btn-sm btn-outline-dark">OK</button>
                     </div>
                 </td>
                 <td>text</td>
@@ -233,8 +233,8 @@
                 <td>text</td>
                 <td>
                      <div class ="flex">
-                        <input type="text" name="bets" class="form-control" placeholder="" id="bets" v-model="bets" style="margin-right: 15px;">
-                        <button type="button" class="btn btn-outline-dark">OK</button>
+                        <input type="text" name="bets" class="form-control me-2 form-control-sm" placeholder="" id="bets" v-model="bets">
+                        <button type="button" class="btn btn-sm btn-outline-dark">OK</button>
                     </div>
                 </td>
                 <td>text</td>
@@ -254,8 +254,8 @@
                 <td>layout</td>
                 <td>
                      <div class ="flex">
-                        <input type="text" name="bets" class="form-control" placeholder="" id="bets" v-model="bets" style="margin-right: 15px;">
-                        <button type="button" class="btn btn-outline-dark">OK</button>
+                        <input type="text" name="bets" class="form-control me-2 form-control-sm" placeholder="" id="bets" v-model="bets">
+                        <button type="button" class="btn btn-sm btn-outline-dark">OK</button>
                     </div>
                 </td>
                 <td>text</td>
@@ -275,8 +275,8 @@
                 <td>tabular</td>
                 <td>
                      <div class ="flex">
-                        <input type="text" name="bets" class="form-control" placeholder="" id="bets" v-model="bets" style="margin-right: 15px;">
-                        <button type="button" class="btn btn-outline-dark">OK</button>
+                        <input type="text" name="bets" class="form-control me-2 form-control-sm" placeholder="" id="bets" v-model="bets">
+                        <button type="button" class="btn btn-sm btn-outline-dark">OK</button>
                     </div>
                 </td>
                 <td>text</td>
@@ -296,8 +296,8 @@
                 <td>data</td>
                 <td >
                      <div class ="flex">
-                        <input type="text" name="bets" class="form-control" placeholder="" id="bets" v-model="bets" style="margin-right: 15px;">
-                        <button type="button" class="btn btn-outline-dark">OK</button>
+                        <input type="text" name="bets" class="form-control me-2 form-control-sm" placeholder="" id="bets" v-model="bets">
+                        <button type="button" class="btn btn-sm btn-outline-dark">OK</button>
                     </div>
                 </td>
                 <td>text</td>
@@ -317,8 +317,8 @@
                 <td>dashboard</td>
                 <td >
                      <div class ="flex">
-                        <input type="text" name="bets" class="form-control" placeholder="" id="bets" v-model="bets" style="margin-right: 15px;">
-                        <button type="button" class="btn btn-outline-dark">OK</button>
+                        <input type="text" name="bets" class="form-control me-2 form-control-sm" placeholder="" id="bets" v-model="bets">
+                        <button type="button" class="btn btn-sm btn-outline-dark">OK</button>
                     </div>
                 </td>
                 <td>text</td>
@@ -338,8 +338,8 @@
                 <td>visual</td>
                 <td >
                      <div class ="flex">
-                        <input type="text" name="bets" class="form-control" placeholder="" id="bets" v-model="bets" style="margin-right: 15px;">
-                        <button type="button" class="btn btn-outline-dark">OK</button>
+                        <input type="text" name="bets" class="form-control me-2 form-control-sm" placeholder="" id="bets" v-model="bets">
+                        <button type="button" class="btn btn-sm btn-outline-dark">OK</button>
                     </div>
                 </td>
                 <td>text</td>
@@ -359,8 +359,8 @@
                 <td>data</td>
                 <td >
                      <div class ="flex">
-                        <input type="text" name="bets" class="form-control" placeholder="" id="bets" v-model="bets" style="margin-right: 15px;">
-                        <button type="button" class="btn btn-outline-dark">OK</button>
+                        <input type="text" name="bets" class="form-control me-2 form-control-sm" placeholder="" id="bets" v-model="bets">
+                        <button type="button" class="btn btn-sm btn-outline-dark">OK</button>
                     </div>
                 </td>
                 <td>text</td>
@@ -380,8 +380,8 @@
                 <td>text</td>
                 <td>
                     <div class ="flex">
-                        <input type="text" name="bets" class="form-control" placeholder="" id="bets" v-model="bets" style="margin-right: 15px;">
-                        <button type="button" class="btn btn-outline-dark">OK</button>
+                        <input type="text" name="bets" class="form-control me-2 form-control-sm" placeholder="" id="bets" v-model="bets">
+                        <button type="button" class="btn btn-sm btn-outline-dark">OK</button>
                     </div>
                 </td>
                 <td>text</td>

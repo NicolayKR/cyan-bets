@@ -1,6 +1,7 @@
 require('./bootstrap');
 
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue';
+
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 
 import Vue from "vue";
