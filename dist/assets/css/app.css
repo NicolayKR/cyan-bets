@@ -10858,6 +10858,36 @@ nav {
   color: white;
 }
 
+.flex {
+  display: flex;
+  align-items: center;
+}
+
+.margin-datepicker {
+  margin-left: 10px;
+}
+
+.form-check-padding {
+  padding-left: 40px;
+}
+
+.label-check-top {
+  margin-left: 5px;
+  padding-top: 5px;
+}
+
+.table-responsive {
+  margin-top: 20px;
+}
+
+.budge-item {
+  margin-left: 10px;
+}
+
+.budge-item:first-child {
+  margin-left: 0;
+}
+
 body {
   font-size: 0.875rem;
 }
