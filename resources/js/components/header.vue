@@ -41,13 +41,21 @@
                     0%
                 </span>
             </li>
+            
         </ul>
-        <div class="nav col-lg-2 justify-content-end">
-            <span class="nav-item">
-                <div class="nav-link text-nowrap">
-                    Здравствуйте, Пользователь
-                </div>
-            </span>
+        <div class="nav-item col-lg-2 dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="text-align: end;">
+                Здравствуйте, Пользователь
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" >
+                <li><a class="dropdown-item" href="logout" onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();">
+                    Выход
+                </a></li>
+                <form id="logout-form" action="logout" method="POST" class="d-none">
+                    @csrf
+                </form>
+            </ul>
         </div>
     </nav>
 </template>

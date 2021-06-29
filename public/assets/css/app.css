@@ -17925,6 +17925,11 @@ nav {
   --bs-gutter-x: 0;
 }
 
+.dropdown-menu {
+  left: none !important;
+  right: 0 !important;
+}
+
 body {
   font-size: 0.875rem;
 }
