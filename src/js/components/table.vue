@@ -65,7 +65,7 @@
                 <td>text</td>
                 <td>
                     <div class ="flex">
-                        <input type="text" name="bets" class="form-control me-2 form-control-sm" placeholder="" id="bets" v-model="bets">
+                        <input type="text" name="bets" class="form-control me-2 form-control-sm" placeholder="" v-model="bets">
                         <button type="button" class="btn btn-sm btn-outline-dark">OK</button>
                     </div>
                 </td>
@@ -86,7 +86,7 @@
                 <td>layout</td>
                 <td>
                     <div class ="flex">
-                        <input type="text" name="bets" class="form-control me-2 form-control-sm" placeholder="" id="bets" v-model="bets">
+                        <input type="text" name="bets" class="form-control me-2 form-control-sm" placeholder="" v-model="bets">
                         <button type="button" class="btn btn-sm btn-outline-dark">OK</button>
                     </div>
                 </td>
@@ -107,7 +107,7 @@
                 <td>tabular</td>
                 <td>
                      <div class ="flex">
-                        <input type="text" name="bets" class="form-control me-2 form-control-sm" placeholder="" id="bets" v-model="bets">
+                        <input type="text" name="bets" class="form-control me-2 form-control-sm" placeholder="" v-model="bets">
                         <button type="button" class="btn btn-sm btn-outline-dark">OK</button>
                     </div>
                 </td>
@@ -128,7 +128,7 @@
                 <td>data</td>
                 <td >
                     <div class ="flex">
-                        <input type="text" name="bets" class="form-control me-2 form-control-sm" placeholder="" id="bets" v-model="bets">
+                        <input type="text" name="bets" class="form-control me-2 form-control-sm" placeholder="" v-model="bets">
                         <button type="button" class="btn btn-sm btn-outline-dark">OK</button>
                     </div>
                 </td>
@@ -149,7 +149,7 @@
                 <td>dashboard</td>
                 <td>
                      <div class ="flex">
-                        <input type="text" name="bets" class="form-control me-2 form-control-sm" placeholder="" id="bets" v-model="bets">
+                        <input type="text" name="bets" class="form-control me-2 form-control-sm" placeholder="" v-model="bets">
                         <button type="button" class="btn btn-sm btn-outline-dark">OK</button>
                     </div>
                 </td>
@@ -170,7 +170,7 @@
                 <td>placeholder</td>
                 <td>
                      <div class ="flex">
-                        <input type="text" name="bets" class="form-control me-2 form-control-sm" placeholder="" id="bets" v-model="bets">
+                        <input type="text" name="bets" class="form-control me-2 form-control-sm" placeholder="" v-model="bets">
                         <button type="button" class="btn btn-sm btn-outline-dark">OK</button>
                     </div>
                 </td>
@@ -191,7 +191,7 @@
                 <td>data</td>
                 <td >
                      <div class ="flex">
-                        <input type="text" name="bets" class="form-control me-2 form-control-sm" placeholder="" id="bets" v-model="bets">
+                        <input type="text" name="bets" class="form-control me-2 form-control-sm" placeholder="" v-model="bets">
                         <button type="button" class="btn btn-sm btn-outline-dark">OK</button>
                     </div>
                 </td>
@@ -212,7 +212,7 @@
                 <td>irrelevant</td>
                 <td >
                     <div class ="flex">
-                        <input type="text" name="bets" class="form-control me-2 form-control-sm" placeholder="" id="bets" v-model="bets">
+                        <input type="text" name="bets" class="form-control me-2 form-control-sm" placeholder="" v-model="bets">
                         <button type="button" class="btn btn-sm btn-outline-dark">OK</button>
                     </div>
                 </td>
@@ -233,7 +233,7 @@
                 <td>text</td>
                 <td>
                      <div class ="flex">
-                        <input type="text" name="bets" class="form-control me-2 form-control-sm" placeholder="" id="bets" v-model="bets">
+                        <input type="text" name="bets" class="form-control me-2 form-control-sm" placeholder="" v-model="bets">
                         <button type="button" class="btn btn-sm btn-outline-dark">OK</button>
                     </div>
                 </td>
@@ -254,7 +254,7 @@
                 <td>layout</td>
                 <td>
                      <div class ="flex">
-                        <input type="text" name="bets" class="form-control me-2 form-control-sm" placeholder="" id="bets" v-model="bets">
+                        <input type="text" name="bets" class="form-control me-2 form-control-sm" placeholder="" v-model="bets">
                         <button type="button" class="btn btn-sm btn-outline-dark">OK</button>
                     </div>
                 </td>
@@ -275,7 +275,7 @@
                 <td>tabular</td>
                 <td>
                      <div class ="flex">
-                        <input type="text" name="bets" class="form-control me-2 form-control-sm" placeholder="" id="bets" v-model="bets">
+                        <input type="text" name="bets" class="form-control me-2 form-control-sm" placeholder="" v-model="bets">
                         <button type="button" class="btn btn-sm btn-outline-dark">OK</button>
                     </div>
                 </td>
@@ -296,7 +296,7 @@
                 <td>data</td>
                 <td >
                      <div class ="flex">
-                        <input type="text" name="bets" class="form-control me-2 form-control-sm" placeholder="" id="bets" v-model="bets">
+                        <input type="text" name="bets" class="form-control me-2 form-control-sm" placeholder="" v-model="bets">
                         <button type="button" class="btn btn-sm btn-outline-dark">OK</button>
                     </div>
                 </td>
@@ -317,7 +317,7 @@
                 <td>dashboard</td>
                 <td >
                      <div class ="flex">
-                        <input type="text" name="bets" class="form-control me-2 form-control-sm" placeholder="" id="bets" v-model="bets">
+                        <input type="text" name="bets" class="form-control me-2 form-control-sm" placeholder="" v-model="bets">
                         <button type="button" class="btn btn-sm btn-outline-dark">OK</button>
                     </div>
                 </td>
@@ -338,7 +338,7 @@
                 <td>visual</td>
                 <td >
                      <div class ="flex">
-                        <input type="text" name="bets" class="form-control me-2 form-control-sm" placeholder="" id="bets" v-model="bets">
+                        <input type="text" name="bets" class="form-control me-2 form-control-sm" placeholder="" v-model="bets">
                         <button type="button" class="btn btn-sm btn-outline-dark">OK</button>
                     </div>
                 </td>
@@ -359,7 +359,7 @@
                 <td>data</td>
                 <td >
                      <div class ="flex">
-                        <input type="text" name="bets" class="form-control me-2 form-control-sm" placeholder="" id="bets" v-model="bets">
+                        <input type="text" name="bets" class="form-control me-2 form-control-sm" placeholder="" v-model="bets">
                         <button type="button" class="btn btn-sm btn-outline-dark">OK</button>
                     </div>
                 </td>
@@ -380,7 +380,7 @@
                 <td>text</td>
                 <td>
                     <div class ="flex">
-                        <input type="text" name="bets" class="form-control me-2 form-control-sm" placeholder="" id="bets" v-model="bets">
+                        <input type="text" name="bets" class="form-control me-2 form-control-sm" placeholder="" v-model="bets">
                         <button type="button" class="btn btn-sm btn-outline-dark">OK</button>
                     </div>
                 </td>
@@ -399,3 +399,12 @@
       </main>
     
 </template>
+<script>
+export default {
+    data() {
+        return {
+            bets: ''
+        }
+    }
+    }
+</script>
