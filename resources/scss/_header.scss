@@ -1,0 +1,21 @@
+nav{
+    min-height: 50px !important;
+    // li{
+    //     margin-left: 20px;
+    // }
+    // li:first-child {
+    //     margin-left: 0;
+    // }
+}
+.nav-link{
+    // display: block;
+    // padding: 0.5rem 1rem;
+    color: white;
+}
+.navbar{
+    //align-items: stretch !important;
+    &-brand{
+        // font-size: 30px;
+        // text-align: center;
+    }
+}

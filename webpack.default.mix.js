@@ -1,6 +1,6 @@
 let mix = require('laravel-mix');
-mix.js('src/js/app.js', 'dist/assets/js').vue()
-        .sass('src/scss/app.scss', 'dist/assets/css');
+mix.js('resources/js/app.js', 'public/assets/js').vue()
+        .sass('resources/scss/app.scss', 'public/assets/css');
 
 // Если не нужен сервер статики, закомментировать...
 const browserSync = require("browser-sync").create();
