@@ -2,7 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AddFormController;
+use App\Http\Controllers\AccountController;
 use Illuminate\Support\Facades\Auth;
+use App\Models\CompanyName;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,22 +18,18 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::view('/','index')->middleware('auth')->name('index');
-Route::view('settings', 'settings')->name('settings');
+Route::view('add-form', 'add-form')->name('add-form');
+Route::view('account', 'account')->name('account');
 Route::post('save-form','App\Http\Controllers\AddFormController@save');
 Route::get('getName', function(){
     return Auth::user()->name;
 });
-Route::get('test',function(){
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, "https://public-api.cian.ru/v1/get-my-balance");
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    $headers = array(
-        "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjI0MDAyODgyfQ.3xNBgSsU7UDAleK8U2znXFw8_fkcKIvMCmv-w0Dz4-c",
-    );
-    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-    $output = curl_exec($ch);
-    curl_close($ch);
-    $result = json_decode($output, true);
-    return $result['result']['totalBalance'];
-});
+Route::get('getFirmsData', 'App\Http\Controllers\AccountController@getData');
 Auth::routes();
+Route::get('test',function(){
+    // $collection = CompanyName::select('name','xml_feed','cyan_key')
+    //                         ->where('user_id', Auth::user()->id)
+    //                         ->groupBy('name','xml_feed','cyan_key')
+    //                         ->get();
+    // return $collection;
+});

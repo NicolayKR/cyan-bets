@@ -48,8 +48,8 @@
                 Здравствуйте, {{nameUser}}
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" >
-                <li><a class="dropdown-item" href="settings">
-                    Настройки
+                <li><a class="dropdown-item" href="account">
+                    Аккаунты
                 </a></li>
                 <li><a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                     Выход

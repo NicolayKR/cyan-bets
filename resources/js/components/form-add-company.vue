@@ -44,9 +44,6 @@
 </template>
 <script>
     export default {
-        props:{
-            textFromForm: null
-        },
         data() {
             return {
                 csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
