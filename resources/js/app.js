@@ -11,6 +11,7 @@ Vue.use(IconsPlugin)
 Vue.component('example-component', require('./components/ExampleComponent').default);
 Vue.component('header-component', require('./components/header').default);
 Vue.component('table-component', require('./components/table').default);
+Vue.component('form-add-company', require('./components/form-add-company').default);
 
 new Vue({
     el: '#app',

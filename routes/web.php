@@ -14,5 +14,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::view('/','index')->middleware('auth')->name('index');
+Route::view('settings', 'settings')->name('settings');
 
 Auth::routes();

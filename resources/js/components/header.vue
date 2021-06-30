@@ -44,18 +44,34 @@
             
         </ul>
         <div class="nav-item col-lg-2 dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="text-align: end;">
+            <a class="nav-link dropdown-toggle text-end" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Здравствуйте, Пользователь
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" >
-                <li><a class="dropdown-item" href="logout" onclick="event.preventDefault();
-                                    document.getElementById('logout-form').submit();">
+                <li><a class="dropdown-item" href="settings">
+                    Настройки
+                </a></li>
+                <li><a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                     Выход
                 </a></li>
-                <form id="logout-form" action="logout" method="POST" class="d-none">
-                    @csrf
-                </form>
+                <b-form id="logout-form" action="logout" method="POST" class="d-none">
+                    <input type="hidden" name="_token" :value="csrf">
+                </b-form>
             </ul>
         </div>
     </nav>
 </template>
+<script>
+export default {
+ data() {
+   return {
+     csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+   }
+ },
+ methods: {
+   submit : function(){
+     this.$refs.form.submit();
+   }
+ }
+}
+</script>
