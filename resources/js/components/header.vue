@@ -45,7 +45,7 @@
         </ul>
         <div class="nav-item col-lg-2 dropdown">
             <a class="nav-link dropdown-toggle text-end" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Здравствуйте, Пользователь
+                Здравствуйте, {{nameUser}}
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" >
                 <li><a class="dropdown-item" href="settings">
@@ -63,15 +63,24 @@
 </template>
 <script>
 export default {
- data() {
-   return {
-     csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-   }
- },
- methods: {
-   submit : function(){
-     this.$refs.form.submit();
-   }
- }
+    data() {
+        return {
+            csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+            nameUser: null,
+        }
+    },
+    mounted(){
+        this.getUserName();
+    },
+    methods: {
+        submit : function(){
+            this.$refs.form.submit();
+            },
+        getUserName(){
+            axios.get('/getName').then(response => {
+                this.nameUser = response.data;
+            });
+        }
+  } 
 }
 </script>

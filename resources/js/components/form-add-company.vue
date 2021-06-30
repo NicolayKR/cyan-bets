@@ -9,6 +9,7 @@
                     <div class="card-header">Добавить</div>
                     <div class="card-body">
                         <form method="POST" action="save-form">
+                            <input type="hidden" name="_token" :value="csrf">
                             <div class="form-group row">
                                 <label for="company-name" class="col-md-4 col-form-label text-md-right">Название фирмы</label>
                                 <div class="col-md-6">
@@ -50,3 +51,17 @@
         </div>
     </div>
 </template>
+<script>
+export default {
+ data() {
+   return {
+     csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+   }
+ },
+ methods: {
+   submit : function(){
+     this.$refs.form.submit();
+   }
+ }
+}
+</script>
