@@ -13,7 +13,20 @@
 <body>
     <div id="app">
         <main class="py-4">
-            <form-add-company></form-add-company>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+                        <div class="user-text">
+                            @if (session('status'))
+                            <div class="alert alert-success">
+                                {{ session('status') }}
+                            </div>
+                            @endif
+                        </div>
+                        <form-add-company ></form-add-company>
+                    </div>
+                </div>
+            </div>
         </main>
     </div>
 </body>

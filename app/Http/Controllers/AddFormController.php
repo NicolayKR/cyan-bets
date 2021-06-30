@@ -41,7 +41,9 @@ class AddFormController extends Controller
                 'user_id'=> Auth::user()->id
             ));
             $newCompany->save();
-            return redirect()->route('setting',['id' => 1]);
+            $textFromForm = 'Пропишите следующую ссылку на XML фид, в Вашем личном кабинете ЦИАН: ';
+            return redirect()->route('settings')->with('status', $textFromForm);
+            
         };
 
 
