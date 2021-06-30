@@ -15,6 +15,10 @@ class CreateCompanyNamesTable extends Migration
     {
         Schema::create('company_names', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->text('xml_feed');
+            $table->string('cyan_key');
+            $table->integer('user_id');
             $table->timestamps();
         });
     }
