@@ -12,8 +12,12 @@
 </head>
 <body>
     <div id="app">
-        <main class="py-4">
-            @yield('content')
+        <main>
+            <header-component ></header-component>
+            <div class="container-fluid">
+                <div class="row">
+                @yield('content')   
+                </div>  
         </main>
     </div>
 </body>

@@ -2,7 +2,7 @@
     <div class="card">
         <div class="card-header">Добавить</div>
         <div class="card-body">
-            <form method="POST" action="save-form">
+            <form method="POST" action="accounts">
                 <input type="hidden" name="_token" :value="csrf">
                 <div class="form-group row">
                     <label for="company-name" class="col-md-4 col-form-label text-md-right">Название фирмы</label>

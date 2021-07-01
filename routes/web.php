@@ -19,12 +19,12 @@ use App\Models\CompanyName;
 
 Route::view('/','index')->middleware('auth')->name('index');
 Route::view('add-form', 'add-form')->name('add-form');
-Route::view('account', 'account')->name('account');
-Route::post('save-form','App\Http\Controllers\AddFormController@save');
+Route::post('accounts/save-form','App\Http\Controllers\AddFormController@save');
 Route::get('getName', function(){
     return Auth::user()->name;
 });
-Route::get('getFirmsData', 'App\Http\Controllers\AccountController@getData');
+Route::post('/updateCompany','App\Http\Controllers\AddFormController@update')->name('updateCompany');
+Route::resource('/accounts','App\Http\Controllers\AccountController');
 Auth::routes();
 Route::get('test',function(){
     // $collection = CompanyName::select('name','xml_feed','cyan_key')
