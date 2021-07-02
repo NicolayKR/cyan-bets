@@ -85,7 +85,12 @@ class AccountController extends Controller
                     'user_id'=> Auth::user()->id 
                 ));
                 $newCompany->save();
-                $id_user = CompanyName::select('id')->where('cyan_key', $current_api)->get();
+                $xml = simplexml_load_file($current_xml);
+                $array = json_decode(json_encode($xml),TRUE);
+                $result = ArrayToXml::convert($array);
+                $res = CompanyName::select('id')->where('cyan_key', $current_api)->get();
+                $id_user = $res[0]['id'];
+                Storage::put('public/'.Auth::user()->id.'/'.$id_user.'/current.xml', $result);
                 $textFromForm = 'Пропишите следующую ссылку на XML фид, в Вашем личном кабинете ЦИАН: ссылка';
                 return redirect()->route('accounts.edit', $newCompany)->with('status', $textFromForm);  
             } else{
