@@ -4,6 +4,9 @@
             <i class="fab fa-atlassian"></i>
             Циан автомат
         </a>
+        <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
         <ul class="nav col-lg-8">
             <li class="nav-item">
                 <span class="nav-link">
