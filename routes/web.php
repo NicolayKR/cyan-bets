@@ -5,6 +5,8 @@ use App\Http\Controllers\AddFormController;
 use App\Http\Controllers\AccountController;
 use Illuminate\Support\Facades\Auth;
 use App\Models\CompanyName;
+use Spatie\ArrayToXml\ArrayToXml;
+use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,9 +29,24 @@ Route::post('/updateCompany','App\Http\Controllers\AddFormController@update')->n
 Route::resource('/accounts','App\Http\Controllers\AccountController');
 Auth::routes();
 Route::get('test',function(){
-    // $collection = CompanyName::select('name','xml_feed','cyan_key')
-    //                         ->where('user_id', Auth::user()->id)
-    //                         ->groupBy('name','xml_feed','cyan_key')
-    //                         ->get();
-    // return $collection;
+    $current_xml = 'https://nasledie-don.ru/admin/upload/cian_flats_rnd.xml';
+    // $contents = @file_get_contents($current_xml);
+    // $result = json_encode($contents);
+    // return $result;
+    $xml = simplexml_load_file($current_xml);
+    $json = json_encode($xml);
+    $array = json_decode($json,TRUE);
+    $result = ArrayToXml::convert($array);
+    $res = CompanyName::select('id')->where('cyan_key', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjI0MDAyODgyfQ.3xNBgSsU7UDAleK8U2znXFw8_fkcKIvMCmv-w0Dz4-c')
+        ->get();
+    $id_user = $res[0]['id'];
+    if(Storage::get('public/'.Auth::user()->id.'/'.$id_user.'/current.xml')){
+       
+    }else{
+        Storage::put('public/'.Auth::user()->id.'/'.$id_user.'/current.xml', $result);
+    }
+    //Storage::put('public/'.Auth::user()->id.'/'.$id_user.'/current.xml', $result);
+    //$url = Storage::url('public/1/1/current.xml');
+    //Storage::put('file.jpg', $contents);
+    // return $res;
 });

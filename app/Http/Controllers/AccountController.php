@@ -6,6 +6,8 @@ use App\Models\CompanyName;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+
 
 class AccountController extends Controller
 {
@@ -53,12 +55,13 @@ class AccountController extends Controller
         $output = curl_exec($ch);
         curl_close($ch);
         $result = json_decode($output, true);
+        $contents = @file_get_contents($current_xml);
         if (array_key_exists('totalBalance', $result['result'])) {
             $status_api_connect = true;
         }else{
             $textFromForm = 'Некорректный ключ к ЦИАН';
         }
-        if(false !== ($contents = @file_get_contents($current_xml))){
+        if(false !== $contents){
             $status_xml_connect = true;
         }
         else{
@@ -69,6 +72,7 @@ class AccountController extends Controller
                 $textFromForm = 'Некорректный XML фид ЦИАН';
             }
         }
+        $contents = json_encode($contents);
         if($status_xml_connect and $status_api_connect){
             $result = CompanyName::select(CompanyName::raw('COUNT(*)'))
                                             ->where('cyan_key', $current_api)
@@ -81,6 +85,7 @@ class AccountController extends Controller
                     'user_id'=> Auth::user()->id 
                 ));
                 $newCompany->save();
+                $id_user = CompanyName::select('id')->where('cyan_key', $current_api)->get();
                 $textFromForm = 'Пропишите следующую ссылку на XML фид, в Вашем личном кабинете ЦИАН: ссылка';
                 return redirect()->route('accounts.edit', $newCompany)->with('status', $textFromForm);  
             } else{

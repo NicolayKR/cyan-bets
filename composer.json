@@ -12,7 +12,8 @@
         "imangazaliev/didom": "^1.16",
         "laravel/framework": "^8.40",
         "laravel/tinker": "^2.5",
-        "laravel/ui": "^3.3"
+        "laravel/ui": "^3.3",
+        "spatie/array-to-xml": "^3.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
