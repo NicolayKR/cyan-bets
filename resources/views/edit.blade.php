@@ -25,13 +25,13 @@
                     <input type="hidden" name="_method" value="put">
                     @csrf
                     <div class="form-group row">
-                        <label for="name" class="col-md-4 col-form-label text-end">Название фирмы</label>
+                        <label for="name" class="col-md-4 col-form-label text-md-end">Название фирмы</label>
                         <div class="col-md-6">
                             <input id="name" type="text" class="form-control" name="name" value="{{$account->name}}" required>
                         </div>
                     </div>
                     <div class="form-group row mt-4">
-                        <label for="xml-feed" class="col-md-4 col-form-label text-end">Ваш XML фид ЦИАН</label>
+                        <label for="xml-feed" class="col-md-4 col-form-label text-md-end">Ваш XML фид ЦИАН</label>
                         <div class="col-md-6">
                             <input id="xml-feed" type="text" class="form-control" name="xml_feed" value="{{$account->xml_feed}}" required aria-describedby="xml-feed-Help">
                             <div id="xml-feed-Help" class="form-text">
@@ -40,7 +40,7 @@
                         </div>
                     </div>
                     <div class="form-group row mt-4">
-                        <label for="key-cyan" class="col-md-4 col-form-label text-end">API ключ ЦИАН</label>
+                        <label for="key-cyan" class="col-md-4 col-form-label text-md-end">API ключ ЦИАН</label>
                         <div class="col-md-6">
                             <input id="key-cyan" type="text" class="form-control" name="key_cyan" value="{{$account->cyan_key}}" required
                             aria-describedby="key-cyan-Help">
