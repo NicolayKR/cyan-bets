@@ -15,7 +15,7 @@
         <div class="card">
             <div class="card-header">Ваша текущая ссылка для ЦИАН</div>
             <div class="card-body">
-                <input class="form-control" type="text" value="{{$account->xml_feed}}" aria-label="Disabled input example" readonly>
+                <input class="form-control" type="text" value="{{$url}}" aria-label="Disabled input example" readonly>
             </div>
         </div>    
         <div class="card">

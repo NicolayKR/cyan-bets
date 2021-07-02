@@ -6,6 +6,7 @@ use App\Models\CompanyName;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Spatie\ArrayToXml\ArrayToXml;
 use Illuminate\Support\Facades\Storage;
 
 
@@ -90,8 +91,11 @@ class AccountController extends Controller
                 $result = ArrayToXml::convert($array);
                 $res = CompanyName::select('id')->where('cyan_key', $current_api)->get();
                 $id_user = $res[0]['id'];
-                Storage::put('public/'.Auth::user()->id.'/'.$id_user.'/current.xml', $result);
-                $textFromForm = 'Пропишите следующую ссылку на XML фид, в Вашем личном кабинете ЦИАН: ссылка';
+                if(!Storage::exists('public/'.Auth::user()->id.'/'.$id_user.'/xml-feed.xml')){
+                    Storage::put('public/'.Auth::user()->id.'/'.$id_user.'/xml-feed.xml', $result);
+                }
+                $url = Storage::url('public/'.Auth::user()->id.'/'.$id_user.'/xml-feed.xml');
+                $textFromForm = 'Пропишите следующую ссылку на XML фид, в Вашем личном кабинете ЦИАН:'.$url;
                 return redirect()->route('accounts.edit', $newCompany)->with('status', $textFromForm);  
             } else{
                 $textFromForm = 'На вашем аккаунте уже зарегистрирован этот ключ к ЦИАН';
@@ -122,8 +126,13 @@ class AccountController extends Controller
      */
     public function edit(CompanyName $account)
     {
+
+        $res = CompanyName::select('id')->where('cyan_key', $account->cyan_key)->get();
+        $id_user = $res[0]['id'];
+        $url = Storage::url('public/'.Auth::user()->id.'/'.$id_user.'/xml-feed.xml');
         return view('edit', [
             'account' => $account,
+            'url' => $url
         ]);
     }
 

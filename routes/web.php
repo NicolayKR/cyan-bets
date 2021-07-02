@@ -40,13 +40,10 @@ Route::get('test',function(){
     $res = CompanyName::select('id')->where('cyan_key', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjI0MDAyODgyfQ.3xNBgSsU7UDAleK8U2znXFw8_fkcKIvMCmv-w0Dz4-c')
         ->get();
     $id_user = $res[0]['id'];
-    if(Storage::get('public/'.Auth::user()->id.'/'.$id_user.'/current.xml')){
-       
-    }else{
-        Storage::put('public/'.Auth::user()->id.'/'.$id_user.'/current.xml', $result);
+    if(!Storage::exists('public/'.Auth::user()->id.'/'.$id_user.'/xml-feed.xml')){
+        Storage::put('public/'.Auth::user()->id.'/'.$id_user.'/xml-feed.xml', $result);
     }
-    //Storage::put('public/'.Auth::user()->id.'/'.$id_user.'/current.xml', $result);
-    //$url = Storage::url('public/1/1/current.xml');
-    //Storage::put('file.jpg', $contents);
+    $url = Storage::url('public/'.Auth::user()->id.'/'.$id_user.'/xml-feed.xml');
+    return $url;
     // return $res;
 });
