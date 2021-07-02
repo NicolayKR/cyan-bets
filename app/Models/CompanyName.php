@@ -9,6 +9,9 @@ class CompanyName extends Model
 {
     use HasFactory;
 
+    public function getUrl(){
+        
+    }
     protected $fillable = [
         'name',
         'xml_feed',
