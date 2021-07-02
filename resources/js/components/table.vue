@@ -1,7 +1,7 @@
 <template>
-    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <div>
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-          <h1 class="h2">Циан Автомат</h1>
+            <h1 class="h2">Циан Автомат</h1>
         </div>
         <div class="row">
             <div class="col-3 flex">
@@ -37,9 +37,9 @@
             </div>
         </div>
         <div class="table-responsive">
-          <table class="table table-striped table-bordered table-sm">
+            <table class="table table-striped table-bordered table-sm">
             <thead>
-              <tr>
+                <tr>
                 <th scope="col">ОХВАТ В ПРОЦЕНТАХ</th>
                 <th scope="col">КОЛИЧЕСТВО ПОИСКОВ</th>
                 <th scope="col">КОЛИЧЕСТВО ПОКАЗОВ</th>
@@ -54,10 +54,10 @@
                 <th scope="col">АГЕНТ</th>
                 <th scope="col">ID ОБЪЕКТА</th>
                 <th scope="col">ID ЦИАНА</th>
-              </tr>
+                </tr>
             </thead>
             <tbody>
-              <tr>
+                <tr>
                 <td>1,001</td>
                 <td>random</td>
                 <td>data</td>
@@ -77,8 +77,8 @@
                 <td>text</td>
                 <td>text</td>
                 <td>text</td>
-              </tr>
-              <tr>
+                </tr>
+                <tr>
                 <td>1,002</td>
                 <td>placeholder</td>
                 <td>irrelevant</td>
@@ -98,15 +98,15 @@
                 <td>text</td>
                 <td>text</td>
                 <td>text</td>
-              </tr>
-              <tr>
+                </tr>
+                <tr>
                 <td>1,003</td>
                 <td>data</td>
                 <td>rich</td>
                 <td>dashboard</td>
                 <td>tabular</td>
                 <td>
-                     <div class ="flex">
+                        <div class ="flex">
                         <input type="text" class="form-control me-2 form-control-sm" placeholder="" v-model="bets">
                         <button type="button" class="btn btn-sm btn-outline-dark">OK</button>
                     </div>
@@ -119,8 +119,8 @@
                 <td>text</td>
                 <td>text</td>
                 <td>text</td>
-              </tr>
-              <tr>
+                </tr>
+                <tr>
                 <td>1,003</td>
                 <td>information</td>
                 <td>placeholder</td>
@@ -140,15 +140,15 @@
                 <td>text</td>
                 <td>text</td>
                 <td>text</td>
-              </tr>
-              <tr>
+                </tr>
+                <tr>
                 <td>1,004</td>
                 <td>text</td>
                 <td>random</td>
                 <td>layout</td>
                 <td>dashboard</td>
                 <td>
-                     <div class ="flex">
+                        <div class ="flex">
                         <input type="text" class="form-control me-2 form-control-sm" placeholder="" v-model="bets">
                         <button type="button" class="btn btn-sm btn-outline-dark">OK</button>
                     </div>
@@ -161,15 +161,15 @@
                 <td>text</td>
                 <td>text</td>
                 <td>text</td>
-              </tr>
-              <tr>
+                </tr>
+                <tr>
                 <td>1,005</td>
                 <td>dashboard</td>
                 <td>irrelevant</td>
                 <td>text</td>
                 <td>placeholder</td>
                 <td>
-                     <div class ="flex">
+                        <div class ="flex">
                         <input type="text" class="form-control me-2 form-control-sm" placeholder="" v-model="bets">
                         <button type="button" class="btn btn-sm btn-outline-dark">OK</button>
                     </div>
@@ -182,15 +182,15 @@
                 <td>text</td>
                 <td>text</td>
                 <td>text</td>
-              </tr>
-              <tr>
+                </tr>
+                <tr>
                 <td>1,006</td>
                 <td>dashboard</td>
                 <td>illustrative</td>
                 <td>rich</td>
                 <td>data</td>
                 <td >
-                     <div class ="flex">
+                        <div class ="flex">
                         <input type="text" class="form-control me-2 form-control-sm" placeholder="" v-model="bets">
                         <button type="button" class="btn btn-sm btn-outline-dark">OK</button>
                     </div>
@@ -203,8 +203,8 @@
                 <td>text</td>
                 <td>text</td>
                 <td>text</td>
-              </tr>
-              <tr>
+                </tr>
+                <tr>
                 <td>1,007</td>
                 <td>placeholder</td>
                 <td>tabular</td>
@@ -224,15 +224,15 @@
                 <td>text</td>
                 <td>text</td>
                 <td>text</td>
-              </tr>
-              <tr>
+                </tr>
+                <tr>
                 <td>1,008</td>
                 <td>random</td>
                 <td>data</td>
                 <td>placeholder</td>
                 <td>text</td>
                 <td>
-                     <div class ="flex">
+                        <div class ="flex">
                         <input type="text" class="form-control me-2 form-control-sm" placeholder="" v-model="bets">
                         <button type="button" class="btn btn-sm btn-outline-dark">OK</button>
                     </div>
@@ -245,15 +245,15 @@
                 <td>text</td>
                 <td>text</td>
                 <td>text</td>
-              </tr>
-              <tr>
+                </tr>
+                <tr>
                 <td>1,009</td>
                 <td>placeholder</td>
                 <td>irrelevant</td>
                 <td>visual</td>
                 <td>layout</td>
                 <td>
-                     <div class ="flex">
+                        <div class ="flex">
                         <input type="text" class="form-control me-2 form-control-sm" placeholder="" v-model="bets">
                         <button type="button" class="btn btn-sm btn-outline-dark">OK</button>
                     </div>
@@ -266,15 +266,15 @@
                 <td>text</td>
                 <td>text</td>
                 <td>text</td>
-              </tr>
-              <tr>
+                </tr>
+                <tr>
                 <td>1,010</td>
                 <td>data</td>
                 <td>rich</td>
                 <td>dashboard</td>
                 <td>tabular</td>
                 <td>
-                     <div class ="flex">
+                        <div class ="flex">
                         <input type="text" class="form-control me-2 form-control-sm" placeholder="" v-model="bets">
                         <button type="button" class="btn btn-sm btn-outline-dark">OK</button>
                     </div>
@@ -287,15 +287,15 @@
                 <td>text</td>
                 <td>text</td>
                 <td>text</td>
-              </tr>
-              <tr>
+                </tr>
+                <tr>
                 <td>1,011</td>
                 <td>information</td>
                 <td>placeholder</td>
                 <td>illustrative</td>
                 <td>data</td>
                 <td >
-                     <div class ="flex">
+                        <div class ="flex">
                         <input type="text" class="form-control me-2 form-control-sm" placeholder="" v-model="bets">
                         <button type="button" class="btn btn-sm btn-outline-dark">OK</button>
                     </div>
@@ -308,15 +308,15 @@
                 <td>text</td>
                 <td>text</td>
                 <td>text</td>
-              </tr>
-              <tr>
+                </tr>
+                <tr>
                 <td>1,012</td>
                 <td>text</td>
                 <td>placeholder</td>
                 <td>layout</td>
                 <td>dashboard</td>
                 <td >
-                     <div class ="flex">
+                        <div class ="flex">
                         <input type="text" class="form-control me-2 form-control-sm" placeholder="" v-model="bets">
                         <button type="button" class="btn btn-sm btn-outline-dark">OK</button>
                     </div>
@@ -329,15 +329,15 @@
                 <td>text</td>
                 <td>text</td>
                 <td>text</td>
-              </tr>
-              <tr>
+                </tr>
+                <tr>
                 <td>1,013</td>
                 <td>dashboard</td>
                 <td>irrelevant</td>
                 <td>text</td>
                 <td>visual</td>
                 <td >
-                     <div class ="flex">
+                        <div class ="flex">
                         <input type="text" class="form-control me-2 form-control-sm" placeholder="" v-model="bets">
                         <button type="button" class="btn btn-sm btn-outline-dark">OK</button>
                     </div>
@@ -350,15 +350,15 @@
                 <td>text</td>
                 <td>text</td>
                 <td>text</td>
-              </tr>
-              <tr>
+                </tr>
+                <tr>
                 <td>1,014</td>
                 <td>dashboard</td>
                 <td>illustrative</td>
                 <td>rich</td>
                 <td>data</td>
                 <td >
-                     <div class ="flex">
+                        <div class ="flex">
                         <input type="text" class="form-control me-2 form-control-sm" placeholder="" v-model="bets">
                         <button type="button" class="btn btn-sm btn-outline-dark">OK</button>
                     </div>
@@ -371,8 +371,8 @@
                 <td>text</td>
                 <td>text</td>
                 <td>text</td>
-              </tr>
-              <tr>
+                </tr>
+                <tr>
                 <td>1,015</td>
                 <td>random</td>
                 <td>tabular</td>
@@ -392,12 +392,11 @@
                 <td>text</td>
                 <td>text</td>
                 <td>text</td>
-              </tr>
+                </tr>
             </tbody>
-          </table>
+            </table>
         </div>
-      </main>
-    
+    </div>
 </template>
 <script>
 export default {

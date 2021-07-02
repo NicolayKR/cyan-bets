@@ -1,6 +1,6 @@
 <template>
-    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">
+    <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="/">
             <i class="fab fa-atlassian"></i>
             Циан автомат
         </a>
@@ -47,11 +47,11 @@
             <a class="nav-link dropdown-toggle text-end" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Здравствуйте, {{nameUser}}
             </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" >
-                <li><a class="dropdown-item" href="/accounts">
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink" >
+                <li><a class="dropdown-item text-center" href="/accounts">
                     Аккаунты
                 </a></li>
-                <li><a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                <li><a class="dropdown-item text-center" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                     Выход
                 </a></li>
                 <b-form id="logout-form" action="logout" method="POST" class="d-none">
@@ -59,7 +59,7 @@
                 </b-form>
             </ul>
         </div>
-    </nav>
+    </header>
 </template>
 <script>
 export default {

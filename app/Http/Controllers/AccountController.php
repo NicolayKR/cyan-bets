@@ -53,17 +53,24 @@ class AccountController extends Controller
         $output = curl_exec($ch);
         curl_close($ch);
         $result = json_decode($output, true);
-        if($result['result']['totalBalance']){
+        if (array_key_exists('totalBalance', $result['result'])) {
             $status_api_connect = true;
-        };
-           //FILEGETCONTENT
-        if(file_get_contents($current_xml)){
+        }else{
+            $textFromForm = 'Некорректный ключ к ЦИАН';
+        }
+        if(false !== ($contents = @file_get_contents($current_xml))){
             $status_xml_connect = true;
-        };
+        }
+        else{
+            if($status_api_connect == false){
+                $textFromForm = $textFromForm.', некорректный XML фид ЦИАН';
+            }
+            else{
+                $textFromForm = 'Некорректный XML фид ЦИАН';
+            }
+        }
         if($status_xml_connect and $status_api_connect){
             $result = CompanyName::select(CompanyName::raw('COUNT(*)'))
-                                            ->where('name', $request->input('company_name'))
-                                            ->where('xml_feed', $current_xml)
                                             ->where('cyan_key', $current_api)
                                             ->count();         
             if($result==0){
@@ -74,10 +81,16 @@ class AccountController extends Controller
                     'user_id'=> Auth::user()->id 
                 ));
                 $newCompany->save();
-                $textFromForm = 'Пропишите следующую ссылку на XML фид, в Вашем личном кабинете ЦИАН: ';
-            }   
-            return redirect()->route('accounts.index')->with('status', $textFromForm);  
-        };
+                $textFromForm = 'Пропишите следующую ссылку на XML фид, в Вашем личном кабинете ЦИАН: ссылка';
+                return redirect()->route('accounts.edit', $newCompany)->with('status', $textFromForm);  
+            } else{
+                $textFromForm = 'На вашем аккаунте уже зарегистрирован этот ключ к ЦИАН';
+                return redirect()->route('accounts.create')->with('status', $textFromForm);  
+            }  
+        }
+        else{
+            return redirect()->route('accounts.create')->with('status', $textFromForm);  
+        }
     }
 
     /**
