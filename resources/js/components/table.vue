@@ -3,7 +3,7 @@
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
             <h1 class="h2">Циан Автомат</h1>
         </div>
-        <div class="row">
+        <div v-if="flagTable" class="row">
             <div class="col-3 flex">
                 <label for="example-datepicker-start">С</label>
                 <b-form-datepicker id="example-datepicker-start" v-model="start"  locale="ru" placeholder="Выберите дату" class="margin-datepicker"></b-form-datepicker> 
@@ -57,341 +57,26 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                <td>1,001</td>
-                <td>random</td>
-                <td>data</td>
-                <td>placeholder</td>
-                <td>text</td>
-                <td>
-                    <div class ="flex">
-                        <input type="text" class="form-control me-2 form-control-sm" placeholder="" v-model="bets">
-                        <button type="button" class="btn btn-sm btn-outline-dark">OK</button>
-                    </div>
-                </td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                </tr>
-                <tr>
-                <td>1,002</td>
-                <td>placeholder</td>
-                <td>irrelevant</td>
-                <td>visual</td>
-                <td>layout</td>
-                <td>
-                    <div class ="flex">
-                        <input type="text" class="form-control me-2 form-control-sm" placeholder="" v-model="bets">
-                        <button type="button" class="btn btn-sm btn-outline-dark">OK</button>
-                    </div>
-                </td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                </tr>
-                <tr>
-                <td>1,003</td>
-                <td>data</td>
-                <td>rich</td>
-                <td>dashboard</td>
-                <td>tabular</td>
-                <td>
+                <tr v-for ="(tabel_item,index) in tabelData">
+                    <td>1,001</td>
+                    <td>random</td>
+                    <td>data</td>
+                    <td>placeholder</td>
+                    <td>text</td>
+                    <td>
                         <div class ="flex">
-                        <input type="text" class="form-control me-2 form-control-sm" placeholder="" v-model="bets">
-                        <button type="button" class="btn btn-sm btn-outline-dark">OK</button>
-                    </div>
-                </td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                </tr>
-                <tr>
-                <td>1,003</td>
-                <td>information</td>
-                <td>placeholder</td>
-                <td>illustrative</td>
-                <td>data</td>
-                <td >
-                    <div class ="flex">
-                        <input type="text" class="form-control me-2 form-control-sm" placeholder="" v-model="bets">
-                        <button type="button" class="btn btn-sm btn-outline-dark">OK</button>
-                    </div>
-                </td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                </tr>
-                <tr>
-                <td>1,004</td>
-                <td>text</td>
-                <td>random</td>
-                <td>layout</td>
-                <td>dashboard</td>
-                <td>
-                        <div class ="flex">
-                        <input type="text" class="form-control me-2 form-control-sm" placeholder="" v-model="bets">
-                        <button type="button" class="btn btn-sm btn-outline-dark">OK</button>
-                    </div>
-                </td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                </tr>
-                <tr>
-                <td>1,005</td>
-                <td>dashboard</td>
-                <td>irrelevant</td>
-                <td>text</td>
-                <td>placeholder</td>
-                <td>
-                        <div class ="flex">
-                        <input type="text" class="form-control me-2 form-control-sm" placeholder="" v-model="bets">
-                        <button type="button" class="btn btn-sm btn-outline-dark">OK</button>
-                    </div>
-                </td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                </tr>
-                <tr>
-                <td>1,006</td>
-                <td>dashboard</td>
-                <td>illustrative</td>
-                <td>rich</td>
-                <td>data</td>
-                <td >
-                        <div class ="flex">
-                        <input type="text" class="form-control me-2 form-control-sm" placeholder="" v-model="bets">
-                        <button type="button" class="btn btn-sm btn-outline-dark">OK</button>
-                    </div>
-                </td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                </tr>
-                <tr>
-                <td>1,007</td>
-                <td>placeholder</td>
-                <td>tabular</td>
-                <td>information</td>
-                <td>irrelevant</td>
-                <td >
-                    <div class ="flex">
-                        <input type="text" class="form-control me-2 form-control-sm" placeholder="" v-model="bets">
-                        <button type="button" class="btn btn-sm btn-outline-dark">OK</button>
-                    </div>
-                </td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                </tr>
-                <tr>
-                <td>1,008</td>
-                <td>random</td>
-                <td>data</td>
-                <td>placeholder</td>
-                <td>text</td>
-                <td>
-                        <div class ="flex">
-                        <input type="text" class="form-control me-2 form-control-sm" placeholder="" v-model="bets">
-                        <button type="button" class="btn btn-sm btn-outline-dark">OK</button>
-                    </div>
-                </td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                </tr>
-                <tr>
-                <td>1,009</td>
-                <td>placeholder</td>
-                <td>irrelevant</td>
-                <td>visual</td>
-                <td>layout</td>
-                <td>
-                        <div class ="flex">
-                        <input type="text" class="form-control me-2 form-control-sm" placeholder="" v-model="bets">
-                        <button type="button" class="btn btn-sm btn-outline-dark">OK</button>
-                    </div>
-                </td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                </tr>
-                <tr>
-                <td>1,010</td>
-                <td>data</td>
-                <td>rich</td>
-                <td>dashboard</td>
-                <td>tabular</td>
-                <td>
-                        <div class ="flex">
-                        <input type="text" class="form-control me-2 form-control-sm" placeholder="" v-model="bets">
-                        <button type="button" class="btn btn-sm btn-outline-dark">OK</button>
-                    </div>
-                </td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                </tr>
-                <tr>
-                <td>1,011</td>
-                <td>information</td>
-                <td>placeholder</td>
-                <td>illustrative</td>
-                <td>data</td>
-                <td >
-                        <div class ="flex">
-                        <input type="text" class="form-control me-2 form-control-sm" placeholder="" v-model="bets">
-                        <button type="button" class="btn btn-sm btn-outline-dark">OK</button>
-                    </div>
-                </td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                </tr>
-                <tr>
-                <td>1,012</td>
-                <td>text</td>
-                <td>placeholder</td>
-                <td>layout</td>
-                <td>dashboard</td>
-                <td >
-                        <div class ="flex">
-                        <input type="text" class="form-control me-2 form-control-sm" placeholder="" v-model="bets">
-                        <button type="button" class="btn btn-sm btn-outline-dark">OK</button>
-                    </div>
-                </td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                </tr>
-                <tr>
-                <td>1,013</td>
-                <td>dashboard</td>
-                <td>irrelevant</td>
-                <td>text</td>
-                <td>visual</td>
-                <td >
-                        <div class ="flex">
-                        <input type="text" class="form-control me-2 form-control-sm" placeholder="" v-model="bets">
-                        <button type="button" class="btn btn-sm btn-outline-dark">OK</button>
-                    </div>
-                </td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                </tr>
-                <tr>
-                <td>1,014</td>
-                <td>dashboard</td>
-                <td>illustrative</td>
-                <td>rich</td>
-                <td>data</td>
-                <td >
-                        <div class ="flex">
-                        <input type="text" class="form-control me-2 form-control-sm" placeholder="" v-model="bets">
-                        <button type="button" class="btn btn-sm btn-outline-dark">OK</button>
-                    </div>
-                </td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                </tr>
-                <tr>
-                <td>1,015</td>
-                <td>random</td>
-                <td>tabular</td>
-                <td>information</td>
-                <td>text</td>
-                <td>
-                    <div class ="flex">
-                        <input type="text" class="form-control me-2 form-control-sm" placeholder="" v-model="bets">
-                        <button type="button" class="btn btn-sm btn-outline-dark">OK</button>
-                    </div>
-                </td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
-                <td>text</td>
+                            <input type="text" class="form-control me-2 form-control-sm" placeholder="" v-model="bets">
+                            <button type="button" class="btn btn-sm btn-outline-dark">OK</button>
+                        </div>
+                    </td>
+                    <td>{{tabel_item.crm_bet}}</td>
+                    <td>{{tabel_item.cyan_bet}}</td>
+                    <td>text</td>
+                    <td>text</td>
+                    <td>text</td>
+                    <td>{{tabel_item.agent}}</td>
+                    <td>{{tabel_item.id_object}}</td>
+                    <td>text</td>
                 </tr>
             </tbody>
             </table>
@@ -405,7 +90,26 @@ export default {
       bets: null,
       start: null,
       end: null,
+      tabelData: null,
+      flagTable:false,
     }
-  }
+  },
+  mounted(){
+      this.getData();
+  },
+  methods:{
+        async getData(){
+            try{
+                const response = await axios.get('/getData');
+                this.tabelData = response.data;
+                console.log(this.tabelData);
+                //console.log(typeof(this.tabelData));
+                this.flagTable = true;
+            }
+            catch{
+                console.log('Ошибка');
+            }          
+        }
+    }
 }
 </script>

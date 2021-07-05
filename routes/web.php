@@ -1,10 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AddFormController;
+use App\Http\Controllers\TableController;
 use App\Http\Controllers\AccountController;
 use Illuminate\Support\Facades\Auth;
 use App\Models\CompanyName;
+use App\Models\Bets;
 use Spatie\ArrayToXml\ArrayToXml;
 use Illuminate\Support\Facades\Storage;
 
@@ -21,29 +22,69 @@ use Illuminate\Support\Facades\Storage;
 
 Route::view('/','index')->middleware('auth')->name('index');
 Route::view('add-form', 'add-form')->name('add-form');
-Route::post('accounts/save-form','App\Http\Controllers\AddFormController@save');
+Route::get('getData','App\Http\Controllers\TableController@getData');
 Route::get('getName', function(){
     return Auth::user()->name;
 });
-Route::post('/updateCompany','App\Http\Controllers\AddFormController@update')->name('updateCompany');
 Route::resource('/accounts','App\Http\Controllers\AccountController');
 Auth::routes();
+
 Route::get('test',function(){
-    $current_xml = 'https://nasledie-don.ru/admin/upload/cian_flats_rnd.xml';
-    // $contents = @file_get_contents($current_xml);
-    // $result = json_encode($contents);
-    // return $result;
-    $xml = simplexml_load_file($current_xml);
-    $json = json_encode($xml);
-    $array = json_decode($json,TRUE);
-    $result = ArrayToXml::convert($array);
-    $res = CompanyName::select('id')->where('cyan_key', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjI0MDAyODgyfQ.3xNBgSsU7UDAleK8U2znXFw8_fkcKIvMCmv-w0Dz4-c')
-        ->get();
-    $id_user = $res[0]['id'];
-    if(!Storage::exists('public/'.Auth::user()->id.'/'.$id_user.'/xml-feed.xml')){
-        Storage::put('public/'.Auth::user()->id.'/'.$id_user.'/xml-feed.xml', $result);
+    $collection = CompanyName::select('id','xml_feed')->where('user_id', Auth::user()->id)->get();
+    $array_xml = [];
+    $array_data = [];
+    foreach($collection as $value){
+        $array_xml[$value['id']] =  $value['xml_feed'];
     }
-    $url = Storage::url('public/'.Auth::user()->id.'/'.$id_user.'/xml-feed.xml');
-    return $url;
-    // return $res;
+    foreach($array_xml as $item => $item_xml){
+        $xml = simplexml_load_file($item_xml);
+        $array = json_decode(json_encode($xml),TRUE);
+        foreach($array['object'] as $current_item) {
+            //Ставка в СРМ
+            $res_bet = Bets::select('bet')
+                        ->where('id_flat', $current_item['ExternalId'])
+                        ->where('id_user', Auth::user()->id)
+                        ->where('id_company', $item)
+                        ->first();
+            $array_data[$item]['crm_bet'] = $res_bet['bet'];
+            //Ставка на циан
+            if(array_key_exists('Bet', $current_item)){
+                $current_bet = $current_item['Bet'];
+            }else{
+                $current_bet = 0;
+            }
+            $array_data[$item]['cyan_bet'] = $current_bet;
+            //Агент
+            $array_data[$item]['agent'] = $current_item['SubAgent']['FirstName'].' '.$current_item['SubAgent']['LastName'];
+            $array_data[$item]['id_object'] = $current_item['ExternalId'];
+        }
+    }
+    return $array_data;
+ });
+ 
+Route::get('test2',function(){
+    $collection = CompanyName::select('id','xml_feed')->where('user_id', Auth::user()->id)->get();
+    $array_xml = [];
+    $array_data = [];
+    foreach($collection as $value){
+        $array_xml[$value['id']] =  $value['xml_feed'];
+    }
+    foreach($array_xml as $item => $item_xml){
+        $xml = simplexml_load_file($item_xml);
+        $array = json_decode(json_encode($xml),TRUE);
+        foreach($array['object'] as $current_item) {
+            if(array_key_exists('Bet', $current_item)){
+                $current_bet = $current_item['Bet'];
+            }else{
+                $current_bet = 0;
+            }
+            $newBet = Bets::create(array(
+                'id_flat' =>$current_item['ExternalId'],
+                'bet'=>$current_bet,
+                'id_user'=> Auth::user()->id,
+                'id_company'=> $item 
+            ));
+            $newBet->save();
+        }
+    }
 });
