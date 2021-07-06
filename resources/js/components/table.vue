@@ -75,7 +75,7 @@
                             <form>
                                 <div class ="flex">
                                     <input type="text" class="form-control me-2 form-control-sm input-value" name="bet" placeholder="" v-model="bets[index]">
-                                    <button type="button" @click="postNewBet(bets[index],tabel_item.id_object, tabel_item.id_company)" 
+                                    <button type="button" @click="postNewBet(bets[index],tabel_item.id_object, tabel_item.id_company,index)" 
                                     class="btn btn-sm btn-outline-dark">OK</button>
                                 </div>
                             </form>
@@ -120,7 +120,7 @@ export default {
                 this.flagTable = false;
             }          
         },
-        async postNewBet(bets,id_object, id_company){
+        async postNewBet(bets,id_object, id_company,index){
             let fd = new FormData();
             fd.set('bet', bets);
             fd.set('id_object', id_object);
@@ -130,17 +130,17 @@ export default {
             .catch(function (error) {
                 console.log(error);
             })
-            await this.getDataFromNewBet(id_object, id_company);
+            await this.getDataFromNewBet(id_object, id_company,index);
         },
-        async getDataFromNewBet(id_object,id_company){
+        async getDataFromNewBet(id_object,id_company,index){
             try{
                 const response = await axios.get(`/getDataFromNewBet?&id_object=${id_object}&id_company=${id_company}`);
                 this.tabelData.forEach(function(item){
                     if(item.id_object == id_object){
                         item.crm_bet = response.data;
-                        
                     } 
-                })
+                });
+                this.bets[index] = '';
             }catch{
                 console.log("Ошибка");
             }
