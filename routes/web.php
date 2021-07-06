@@ -62,10 +62,11 @@ Route::get('test',function(){
  });
  
 
- //Метод наполнения таблицы ставок в БД
+
 Route::get('test2',function(){
     $collection = CompanyName::select('id','xml_feed')->where('user_id', Auth::user()->id)->get();
     $array_xml = [];
+    $array_new = [];
     foreach($collection as $value){
         $array_xml[$value['id']] =  $value['xml_feed'];
     }
@@ -88,6 +89,15 @@ Route::get('test2',function(){
                 $current_bet = 0;
             }
             $current_agent_name = $current_item['SubAgent']['FirstName'].' '.$current_item['SubAgent']['LastName'];
+            //Сборка массива с новыми эллементами
+            $array_new_item = [];
+            $array_new_item['id_flat'] = $current_array['id_flat'];
+            $array_new_item['id_user'] = $current_array['id_user'];
+            $array_new_item['id_company'] = $current_array['id_company'];
+            $array_new_item['bet'] =  $current_bet;
+            $array_new_item['name_agent'] = $current_agent_name;
+            array_push($array_new, $array_new_item);
+            
             foreach($xml_feed as $index_xml => $current_xml_feed){
                 if($current_array == $current_xml_feed){
                     CurrentXml::where('id_flat', '=', $current_array['id_flat'])
@@ -105,6 +115,11 @@ Route::get('test2',function(){
             }
         }
         return $xml_feed;
+        // foreach($array_new as $array_new_elem){
+        //     foreach($xml_feed_copy as $xml_feed_cop_elem){
+        //         if($array_new_elem == )
+        //     }
+        // }
     }
     
 });
