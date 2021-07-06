@@ -3,6 +3,13 @@
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
             <h1 class="h2">Циан Автомат</h1>
         </div>
+        <div v-if="!flagTable">
+            <div class="d-flex justify-content-center mt-4">
+                <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        </div>    
         <div v-if="flagTable">
             <div class="row">
                 <div class="col-3 flex">
@@ -28,7 +35,7 @@
             <div class="budge-block mt-4">
                 <div class=budge-item>
                     <button type="button" class="btn btn-outline-dark">
-                        ВСЕГО <span class="badge bg-secondary">251</span>
+                        ВСЕГО <span class="badge bg-secondary">{{this.tabelData.length}}</span>
                     </button>
                 </div>
                 <div class=budge-item>
@@ -63,13 +70,13 @@
                         <td>random</td>
                         <td>data</td>
                         <td>placeholder</td>
-                        <td>{{tabel_item.id}}</td>
+                        <td>{{tabel_item.id_company}}</td>
                         <td>
                             <form>
                                 <div class ="flex">
-                                    <input type="text" class="form-control me-2 form-control-sm" name="bet" placeholder="" v-model="bets[index]">
-                                    <input type="hidden" name="id_bet" :value="tabel_item.id">
-                                    <button type="button" @click="postNewBet(bets[index],tabel_item.id)" class="btn btn-sm btn-outline-dark">OK</button>
+                                    <input type="text" class="form-control me-2 form-control-sm input-value" name="bet" placeholder="" v-model="bets[index]">
+                                    <button type="button" @click="postNewBet(bets[index],tabel_item.id_object, tabel_item.id_company)" 
+                                    class="btn btn-sm btn-outline-dark">OK</button>
                                 </div>
                             </form>
                         </td>
@@ -110,20 +117,35 @@ export default {
                 this.flagTable = true;
             }
             catch{
-                console.log('Ошибка');
+                this.flagTable = false;
             }          
         },
-        postNewBet(bets,id){
+        async postNewBet(bets,id_object, id_company){
             let fd = new FormData();
             fd.set('bet', bets);
-            fd.set('id_bet', id);
-            axios.post('/saveNewBet', fd).then(function (response) {
-                    console.log(response);
+            fd.set('id_object', id_object);
+            fd.set('id_company', id_company);
+            await axios.post('/saveNewBet', fd).then(function (response) { 
                 })
             .catch(function (error) {
                 console.log(error);
             })
+            await this.getDataFromNewBet(id_object, id_company);
+        },
+        async getDataFromNewBet(id_object,id_company){
+            try{
+                const response = await axios.get(`/getDataFromNewBet?&id_object=${id_object}&id_company=${id_company}`);
+                this.tabelData.forEach(function(item){
+                    if(item.id_object == id_object){
+                        item.crm_bet = response.data;
+                        
+                    } 
+                })
+            }catch{
+                console.log("Ошибка");
+            }
         }
+
     }
 }
 </script>

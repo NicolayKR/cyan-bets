@@ -22,8 +22,9 @@ use Illuminate\Support\Facades\Storage;
 
 Route::view('/','index')->middleware('auth')->name('index');
 Route::view('add-form', 'add-form')->name('add-form');
-Route::get('getData','App\Http\Controllers\TableController@getData');
+Route::get('/getData','App\Http\Controllers\TableController@getData');
 Route::post('/saveNewBet','App\Http\Controllers\TableController@saveNewBet');
+Route::get('/getDataFromNewBet','App\Http\Controllers\TableController@getDataFromNewBet');
 Route::get('getName', function(){
     return Auth::user()->name;
 });
@@ -31,66 +32,42 @@ Route::resource('/accounts','App\Http\Controllers\AccountController');
 Auth::routes();
 
 Route::get('test',function(){
-    // $collection = CompanyName::select('id','xml_feed')->where('user_id', Auth::user()->id)->get();
-    // $array_xml = [];
-    // $array_data = [];
-    // foreach($collection as $value){
-    //     $array_xml[$value['id']] =  $value['xml_feed'];
-    // }
-    // $res_bet = Bets::select('id','id_flat')->selectRaw('round(bet) as bet')
-    //                     ->where('id_user', Auth::user()->id)
-    //                     ->get();
-    // foreach($array_xml as $item_xml){
-    //     $xml = simplexml_load_file($item_xml);
-    //     $array = json_decode(json_encode($xml),TRUE);
-    //     foreach($array['object'] as $item => $current_item) {
-    //         //Ставка в СРМ
-    //         foreach($res_bet as $res_bet_item){
-    //             if($res_bet_item['id_flat'] == $current_item['ExternalId']){
-    //                 $array_data[$item]['crm_bet'] = $res_bet_item['bet'];
-    //                 $array_data[$item]['id'] = $res_bet_item['id'];
-    //             }
-    //         }
-    //         //Ставка на циан
-    //         if(array_key_exists('Bet', $current_item)){
-    //             $current_bet = $current_item['Bet'];
-    //         }else{
-    //             $current_bet = 0;
-    //         }
-    //         $array_data[$item]['cyan_bet'] = $current_bet;
-    //         //Агент
-    //         $array_data[$item]['agent'] = $current_item['SubAgent']['FirstName'].' '.$current_item['SubAgent']['LastName'];
-    //         $array_data[$item]['id_object'] = $current_item['ExternalId'];
-    //     }
-    // }
-    // return $array_data;
+
+    
+        // $bet = 200;
+        // $id = 200;
+        // $id_company = 2;
+        // $result = Bets::select(Bets::raw('COUNT(*)'))
+        //                 ->where('id_flat', $id)
+        //                 ->where('id_company', $id_company)
+        //                 ->where('id_user', Auth::user()->id)
+        //                 ->count(); 
+        // if($result == 1 ){
+        //     Bets::where('id_flat', '=', $id)->
+        //             where('id_company', '=', $id_company)-> 
+        //             where('id_user', Auth::user()->id)->
+        //             update(array('bet' => $bet));
+        // }
+        // else{
+        //     $newBet = Bets::create(array(
+        //         'id_flat' =>$id,
+        //         'bet'=> $bet,
+        //         'id_user'=> Auth::user()->id,
+        //         'id_company'=> $id_company 
+        //     ));
+        //     $newBet->save();
+        // }
+
  });
  
 
  //Метод наполнения таблицы ставок в БД
-// Route::get('test2',function(){
-//     $collection = CompanyName::select('id','xml_feed')->where('user_id', Auth::user()->id)->get();
-//     $array_xml = [];
-//     $array_data = [];
-//     foreach($collection as $value){
-//         $array_xml[$value['id']] =  $value['xml_feed'];
-//     }
-//     foreach($array_xml as $item => $item_xml){
-//         $xml = simplexml_load_file($item_xml);
-//         $array = json_decode(json_encode($xml),TRUE);
-//         foreach($array['object'] as $current_item) {
-//             if(array_key_exists('Bet', $current_item)){
-//                 $current_bet = $current_item['Bet'];
-//             }else{
-//                 $current_bet = 0;
-//             }
-//             $newBet = Bets::create(array(
-//                 'id_flat' =>$current_item['ExternalId'],
-//                 'bet'=>$current_bet,
-//                 'id_user'=> Auth::user()->id,
-//                 'id_company'=> $item 
-//             ));
-//             $newBet->save();
-//         }
-//     }
-// });
+Route::get('test2',function(){
+
+    $id_object = 157571;
+    $id_company = 2;
+    $collection = Bets::where('id_flat', $id_object)
+                            ->where('id_company', $id_company)
+                            ->first();
+    return $collection['bet'];
+});
