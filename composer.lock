@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a178d940f89e4298e7ecb5e83025a79e",
+    "content-hash": "f09d24df29b8a4c9e0958965e227e130",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -556,6 +556,48 @@
                 }
             ],
             "time": "2021-04-26T11:24:25+00:00"
+        },
+        {
+            "name": "gaarf/xml-to-php-array",
+            "version": "v1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/RicardoRamirezR/XML-string-to-PHP-array.git",
+                "reference": "2fc91609119016132650759f8032a7abeeb51770"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/RicardoRamirezR/XML-string-to-PHP-array/zipball/2fc91609119016132650759f8032a7abeeb51770",
+                "reference": "2fc91609119016132650759f8032a7abeeb51770",
+                "shasum": ""
+            },
+            "require": {
+                "ext-dom": "*",
+                "php": ">=7.1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Adrien Cahen",
+                    "homepage": "http://gaarf.info"
+                },
+                {
+                    "name": "Jan Barášek",
+                    "homepage": "http://baraja.cz"
+                }
+            ],
+            "description": "XML to PHP array convertor",
+            "homepage": "https://github.com/gaarf/XML-string-to-PHP-array",
+            "support": {
+                "source": "https://github.com/RicardoRamirezR/XML-string-to-PHP-array/tree/v1.0"
+            },
+            "time": "2019-10-08T18:51:04+00:00"
         },
         {
             "name": "graham-campbell/result-type",

@@ -101,7 +101,11 @@ class UpdateXmlDb extends Command
                 }
             foreach($array_xml_feed as $current_array_xml_feed_index => $current_array_xml_feed){
                 CurrentXml::where('id_flat', $current_array_xml_feed_index)
-                            ->where('id_user', Auth::user()->id)
+                            ->where('id_user', $index_user)
+                            ->where('id_company', $current_array_xml_feed['id_company'])
+                            ->delete();
+                Bets::where('id_flat', $current_array_xml_feed_index)
+                            ->where('id_user', $index_user)
                             ->where('id_company', $current_array_xml_feed['id_company'])
                             ->delete();
                 }    

@@ -28,7 +28,7 @@
                         Топ
                     </label>
                 </div>
-                <div class="col-1 ms-n3 flex">
+                <div class="col-1 flex">
                     <button type="button" class="btn btn-outline-dark">OK</button>
                 </div>
             </div>

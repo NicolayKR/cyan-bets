@@ -86,15 +86,12 @@ class AccountController extends Controller
                     'user_id'=> Auth::user()->id 
                 ));
                 $newCompany->save();
-                $xml = simplexml_load_file($current_xml);
-                $array = json_decode(json_encode($xml),TRUE);
-                $result = ArrayToXml::convert($array);
+                $xml = file_get_contents($current_xml);
                 $res = CompanyName::select('id')->where('cyan_key', $current_api)->get();
                 $id_user = $res[0]['id'];
-                if(!Storage::exists('public/'.Auth::user()->id.'/'.$id_user.'/xml-feed.xml')){
-                    Storage::put('public/'.Auth::user()->id.'/'.$id_user.'/xml-feed.xml', $result);
-                }
-                $url = Storage::url('public/'.Auth::user()->id.'/'.$id_user.'/xml-feed.xml');
+                Storage::put('public/'.Auth::user()->id.'/'.$id_user.'/original-xml-feed.xml', $xml);
+                Storage::put('public/'.Auth::user()->id.'/'.$id_user.'/crm-xml-feed.xml', $xml);
+                $url = Storage::url('public/'.Auth::user()->id.'/'.$id_user.'/crm-xml-feed.xml');
                 $textFromForm = 'Пропишите следующую ссылку на XML фид, в Вашем личном кабинете ЦИАН:'.$url;
                 return redirect()->route('accounts.edit', $newCompany)->with('status', $textFromForm);  
             } else{
@@ -129,7 +126,7 @@ class AccountController extends Controller
 
         $res = CompanyName::select('id')->where('cyan_key', $account->cyan_key)->get();
         $id_user = $res[0]['id'];
-        $url = Storage::url('public/'.Auth::user()->id.'/'.$id_user.'/xml-feed.xml');
+        $url = Storage::url('public/'.Auth::user()->id.'/'.$id_user.'/crm-xml-feed.xml');
         return view('edit', [
             'account' => $account,
             'url' => $url
