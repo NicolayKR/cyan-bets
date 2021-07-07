@@ -26,6 +26,7 @@ use Gaarf\XmlToPhp\Convertor;
 Route::view('/','index')->middleware('auth')->name('index');
 Route::view('add-form', 'add-form')->name('add-form');
 Route::get('/getData','App\Http\Controllers\TableController@getData');
+Route::get('/updateNow/{account}','App\Http\Controllers\XmlController@updateXml')->name('updateNow');
 Route::post('/saveNewBet','App\Http\Controllers\TableController@saveNewBet');
 Route::get('/getDataFromNewBet','App\Http\Controllers\TableController@getDataFromNewBet');
 Route::get('getName', function(){

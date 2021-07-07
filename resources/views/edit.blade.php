@@ -16,6 +16,15 @@
             <div class="card-header">Ваша текущая ссылка для ЦИАН</div>
             <div class="card-body">
                 <input class="form-control" type="text" value="{{$url}}" aria-label="Disabled input example" readonly>
+                <form method="get" action="{{ route('updateNow', $account)}}" class="mt-3">
+                    <input type="hidden" value="{{$account->id}}">
+                    <button type="submit" class="btn btn-primary">Обновить сейчас</button>
+                </form>
+                @if(session('status_update'))
+                <div class="alert alert-success mt-3">
+                    {{ session('status_update') }}
+                </div>
+                @endif
             </div>
         </div>    
         <div class="card">
