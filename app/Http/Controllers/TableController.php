@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\Bets;
+use App\Models\CurrentXml;
 use DiDom\Document;
 use DiDom\Query; 
 
@@ -14,13 +15,9 @@ use DiDom\Query;
 class TableController extends Controller
 {
     public function getData(){
-        $collection = CompanyName::select('id','xml_feed')->where('user_id', Auth::user()->id)->get();
         $array_xml = [];
         $array_data = [];
         $array_bets = [];
-        foreach($collection as $value){
-            $array_xml[$value['id']] =  $value['xml_feed'];
-        }
         $res_bet = Bets::select('id','id_flat','id_company')->selectRaw('round(bet) as bet')
                 ->where('id_user', Auth::user()->id)
                 ->get();
@@ -28,37 +25,28 @@ class TableController extends Controller
             $array_bets[$current_bet['id_company']][$current_bet['id_flat']]['bet'] =  $current_bet['bet'];
             $array_bets[$current_bet['id_company']][$current_bet['id_flat']]['id'] =  $current_bet['id'];
         }
-        foreach($array_xml as $index =>$item_xml){
-            $xml = simplexml_load_file($item_xml);
-            $array = json_decode(json_encode($xml),TRUE);
-            foreach($array['object'] as $item => $current_item) {
-                //Ставка в СРМ
-                if(array_key_exists($index, $array_bets)){
-                    if(array_key_exists($current_item['ExternalId'], $array_bets[$index])){
-                        if(array_key_exists('bet', $array_bets[$index][$current_item['ExternalId']])){
-                            $array_data[$item]['crm_bet'] = $array_bets[$index][$current_item['ExternalId']]['bet'];
-                            $array_data[$item]['id'] = $array_bets[$index][$current_item['ExternalId']]['id'];
-                        }
-                    }else{
-                        $array_data[$item]['crm_bet'] = 0;
+        $collection = CurrentXml::select('id','id_flat','bet','id_user','id_company','name_agent')->get();
+        foreach($collection as $index =>$item_collection){
+            if(array_key_exists($item_collection['id_company'], $array_bets)){
+                if(array_key_exists($item_collection['id_flat'], $array_bets[$item_collection['id_company']])){
+                    if(array_key_exists('bet', $array_bets[$item_collection['id_company']][$item_collection['id_flat']])){
+                        $array_data[$index]['crm_bet'] = $array_bets[$item_collection['id_company']][$item_collection['id_flat']]['bet'];
+                        $array_data[$index]['id'] = $array_bets[$item_collection['id_company']][$item_collection['id_flat']]['id'];
                     }
-                }
-                else{
-                    $array_data[$item]['crm_bet'] = 0;
-                }
-                //Текущая фирма 
-                $array_data[$item]['id_company'] = $index;
-                //Ставка на циан
-                if(array_key_exists('Bet', $current_item)){
-                    $current_bet = $current_item['Bet'];
                 }else{
-                    $current_bet = 0;
+                    $array_data[$index]['crm_bet'] = 0;
                 }
-                $array_data[$item]['cyan_bet'] = $current_bet;
-                //Агент
-                $array_data[$item]['agent'] = $current_item['SubAgent']['FirstName'].' '.$current_item['SubAgent']['LastName'];
-                $array_data[$item]['id_object'] = $current_item['ExternalId'];
             }
+            else{
+                $array_data[$index]['crm_bet'] = 0;
+            }
+            //Текущая фирма 
+            $array_data[$index]['id_company'] = $item_collection['id_company'];
+            //Ставка на циан
+            $array_data[$index]['cyan_bet'] = $item_collection['bet'];
+            //Агент
+            $array_data[$index]['agent'] = $item_collection['name_agent'];
+            $array_data[$index]['id_object'] = $item_collection['id_flat'];
         }
         return $array_data; 
     }
