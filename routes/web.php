@@ -75,65 +75,66 @@ Route::get('test',function(){
 
 
 Route::get('test2',function(){
-    $collection_firms = CompanyName::select('id','xml_feed')->where('user_id', Auth::user()->id)->get();
+    date_default_timezone_set("Europe/Moscow");
+    $collection_firms = CompanyName::select('id','xml_feed','user_id')->get();
     $array_xml = [];
     $array_new = [];
     $array_xml_feed = [];
     foreach($collection_firms as $value){
-        $array_xml[$value['id']] =  $value['xml_feed'];
+        $array_xml[$value['user_id']][$value['id']] =  $value['xml_feed'];
     }
-    foreach($array_xml as $index =>$item_xml){
-        $xml_feed= CurrentXml::select('id_flat','bet','id_user','id_company','name_agent')
-                                ->where('id_user', Auth::user()->id)
-                                ->where('id_company', $index)
+    foreach($array_xml as $index_user =>$item_xml){
+        foreach($item_xml as $index_company =>$current_item_xml){
+            $xml_feed= CurrentXml::select('id_flat','bet','id_user','id_company','name_agent')
+                                ->where('id_user', $index_user)
+                                ->where('id_company', $index_company)
                                 ->get()->toArray();
-        $xml = simplexml_load_file($item_xml);
-        $array = json_decode(json_encode($xml),TRUE);
-        //id_flat,bet,name_agent,id_user,id_company
-        foreach($xml_feed as $index_xml => $current_xml_feed){
-            $array_xml_feed[$current_xml_feed['id_flat']]['id_company']= $current_xml_feed['id_company'];
-            $array_xml_feed[$current_xml_feed['id_flat']]['id_flat']= $current_xml_feed['id_flat'];
-            $array_xml_feed[$current_xml_feed['id_flat']]['bet']= $current_xml_feed['bet'];
-            $array_xml_feed[$current_xml_feed['id_flat']]['id_user']= $current_xml_feed['id_user'];
-            $array_xml_feed[$current_xml_feed['id_flat']]['name_agent']= $current_xml_feed['name_agent'];
-        }
-        $array_xml_feed_copy = $array_xml_feed;
-        foreach($array['object'] as $item => $current_item) {
-            $current_array['id_flat'] = (int)$current_item['ExternalId'];
-            $current_array['id_company'] = $index;
-            if(array_key_exists('Bet', $current_item)){
-                $current_bet = $current_item['Bet'];
-            }else{
-                $current_bet = 0;
+            $xml = simplexml_load_file($current_item_xml);
+            $array = json_decode(json_encode($xml),TRUE);
+            foreach($xml_feed as $index_xml => $current_item_feed){
+                $array_xml_feed[$current_item_feed['id_flat']]['id_company']= $current_item_feed['id_company'];
+                $array_xml_feed[$current_item_feed['id_flat']]['id_flat']= $current_item_feed['id_flat'];
+                $array_xml_feed[$current_item_feed['id_flat']]['bet']= $current_item_feed['bet'];
+                $array_xml_feed[$current_item_feed['id_flat']]['id_user']= $current_item_feed['id_user'];
+                $array_xml_feed[$current_item_feed['id_flat']]['name_agent']= $current_item_feed['name_agent'];
             }
-            $current_agent_name = $current_item['SubAgent']['FirstName'].' '.$current_item['SubAgent']['LastName'];
-            if(array_key_exists($current_array['id_flat'], $array_xml_feed)){
-                CurrentXml::where('id_flat', '=', $current_array['id_flat'])
-                    ->where('id_company', '=', $current_array['id_company'])
-                    ->where('id_user', Auth::user()->id)
-                    ->update(array(
-                        'bet' => $current_bet,
-                        'name_agent' =>$current_agent_name
+            $array_xml_feed_copy = $array_xml_feed;
+            foreach($array['object'] as $item => $current_item) {
+                $current_array['id_flat'] = (int)$current_item['ExternalId'];
+                $current_array['id_company'] = $index_company;
+                if(array_key_exists('Bet', $current_item)){
+                    $current_bet = $current_item['Bet'];
+                }else{
+                    $current_bet = 0;
+                }
+                $current_agent_name = $current_item['SubAgent']['FirstName'].' '.$current_item['SubAgent']['LastName'];
+                if(array_key_exists($current_array['id_flat'], $array_xml_feed)){
+                    CurrentXml::where('id_flat', '=', $current_array['id_flat'])
+                        ->where('id_company', '=', $current_array['id_company'])
+                        ->where('id_user', $index_user)
+                        ->update(array(
+                            'bet' => $current_bet,
+                            'name_agent' =>$current_agent_name
+                        ));
+                    unset($array_xml_feed[$current_array['id_flat']]);
+                }
+                else{
+                    $newObject = CurrentXml::create(array(
+                        'id_flat' =>$current_array['id_flat'],
+                        'bet'=> $current_bet,
+                        'id_user'=> $index_user,
+                        'id_company'=> $current_array['id_company'],
+                        'name_agent'=>$current_agent_name
                     ));
-                unset($array_xml_feed[$current_array['id_flat']]);
+                    $newObject->save();
+                } 
             }
-            else{
-                $newObject = CurrentXml::create(array(
-                    'id_flat' =>$current_array['id_flat'],
-                    'bet'=> $current_bet,
-                    'id_user'=> Auth::user()->id,
-                    'id_company'=> $current_array['id_company'],
-                    'name_agent'=>$current_agent_name
-                ));
-                $newObject->save();
-            } 
-        }
         foreach($array_xml_feed as $current_array_xml_feed_index => $current_array_xml_feed){
             CurrentXml::where('id_flat', $current_array_xml_feed_index)
                         ->where('id_user', Auth::user()->id)
                         ->where('id_company', $current_array_xml_feed['id_company'])
                         ->delete();
-        }    
+            }    
+        }
     }
-    
 });
