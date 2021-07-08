@@ -23,7 +23,7 @@
                     <b-form-datepicker id="example-datepicker-end" v-model="end" locale="ru" placeholder="Выберите дату" class="margin-datepicker"></b-form-datepicker>
                 </div>
                 <div class="col-1 form-check form-check-padding flex">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <input class="form-check-input" type="checkbox" v-model="checked" id="flexCheckDefault" @click="getTop()">
                     <label class="form-check-label label-check-top" for="flexCheckDefault">
                         Топ
                     </label>
@@ -70,7 +70,7 @@
                         <td>random</td>
                         <td>data</td>
                         <td>placeholder</td>
-                        <td>{{tabel_item.id_company}}</td>
+                        <td>{{tabel_item.top}}</td>
                         <td>
                             <form>
                                 <div class ="flex">
@@ -103,6 +103,8 @@ export default {
       start: null,
       end: null,
       tabelData: null,
+      copyTabelData: null,
+      checked: false,
       flagTable: false,
     }
   },
@@ -114,6 +116,7 @@ export default {
             try{
                 const response = await axios.get('/getData');
                 this.tabelData = response.data;
+                this.copyTabelData = response.data;
                 this.flagTable = true;
             }
             catch{
@@ -144,8 +147,33 @@ export default {
             }catch{
                 console.log("Ошибка");
             }
-        }
+        },
+        getTop(){
+            this.checked = !this.checked;
+            if(this.checked){
+                this.tabelData.sort(function (a, b) {
+                    if (a.top < b.top) {
+                        return 1;
+                    }
+                    if (a.top > b.top) {
+                        return -1;
+                    }
+                    return 0;
+                });
+            }
+            else{
+               this.tabelData.sort(function (a, b) {
+                    if (a.top > b.top) {
+                        return 1;
+                    }
+                    if (a.top < b.top) {
+                        return -1;
+                    }
+                    return 0;
+                });
+            }
 
+        }
     }
 }
 </script>

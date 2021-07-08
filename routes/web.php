@@ -6,6 +6,7 @@ use App\Http\Controllers\AccountController;
 use Illuminate\Support\Facades\Auth;
 use App\Models\CompanyName;
 use App\Models\Bets;
+use App\Models\CyanCallPhones;
 use Spatie\ArrayToXml\ArrayToXml;
 use Illuminate\Support\Facades\Storage;
 use App\Models\CurrentXml;
@@ -36,106 +37,74 @@ Route::resource('/accounts','App\Http\Controllers\AccountController');
 Auth::routes();
 
 Route::get('test',function(){
-    date_default_timezone_set("Europe/Moscow");
-        $collection_firms = CompanyName::select('id','xml_feed','user_id')->get();
-        $array_xml = [];
-        $array_new = [];
-        $array_xml_feed = [];
-        foreach($collection_firms as $value){
-            $array_xml[$value['user_id']][$value['id']] =  $value['xml_feed'];
-        }
-        foreach($array_xml as $index_user =>$item_xml){
-            foreach($item_xml as $index_company =>$current_item_xml){
-                $xml_feed= CurrentXml::select('id_flat','bet','id_user','id_company','name_agent','top')
-                                    ->where('id_user', $index_user)
-                                    ->where('id_company', $index_company)
-                                    ->get()->toArray();
-                $xml = simplexml_load_file($current_item_xml);
-                $array = json_decode(json_encode($xml),TRUE);
-                foreach($xml_feed as $index_xml => $current_item_feed){
-                    $array_xml_feed[$current_item_feed['id_flat']]['id_company']= $current_item_feed['id_company'];
-                    $array_xml_feed[$current_item_feed['id_flat']]['id_flat']= $current_item_feed['id_flat'];
-                    $array_xml_feed[$current_item_feed['id_flat']]['bet']= $current_item_feed['bet'];
-                    $array_xml_feed[$current_item_feed['id_flat']]['id_user']= $current_item_feed['id_user'];
-                    $array_xml_feed[$current_item_feed['id_flat']]['name_agent']= $current_item_feed['name_agent'];
-                    $array_xml_feed[$current_item_feed['id_flat']]['top']= $current_item_feed['top'];
+    $date = new DateTime('-2 days');
+    $startTime =  $date->format('Y-m-d');
+    $collection_keys = CompanyName::select('id','cyan_key','user_id')->get();
+    foreach($collection_keys as $collection_key){
+        $url = 'https://public-api.cian.ru/v1/get-calls-report?page=1&pageSize=100&dateFrom='.$startTime; //?startTime=2019-01-10
+        $curl = curl_init($url);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, array("Authorization: Bearer ".$collection_key->cyan_key));
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        $curl_response = curl_exec($curl);
+        $res = json_decode($curl_response);
+        curl_close($curl);
+        if ($res->result->calls) {
+            $ar_calls = array_reverse($res->result->calls);
+            foreach ($ar_calls as $call) {
+                $phone = preg_replace('/\D+/', '', $call->sourcePhone);
+                CyanCallPhones::create(array(
+                    'phone'=>$phone,
+                    'called'=>$call->date,
+                    'id_user'=>$collection_key->user_id,
+                    'id_company'=>$collection_key->id
+                    ));
                 }
-                $array_xml_feed_copy = $array_xml_feed;
-                foreach($array['object'] as $item => $current_item) {
-                    $current_array['id_flat'] = (int)$current_item['ExternalId'];
-                    $current_array['id_company'] = $index_company;
-                    if(array_key_exists('Bet', $current_item)){
-                        $current_bet = $current_item['Bet'];
-                    }else{
-                        $current_bet = 0;
-                    }
-                    $current_agent_name = $current_item['SubAgent']['FirstName'].' '.$current_item['SubAgent']['LastName'];
-                    if(array_key_exists('PublishTerms', $current_item)){
-                        $current_top = '';
-                        $current_another_top = '';
-                        if(array_key_exists('Services', $current_item['PublishTerms']['Terms']['PublishTermSchema'])){
-                            $current_top = $current_item['PublishTerms']['Terms']['PublishTermSchema']['Services']['ServicesEnum'];
-                        }
-                        if(array_key_exists('ExcludedServices', $current_item['PublishTerms']['Terms']['PublishTermSchema'])){
-                            $current_another_top = $current_item['PublishTerms']['Terms']['PublishTermSchema']['ExcludedServices']['ExcludedServicesEnum'];
-                        }
-                        if($current_top == "top3" or $current_another_top == "top3"){
-                            $top = 1;
-                        }else{
-                            $top = 0;
-                        }
-                    }else{
-                        $top = 0;
-                    }
-                    if(array_key_exists($current_array['id_flat'], $array_xml_feed)){
-                        CurrentXml::where('id_flat', '=', $current_array['id_flat'])
-                            ->where('id_company', '=', $current_array['id_company'])
-                            ->where('id_user', $index_user)
-                            ->update(array(
-                                'bet' => $current_bet,
-                                'name_agent' =>$current_agent_name,
-                                'top' => $top
-                            ));
-                        unset($array_xml_feed[$current_array['id_flat']]);
-                    }
-                    else{
-                        $newObject = CurrentXml::create(array(
-                            'id_flat' =>$current_array['id_flat'],
-                            'bet'=> $current_bet,
-                            'id_user'=> $index_user,
-                            'id_company'=> $current_array['id_company'],
-                            'name_agent'=>$current_agent_name,
-                            'top' => $top
-                        ));
-                        $newObject->save();
-                    } 
-                }
-            foreach($array_xml_feed as $current_array_xml_feed_index => $current_array_xml_feed){
-                CurrentXml::where('id_flat', $current_array_xml_feed_index)
-                            ->where('id_user', $index_user)
-                            ->where('id_company', $current_array_xml_feed['id_company'])
-                            ->delete();
-                Bets::where('id_flat', $current_array_xml_feed_index)
-                            ->where('id_user', $index_user)
-                            ->where('id_company', $current_array_xml_feed['id_company'])
-                            ->delete();
-                }    
             }
         }
  });
- 
+Route::get('test1',function(){
 
+    CompanyName::where('created_at','<','DATE_SUB(NOW(), INTERVAL 5 DAY)')->delete();
+    $limit = 80;//file_get_contents(APP_PATH.'script/cian/cian_call_phones.limit');Было, но в файле 80 
+    $sql = CompanyName::select('phone','DATE_FORMAT(called, "%Y-%m-%d") as called_date')
+                        ->orderBy('id')
+    $sql = 'SELECT `phone`, DATE_FORMAT(`called`, "%Y-%m-%d") as called_date FROM `cian_call_phones` ORDER BY `id` LIMIT '.$limit.', 10';
+    $phones = Base::GetObjectByQuery($sql);
 
-Route::get('test2',function(){
-    // $current_xml = 'https://nasledie-don.ru/admin/upload/cian_flats_rnd.xml';
-    // $xml = simplexml_load_file($current_xml);
-    // $array = json_decode(json_encode($xml),TRUE);
-    // $result = ArrayToXml::convert($array);
-    // return $array;
+    if (count($phones)<10) {
+        $limit = 0;
+    } else {
+        $limit += 10;
+    }
+    file_put_contents(APP_PATH.'script/cian/cian_call_phones.limit', $limit);
 
-    // Storage::put('public/1/1/original-xml-feed.xml', $xml);
-    
-    // $contents = Storage::get('public/1/1/crm-xml-feed.xml');
-    // $resultArray = Convertor::covertToArray($contents);
-    // return $resultArray;
+    foreach ($phones as $ph) {
+        $phone = $ph['phone'];
+        $receive_path = 70;
+
+        $phone = Functions::clear_phone_crm($phone);
+
+        if (!empty($phone) && $phone != '' && strlen($phone)==11) {
+            
+            $sql = 'SELECT `idx` FROM  `clients_flats` '
+                    . 'WHERE '
+                    . '(`num1` LIKE "'.$phone.'" OR '
+                    . ' `num2` LIKE "'.$phone.'" OR '
+                    . ' `num3` LIKE "'.$phone.'" OR '
+                    . ' `num4` LIKE "'.$phone.'" OR '
+                    . ' `num5` LIKE "'.$phone.'" OR '
+                    . ' `num6` LIKE "'.$phone.'") AND ( (`returned` IS NOT NULL AND `returned` > DATE_SUB(NOW(), INTERVAL 7 DAY) OR `created` > DATE_SUB(NOW(), INTERVAL 7 DAY) AND (`receive_path` = 58 OR `receive_path` = 12) ) AND (`receive_path_last_date` IS NULL OR "'.$ph['called_date'].'" <= DATE_FORMAT(`receive_path_last_date`, "%Y-%m-%d"))  )';
+            $rows = Base::GetObjectByQuery($sql);
+            //AND `receive_path` != '.$receive_path.'
+            //AND ( (`removed` IS NULL AND `receive_path` = 58 OR `removed` IS NOT NULL AND `removed` < DATE_SUB(NOW(), INTERVAL 30 DAY) ) AND (`receive_path_last_date` IS NULL OR "'.$ph['called_date'].'" < DATE_FORMAT(`receive_path_last_date`, "%Y-%m-%d"))  )
+
+            if ($rows) {
+                foreach ($rows as $row) {
+                    $sql = 'UPDATE `clients_flats` SET `creator` = 0, `adv_id` = '.$receive_path.', `receive_path` = '.$receive_path.', `receive_path_last_date` = "'.$ph['called_date'].'" WHERE `idx` = '.$row['idx'].' LIMIT 1';
+                    $res = mysql_query($sql);
+                }
+            }
+            
+        }
+    }
 });
