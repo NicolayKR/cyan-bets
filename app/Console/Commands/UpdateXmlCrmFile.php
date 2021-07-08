@@ -60,7 +60,7 @@ class UpdateXmlCrmFile extends Command
             }
             foreach($resultArray['object'] as $res_item_index => $res_item){
                 if(array_key_exists($res_item['ExternalId'], $array_bets)){     
-                    $resultArray['object'][$res_item_index]['Bet'] = (string)$array_bets[$res_item['ExternalId']]['bet'];
+                    $resultArray['object'][$res_item_index]['Auction']['Bet'] = (string)$array_bets[$res_item['ExternalId']]['bet'];
                 }
 
             }

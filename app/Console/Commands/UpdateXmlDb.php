@@ -55,7 +55,7 @@ class UpdateXmlDb extends Command
         }
         foreach($array_xml as $index_user =>$item_xml){
             foreach($item_xml as $index_company =>$current_item_xml){
-                $xml_feed= CurrentXml::select('id_flat','bet','id_user','id_company','name_agent')
+                $xml_feed= CurrentXml::select('id_flat','bet','id_user','id_company','name_agent','top')
                                     ->where('id_user', $index_user)
                                     ->where('id_company', $index_company)
                                     ->get()->toArray();
@@ -67,6 +67,7 @@ class UpdateXmlDb extends Command
                     $array_xml_feed[$current_item_feed['id_flat']]['bet']= $current_item_feed['bet'];
                     $array_xml_feed[$current_item_feed['id_flat']]['id_user']= $current_item_feed['id_user'];
                     $array_xml_feed[$current_item_feed['id_flat']]['name_agent']= $current_item_feed['name_agent'];
+                    $array_xml_feed[$current_item_feed['id_flat']]['top']= $current_item_feed['top'];
                 }
                 $array_xml_feed_copy = $array_xml_feed;
                 foreach($array['object'] as $item => $current_item) {
@@ -78,13 +79,31 @@ class UpdateXmlDb extends Command
                         $current_bet = 0;
                     }
                     $current_agent_name = $current_item['SubAgent']['FirstName'].' '.$current_item['SubAgent']['LastName'];
+                    if(array_key_exists('PublishTerms', $current_item)){
+                        $current_top = '';
+                        $current_another_top = '';
+                        if(array_key_exists('Services', $current_item['PublishTerms']['Terms']['PublishTermSchema'])){
+                            $current_top = $current_item['PublishTerms']['Terms']['PublishTermSchema']['Services']['ServicesEnum'];
+                        }
+                        if(array_key_exists('ExcludedServices', $current_item['PublishTerms']['Terms']['PublishTermSchema'])){
+                            $current_another_top = $current_item['PublishTerms']['Terms']['PublishTermSchema']['ExcludedServices']['ExcludedServicesEnum'];
+                        }
+                        if($current_top == "top3" or $current_another_top == "top3"){
+                            $top = 1;
+                        }else{
+                            $top = 0;
+                        }
+                    }else{
+                        $top = 0;
+                    }
                     if(array_key_exists($current_array['id_flat'], $array_xml_feed)){
                         CurrentXml::where('id_flat', '=', $current_array['id_flat'])
                             ->where('id_company', '=', $current_array['id_company'])
                             ->where('id_user', $index_user)
                             ->update(array(
                                 'bet' => $current_bet,
-                                'name_agent' =>$current_agent_name
+                                'name_agent' =>$current_agent_name,
+                                'top' => $top
                             ));
                         unset($array_xml_feed[$current_array['id_flat']]);
                     }
@@ -94,7 +113,8 @@ class UpdateXmlDb extends Command
                             'bet'=> $current_bet,
                             'id_user'=> $index_user,
                             'id_company'=> $current_array['id_company'],
-                            'name_agent'=>$current_agent_name
+                            'name_agent'=>$current_agent_name,
+                            'top' => $top
                         ));
                         $newObject->save();
                     } 

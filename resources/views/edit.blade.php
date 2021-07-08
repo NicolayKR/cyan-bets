@@ -17,6 +17,7 @@
             <div class="card-body">
                 <input class="form-control" type="text" value="{{$url}}" aria-label="Disabled input example" readonly>
                 <form method="get" action="{{ route('updateNow', $account)}}" class="mt-3">
+                    @csrf
                     <input type="hidden" value="{{$account->id}}">
                     <button type="submit" class="btn btn-primary">Обновить сейчас</button>
                 </form>
@@ -34,7 +35,7 @@
                     <input type="hidden" name="_method" value="put">
                     @csrf
                     <div class="form-group row">
-                        <label for="name" class="col-md-4 col-form-label text-md-end">Название фирмы</label>
+                        <label for="name" class="col-md-4 col-form-label text-md-end">Название Фида</label>
                         <div class="col-md-6">
                             <input id="name" type="text" class="form-control" name="name" value="{{$account->name}}" required>
                         </div>

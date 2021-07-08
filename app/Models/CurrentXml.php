@@ -13,6 +13,7 @@ class CurrentXml extends Model
         'bet',
         'name_agent',
         'id_user',
-        'id_company'
+        'id_company',
+        'top'
     ];
 }

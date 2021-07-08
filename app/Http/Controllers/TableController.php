@@ -25,7 +25,7 @@ class TableController extends Controller
             $array_bets[$current_bet['id_company']][$current_bet['id_flat']]['bet'] =  $current_bet['bet'];
             $array_bets[$current_bet['id_company']][$current_bet['id_flat']]['id'] =  $current_bet['id'];
         }
-        $collection = CurrentXml::select('id','id_flat','bet','id_user','id_company','name_agent')->get();
+        $collection = CurrentXml::select('id','id_flat','bet','id_user','id_company','name_agent','top')->get();
         foreach($collection as $index =>$item_collection){
             if(array_key_exists($item_collection['id_company'], $array_bets)){
                 if(array_key_exists($item_collection['id_flat'], $array_bets[$item_collection['id_company']])){
@@ -40,6 +40,7 @@ class TableController extends Controller
             else{
                 $array_data[$index]['crm_bet'] = 0;
             }
+            $array_data[$index]['top'] = $item_collection['top'];
             //Текущая фирма 
             $array_data[$index]['id_company'] = $item_collection['id_company'];
             //Ставка на циан

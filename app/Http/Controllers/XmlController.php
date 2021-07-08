@@ -10,6 +10,7 @@ use App\Models\Bets;
 use Spatie\ArrayToXml\ArrayToXml;
 use Illuminate\Support\Facades\Storage;
 use Gaarf\XmlToPhp\Convertor;
+use Illuminate\Http\File;
 
 class XmlController extends Controller
 {
@@ -36,7 +37,7 @@ class XmlController extends Controller
             }
             foreach($resultArray['object'] as $res_item_index => $res_item){
                 if(array_key_exists($res_item['ExternalId'], $array_bets)){     
-                    $resultArray['object'][$res_item_index]['Bet'] = (string)$array_bets[$res_item['ExternalId']]['bet'];
+                    $resultArray['object'][$res_item_index]['Auction']['Bet'] = (string)$array_bets[$res_item['ExternalId']]['bet'];
                 }
 
             }

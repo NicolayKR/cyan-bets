@@ -19,7 +19,7 @@
                 <table class="table table-striped table-bordered table-sm">
                     <thead>
                         <tr>
-                            <th scope="col">Название Фирмы</th>
+                            <th scope="col">Название Фида</th>
                             <th scope="col">XML фид ЦИАН</th>
                             <th scope="col">API ключ ЦИАН</th>
                             <th scope="col"></th>
