@@ -16,7 +16,6 @@ class Statistic extends Model
         'leader_bet',
         'position',
         'page',
-        'id_user',
-        'id_company'
+        'id_user'
     ];
 }

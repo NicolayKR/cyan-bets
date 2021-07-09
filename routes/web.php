@@ -118,7 +118,7 @@ Route::get('test',function(){
         }
  });
 Route::get('test1',function(){
-    $collection_keys = CompanyName::select('id','cyan_key','user_id')->get();
+    $collection_keys = CompanyName::distinct()->select('user_id','cyan_key')->get();
     foreach($collection_keys as $collection_key){
         $url = 'https://public-api.cian.ru/v1/get-order';
         $curl = curl_init($url);
@@ -130,7 +130,8 @@ Route::get('test1',function(){
         $ar_offerIds = array();
         $x_auction = 0;
         $y_auction = 0;
-        $collectionExtID = Statistic::select('id_flat','id_offer','url_offer')->where('id_company', $collection_key->id)->get();
+        $collectionExtID = Statistic::select('id_flat','id_offer','url_offer')
+                                    ->where('id_user', $collection_key->user_id)->get();
         $array_statistic = array();
         $array_statistic_from_db = array();
         foreach($collectionExtID as $collectionExtIdItem){
@@ -188,15 +189,13 @@ Route::get('test1',function(){
                                 'position'=> $a->position,
                                 'page'=>$a->page,
                                 'id_user'=>$collection_key->user_id,
-                                'id_company'=>$collection_key->id
                                 ));
                         }
                         else{
                             Statistic::where('id_user', $collection_key->id_user)->
                                         where('id_flat', $array_statistic[$a->offerId]['id_flat'])-> 
                                         where('id_offer', (int)$a->offerId)->  
-                                        where('id_user', $collection_key->user_id)-> 
-                                        where('id_company', $collection_key->id)->     
+                                        where('id_user', $collection_key->user_id)->  
                                         update(array(
                                             'url_offer'=>$array_statistic[$a->offerId]['url_offer'],
                                             'current_bet'=>$current_bet,

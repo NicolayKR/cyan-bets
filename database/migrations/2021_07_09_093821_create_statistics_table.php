@@ -23,7 +23,6 @@ class CreateStatisticsTable extends Migration
             $table->integer('position');
             $table->integer('page');
             $table->integer('id_user');
-            $table->integer('id_company');
             $table->timestamps();
         });
     }
