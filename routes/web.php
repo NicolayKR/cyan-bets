@@ -10,6 +10,7 @@ use App\Models\CyanCallPhones;
 use Spatie\ArrayToXml\ArrayToXml;
 use Illuminate\Support\Facades\Storage;
 use App\Models\CurrentXml;
+use App\Models\Statistic;
 use Gaarf\XmlToPhp\Convertor;
 
 
@@ -63,48 +64,96 @@ Route::get('test',function(){
         }
  });
 Route::get('test1',function(){
-
-    CompanyName::where('created_at','<','DATE_SUB(NOW(), INTERVAL 5 DAY)')->delete();
-    $limit = 80;//file_get_contents(APP_PATH.'script/cian/cian_call_phones.limit');Было, но в файле 80 
-    $sql = CompanyName::select('phone','DATE_FORMAT(called, "%Y-%m-%d") as called_date')
-                        ->orderBy('id')
-    $sql = 'SELECT `phone`, DATE_FORMAT(`called`, "%Y-%m-%d") as called_date FROM `cian_call_phones` ORDER BY `id` LIMIT '.$limit.', 10';
-    $phones = Base::GetObjectByQuery($sql);
-
-    if (count($phones)<10) {
-        $limit = 0;
-    } else {
-        $limit += 10;
-    }
-    file_put_contents(APP_PATH.'script/cian/cian_call_phones.limit', $limit);
-
-    foreach ($phones as $ph) {
-        $phone = $ph['phone'];
-        $receive_path = 70;
-
-        $phone = Functions::clear_phone_crm($phone);
-
-        if (!empty($phone) && $phone != '' && strlen($phone)==11) {
-            
-            $sql = 'SELECT `idx` FROM  `clients_flats` '
-                    . 'WHERE '
-                    . '(`num1` LIKE "'.$phone.'" OR '
-                    . ' `num2` LIKE "'.$phone.'" OR '
-                    . ' `num3` LIKE "'.$phone.'" OR '
-                    . ' `num4` LIKE "'.$phone.'" OR '
-                    . ' `num5` LIKE "'.$phone.'" OR '
-                    . ' `num6` LIKE "'.$phone.'") AND ( (`returned` IS NOT NULL AND `returned` > DATE_SUB(NOW(), INTERVAL 7 DAY) OR `created` > DATE_SUB(NOW(), INTERVAL 7 DAY) AND (`receive_path` = 58 OR `receive_path` = 12) ) AND (`receive_path_last_date` IS NULL OR "'.$ph['called_date'].'" <= DATE_FORMAT(`receive_path_last_date`, "%Y-%m-%d"))  )';
-            $rows = Base::GetObjectByQuery($sql);
-            //AND `receive_path` != '.$receive_path.'
-            //AND ( (`removed` IS NULL AND `receive_path` = 58 OR `removed` IS NOT NULL AND `removed` < DATE_SUB(NOW(), INTERVAL 30 DAY) ) AND (`receive_path_last_date` IS NULL OR "'.$ph['called_date'].'" < DATE_FORMAT(`receive_path_last_date`, "%Y-%m-%d"))  )
-
-            if ($rows) {
-                foreach ($rows as $row) {
-                    $sql = 'UPDATE `clients_flats` SET `creator` = 0, `adv_id` = '.$receive_path.', `receive_path` = '.$receive_path.', `receive_path_last_date` = "'.$ph['called_date'].'" WHERE `idx` = '.$row['idx'].' LIMIT 1';
-                    $res = mysql_query($sql);
+    $collection_keys = CompanyName::select('id','cyan_key','user_id')->get();
+    foreach($collection_keys as $collection_key){
+        $url = 'https://public-api.cian.ru/v1/get-order';
+        $curl = curl_init($url);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, array("Authorization: Bearer " .$collection_key->cyan_key));
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        $curl_response = curl_exec($curl);
+        $res = json_decode($curl_response);
+        curl_close($curl);
+        $ar_offerIds = array();
+        $x_auction = 0;
+        $y_auction = 0;
+        $collectionExtID = Statistic::select('id_flat','id_offer','url_offer')->where('id_company', $collection_key->id)->get();
+        $array_statistic = array();
+        $array_statistic_from_db = array();
+        foreach($collectionExtID as $collectionExtIdItem){
+            $array_statistic_from_db[$collectionExtIdItem['id_offer']]['id_flat'] = $collectionExtIdItem['id_flat'];
+            $array_statistic_from_db[$collectionExtIdItem['id_offer']]['url_offer'] = $collectionExtIdItem['url_offer'];
+        }
+        if ($res->result->offers) {
+            foreach ($res->result->offers as $item) {
+                if ($item->externalId > 0) {
+                    $offer_id = $item->offerId;
+                    if($offer_id != null){
+                        if(!array_key_exists($offer_id, $array_statistic)){
+                            $array_statistic[$offer_id]['id_flat'] = $item->externalId;
+                            $array_statistic[$offer_id]['url_offer'] = $item->url;
+                        }
+                        $ar_offerIds[$x_auction][$y_auction++] = 'offerIds='.$offer_id;
+                        if ($y_auction >= 20) {
+                            $x_auction++;
+                            $y_auction = 0;
+                        }
+                    }
                 }
             }
-            
+        }
+        if (!empty($ar_offerIds)) {
+            foreach ($ar_offerIds as $offerIds) {
+                $url = 'https://public-api.cian.ru/v1/get-auction?'.implode('&', $offerIds);
+                $curl = curl_init($url);
+                curl_setopt($curl, CURLOPT_HTTPHEADER, array("Authorization: Bearer " . $collection_key->cyan_key));
+                curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+                $curl_response = curl_exec($curl);
+                $res_auction = json_decode($curl_response);
+                curl_close($curl);
+                if (!empty($res_auction->result->items)) {
+                    foreach ($res_auction->result->items as $a) {
+                        if($a->currentBet == null){
+                            $current_bet = 0;
+                        }
+                        else{
+                            $current_bet = $a->currentBet;
+                        }
+                        if($a->leaderBet == null){
+                            $leaderBet  = 0;
+                        }
+                        else{
+                            $leaderBet  = $a->leaderBet ;
+                        }
+                        if(!array_key_exists($a->offerId, $array_statistic_from_db)){
+                            Statistic::create(array(
+                                'id_flat'=>$array_statistic[$a->offerId]['id_flat'],
+                                'id_offer'=>(int)$a->offerId,
+                                'url_offer'=>$array_statistic[$a->offerId]['url_offer'],
+                                'current_bet'=>$current_bet,
+                                'leader_bet'=>$leaderBet ,
+                                'position'=> $a->position,
+                                'page'=>$a->page,
+                                'id_user'=>$collection_key->user_id,
+                                'id_company'=>$collection_key->id
+                                ));
+                        }
+                        else{
+                            Statistic::where('id_user', $collection_key->id_user)->
+                                        where('id_flat', $array_statistic[$a->offerId]['id_flat'])-> 
+                                        where('id_offer', (int)$a->offerId)->  
+                                        where('id_user', $collection_key->user_id)-> 
+                                        where('id_company', $collection_key->id)->     
+                                        update(array(
+                                            'url_offer'=>$array_statistic[$a->offerId]['url_offer'],
+                                            'current_bet'=>$current_bet,
+                                            'leader_bet'=>$leaderBet ,
+                                            'position'=> $a->position,
+                                            'page'=>$a->page,
+                                        ));
+                        }
+                    }
+                }
+            }
         }
     }
 });
