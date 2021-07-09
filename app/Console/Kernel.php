@@ -6,6 +6,7 @@ use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use App\Console\Commands\UpdateXmlDb;
 use App\Console\Commands\UpdateXmlCrmFile;
+use App\Console\Commands\UpdateStatistic;
 
 class Kernel extends ConsoleKernel
 {
@@ -28,6 +29,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('update:dbxml')->everyMinute()->timezone("Europe/Moscow");
         $schedule->command('update:crmfile')->everyMinute()->timezone("Europe/Moscow");
+        $schedule->command('update:statistic')->everyMinute()->timezone("Europe/Moscow");
     }
 
     /**
