@@ -23,7 +23,7 @@
                     <b-form-datepicker id="example-datepicker-end" v-model="end" locale="ru" placeholder="Выберите дату" class="margin-datepicker"></b-form-datepicker>
                 </div>
                 <div class="col-1 form-check form-check-padding flex">
-                    <input class="form-check-input" type="checkbox" v-model="checked" id="flexCheckDefault" @click="getTop()">
+                    <input class="form-check-input" type="checkbox" v-model="checked" id="flexCheckDefault" @click="sortTable('top')">
                     <label class="form-check-label label-check-top" for="flexCheckDefault">
                         Топ
                     </label>
@@ -48,20 +48,20 @@
                 <table class="table table-striped table-bordered table-sm">
                 <thead>
                     <tr>
-                    <th scope="col"><button @click="sortTable('coverage'); activeSortParam='coverage'">ОХВАТ В ПРОЦЕНТАХ</button></th>
-                    <th scope="col"><button @click="sortTable('searches_count'); activeSortParam='searches_count'">КОЛИЧЕСТВО ПОИСКОВ</button></th>
-                    <th scope="col"><button @click="sortTable('shows_count'); activeSortParam='shows_count'">КОЛИЧЕСТВО ПОКАЗОВ</button></th>
-                    <th scope="col"><button @click="sortTable('phone_shows'); activeSortParam='phone_shows'">КОЛИЧЕСТВО РАСХЛОПОВ ПО ДНЯМ(ПОКАЗ ТЕЛЕФОНА)</button></th>
-                    <th scope="col"><button @click="sortTable('views'); activeSortParam='views'">КОЛИЧЕСТВО ПРОСМОТРОВ ПО ДНЯМ</button></th>
+                    <th scope="col"><a @click="sortTable('coverage')">ОХВАТ В ПРОЦЕНТАХ</a></th>
+                    <th scope="col"><a @click="sortTable('searches_count') ">КОЛИЧЕСТВО ПОИСКОВ</a></th>
+                    <th scope="col"><a @click="sortTable('shows_count')">КОЛИЧЕСТВО ПОКАЗОВ</a></th>
+                    <th scope="col"><a @click="sortTable('phone_shows')">КОЛИЧЕСТВО РАСХЛОПОВ ПО ДНЯМ(ПОКАЗ ТЕЛЕФОНА)</a></th>
+                    <th scope="col"><a @click="sortTable('views')">КОЛИЧЕСТВО ПРОСМОТРОВ ПО ДНЯМ</a></th>
                     <th scope="col">СТАВКА</th>
-                    <th scope="col"><button @click="sortTable('crm_bet'); activeSortParam='crm_bet'">ТЕКУЩАЯ СТАВКА (CRM)</button></th>
-                    <th scope="col"><button @click="sortTable('cyan_bet'); activeSortParam='cyan_bet'">ТЕКУЩАЯ СТАВКА (ЦИАН)</button></th>
-                    <th scope="col"><button @click="sortTable('leader_bet'); activeSortParam='leader_bet'">СТАВКА ЛИДЕРА</button></th>
-                    <th scope="col"><button @click="sortTable('page'); activeSortParam='page'">СТРАНИЦА</button></th>
-                    <th scope="col"><button @click="sortTable('position'); activeSortParam='position'">ПОЗИЦИЯ В ВЫДАЧЕ</button></th>
-                    <th scope="col"><button @click="sortTable('agent'); activeSortParam='agent'">АГЕНТ</button></th>
-                    <th scope="col"><button @click="sortTable('id_object'); activeSortParam='id_object'">ID ОБЪЕКТА</button></th>
-                    <th scope="col"><button @click="sortTable('id_offer'); activeSortParam='id_offer'">ID ЦИАНА</button></th>
+                    <th scope="col"><a @click="sortTable('crm_bet')">ТЕКУЩАЯ СТАВКА (CRM)</a></th>
+                    <th scope="col"><a @click="sortTable('cyan_bet')">ТЕКУЩАЯ СТАВКА (ЦИАН)</a></th>
+                    <th scope="col"><a @click="sortTable('leader_bet')">СТАВКА ЛИДЕРА</a></th>
+                    <th scope="col"><a @click="sortTable('page')">СТРАНИЦА</a></th>
+                    <th scope="col"><a @click="sortTable('position')">ПОЗИЦИЯ В ВЫДАЧЕ</a></th>
+                    <th scope="col"><a @click="sortTable('agent')">АГЕНТ</a></th>
+                    <th scope="col"><a @click="sortTable('id_object')">ID ОБЪЕКТА</a></th>
+                    <th scope="col"><a @click="sortTable('id_offer')" >ID ЦИАНА</a></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -112,11 +112,6 @@ export default {
   mounted(){
       this.getData();
   },
-  watch:{
-      activeSortParam(){
-          console.log(this.activeSortParam);
-      }
-  },
   methods:{
         async getData(){
             try{
@@ -154,64 +149,80 @@ export default {
                 console.log("Ошибка");
             }
         },
-        getTop(){
-            this.checked = !this.checked;
-            if(this.checked){
-                this.tabelData.sort(function (a, b) {
-                    if (a.top < b.top) {
-                        return 1;
-                    }
-                    if (a.top > b.top) {
-                        return -1;
-                    }
-                    return 0;
-                });
+        onSort(name, nameFunc){
+            this.activeSortParam = name;
+            if(this.activeSortParam == 'top'){
+                this.checked=true;
+            }else{
+                this.checked=false;
             }
-            else{
-               this.tabelData.sort(function (a, b) {
-                    if (a.top > b.top) {
-                        return 1;
-                    }
-                    if (a.top < b.top) {
-                        return -1;
-                    }
-                    return 0;
-                });
-            }
+            return this.tabelData.sort(nameFunc);
+        },
+        offSort(nameFunc){
+            this.checked=false;
+            this.activeSortParam = '#'; 
+            return this.tabelData.sort(nameFunc);
         },
         sortTable(par){
             switch(par){
-                case 'coverage': return this.tabelData.sort(sortByCoverage);
-                case 'searches_count': return this.tabelData.sort(sortBySearchesCount);
-                case 'shows_count': return this.tabelData.sort(sortByShowsCount);
-                case 'phone_shows': return this.tabelData.sort(sortByPhoneShows);
-                case 'views': return this.tabelData.sort(sortByViews);
-                case 'crm_bet': return this.tabelData.sort(sortByCrmBet);
-                case 'cyan_bet': return this.tabelData.sort(sortByCyanBet);
-                case 'leader_bet': return this.tabelData.sort(sortByLeaderBet);
-                case 'page': return this.tabelData.sort(sortByPage);
-                case 'position': return this.tabelData.sort(sortByPosition);
-                case 'agent': return this.tabelData.sort(sortByAgent);
-                case 'id_object': return this.tabelData.sort(sortByIdObject);
-                case 'id_offer': return this.tabelData.sort(sortByIdOffer);
-               id_offer
-               
-                
+                case 'top': if(this.activeSortParam != 'top'){ return this.onSort('top', sortByTopTop)}
+                                else{return this.offSort(sortByTopBottom);}
+                case 'coverage': if(this.activeSortParam != 'coverage'){ return this.onSort('coverage', sortByCoverageTop);}
+                                else{return this.offSort(sortByCoverageBottom);}
+                case 'searches_count': if(this.activeSortParam != 'searches_count'){ return this.onSort('searches_count', sortBySearchesCountTop);}
+                                else{return this.offSort(sortBySearchesCountBottom);}          
+                case 'shows_count': if(this.activeSortParam != 'shows_count'){ return this.onSort('shows_count', sortByShowsCountTop);}
+                                else{return this.offSort(sortByShowsCountBottom);} 
+                case 'phone_shows': if(this.activeSortParam != 'phone_shows'){ return this.onSort('phone_shows', sortByPhoneShowsTop);}
+                                else{return this.offSort(sortByPhoneShowsBottom);} 
+                case 'views': if(this.activeSortParam != 'views'){ return this.onSort('views', sortByViewsTop);}
+                                else{return this.offSort(sortByViewsBottom);} 
+                case 'crm_bet': if(this.activeSortParam != 'crm_bet'){ return this.onSort('crm_bet', sortByCrmBetTop);}
+                                else{return this.offSort(sortByCrmBetBottom);} 
+                case 'cyan_bet': if(this.activeSortParam != 'cyan_bet'){ return this.onSort('cyan_bet', sortByCyanBetTop);}
+                                else{return this.offSort(sortByCyanBetBottom);} 
+                case 'leader_bet': if(this.activeSortParam != 'leader_bet'){ return this.onSort('leader_bet', sortByLeaderBetTop);}
+                                else{return this.offSort(sortByLeaderBetBottom);} 
+                case 'page': if(this.activeSortParam != 'page'){ return this.onSort('page', sortByPageTop);}
+                                else{return this.offSort(sortByPageBottom);} 
+                case 'position': if(this.activeSortParam != 'position'){ return this.onSort('position', sortByPositionTop);}
+                                else{return this.offSort(sortByPositionBottom);} 
+                case 'agent': if(this.activeSortParam != 'agent'){ return this.onSort('agent', sortByAgentTop);}
+                                else{return this.offSort(sortByAgentBottom);} 
+                case 'id_object': if(this.activeSortParam != 'id_object'){ return this.onSort('id_object', sortByIdObjectTop);}
+                                else{return this.offSort(sortByIdObjectBottom);} 
+                case 'id_offer': if(this.activeSortParam != 'id_offer'){ return this.onSort('id_offer', sortByIdOfferTop);}
+                                else{return this.offSort(sortByIdOfferBottom);}         
             }
         }
     }
 }
-var sortByCoverage = function (d1, d2) {return (d1.coverage < d2.coverage) ? 1 : -1;};                   
-var sortBySearchesCount = function (d1, d2) { return (d1.searches_count < d2.searches_count) ? 1 : -1; };
-var sortByShowsCount = function (d1, d2) { return (d1.shows_count < d2.shows_count) ? 1 : -1; };
-var sortByPhoneShows = function (d1, d2) { return (d1.phone_shows < d2.phone_shows) ? 1 : -1; };
-var sortByViews = function (d1, d2) { return (d1.views < d2.views) ? 1 : -1; };
-var sortByCrmBet = function (d1, d2) { return (d1.crm_bet < d2.crm_bet) ? 1 : -1; };
-var sortByCyanBet = function (d1, d2) { return (d1.cyan_bet < d2.cyan_bet) ? 1 : -1; };
-var sortByLeaderBet = function (d1, d2) { return (d1.leader_bet < d2.leader_bet) ? 1 : -1; };
-var sortByPage = function (d1, d2) { return (d1.page < d2.page) ? 1 : -1; };
-var sortByPosition = function (d1, d2) { return (d1.position < d2.position) ? 1 : -1; };
-var sortByAgent = function (d1, d2) { return (d1.agent.toLowerCase() < d2.agent.toLowerCase()) ? 1 : -1; };
-var sortByIdObject= function (d1, d2) { return (d1.id_object < d2.id_object) ? 1 : -1; };
-var sortByIdOffer= function (d1, d2) { return (d1.id_offer < d2.id_offer) ? 1 : -1; };
+var sortByTopTop = function (d1, d2) {return (d1.top < d2.top) ? 1 : -1;};   
+var sortByTopBottom = function (d1, d2) {return (d1.top > d2.top) ? 1 : -1;};   
+var sortByCoverageTop = function (d1, d2) {return (d1.coverage < d2.coverage) ? 1 : -1;};   
+var sortByCoverageBottom = function (d1, d2) {return (d1.coverage > d2.coverage) ? 1 : -1;};                   
+var sortBySearchesCountTop  = function (d1, d2) { return (d1.searches_count < d2.searches_count) ? 1 : -1; };
+var sortBySearchesCountBottom  = function (d1, d2) { return (d1.searches_count > d2.searches_count) ? 1 : -1; };
+var sortByShowsCountTop  = function (d1, d2) { return (d1.shows_count < d2.shows_count) ? 1 : -1; };
+var sortByShowsCountBottom  = function (d1, d2) { return (d1.searches_count > d2.searches_count) ? 1 : -1; };
+var sortByPhoneShowsTop  = function (d1, d2) { return (d1.phone_shows < d2.phone_shows) ? 1 : -1; };
+var sortByPhoneShowsBottom  = function (d1, d2) { return (d1.searches_count > d2.searches_count) ? 1 : -1; };
+var sortByViewsTop  = function (d1, d2) { return (d1.views < d2.views) ? 1 : -1; };
+var sortByViewsBottom  = function (d1, d2) { return (d1.searches_count > d2.searches_count) ? 1 : -1; };
+var sortByCrmBetTop  = function (d1, d2) { return (d1.crm_bet < d2.crm_bet) ? 1 : -1; };
+var sortByCrmBetBottom  = function (d1, d2) { return (d1.searches_count > d2.searches_count) ? 1 : -1; };
+var sortByCyanBetTop  = function (d1, d2) { return (d1.cyan_bet < d2.cyan_bet) ? 1 : -1; };
+var sortByCyanBetBottom  = function (d1, d2) { return (d1.searches_count > d2.searches_count) ? 1 : -1; };
+var sortByLeaderBetTop  = function (d1, d2) { return (d1.leader_bet < d2.leader_bet) ? 1 : -1; };
+var sortByLeaderBetBottom  = function (d1, d2) { return (d1.searches_count > d2.searches_count) ? 1 : -1; };
+var sortByPageTop  = function (d1, d2) { return (d1.page < d2.page) ? 1 : -1; };
+var sortByPageBottom  = function (d1, d2) { return (d1.searches_count > d2.searches_count) ? 1 : -1; };
+var sortByPositionTop  = function (d1, d2) { return (d1.position < d2.position) ? 1 : -1; };
+var sortByPositionBottom  = function (d1, d2) { return (d1.searches_count > d2.searches_count) ? 1 : -1; };
+var sortByAgentTop  = function (d1, d2) { return (d1.agent.toLowerCase() < d2.agent.toLowerCase()) ? 1 : -1; };
+var sortByAgentBottom  = function (d1, d2) { return (d1.searches_count > d2.searches_count) ? 1 : -1; };
+var sortByIdObjectTop = function (d1, d2) { return (d1.id_object < d2.id_object) ? 1 : -1; };
+var sortByIdObjectBottom  = function (d1, d2) { return (d1.searches_count > d2.searches_count) ? 1 : -1; };
+var sortByIdOfferTop = function (d1, d2) { return (d1.id_offer < d2.id_offer) ? 1 : -1; };
+var sortByIdOfferBottom  = function (d1, d2) { return (d1.searches_count > d2.searches_count) ? 1 : -1; };
 </script>

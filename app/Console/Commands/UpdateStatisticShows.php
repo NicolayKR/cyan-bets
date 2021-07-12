@@ -80,10 +80,12 @@ class UpdateStatisticShows extends Command
                         if(sizeof($res['result']['phoneShowsByDays']) == 0){
                                 $stat['phone_shows'] = 0;
                                 $stat['views'] = 0;
+                                $stat['date'] = $date;
                         }
                         else{
-                                $stat['phone_shows'] = $res['result']['phoneShowsByDays'][0]['phoneShows'];
-                                $stat['views'] = $res['result']['viewsByDays'][0]['views'];
+                            $stat['phone_shows'] = $res['result']['phoneShowsByDays'][0]['phoneShows'];
+                            $stat['views'] = $res['result']['viewsByDays'][0]['views'];
+                            $stat['date'] = $res['result']['viewsByDays'][0]['date'];
                         }
                     }          
                     StatisticShows::create(array(
@@ -94,6 +96,7 @@ class UpdateStatisticShows extends Command
                         'phone_shows'=> $stat['phone_shows'] ,
                         'views'=> $stat['views'],
                         'id_user'=> $collection_key->user_id,
+                        'created_at' => $stat['date']
                         ));
                 }
             }

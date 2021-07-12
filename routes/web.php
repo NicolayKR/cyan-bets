@@ -41,15 +41,17 @@ Auth::routes();
 
 
 Route::get('test',function(){
-    $collection = CurrentXml::select('current_xmls.id','current_xmls.id_flat','bet','current_xmls.id_user','current_xmls.id_company','name_agent','top','statistics.id_offer',
-                                    'url_offer','current_bet','leader_bet','position','page','coverage','searches_count','shows_count','phone_shows','views')
-                                    ->leftJoin('statistics', function ($join){
-                                        $join->on("current_xmls.id_flat",'=',"statistics.id_flat")
-                                        ->on('current_xmls.id_user','=','statistics.id_user');})
-                                    ->leftJoin('statistic_shows', function ($join){
-                                        $join->on("statistics.id_offer",'=',"statistic_shows.id_offer")
-                                            ->on('statistics.id_user','=','statistic_shows.id_user');})
-                                        ->get();
-                       
+    $date = date('Y-m-d', strtotime("-1 days"));
+    $collection = CurrentXml::select('current_xmls.id','current_xmls.id_flat','bet','current_xmls.id_user','current_xmls.id_company','name_agent','top',
+                'statistics.id_offer','url_offer','current_bet','leader_bet','position','page','coverage','searches_count',
+                'shows_count','phone_shows','views')->selectRaw('date(statistic_shows.created_at) as created_at')
+                ->leftJoin('statistics', function ($join){
+                    $join->on("current_xmls.id_flat",'=',"statistics.id_flat")
+                    ->on('current_xmls.id_user','=','statistics.id_user');})
+                ->leftJoin('statistic_shows', function ($join){
+                    $join->on("statistics.id_offer",'=',"statistic_shows.id_offer")
+                        ->on('statistics.id_user','=','statistic_shows.id_user');})
+                    ->whereRaw('date(statistic_shows.created_at) = "'.$date.'"')
+                    ->get();
     return $collection;
 });

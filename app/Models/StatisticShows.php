@@ -16,5 +16,6 @@ class StatisticShows extends Model
             'phone_shows',
             'views',
             'id_user',
+            'created_at'
     ];
 }

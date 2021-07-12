@@ -29,7 +29,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('update:dbxml')->everyMinute()->timezone("Europe/Moscow");
         $schedule->command('update:crmfile')->everyMinute()->timezone("Europe/Moscow");
-        //$schedule->command('update:statistic_shows')->everyMinute()->timezone("Europe/Moscow");//Накопительная (запускать в 8 утра) 
+        $schedule->command('update:statistic_shows')->everyMinute()->timezone("Europe/Moscow");//Накопительная (запускать в 8 утра) 
         $schedule->command('update:statistic')->everyMinute()->timezone("Europe/Moscow");
     }
 

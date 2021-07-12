@@ -20,6 +20,7 @@ class TableController extends Controller
         $array_xml = [];
         $array_data = [];
         $array_bets = [];
+        $date = date('Y-m-d', strtotime("-1 days"));
         $res_bet = Bets::select('id','id_flat','id_company')->selectRaw('round(bet) as bet')
                 ->where('id_user', Auth::user()->id)
                 ->get();
@@ -35,6 +36,7 @@ class TableController extends Controller
                 ->leftJoin('statistic_shows', function ($join){
                     $join->on("statistics.id_offer",'=',"statistic_shows.id_offer")
                         ->on('statistics.id_user','=','statistic_shows.id_user');})
+                    ->whereRaw('date(statistic_shows.created_at) = "'.$date.'"')
                     ->get();
         foreach($collection as $index =>$item_collection){
             if(array_key_exists($item_collection['id_company'], $array_bets)){
