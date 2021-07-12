@@ -48,29 +48,29 @@
                 <table class="table table-striped table-bordered table-sm">
                 <thead>
                     <tr>
-                    <th scope="col">ОХВАТ В ПРОЦЕНТАХ</th>
-                    <th scope="col">КОЛИЧЕСТВО ПОИСКОВ</th>
-                    <th scope="col">КОЛИЧЕСТВО ПОКАЗОВ</th>
-                    <th scope="col">КОЛИЧЕСТВО РАСХЛОПОВ ПО ДНЯМ(ПОКАЗ ТЕЛЕФОНА)</th>
-                    <th scope="col">КОЛИЧЕСТВО ПРОСМОТРОВ ПО ДНЯМ</th>
+                    <th scope="col"><button @click="sortTable('coverage'); activeSortParam='coverage'">ОХВАТ В ПРОЦЕНТАХ</button></th>
+                    <th scope="col"><button @click="sortTable('searches_count'); activeSortParam='searches_count'">КОЛИЧЕСТВО ПОИСКОВ</button></th>
+                    <th scope="col"><button @click="sortTable('shows_count'); activeSortParam='shows_count'">КОЛИЧЕСТВО ПОКАЗОВ</button></th>
+                    <th scope="col"><button @click="sortTable('phone_shows'); activeSortParam='phone_shows'">КОЛИЧЕСТВО РАСХЛОПОВ ПО ДНЯМ(ПОКАЗ ТЕЛЕФОНА)</button></th>
+                    <th scope="col"><button @click="sortTable('views'); activeSortParam='views'">КОЛИЧЕСТВО ПРОСМОТРОВ ПО ДНЯМ</button></th>
                     <th scope="col">СТАВКА</th>
-                    <th scope="col">ТЕКУЩАЯ СТАВКА (CRM)</th>
-                    <th scope="col">ТЕКУЩАЯ СТАВКА (ЦИАН)</th>
-                    <th scope="col">СТАВКА ЛИДЕРА</th>
-                    <th scope="col">СТРАНИЦА</th>
-                    <th scope="col">ПОЗИЦИЯ В ВЫДАЧЕ</th>
-                    <th scope="col">АГЕНТ</th>
-                    <th scope="col">ID ОБЪЕКТА</th>
-                    <th scope="col">ID ЦИАНА</th>
+                    <th scope="col"><button @click="sortTable('crm_bet'); activeSortParam='crm_bet'">ТЕКУЩАЯ СТАВКА (CRM)</button></th>
+                    <th scope="col"><button @click="sortTable('cyan_bet'); activeSortParam='cyan_bet'">ТЕКУЩАЯ СТАВКА (ЦИАН)</button></th>
+                    <th scope="col"><button @click="sortTable('leader_bet'); activeSortParam='leader_bet'">СТАВКА ЛИДЕРА</button></th>
+                    <th scope="col"><button @click="sortTable('page'); activeSortParam='page'">СТРАНИЦА</button></th>
+                    <th scope="col"><button @click="sortTable('position'); activeSortParam='position'">ПОЗИЦИЯ В ВЫДАЧЕ</button></th>
+                    <th scope="col"><button @click="sortTable('agent'); activeSortParam='agent'">АГЕНТ</button></th>
+                    <th scope="col"><button @click="sortTable('id_object'); activeSortParam='id_object'">ID ОБЪЕКТА</button></th>
+                    <th scope="col"><button @click="sortTable('id_offer'); activeSortParam='id_offer'">ID ЦИАНА</button></th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr v-for ="(tabel_item,index) in tabelData" :key="index">
-                        <td>1,001</td>
-                        <td>random</td>
-                        <td>data</td>
-                        <td>placeholder</td>
-                        <td>{{tabel_item.top}}</td>
+                        <td>{{tabel_item.coverage}}</td>
+                        <td>{{tabel_item.searches_count}}</td>
+                        <td>{{tabel_item.shows_count}}</td>
+                        <td>{{tabel_item.phone_shows}}</td>
+                        <td>{{tabel_item.views}}</td>
                         <td>
                             <form>
                                 <div class ="flex">
@@ -82,12 +82,12 @@
                         </td>
                         <td>{{tabel_item.crm_bet}}</td>
                         <td>{{tabel_item.cyan_bet}}</td>
-                        <td>text</td>
-                        <td>text</td>
-                        <td>text</td>
+                        <td>{{tabel_item.leader_bet}}</td>
+                        <td>{{tabel_item.page}}</td>
+                        <td>{{tabel_item.position}}</td>
                         <td>{{tabel_item.agent}}</td>
                         <td>{{tabel_item.id_object}}</td>
-                        <td>text</td>
+                        <td>{{tabel_item.id_offer}}</td>
                     </tr>
                 </tbody>
                 </table>
@@ -106,10 +106,16 @@ export default {
       copyTabelData: null,
       checked: false,
       flagTable: false,
+      activeSortParam: '',
     }
   },
   mounted(){
       this.getData();
+  },
+  watch:{
+      activeSortParam(){
+          console.log(this.activeSortParam);
+      }
   },
   methods:{
         async getData(){
@@ -172,8 +178,40 @@ export default {
                     return 0;
                 });
             }
-
+        },
+        sortTable(par){
+            switch(par){
+                case 'coverage': return this.tabelData.sort(sortByCoverage);
+                case 'searches_count': return this.tabelData.sort(sortBySearchesCount);
+                case 'shows_count': return this.tabelData.sort(sortByShowsCount);
+                case 'phone_shows': return this.tabelData.sort(sortByPhoneShows);
+                case 'views': return this.tabelData.sort(sortByViews);
+                case 'crm_bet': return this.tabelData.sort(sortByCrmBet);
+                case 'cyan_bet': return this.tabelData.sort(sortByCyanBet);
+                case 'leader_bet': return this.tabelData.sort(sortByLeaderBet);
+                case 'page': return this.tabelData.sort(sortByPage);
+                case 'position': return this.tabelData.sort(sortByPosition);
+                case 'agent': return this.tabelData.sort(sortByAgent);
+                case 'id_object': return this.tabelData.sort(sortByIdObject);
+                case 'id_offer': return this.tabelData.sort(sortByIdOffer);
+               id_offer
+               
+                
+            }
         }
     }
 }
+var sortByCoverage = function (d1, d2) {return (d1.coverage < d2.coverage) ? 1 : -1;};                   
+var sortBySearchesCount = function (d1, d2) { return (d1.searches_count < d2.searches_count) ? 1 : -1; };
+var sortByShowsCount = function (d1, d2) { return (d1.shows_count < d2.shows_count) ? 1 : -1; };
+var sortByPhoneShows = function (d1, d2) { return (d1.phone_shows < d2.phone_shows) ? 1 : -1; };
+var sortByViews = function (d1, d2) { return (d1.views < d2.views) ? 1 : -1; };
+var sortByCrmBet = function (d1, d2) { return (d1.crm_bet < d2.crm_bet) ? 1 : -1; };
+var sortByCyanBet = function (d1, d2) { return (d1.cyan_bet < d2.cyan_bet) ? 1 : -1; };
+var sortByLeaderBet = function (d1, d2) { return (d1.leader_bet < d2.leader_bet) ? 1 : -1; };
+var sortByPage = function (d1, d2) { return (d1.page < d2.page) ? 1 : -1; };
+var sortByPosition = function (d1, d2) { return (d1.position < d2.position) ? 1 : -1; };
+var sortByAgent = function (d1, d2) { return (d1.agent.toLowerCase() < d2.agent.toLowerCase()) ? 1 : -1; };
+var sortByIdObject= function (d1, d2) { return (d1.id_object < d2.id_object) ? 1 : -1; };
+var sortByIdOffer= function (d1, d2) { return (d1.id_offer < d2.id_offer) ? 1 : -1; };
 </script>

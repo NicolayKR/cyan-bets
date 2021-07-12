@@ -13,6 +13,7 @@ use App\Models\CurrentXml;
 use App\Models\Statistic;
 use App\Models\StatisticShows;
 use Gaarf\XmlToPhp\Convertor;
+use Illuminate\Support\Facades\DB;
 
 
 /*
@@ -38,235 +39,17 @@ Route::get('getName', function(){
 Route::resource('/accounts','App\Http\Controllers\AccountController');
 Auth::routes();
 
-Route::get('test3',function(){
-    set_time_limit(1200);
-    $collection_keys = CompanyName::distinct()->select('user_id','cyan_key')->get();
-    foreach($collection_keys as $collection_key){
-        $url = 'https://public-api.cian.ru/v1/get-my-offers?source=upload&statuses=published';
-        $curl = curl_init($url);
-        curl_setopt($curl, CURLOPT_HTTPHEADER, array("Authorization: Bearer ".$collection_key->cyan_key));
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        $curl_response = curl_exec($curl);
-        $res_published = json_decode($curl_response);
-        curl_close($curl);
-        if (!empty($res_published->result->announcements)) {
-            $date = date('Y-m-d', strtotime("-1 days"));
-            $stat = array();
-            $dateFrom = $date;
-            $dateTo = $date;
-            //$url = 'https://public-api.cian.ru/v1/get-search-coverage?dateTo='.$dateTo.'&dateFrom='.$dateFrom.'&offerId=260356445';//'&offerId=260378780';
-            $url = 'https://public-api.cian.ru/v1/get-search-coverage?dateTo='.$dateTo.'&dateFrom='.$dateFrom.'&offerId=260378780';
-            $curl = curl_init($url);
-            curl_setopt($curl, CURLOPT_HTTPHEADER, array("Authorization: Bearer ".$collection_key->cyan_key));
-            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-            $curl_response = curl_exec($curl);
-            $res = json_decode($curl_response,true);   
-            curl_close($curl);
-            if ($res['result']['offerId'] > 0) {
-                $stat['searches_count'] = $res['result']['searchesCount'];
-                $stat['shows_count'] = $res['result']['showsCount'];
-                $stat['coverage'] = $res['result']['coverage'];
-            }
-            //$url = 'https://public-api.cian.ru/v1/get-views-statistics-by-days?dateTo='.$dateTo.'&dateFrom='.$dateFrom.'&offerId=260356445';//'&offerId=260378780';
-            $url = 'https://public-api.cian.ru/v1/get-views-statistics-by-days?dateTo='.$dateTo.'&dateFrom='.$dateFrom.'&offerId=260378780';
-            $curl = curl_init($url);
-            curl_setopt($curl, CURLOPT_HTTPHEADER, array("Authorization: Bearer ".$collection_key->cyan_key));
-            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-            $curl_response = curl_exec($curl);
-            $res = json_decode($curl_response,true);
-            curl_close($curl);
-            if ($res['result']['offerId'] > 0) {
-               if(sizeof($res['result']['phoneShowsByDays'])== 0){
-                    $stat['phone_shows'] = 0;
-                    $stat['views'] = 0;
-               }
-               else{
-                    $stat['phone_shows'] = $res['result']['phoneShowsByDays'][0]['phoneShows'];
-                    $stat['views'] = $res['result']['viewsByDays'][0]['views'];
-               }
-            }     
-            return $stat;
-        }
-    }
-});
-
-Route::get('test2',function(){
-    set_time_limit(30000);
-    $collection_keys = CompanyName::distinct()->select('user_id','cyan_key')->get();
-    foreach($collection_keys as $collection_key){
-        $url = 'https://public-api.cian.ru/v1/get-my-offers?source=upload&statuses=published';
-        $curl = curl_init($url);
-        curl_setopt($curl, CURLOPT_HTTPHEADER, array("Authorization: Bearer ".$collection_key->cyan_key));
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        $curl_response = curl_exec($curl);
-        $res_published = json_decode($curl_response);
-        curl_close($curl);
-        if (!empty($res_published->result->announcements)) {
-            $date = date('Y-m-d', strtotime("-1 days"));
-            foreach ($res_published->result->announcements as $published) {
-                $offer_id = $published->id;
-                $stat = array();
-                $dateFrom = $date;
-                $dateTo = $date;
-                $url = 'https://public-api.cian.ru/v1/get-search-coverage?dateTo='.$dateTo.'&dateFrom='.$dateFrom.'&offerId='.$offer_id;
-                $curl = curl_init($url);
-                curl_setopt($curl, CURLOPT_HTTPHEADER, array("Authorization: Bearer ".$collection_key->cyan_key));
-                curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-                $curl_response = curl_exec($curl);
-                $res = json_decode($curl_response,true);   
-                curl_close($curl);
-                if ($res['result']['offerId'] > 0) {
-                    $stat['searches_count'] = $res['result']['searchesCount'];
-                    $stat['shows_count'] = $res['result']['showsCount'];
-                    $stat['coverage'] = $res['result']['coverage'];
-                }
-                $url = 'https://public-api.cian.ru/v1/get-views-statistics-by-days?dateTo='.$dateTo.'&dateFrom='.$dateFrom.'&offerId='.$offer_id;
-                $curl = curl_init($url);
-                curl_setopt($curl, CURLOPT_HTTPHEADER, array("Authorization: Bearer ".$collection_key->cyan_key));
-                curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-                $curl_response = curl_exec($curl);
-                $res = json_decode($curl_response,true);
-                curl_close($curl);
-                if ($res['result']['offerId'] > 0) {
-                    if(sizeof($res['result']['phoneShowsByDays']) == 0){
-                            $stat['phone_shows'] = 0;
-                            $stat['views'] = 0;
-                    }
-                    else{
-                            $stat['phone_shows'] = $res['result']['phoneShowsByDays'][0]['phoneShows'];
-                            $stat['views'] = $res['result']['viewsByDays'][0]['views'];
-                    }
-                }          
-                StatisticShows::create(array(
-                    'id_offer'=>(int)$offer_id,
-                    'coverage'=>$stat['coverage'],
-                    'searches_count'=>$stat['searches_count']  ,
-                    'shows_count'=> $stat['shows_count'],
-                    'phone_shows'=> $stat['phone_shows'] ,
-                    'views'=> $stat['views'],
-                    'id_user'=> $collection_key->user_id
-                    ));
-            }
-        }
-    }
-});
 
 Route::get('test',function(){
-    $date = new DateTime('-2 days');
-    $startTime =  $date->format('Y-m-d');
-    $collection_keys = CompanyName::select('id','cyan_key','user_id')->get();
-    foreach($collection_keys as $collection_key){
-        $url = 'https://public-api.cian.ru/v1/get-calls-report?page=1&pageSize=100&dateFrom='.$startTime; //?startTime=2019-01-10
-        $curl = curl_init($url);
-        curl_setopt($curl, CURLOPT_HTTPHEADER, array("Authorization: Bearer ".$collection_key->cyan_key));
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        $curl_response = curl_exec($curl);
-        $res = json_decode($curl_response);
-        curl_close($curl);
-        if ($res->result->calls) {
-            $ar_calls = array_reverse($res->result->calls);
-            foreach ($ar_calls as $call) {
-                $phone = preg_replace('/\D+/', '', $call->sourcePhone);
-                CyanCallPhones::create(array(
-                    'phone'=>$phone,
-                    'called'=>$call->date,
-                    'id_user'=>$collection_key->user_id,
-                    'id_company'=>$collection_key->id
-                    ));
-                }
-            }
-        }
- });
-Route::get('test1',function(){
-    $collection_keys = CompanyName::distinct()->select('user_id','cyan_key')->get();
-    foreach($collection_keys as $collection_key){
-        $url = 'https://public-api.cian.ru/v1/get-order';
-        $curl = curl_init($url);
-        curl_setopt($curl, CURLOPT_HTTPHEADER, array("Authorization: Bearer " .$collection_key->cyan_key));
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        $curl_response = curl_exec($curl);
-        $res = json_decode($curl_response);
-        curl_close($curl);
-        $ar_offerIds = array();
-        $x_auction = 0;
-        $y_auction = 0;
-        $collectionExtID = Statistic::select('id_flat','id_offer','url_offer')
-                                    ->where('id_user', $collection_key->user_id)->get();
-        $array_statistic = array();
-        $array_statistic_from_db = array();
-        foreach($collectionExtID as $collectionExtIdItem){
-            $array_statistic_from_db[$collectionExtIdItem['id_offer']]['id_flat'] = $collectionExtIdItem['id_flat'];
-            $array_statistic_from_db[$collectionExtIdItem['id_offer']]['url_offer'] = $collectionExtIdItem['url_offer'];
-        }
-        if ($res->result->offers) {
-            foreach ($res->result->offers as $item) {
-                if ($item->externalId > 0) {
-                    $offer_id = $item->offerId;
-                    if($offer_id != null){
-                        if(!array_key_exists($offer_id, $array_statistic)){
-                            $array_statistic[$offer_id]['id_flat'] = $item->externalId;
-                            $array_statistic[$offer_id]['url_offer'] = $item->url;
-                        }
-                        $ar_offerIds[$x_auction][$y_auction++] = 'offerIds='.$offer_id;
-                        if ($y_auction >= 20) {
-                            $x_auction++;
-                            $y_auction = 0;
-                        }
-                    }
-                }
-            }
-        }
-        if (!empty($ar_offerIds)) {
-            foreach ($ar_offerIds as $offerIds) {
-                $url = 'https://public-api.cian.ru/v1/get-auction?'.implode('&', $offerIds);
-                $curl = curl_init($url);
-                curl_setopt($curl, CURLOPT_HTTPHEADER, array("Authorization: Bearer " . $collection_key->cyan_key));
-                curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-                $curl_response = curl_exec($curl);
-                $res_auction = json_decode($curl_response);
-                curl_close($curl);
-                if (!empty($res_auction->result->items)) {
-                    foreach ($res_auction->result->items as $a) {
-                        if($a->currentBet == null){
-                            $current_bet = 0;
-                        }
-                        else{
-                            $current_bet = $a->currentBet;
-                        }
-                        if($a->leaderBet == null){
-                            $leaderBet  = 0;
-                        }
-                        else{
-                            $leaderBet  = $a->leaderBet ;
-                        }
-                        if(!array_key_exists($a->offerId, $array_statistic_from_db)){
-                            Statistic::create(array(
-                                'id_flat'=>$array_statistic[$a->offerId]['id_flat'],
-                                'id_offer'=>(int)$a->offerId,
-                                'url_offer'=>$array_statistic[$a->offerId]['url_offer'],
-                                'current_bet'=>$current_bet,
-                                'leader_bet'=>$leaderBet ,
-                                'position'=> $a->position,
-                                'page'=>$a->page,
-                                'id_user'=>$collection_key->user_id,
-                                ));
-                        }
-                        else{
-                            Statistic::where('id_user', $collection_key->id_user)->
-                                        where('id_flat', $array_statistic[$a->offerId]['id_flat'])-> 
-                                        where('id_offer', (int)$a->offerId)->  
-                                        where('id_user', $collection_key->user_id)->  
-                                        update(array(
-                                            'url_offer'=>$array_statistic[$a->offerId]['url_offer'],
-                                            'current_bet'=>$current_bet,
-                                            'leader_bet'=>$leaderBet ,
-                                            'position'=> $a->position,
-                                            'page'=>$a->page,
-                                        ));
-                        }
-                    }
-                }
-            }
-        }
-    }
+    $collection = CurrentXml::select('current_xmls.id','current_xmls.id_flat','bet','current_xmls.id_user','current_xmls.id_company','name_agent','top','statistics.id_offer',
+                                    'url_offer','current_bet','leader_bet','position','page','coverage','searches_count','shows_count','phone_shows','views')
+                                    ->leftJoin('statistics', function ($join){
+                                        $join->on("current_xmls.id_flat",'=',"statistics.id_flat")
+                                        ->on('current_xmls.id_user','=','statistics.id_user');})
+                                    ->leftJoin('statistic_shows', function ($join){
+                                        $join->on("statistics.id_offer",'=',"statistic_shows.id_offer")
+                                            ->on('statistics.id_user','=','statistic_shows.id_user');})
+                                        ->get();
+                       
+    return $collection;
 });

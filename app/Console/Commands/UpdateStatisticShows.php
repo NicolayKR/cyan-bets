@@ -40,7 +40,7 @@ class UpdateStatisticShows extends Command
      */
     public function handle()
     {
-        set_time_limit(1200);
+        set_time_limit(30000);
         $collection_keys = CompanyName::distinct()->select('user_id','cyan_key')->get();
         foreach($collection_keys as $collection_key){
             $url = 'https://public-api.cian.ru/v1/get-my-offers?source=upload&statuses=published';
@@ -93,7 +93,7 @@ class UpdateStatisticShows extends Command
                         'shows_count'=> $stat['shows_count'],
                         'phone_shows'=> $stat['phone_shows'] ,
                         'views'=> $stat['views'],
-                        'id_user'=> $collection_key->user_id
+                        'id_user'=> $collection_key->user_id,
                         ));
                 }
             }
