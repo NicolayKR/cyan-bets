@@ -11,6 +11,7 @@ use Spatie\ArrayToXml\ArrayToXml;
 use Illuminate\Support\Facades\Storage;
 use App\Models\CurrentXml;
 use App\Models\Statistic;
+use App\Models\StatisticShows;
 use Gaarf\XmlToPhp\Convertor;
 
 
@@ -37,57 +38,116 @@ Route::get('getName', function(){
 Route::resource('/accounts','App\Http\Controllers\AccountController');
 Auth::routes();
 
-Route::get('test2',function(){
-    $url = 'https://public-api.cian.ru/v1/get-my-offers?source=upload&statuses=published';
-    $ACCESS_KEY = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjI0MDAyODgyfQ.3xNBgSsU7UDAleK8U2znXFw8_fkcKIvMCmv-w0Dz4-c';
-    $curl = curl_init($url);
-    curl_setopt($curl, CURLOPT_HTTPHEADER, array("Authorization: Bearer ".$ACCESS_KEY));
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-    $curl_response = curl_exec($curl);
-    $res_published = json_decode($curl_response);
-    curl_close($curl);
-    if (!empty($res_published->result->announcements)) {
-        //$date = date('Y-m-d', strtotime("-1 days"));
-        $date = new DateTime();
-        foreach ($res_published->result->announcements as $published) {
-            $offer_id = $published->id;
+Route::get('test3',function(){
+    set_time_limit(1200);
+    $collection_keys = CompanyName::distinct()->select('user_id','cyan_key')->get();
+    foreach($collection_keys as $collection_key){
+        $url = 'https://public-api.cian.ru/v1/get-my-offers?source=upload&statuses=published';
+        $curl = curl_init($url);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, array("Authorization: Bearer ".$collection_key->cyan_key));
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        $curl_response = curl_exec($curl);
+        $res_published = json_decode($curl_response);
+        curl_close($curl);
+        if (!empty($res_published->result->announcements)) {
+            $date = date('Y-m-d', strtotime("-1 days"));
             $stat = array();
             $dateFrom = $date;
             $dateTo = $date;
-            $url = 'https://public-api.cian.ru/v1/get-search-coverage?dateTo='.$dateTo.'&dateFrom='.$dateFrom.'&offerId='.$offer_id;
+            //$url = 'https://public-api.cian.ru/v1/get-search-coverage?dateTo='.$dateTo.'&dateFrom='.$dateFrom.'&offerId=260356445';//'&offerId=260378780';
+            $url = 'https://public-api.cian.ru/v1/get-search-coverage?dateTo='.$dateTo.'&dateFrom='.$dateFrom.'&offerId=260378780';
             $curl = curl_init($url);
-            curl_setopt($curl, CURLOPT_HTTPHEADER, array("Authorization: Bearer ".$ACCESS_KEY));
+            curl_setopt($curl, CURLOPT_HTTPHEADER, array("Authorization: Bearer ".$collection_key->cyan_key));
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
             $curl_response = curl_exec($curl);
-            $res = json_decode($curl_response);
+            $res = json_decode($curl_response,true);   
             curl_close($curl);
-            if ($res->result->offerId > 0) {
-                $stat['searches_count'] = $res->result->searchesCount;
-                $stat['shows_count'] = $res->result->showsCount;
-                $stat['coverage'] = $res->result->coverage;
+            if ($res['result']['offerId'] > 0) {
+                $stat['searches_count'] = $res['result']['searchesCount'];
+                $stat['shows_count'] = $res['result']['showsCount'];
+                $stat['coverage'] = $res['result']['coverage'];
             }
-            $url = 'https://public-api.cian.ru/v1/get-views-statistics-by-days?dateTo='.$dateTo.'&dateFrom='.$dateFrom.'&offerId='.$offer_id;
+            //$url = 'https://public-api.cian.ru/v1/get-views-statistics-by-days?dateTo='.$dateTo.'&dateFrom='.$dateFrom.'&offerId=260356445';//'&offerId=260378780';
+            $url = 'https://public-api.cian.ru/v1/get-views-statistics-by-days?dateTo='.$dateTo.'&dateFrom='.$dateFrom.'&offerId=260378780';
             $curl = curl_init($url);
-            curl_setopt($curl, CURLOPT_HTTPHEADER, array("Authorization: Bearer ".$ACCESS_KEY));
+            curl_setopt($curl, CURLOPT_HTTPHEADER, array("Authorization: Bearer ".$collection_key->cyan_key));
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
             $curl_response = curl_exec($curl);
             $res = json_decode($curl_response,true);
             curl_close($curl);
-            return $res;
-            if ($res->result->offerId > 0) {
-                $stat['phone_shows'] = $res->result->phoneShowsByDays[0]->phoneShows;
-                $stat['views'] = $res->result->viewsByDays[0]->views;
-            }
-            $set = array('`offer_id` = "'.$offer_id.'"', '`idx` = "'.$arr_offer_to_idx[$offer_id].'"', '`date` = "'.$date.'"');
-
-            foreach ($stat as $key => $val) {
-                $set[] = ' `'.$key.'` = "'.$val.'" ';
-            }
-
-            $sql = 'INSERT INTO `statistic_cian_coverage` SET '.implode(', ', $set);
-            
+            if ($res['result']['offerId'] > 0) {
+               if(sizeof($res['result']['phoneShowsByDays'])== 0){
+                    $stat['phone_shows'] = 0;
+                    $stat['views'] = 0;
+               }
+               else{
+                    $stat['phone_shows'] = $res['result']['phoneShowsByDays'][0]['phoneShows'];
+                    $stat['views'] = $res['result']['viewsByDays'][0]['views'];
+               }
+            }     
+            return $stat;
         }
+    }
+});
 
+Route::get('test2',function(){
+    set_time_limit(30000);
+    $collection_keys = CompanyName::distinct()->select('user_id','cyan_key')->get();
+    foreach($collection_keys as $collection_key){
+        $url = 'https://public-api.cian.ru/v1/get-my-offers?source=upload&statuses=published';
+        $curl = curl_init($url);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, array("Authorization: Bearer ".$collection_key->cyan_key));
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        $curl_response = curl_exec($curl);
+        $res_published = json_decode($curl_response);
+        curl_close($curl);
+        if (!empty($res_published->result->announcements)) {
+            $date = date('Y-m-d', strtotime("-1 days"));
+            foreach ($res_published->result->announcements as $published) {
+                $offer_id = $published->id;
+                $stat = array();
+                $dateFrom = $date;
+                $dateTo = $date;
+                $url = 'https://public-api.cian.ru/v1/get-search-coverage?dateTo='.$dateTo.'&dateFrom='.$dateFrom.'&offerId='.$offer_id;
+                $curl = curl_init($url);
+                curl_setopt($curl, CURLOPT_HTTPHEADER, array("Authorization: Bearer ".$collection_key->cyan_key));
+                curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+                $curl_response = curl_exec($curl);
+                $res = json_decode($curl_response,true);   
+                curl_close($curl);
+                if ($res['result']['offerId'] > 0) {
+                    $stat['searches_count'] = $res['result']['searchesCount'];
+                    $stat['shows_count'] = $res['result']['showsCount'];
+                    $stat['coverage'] = $res['result']['coverage'];
+                }
+                $url = 'https://public-api.cian.ru/v1/get-views-statistics-by-days?dateTo='.$dateTo.'&dateFrom='.$dateFrom.'&offerId='.$offer_id;
+                $curl = curl_init($url);
+                curl_setopt($curl, CURLOPT_HTTPHEADER, array("Authorization: Bearer ".$collection_key->cyan_key));
+                curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+                $curl_response = curl_exec($curl);
+                $res = json_decode($curl_response,true);
+                curl_close($curl);
+                if ($res['result']['offerId'] > 0) {
+                    if(sizeof($res['result']['phoneShowsByDays']) == 0){
+                            $stat['phone_shows'] = 0;
+                            $stat['views'] = 0;
+                    }
+                    else{
+                            $stat['phone_shows'] = $res['result']['phoneShowsByDays'][0]['phoneShows'];
+                            $stat['views'] = $res['result']['viewsByDays'][0]['views'];
+                    }
+                }          
+                StatisticShows::create(array(
+                    'id_offer'=>(int)$offer_id,
+                    'coverage'=>$stat['coverage'],
+                    'searches_count'=>$stat['searches_count']  ,
+                    'shows_count'=> $stat['shows_count'],
+                    'phone_shows'=> $stat['phone_shows'] ,
+                    'views'=> $stat['views'],
+                    'id_user'=> $collection_key->user_id
+                    ));
+            }
+        }
     }
 });
 

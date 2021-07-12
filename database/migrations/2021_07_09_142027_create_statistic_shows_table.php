@@ -15,13 +15,13 @@ class CreateStatisticShowsTable extends Migration
     {
         Schema::create('statistic_shows', function (Blueprint $table) {
             $table->id();
+            $table->integer('id_offer');
             $table->integer('coverage');
             $table->integer('searches_count');
             $table->integer('shows_count');
             $table->integer('phone_shows');
             $table->integer('views');
             $table->integer('id_user');
-            $table->integer('id_company');
             $table->timestamps();
         });
     }

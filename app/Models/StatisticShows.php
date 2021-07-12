@@ -9,12 +9,12 @@ class StatisticShows extends Model
 {
     use HasFactory;
     protected $fillable = [
+            'id_offer',
             'coverage',
             'searches_count',
             'shows_count',
             'phone_shows',
             'views',
             'id_user',
-            'id_company',
     ];
 }
