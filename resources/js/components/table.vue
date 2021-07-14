@@ -129,7 +129,6 @@ export default {
                 this.tabelData = response.data;
                 this.copyTabelData = response.data;
                 this.flagTable = true;
-                console.log(response.data)
             }
             catch{
                 this.flagTable = false;
