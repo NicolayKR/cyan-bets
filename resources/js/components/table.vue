@@ -29,7 +29,7 @@
                     </label>
                 </div>
                 <div class="col-1 flex">
-                    <button type="button" class="btn btn-outline-dark">OK</button>
+                    <button type="button" class="btn btn-outline-dark" @click="getData(start,end)">OK</button>
                 </div>
             </div>
             <div class="budge-block mt-4">
@@ -65,7 +65,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for ="(tabel_item,index) in tabelData" :key="index">
+                    <tr v-for ="(tabel_item,index) in filteredList" :key="index">
                         <td>{{tabel_item.coverage}}</td>
                         <td>{{tabel_item.searches_count}}</td>
                         <td>{{tabel_item.shows_count}}</td>
@@ -107,15 +107,25 @@ export default {
       checked: false,
       flagTable: false,
       activeSortParam: '',
+      id_object: null,
     }
   },
+  computed:{
+    filteredList: function(){
+        var id_obj = this.id_object;
+        return this.tabelData.filter(function (elem) {
+            if(id_obj ==='') return true;
+            else return elem.id_object.indexOf(id_obj) > -1;
+        })
+    }
+},
   mounted(){
       this.getData();
   },
   methods:{
         async getData(){
             try{
-                const response = await axios.get('/getData');
+                const response = await axios.get(`/getData?&start=${this.start}&end=${this.end}`);
                 this.tabelData = response.data;
                 this.copyTabelData = response.data;
                 this.flagTable = true;

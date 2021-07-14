@@ -41,17 +41,89 @@ Auth::routes();
 
 
 Route::get('test',function(){
-    $date = date('Y-m-d', strtotime("-1 days"));
-    $collection = CurrentXml::select('current_xmls.id','current_xmls.id_flat','bet','current_xmls.id_user','current_xmls.id_company','name_agent','top',
-                'statistics.id_offer','url_offer','current_bet','leader_bet','position','page','coverage','searches_count',
-                'shows_count','phone_shows','views')->selectRaw('date(statistic_shows.created_at) as created_at')
-                ->leftJoin('statistics', function ($join){
-                    $join->on("current_xmls.id_flat",'=',"statistics.id_flat")
-                    ->on('current_xmls.id_user','=','statistics.id_user');})
-                ->leftJoin('statistic_shows', function ($join){
-                    $join->on("statistics.id_offer",'=',"statistic_shows.id_offer")
-                        ->on('statistics.id_user','=','statistic_shows.id_user');})
-                    ->whereRaw('date(statistic_shows.created_at) = "'.$date.'"')
-                    ->get();
+    set_time_limit(30000);
+        $collection_keys = CompanyName::distinct()->select('user_id','cyan_key')->get();
+        foreach($collection_keys as $collection_key){
+            $url = 'https://public-api.cian.ru/v1/get-my-offers?source=upload&statuses=published';
+            $curl = curl_init($url);
+            curl_setopt($curl, CURLOPT_HTTPHEADER, array("Authorization: Bearer ".$collection_key->cyan_key));
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+            $curl_response = curl_exec($curl);
+            $res_published = json_decode($curl_response);
+            curl_close($curl);
+            if (!empty($res_published->result->announcements)) {
+                $date = date('Y-m-d', strtotime("-1 days"));
+                foreach ($res_published->result->announcements as $published) {
+                    $offer_id = $published->id;
+                    $stat = array();
+                    $dateFrom = $date;
+                    $dateTo = $date;
+                    $url = 'https://public-api.cian.ru/v1/get-search-coverage?dateTo='.$dateTo.'&dateFrom='.$dateFrom.'&offerId='.$offer_id;
+                    $curl = curl_init($url);
+                    curl_setopt($curl, CURLOPT_HTTPHEADER, array("Authorization: Bearer ".$collection_key->cyan_key));
+                    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+                    $curl_response = curl_exec($curl);
+                    $res = json_decode($curl_response,true);   
+                    curl_close($curl);
+                    if ($res['result']['offerId'] > 0) {
+                        $stat['searches_count'] = $res['result']['searchesCount'];
+                        $stat['shows_count'] = $res['result']['showsCount'];
+                        $stat['coverage'] = $res['result']['coverage'];
+                    }
+                    usleep(1000);
+                    $current_url = 'https://public-api.cian.ru/v1/get-views-statistics-by-days?dateTo='.$dateTo.'&dateFrom='.$dateFrom.'&offerId='.$offer_id;
+                    $current_curl = curl_init($current_url);
+                    curl_setopt($current_curl, CURLOPT_HTTPHEADER, array("Authorization: Bearer ".$collection_key->cyan_key));
+                    for($i=0; $i<10;$i++){
+                        curl_setopt($current_curl, CURLOPT_RETURNTRANSFER, true);
+                        usleep(2000);
+                        $current_curl_response = curl_exec($current_curl);
+                        $current_res = json_decode($current_curl_response,true);
+                        curl_close($current_curl);
+                        if(array_key_exists("offerId",$current_res['result'])){
+                            break;
+                        }
+                    }
+                    if ($current_res['result']['offerId'] > 0) {
+                        if(sizeof($current_res['result']['phoneShowsByDays']) == 0){
+                                $stat['phone_shows'] = 0;
+                                $stat['views'] = 0;
+                                $stat['date'] = $date;
+                        }
+                        else{
+                            $stat['phone_shows'] = $current_res['result']['phoneShowsByDays'][0]['phoneShows'];
+                            $stat['views'] = $current_res['result']['viewsByDays'][0]['views'];
+                            $stat['date'] = $current_res['result']['viewsByDays'][0]['date'];
+                        }
+                    }          
+                    StatisticShows::create(array(
+                        'id_offer'=>(int)$offer_id,
+                        'coverage'=>$stat['coverage'],
+                        'searches_count'=>$stat['searches_count']  ,
+                        'shows_count'=> $stat['shows_count'],
+                        'phone_shows'=> $stat['phone_shows'] ,
+                        'views'=> $stat['views'],
+                        'id_user'=> $collection_key->user_id,
+                        'created_at' => $stat['date']
+                        ));
+                }
+            }
+        }
+});
+Route::get('test1',function(){
+$collection = CurrentXml::select('current_xmls.id','current_xmls.id_flat','bet','current_xmls.id_user','current_xmls.id_company','name_agent','top',
+'statistic_shows.id_offer','url_offer','current_bet','leader_bet','position','page')
+->selectRaw('ROUND(SUM(shows_count)/sum(searches_count)*100) as coverage')->selectRaw('sum(searches_count) as searches_count')->selectRaw('sum(shows_count) as shows_count')
+->selectRaw('sum(phone_shows) as phone_shows')->selectRaw('sum(views) as views')
+->leftJoin('statistics', function ($join){
+    $join->on("current_xmls.id_flat",'=',"statistics.id_flat")
+    ->on('current_xmls.id_user','=','statistics.id_user');})
+->leftJoin('statistic_shows', function ($join){
+    $join->on("statistics.id_offer",'=',"statistic_shows.id_offer")
+        ->on('statistics.id_user','=','statistic_shows.id_user');})
+    ->whereRaw('statistic_shows.created_at BETWEEN DATE_SUB(DATE(NOW()), INTERVAL 8 DAY) and DATE(now()+ INTERVAL 1 DAY)')
+    ->groupBy('current_xmls.id','current_xmls.id_flat','bet','current_xmls.id_user','current_xmls.id_company','name_agent','top',
+    'statistic_shows.id_offer','url_offer','current_bet','leader_bet','position','page')
+    ->get();
     return $collection;
 });

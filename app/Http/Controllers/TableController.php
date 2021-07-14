@@ -16,7 +16,17 @@ use DiDom\Query;
 
 class TableController extends Controller
 {
-    public function getData(){
+    public function getData(Request $request){
+        $start = $request->query('start'); 
+        $end = $request->query('end'); 
+        if($start == null and $end== null){
+            $first_date = 'DATE_SUB(DATE(NOW()), INTERVAL 8 DAY)';
+            $second_date = 'DATE(now()+ INTERVAL 1 DAY)';
+        }
+        else{
+            $first_date =  $start;
+            $second_date = $end;
+        }
         $array_xml = [];
         $array_data = [];
         $array_bets = [];
@@ -29,15 +39,19 @@ class TableController extends Controller
             $array_bets[$current_bet['id_company']][$current_bet['id_flat']]['id'] =  $current_bet['id'];
         }
         $collection = CurrentXml::select('current_xmls.id','current_xmls.id_flat','bet','current_xmls.id_user','current_xmls.id_company','name_agent','top',
-                'statistics.id_offer','url_offer','current_bet','leader_bet','position','page','coverage','searches_count','shows_count','phone_shows','views')
-                ->leftJoin('statistics', function ($join){
-                    $join->on("current_xmls.id_flat",'=',"statistics.id_flat")
-                    ->on('current_xmls.id_user','=','statistics.id_user');})
-                ->leftJoin('statistic_shows', function ($join){
-                    $join->on("statistics.id_offer",'=',"statistic_shows.id_offer")
-                        ->on('statistics.id_user','=','statistic_shows.id_user');})
-                    ->whereRaw('date(statistic_shows.created_at) = "'.$date.'"')
-                    ->get();
+        'statistic_shows.id_offer','url_offer','current_bet','leader_bet','position','page')
+        ->selectRaw('ROUND(SUM(shows_count)/sum(searches_count)*100) as coverage')->selectRaw('sum(searches_count) as searches_count')->selectRaw('sum(shows_count) as shows_count')
+        ->selectRaw('sum(phone_shows) as phone_shows')->selectRaw('sum(views) as views')
+        ->leftJoin('statistics', function ($join){
+            $join->on("current_xmls.id_flat",'=',"statistics.id_flat")
+            ->on('current_xmls.id_user','=','statistics.id_user');})
+        ->leftJoin('statistic_shows', function ($join){
+            $join->on("statistics.id_offer",'=',"statistic_shows.id_offer")
+                ->on('statistics.id_user','=','statistic_shows.id_user');})
+            ->whereRaw('statistic_shows.created_at BETWEEN '.$first_date.' and '.$second_date.'')
+            ->groupBy('current_xmls.id','current_xmls.id_flat','bet','current_xmls.id_user','current_xmls.id_company','name_agent','top',
+            'statistic_shows.id_offer','url_offer','current_bet','leader_bet','position','page')
+            ->get();
         foreach($collection as $index =>$item_collection){
             if(array_key_exists($item_collection['id_company'], $array_bets)){
                 if(array_key_exists($item_collection['id_flat'], $array_bets[$item_collection['id_company']])){

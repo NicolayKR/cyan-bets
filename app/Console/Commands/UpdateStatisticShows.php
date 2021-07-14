@@ -69,23 +69,30 @@ class UpdateStatisticShows extends Command
                         $stat['shows_count'] = $res['result']['showsCount'];
                         $stat['coverage'] = $res['result']['coverage'];
                     }
-                    $url = 'https://public-api.cian.ru/v1/get-views-statistics-by-days?dateTo='.$dateTo.'&dateFrom='.$dateFrom.'&offerId='.$offer_id;
-                    $curl = curl_init($url);
-                    curl_setopt($curl, CURLOPT_HTTPHEADER, array("Authorization: Bearer ".$collection_key->cyan_key));
-                    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-                    $curl_response = curl_exec($curl);
-                    $res = json_decode($curl_response,true);
-                    curl_close($curl);
-                    if ($res['result']['offerId'] > 0) {
-                        if(sizeof($res['result']['phoneShowsByDays']) == 0){
+                    usleep(1000);
+                    $current_url = 'https://public-api.cian.ru/v1/get-views-statistics-by-days?dateTo='.$dateTo.'&dateFrom='.$dateFrom.'&offerId='.$offer_id;
+                    $current_curl = curl_init($current_url);
+                    curl_setopt($current_curl, CURLOPT_HTTPHEADER, array("Authorization: Bearer ".$collection_key->cyan_key));
+                    for($i=0; $i<10;$i++){
+                        curl_setopt($current_curl, CURLOPT_RETURNTRANSFER, true);
+                        usleep(2000);
+                        $current_curl_response = curl_exec($current_curl);
+                        $current_res = json_decode($current_curl_response,true);
+                        curl_close($current_curl);
+                        if(array_key_exists("offerId",$current_res['result'])){
+                            break;
+                        }
+                    }
+                    if ($current_res['result']['offerId'] > 0) {
+                        if(sizeof($current_res['result']['phoneShowsByDays']) == 0){
                                 $stat['phone_shows'] = 0;
                                 $stat['views'] = 0;
                                 $stat['date'] = $date;
                         }
                         else{
-                            $stat['phone_shows'] = $res['result']['phoneShowsByDays'][0]['phoneShows'];
-                            $stat['views'] = $res['result']['viewsByDays'][0]['views'];
-                            $stat['date'] = $res['result']['viewsByDays'][0]['date'];
+                            $stat['phone_shows'] = $current_res['result']['phoneShowsByDays'][0]['phoneShows'];
+                            $stat['views'] = $current_res['result']['viewsByDays'][0]['views'];
+                            $stat['date'] = $current_res['result']['viewsByDays'][0]['date'];
                         }
                     }          
                     StatisticShows::create(array(
