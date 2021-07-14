@@ -65,7 +65,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for ="(tabel_item,index) in filteredList" :key="index">
+                    <tr v-for ="(tabel_item,index) in tabelData" :key="index">
                         <td>{{tabel_item.coverage}}</td>
                         <td>{{tabel_item.searches_count}}</td>
                         <td>{{tabel_item.shows_count}}</td>
@@ -125,10 +125,11 @@ export default {
   methods:{
         async getData(){
             try{
-                const response = await axios.get(`/getData?&start=${this.start}&end=${this.end}`);
+                const response = await axios.get(`/getData`);
                 this.tabelData = response.data;
                 this.copyTabelData = response.data;
                 this.flagTable = true;
+                console.log(response.data)
             }
             catch{
                 this.flagTable = false;
