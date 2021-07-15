@@ -14,5 +14,5 @@ Vue.component('table-component', require('./components/table').default);
 
 new Vue({
     el: '#app',
-    store
+    store,
 });

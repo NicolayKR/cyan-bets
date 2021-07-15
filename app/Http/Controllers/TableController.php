@@ -31,6 +31,7 @@ class TableController extends Controller
         $array_xml = [];
         $array_data = [];
         $array_bets = [];
+        $lenght_auction = 0;
         $date = date('Y-m-d', strtotime("-1 days"));
         $res_bet = Bets::select('id','id_flat','id_company')->selectRaw('round(bet) as bet')
                 ->where('id_user', Auth::user()->id)
@@ -52,38 +53,42 @@ class TableController extends Controller
             if(array_key_exists($item_collection->id_company, $array_bets)){
                 if(array_key_exists($item_collection->id_flat, $array_bets[$item_collection->id_company])){
                     if(array_key_exists('bet', $array_bets[$item_collection->id_company][$item_collection->id_flat])){
-                        $array_data[$index]['crm_bet'] = (int)$array_bets[$item_collection->id_company][$item_collection->id_flat]['bet'];
-                        $array_data[$index]['id'] = (int)$array_bets[$item_collection->id_company][$item_collection->id_flat]['id'];
+                        $array_data['table_date'][$index]['crm_bet'] = (int)$array_bets[$item_collection->id_company][$item_collection->id_flat]['bet'];
+                        $array_data['table_date'][$index]['id'] = (int)$array_bets[$item_collection->id_company][$item_collection->id_flat]['id'];
                     }
                 }else{
-                    $array_data[$index]['crm_bet'] = 0;
-                    $array_data[$index]['id'] = $item_collection->id;
+                    $array_data['table_data'][$index]['crm_bet'] = 0;
+                    $array_data['table_data'][$index]['id'] = $item_collection->id;
                 }
             }
             else{
-                $array_data[$index]['crm_bet'] = 0;
+                $array_data['table_data'][$index]['crm_bet'] = 0;
             }
-            $array_data[$index]['auction'] = $item_collection->bet;
-            $array_data[$index]['id_offer'] = (int)$item_collection->id_offer;
-            $array_data[$index]['url_offer'] = $item_collection->url_offer;
-            $array_data[$index]['leader_bet'] = (int)$item_collection->leader_bet;
-            $array_data[$index]['position'] = (int)$item_collection->position;
-            $array_data[$index]['page'] = (int)$item_collection->page;
-            $array_data[$index]['coverage'] = (int)$item_collection->coverage;
-            $array_data[$index]['searches_count'] = (int)$item_collection->searches_count;
-            $array_data[$index]['shows_count'] = (int)$item_collection->shows_count;
-            $array_data[$index]['phone_shows'] = (int)$item_collection->phone_shows;
-            $array_data[$index]['views'] = (int)$item_collection->views;
-            $array_data[$index]['top'] = (int)$item_collection->top;
+            $array_data['table_data'][$index]['auction'] = $item_collection->bet;
+            if($item_collection->bet != null){
+                $lenght_auction++;
+            }
+            $array_data['table_data'][$index]['id_offer'] = (int)$item_collection->id_offer;
+            $array_data['table_data'][$index]['url_offer'] = $item_collection->url_offer;
+            $array_data['table_data'][$index]['leader_bet'] = (int)$item_collection->leader_bet;
+            $array_data['table_data'][$index]['position'] = (int)$item_collection->position;
+            $array_data['table_data'][$index]['page'] = (int)$item_collection->page;
+            $array_data['table_data'][$index]['coverage'] = (int)$item_collection->coverage;
+            $array_data['table_data'][$index]['searches_count'] = (int)$item_collection->searches_count;
+            $array_data['table_data'][$index]['shows_count'] = (int)$item_collection->shows_count;
+            $array_data['table_data'][$index]['phone_shows'] = (int)$item_collection->phone_shows;
+            $array_data['table_data'][$index]['views'] = (int)$item_collection->views;
+            $array_data['table_data'][$index]['top'] = (int)$item_collection->top;
             //Текущая фирма 
-            $array_data[$index]['id_company'] = (int)$item_collection->id_company;
+            $array_data['table_data'][$index]['id_company'] = (int)$item_collection->id_company;
             //Ставка на циан
-            $array_data[$index]['cyan_bet'] = (int)$item_collection->current_bet;
+            $array_data['table_data'][$index]['cyan_bet'] = (int)$item_collection->current_bet;
             //Агент
-            $array_data[$index]['agent'] = $item_collection->name_agent;
-            $array_data[$index]['id_object'] =(int) $item_collection->id_flat;
+            $array_data['table_data'][$index]['agent'] = $item_collection->name_agent;
+            $array_data['table_data'][$index]['id_object'] =(int) $item_collection->id_flat;
         
         }
+        $array_data['lenght_auction'] = $lenght_auction;
         return $array_data; 
     }
     public function saveNewBet(Request $request){

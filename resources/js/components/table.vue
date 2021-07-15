@@ -1,5 +1,16 @@
 <template>
     <div>
+        <div class="circle-wrapper">
+            <div class="blackcircle">
+                <div class="whitecircle">Hellow</div>
+            </div>
+            <div class="blackcircle">
+                <div class="whitecircle">Hellow</div>
+            </div>
+            <div class="blackcircle">
+                <div class="whitecircle">Hellow</div>
+            </div>
+        </div>
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
             <h1 class="h2">Циан Автомат</h1>
         </div>
@@ -51,24 +62,24 @@
                 <table class="table table-striped table-bordered table-sm">
                 <thead>
                     <tr>
-                    <th scope="col"><a @click="sortTable('coverage')">ОХВАТ В ПРОЦЕНТАХ</a></th>
-                    <th scope="col"><a @click="sortTable('searches_count') ">КОЛИЧЕСТВО ПОИСКОВ</a></th>
-                    <th scope="col"><a @click="sortTable('shows_count')">КОЛИЧЕСТВО ПОКАЗОВ</a></th>
-                    <th scope="col"><a @click="sortTable('phone_shows')">КОЛИЧЕСТВО РАСХЛОПОВ ПО ДНЯМ(ПОКАЗ ТЕЛЕФОНА)</a></th>
-                    <th scope="col"><a @click="sortTable('views')">КОЛИЧЕСТВО ПРОСМОТРОВ ПО ДНЯМ</a></th>
+                    <th scope="col"><a @click="sortTable('coverage') " class="filter-link">ОХВАТ В ПРОЦЕНТАХ</a></th>
+                    <th scope="col"><a @click="sortTable('searches_count') " class="filter-link">КОЛИЧЕСТВО ПОИСКОВ</a></th>
+                    <th scope="col"><a @click="sortTable('shows_count')" class="filter-link">КОЛИЧЕСТВО ПОКАЗОВ</a></th>
+                    <th scope="col"><a @click="sortTable('phone_shows')" class="filter-link">КОЛИЧЕСТВО РАСХЛОПОВ ПО ДНЯМ(ПОКАЗ ТЕЛЕФОНА)</a></th>
+                    <th scope="col"><a @click="sortTable('views')" class="filter-link">КОЛИЧЕСТВО ПРОСМОТРОВ ПО ДНЯМ</a></th>
                     <th scope="col">СТАВКА</th>
-                    <th scope="col"><a @click="sortTable('crm_bet')">ТЕКУЩАЯ СТАВКА (CRM)</a></th>
-                    <th scope="col"><a @click="sortTable('cyan_bet')">ТЕКУЩАЯ СТАВКА (ЦИАН)</a></th>
-                    <th scope="col"><a @click="sortTable('leader_bet')">СТАВКА ЛИДЕРА</a></th>
-                    <th scope="col"><a @click="sortTable('page')">СТРАНИЦА</a></th>
-                    <th scope="col"><a @click="sortTable('position')">ПОЗИЦИЯ В ВЫДАЧЕ</a></th>
-                    <th scope="col"><a @click="sortTable('agent')">АГЕНТ</a></th>
-                    <th scope="col"><a @click="sortTable('id_object')">ID ОБЪЕКТА</a></th>
-                    <th scope="col"><a @click="sortTable('id_offer')" >ID ЦИАНА</a></th>
+                    <th scope="col"><a @click="sortTable('crm_bet')" class="filter-link">ТЕКУЩАЯ СТАВКА (CRM)</a></th>
+                    <th scope="col"><a @click="sortTable('cyan_bet')" class="filter-link">ТЕКУЩАЯ СТАВКА (ЦИАН)</a></th>
+                    <th scope="col"><a @click="sortTable('leader_bet')" class="filter-link">СТАВКА ЛИДЕРА</a></th>
+                    <th scope="col"><a @click="sortTable('page')" class="filter-link">СТРАНИЦА</a></th>
+                    <th scope="col"><a @click="sortTable('position')" class="filter-link">ПОЗИЦИЯ В ВЫДАЧЕ</a></th>
+                    <th scope="col"><a @click="sortTable('agent')" class="filter-link">АГЕНТ</a></th>
+                    <th scope="col"><a @click="sortTable('id_object')" class="filter-link">ID ОБЪЕКТА</a></th>
+                    <th scope="col"><a @click="sortTable('id_offer')" class="filter-link">ID ЦИАНА</a></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for ="(tabel_item,index) in filteredList" :key="index" class="flip-list">
+                    <tr v-for ="(tabel_item,index) in paginatedObject" :key="index" class="flip-list">
                         <td>{{tabel_item.coverage}}</td>
                         <td>{{tabel_item.searches_count}}</td>
                         <td>{{tabel_item.shows_count}}</td>
@@ -96,11 +107,22 @@
                 <tfoot>
                     <tr>
                         <td colspan="14">
-                            <ul class="pagination pull-right">
-                                <li v-for="page in pages" :key="page">
-                                    {{page}}
-                                </li>
-                            </ul>
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination justify-content-center mt-3" >
+                                    <li class="page-item">
+                                        <a class="page-link" href="#" @click="pageClickBack">Назад</a>
+                                    </li>
+                                    <li class="page-item" v-for="page in pages" :key="page">
+                                        <a class="page-link" href="#" 
+                                            @click="pageClick(page)"
+                                            :class="{'page_active':page === pageNumber}"
+                                            >{{page}}</a>
+                                    </li>     
+                                    <li class="page-item">                             
+                                        <a class="page-link" href="#" @click="pageClickUp">Вперед</a>
+                                    </li>
+                                </ul>
+                            </nav>
                         </td>
                     </tr>
                 </tfoot>
@@ -123,33 +145,51 @@ export default {
       id_object: '',
       auction_lenght: 0,
       objectPerPage: 100,
+      pageNumber: 1,
     }
   },
   computed:{
-    filteredList(){
+    pages(){
+        return Math.ceil(this.tabelData.length/100);
+    },
+    paginatedObject(){
+        let from = (this.pageNumber -1) * this.objectPerPage;
+        let to= from + this.objectPerPage;
         return this.tabelData.filter(elem => {
             if(String(this.id_object).toLowerCase()==='') return this.tabelData;
             return String(elem.id_object).toLowerCase().indexOf(String(this.id_object).toLowerCase()) !== -1
                     ||String(elem.id_offer).toLowerCase().indexOf(String(this.id_object).toLowerCase()) !== -1;
-        })
-    },
-    pages(){
-        return Math.ceil(this.tabelData.lenght/100);
+        }).slice(from,to);
     }
 },
   mounted(){
       this.getData();
   },
   methods:{
+        pageClick(page){
+            this.pageNumber = page;
+        },
+        pageClickBack(){
+            if(this.pageNumber == 1){
+                this.pageNumber = this.pages;
+            }
+            else{
+                this.pageNumber--;
+            }
+        },
+        pageClickUp(){
+            if(this.pageNumber == this.pages){
+                this.pageNumber = 1;
+            }
+            else{
+                this.pageNumber++;
+            }
+        },
         async getData(){
             try{
                 const response = await axios.get(`/getData?&start=${this.start}&end=${this.end}`);
-                this.tabelData = response.data;
-                this.tabelData.forEach(element => {
-                    if(element.auction != null){
-                        this.auction_lenght++;
-                    }
-                });
+                this.tabelData = response.data.table_data;
+                this.auction_lenght = response.data.lenght_auction;
                 this.flagTable = true;
             }
             catch{
@@ -261,5 +301,35 @@ var sortByIdOfferBottom  = function (d1, d2) { return (d1.searches_count > d2.se
 <style scoped>
 .flip-list-move {
   transition: transform 1s;
+}
+.filter-link:hover{
+    cursor: pointer;
+    color:blue;
+}
+.page_active{
+    background: rgb(183, 183, 235);
+}
+.blackcircle {
+    background-color:blue;
+     width: 200px;
+    height: 200px;
+    border-radius:50%; 
+    text-align:center;
+    display: flex;
+    align-items: center;
+}
+.whitecircle {
+    background-color: white;
+    color: black;
+    width: 90%;
+    height: 90%;
+    border-radius:50%;
+    margin: 0 auto;
+    text-align: center;
+    padding-top:40%;
+} 
+.circle-wrapper{
+    display: flex;
+    justify-content: space-evenly;
 }
 </style>
