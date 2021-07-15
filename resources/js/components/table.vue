@@ -93,6 +93,17 @@
                         <td>{{tabel_item.id_offer}}</td>
                     </tr>
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="14">
+                            <ul class="pagination pull-right">
+                                <li v-for="page in pages" :key="page">
+                                    {{page}}
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tfoot>
                 </table>
             </div>
         </div>
@@ -110,7 +121,8 @@ export default {
       flagTable: false,
       activeSortParam: '',
       id_object: '',
-      auction_lenght: 0
+      auction_lenght: 0,
+      objectPerPage: 100,
     }
   },
   computed:{
@@ -121,6 +133,9 @@ export default {
                     ||String(elem.id_offer).toLowerCase().indexOf(String(this.id_object).toLowerCase()) !== -1;
         })
     },
+    pages(){
+        return Math.ceil(this.tabelData.lenght/100);
+    }
 },
   mounted(){
       this.getData();
