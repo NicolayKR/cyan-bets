@@ -76,7 +76,7 @@ class UpdateXmlDb extends Command
                     if(array_key_exists('Bet', $current_item)){
                         $current_bet = $current_item['Bet'];
                     }else{
-                        $current_bet = 0;
+                        $current_bet = null;
                     }
                     $current_agent_name = $current_item['SubAgent']['FirstName'].' '.$current_item['SubAgent']['LastName'];
                     if(array_key_exists('PublishTerms', $current_item)){

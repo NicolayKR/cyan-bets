@@ -20,13 +20,13 @@ class TableController extends Controller
     public function getData(Request $request){
         $start = $request->query('start'); 
         $end = $request->query('end'); 
-        if($start == null and $end== null){
+        if($start == 'null' and $end== 'null'){
             $first_date = 'DATE_SUB(DATE(NOW()), INTERVAL 8 DAY)';
             $second_date = 'DATE(now()+ INTERVAL 1 DAY)';
         }
         else{
-            $first_date =  $start;
-            $second_date = $end;
+            $first_date =  "'".(string)$start."'";
+            $second_date = "'".(string)$end."'";
         }
         $array_xml = [];
         $array_data = [];
@@ -40,14 +40,14 @@ class TableController extends Controller
             $array_bets[$current_bet['id_company']][$current_bet['id_flat']]['id'] =  $current_bet['id'];
         }
         $collection = DB::select('SELECT a.id,a.id_flat,a.bet,a.id_user,a.id_company,a.name_agent,a.top,
-                b.id_offer,b.url_offer,b.current_bet,b.leader_bet,b.position,b.page, 
-                ROUND((SUM(c.shows_count)/sum(c.searches_count))*100) as coverage,sum(c.searches_count) as searches_count,sum(c.shows_count) as shows_count,
-                sum(phone_shows) as phone_shows,sum(views) as views
-                FROM `current_xmls` as a
-                left join `statistics` as b on a.id_flat = b.id_flat and a.id_user = b.id_user
-                left join (select * from `statistic_shows` where date(created_at) BETWEEN DATE_SUB(DATE(NOW()), INTERVAL 8 DAY) and DATE(now()+ INTERVAL 1 DAY)) as c on b.id_offer = c.id_offer and a.id_user = c.id_user
-                group by a.id,a.id_flat,a.bet,a.id_user,a.id_company,a.name_agent,a.top,
-                b.id_offer,b.url_offer,b.current_bet,b.leader_bet,b.position,b.page');
+            b.id_offer,b.url_offer,b.current_bet,b.leader_bet,b.position,b.page, 
+            ROUND((SUM(c.shows_count)/sum(c.searches_count))*100) as coverage,sum(c.searches_count) as searches_count,sum(c.shows_count) as shows_count,
+            sum(phone_shows) as phone_shows,sum(views) as views
+            FROM `current_xmls` as a
+            left join `statistics` as b on a.id_flat = b.id_flat and a.id_user = b.id_user
+            left join `statistic_shows` as c on b.id_offer = c.id_offer and a.id_user = c.id_user
+            and date(c.created_at) BETWEEN '.$first_date.' and '.$second_date.' 
+            group by a.id,a.id_user,b.id_offer,b.url_offer,b.current_bet,b.leader_bet,b.position,b.page');
         foreach($collection as $index =>$item_collection){
             if(array_key_exists($item_collection->id_company, $array_bets)){
                 if(array_key_exists($item_collection->id_flat, $array_bets[$item_collection->id_company])){
@@ -63,6 +63,7 @@ class TableController extends Controller
             else{
                 $array_data[$index]['crm_bet'] = 0;
             }
+            $array_data[$index]['auction'] = $item_collection->bet;
             $array_data[$index]['id_offer'] = (int)$item_collection->id_offer;
             $array_data[$index]['url_offer'] = $item_collection->url_offer;
             $array_data[$index]['leader_bet'] = (int)$item_collection->leader_bet;
@@ -81,6 +82,7 @@ class TableController extends Controller
             //Агент
             $array_data[$index]['agent'] = $item_collection->name_agent;
             $array_data[$index]['id_object'] =(int) $item_collection->id_flat;
+        
         }
         return $array_data; 
     }

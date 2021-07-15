@@ -20,7 +20,7 @@
                     <div class="label-wrapper">
                         <label for="example-datepicker-end">По</label>
                     </div>
-                    <b-form-datepicker id="example-datepicker-end" v-model="end" locale="ru" placeholder="Выберите дату" class="margin-datepicker"></b-form-datepicker>
+                    <b-form-datepicker id="example-datepicker-end" v-model="end" :min="start" locale="ru" placeholder="Выберите дату" class="margin-datepicker"></b-form-datepicker>
                 </div>
                 <div class="col-1 form-check form-check-padding flex">
                     <input class="form-check-input" type="checkbox" v-model="checked" id="flexCheckDefault" @click="sortTable('top')">
@@ -29,7 +29,7 @@
                     </label>
                 </div>
                 <div class="col-1 flex">
-                    <button type="button" class="btn btn-outline-dark" @click="getData(start,end)">OK</button>
+                    <button type="button" class="btn btn-outline-dark" @click="getData()">OK</button>
                 </div>
             </div>
             <div class="budge-block mt-4">
@@ -40,8 +40,11 @@
                 </div>
                 <div class=budge-item>
                     <button type="button" class="btn btn-outline-dark">
-                        АУКЦИОН <span class="badge bg-secondary">765</span>
+                        АУКЦИОН <span class="badge bg-secondary">{{this.auction_lenght}}</span>
                     </button>
+                </div>
+                <div class="input-group">
+                    <input type="text" v-model="id_object" placeholder="Поиск по id-объекта или id-циана" class="form-control btn-outline-dark ms-3"/>
                 </div>
             </div>
             <div class="table-responsive">
@@ -65,7 +68,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for ="(tabel_item,index) in tabelData" :key="index">
+                    <tr v-for ="(tabel_item,index) in filteredList" :key="index" class="flip-list">
                         <td>{{tabel_item.coverage}}</td>
                         <td>{{tabel_item.searches_count}}</td>
                         <td>{{tabel_item.shows_count}}</td>
@@ -103,21 +106,21 @@ export default {
       start: null,
       end: null,
       tabelData: null,
-      copyTabelData: null,
       checked: false,
       flagTable: false,
       activeSortParam: '',
-      id_object: null,
+      id_object: '',
+      auction_lenght: 0
     }
   },
   computed:{
-    filteredList: function(){
-        var id_obj = this.id_object;
-        return this.tabelData.filter(function (elem) {
-            if(id_obj ==='') return true;
-            else return elem.id_object.indexOf(id_obj) > -1;
+    filteredList(){
+        return this.tabelData.filter(elem => {
+            if(String(this.id_object).toLowerCase()==='') return this.tabelData;
+            return String(elem.id_object).toLowerCase().indexOf(String(this.id_object).toLowerCase()) !== -1
+                    ||String(elem.id_offer).toLowerCase().indexOf(String(this.id_object).toLowerCase()) !== -1;
         })
-    }
+    },
 },
   mounted(){
       this.getData();
@@ -125,9 +128,13 @@ export default {
   methods:{
         async getData(){
             try{
-                const response = await axios.get(`/getData`);
+                const response = await axios.get(`/getData?&start=${this.start}&end=${this.end}`);
                 this.tabelData = response.data;
-                this.copyTabelData = response.data;
+                this.tabelData.forEach(element => {
+                    if(element.auction != null){
+                        this.auction_lenght++;
+                    }
+                });
                 this.flagTable = true;
             }
             catch{
@@ -236,3 +243,8 @@ var sortByIdObjectBottom  = function (d1, d2) { return (d1.searches_count > d2.s
 var sortByIdOfferTop = function (d1, d2) { return (d1.id_offer < d2.id_offer) ? 1 : -1; };
 var sortByIdOfferBottom  = function (d1, d2) { return (d1.searches_count > d2.searches_count) ? 1 : -1; };
 </script>
+<style scoped>
+.flip-list-move {
+  transition: transform 1s;
+}
+</style>

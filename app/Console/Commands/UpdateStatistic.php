@@ -58,8 +58,14 @@ class UpdateStatistic extends Command
             $y_auction = 0;
             $collectionExtID = Statistic::select('id_flat','id_offer','url_offer')
                                         ->where('id_user', $collection_key->user_id)->get();
+            $collection_from_delete = CurrentXml::select('id_flat')
+                                        ->where('id_user', $collection_key->user_id)->get();
+            $array_delete_items = array();
             $array_statistic = array();
             $array_statistic_from_db = array();
+            foreach($collection_from_delete as $collection_item_from_delete){
+                $array_delete_items[$collection_item_from_delete['id_flat']] = $collection_item_from_delete['id_flat'];
+            }
             foreach($collectionExtID as $collectionExtIdItem){
                 $array_statistic_from_db[$collectionExtIdItem['id_offer']]['id_flat'] = $collectionExtIdItem['id_flat'];
                 $array_statistic_from_db[$collectionExtIdItem['id_offer']]['url_offer'] = $collectionExtIdItem['url_offer'];
@@ -135,5 +141,6 @@ class UpdateStatistic extends Command
                 }
             }
         }
+        Statistic::whereRaw('updated_at < DATE_SUB(DATE(NOW()), INTERVAL 7 DAY)')->delete();
     }
 }

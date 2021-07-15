@@ -16,8 +16,9 @@ class CreateCurrentXmlsTable extends Migration
         Schema::create('current_xmls', function (Blueprint $table) {
             $table->id();
             $table->integer('id_flat');
-            $table->double('bet', 10, 5);
+            $table->double('bet', 10, 5)->nullable();
             $table->string('name_agent');
+            $table->string('top');
             $table->integer('id_user');
             $table->integer('id_company');
             $table->timestamps();
