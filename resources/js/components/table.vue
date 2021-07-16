@@ -3,16 +3,16 @@
         <div v-if="flagReady">
             <div class="row date-input">
                 <div class="col-md-3 col-12 flex mt-3">
-                    <div class="label-wrapper">
+                    <div class="label-wrapper ">
                         <label for="example-datepicker-start" class="text-md-right">С</label>
                     </div>
-                    <b-form-datepicker id="example-datepicker-start" v-model="start"  locale="ru" placeholder="Выберите дату" class="margin-datepicker"></b-form-datepicker> 
+                    <b-form-datepicker id="example-datepicker-start" v-model="start"  locale="ru" placeholder="Выберите дату" ></b-form-datepicker> 
                 </div>
                 <div class="col-md-3 col-12 flex mt-3">
                     <div class="label-wrapper text-md-right">
                         <label for="example-datepicker-end">По</label>
                     </div>
-                    <b-form-datepicker id="example-datepicker-end" v-model="end" :min="start" locale="ru" placeholder="Выберите дату" class="margin-datepicker"></b-form-datepicker>
+                    <b-form-datepicker id="example-datepicker-end" v-model="end" :min="start" locale="ru" placeholder="Выберите дату" ></b-form-datepicker>
                 </div>
                 <div class="col-md-1 col-12 justify-content-center flex mt-3">
                     <button type="button" class="btn btn-outline-dark" @click="getData()">OK</button>
