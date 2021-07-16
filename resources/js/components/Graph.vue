@@ -13,10 +13,9 @@ export default {
   },
   data(){
       return {
-        currentData: this.chartData,
         option: { 
             legend: {
-                display: false,
+                display: true,
             },
             scales: {
                 xAxes: [{
@@ -33,7 +32,7 @@ export default {
                     }
                 }]
             },
-            tooltips :{
+            tooltips: {
                 display: true,
                 bodyFontSize: 12
             },
@@ -50,17 +49,17 @@ export default {
             }
         }
     },
+    watch:{
+        chartData(){
+           this.renderChart(this.chartData, this.option);
+        }
+    },
     mounted () {
-        this.updateGraphData();
+        this.renderChart(this.chartData, this.option);
+        
     },
     methods:{
-        updateGraphData(){
-            if(this.windowWidth < 524){
-                this.option.scales.xAxes[0].ticks.fontSize =  10;
-                this.option.tooltips = false;
-            };
-            this.renderChart(this.currentData, this.option);
-        }
+        
     }
 }
 </script>

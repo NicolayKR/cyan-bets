@@ -17899,12 +17899,16 @@ header {
   align-items: center;
 }
 
+.label-wrapper {
+  min-width: 20px;
+}
+
 .margin-datepicker {
   margin-left: 10px;
 }
 
 .form-check-padding {
-  padding-left: 40px;
+  margin-left: 40px;
 }
 
 .bd-placeholder-img {

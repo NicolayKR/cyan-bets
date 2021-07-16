@@ -1,7 +1,24 @@
 <template>
     <div>
         <div v-if="flagReady">
-            <p>Общая статистика</p>
+            <div class="row date-input">
+                <div class="col-md-3 col-12 flex mt-3">
+                    <div class="label-wrapper">
+                        <label for="example-datepicker-start" class="text-md-right">С</label>
+                    </div>
+                    <b-form-datepicker id="example-datepicker-start" v-model="start"  locale="ru" placeholder="Выберите дату" class="margin-datepicker"></b-form-datepicker> 
+                </div>
+                <div class="col-md-3 col-12 flex mt-3">
+                    <div class="label-wrapper text-md-right">
+                        <label for="example-datepicker-end">По</label>
+                    </div>
+                    <b-form-datepicker id="example-datepicker-end" v-model="end" :min="start" locale="ru" placeholder="Выберите дату" class="margin-datepicker"></b-form-datepicker>
+                </div>
+                <div class="col-md-1 col-12 justify-content-center flex mt-3">
+                    <button type="button" class="btn btn-outline-dark" @click="getData()">OK</button>
+                </div>
+            </div>
+            <h1 class="h2 mt-4">Общая статистика</h1>
             <div class="circle-wrapper">
                 <div class="blackcircle">
                     <div class="whitecircle">
@@ -22,11 +39,9 @@
                     </div>
                 </div>
             </div>  
-            <div class="graph">
-                <!-- <div class = "graph_title">Статистика скачиваний <br>{{selectedDate}}<br></div> -->
+            <div class="graph mt-4">
                 <div class = "graph_wrapper">
-                    <graph :chartData ="datacollection"/>
-                    <!-- <graph :chartData ="datacollection" :selected="selected" :windowWidth="windowWidth" :selectedDate="selectedDate"/> -->
+                    <graph :chartData ="datacollection" :windowWidth="windowWidth"/>
                 </div>
             </div>
         </div>
@@ -41,27 +56,6 @@
             </div>
         </div>    
         <div v-if="flagReady">
-            <div class="row">
-                <div class="col-3 flex">
-                    <label for="example-datepicker-start">С</label>
-                    <b-form-datepicker id="example-datepicker-start" v-model="start"  locale="ru" placeholder="Выберите дату" class="margin-datepicker"></b-form-datepicker> 
-                </div>
-                <div class="col-3 flex">
-                    <div class="label-wrapper">
-                        <label for="example-datepicker-end">По</label>
-                    </div>
-                    <b-form-datepicker id="example-datepicker-end" v-model="end" :min="start" locale="ru" placeholder="Выберите дату" class="margin-datepicker"></b-form-datepicker>
-                </div>
-                <div class="col-1 form-check form-check-padding flex">
-                    <input class="form-check-input" type="checkbox" v-model="checked" id="flexCheckDefault" @click="sortTable('top')">
-                    <label class="form-check-label label-check-top" for="flexCheckDefault">
-                        Топ
-                    </label>
-                </div>
-                <div class="col-1 flex">
-                    <button type="button" class="btn btn-outline-dark" @click="getData()">OK</button>
-                </div>
-            </div>
             <div class="budge-block mt-4">
                 <div class=budge-item>
                     <button type="button" class="btn btn-outline-dark">
@@ -73,8 +67,14 @@
                         АУКЦИОН <span class="badge bg-secondary">{{this.auction_lenght}}</span>
                     </button>
                 </div>
-                <div class="input-group">
-                    <input type="text" v-model="id_object" placeholder="Поиск по id-объекта или id-циана" class="form-control btn-outline-dark ms-3"/>
+                <div class="col-4">
+                    <input type="text" v-model="id_object" placeholder="Поиск по id-объекта или id-циана" class="form-control ms-3"/>
+                </div>
+                <div class="col-1 form-check form-check-padding flex">
+                    <input class="form-check-input" type="checkbox" v-model="checked" id="flexCheckDefault" @click="sortTable('top')">
+                    <label class="form-check-label label-check-top" for="flexCheckDefault">
+                        Топ
+                    </label>
                 </div>
             </div>
             <div class="table-responsive">
@@ -338,15 +338,18 @@ var sortByIdOfferBottom  = function (d1, d2) { return (d1.searches_count > d2.se
 .flip-list-move {
   transition: transform 1s;
 }
+.filter-link{
+    color:black;
+}
 .filter-link:hover{
     cursor: pointer;
-    color:blue;
+    color:#2d7ffa;
 }
 .page_active{
     background: rgb(183, 183, 235);
 }
 .blackcircle {
-    background-color:blue;
+    background-color:#2d7ffa;
     width: 200px;
     height: 200px;
     border-radius:50%; 
@@ -380,5 +383,8 @@ var sortByIdOfferBottom  = function (d1, d2) { return (d1.searches_count > d2.se
     text-align: center;
     line-height: 15px;
     font-size: 12px;
+}
+.table{
+    max-width: 100%;
 }
 </style>

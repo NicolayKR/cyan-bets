@@ -95,12 +95,12 @@ class TableController extends Controller
             ->leftJoin('statistic_shows',function ($join) {
                 $join->on('statistics.id_offer', '=', 'statistic_shows.id_offer');
                 $join->on('current_xmls.id_user', '=', 'statistic_shows.id_user');})
-            ->whereRaw('date(statistic_shows.created_at) BETWEEN DATE_SUB(DATE(NOW()), INTERVAL 8 DAY) and DATE(now()+ INTERVAL 1 DAY)')
+            ->whereRaw('date(statistic_shows.created_at) BETWEEN '.$first_date.' and '.$second_date.'')
             ->selectRaw('sum(shows_count) as shows_count,sum(phone_shows) as phone_shows,sum(views) as views')
             ->get();
-        $array_data['shows_count'] = $collection_statistic[0]->shows_count;
-        $array_data['phone_shows'] = $collection_statistic[0]->phone_shows;
-        $array_data['views'] = $collection_statistic[0]->views;
+        $array_data['shows_count'] = (int)$collection_statistic[0]->shows_count;
+        $array_data['phone_shows'] = (int)$collection_statistic[0]->phone_shows;
+        $array_data['views'] = (int)$collection_statistic[0]->views;
         $array_data['lenght_auction'] = $lenght_auction;
         $collection_statistic = DB::table('current_xmls')
         ->leftJoin('statistics',function ($join) {
@@ -109,7 +109,7 @@ class TableController extends Controller
         ->leftJoin('statistic_shows',function ($join) {
             $join->on('statistics.id_offer', '=', 'statistic_shows.id_offer');
             $join->on('current_xmls.id_user', '=', 'statistic_shows.id_user');})
-        ->whereRaw('date(statistic_shows.created_at) BETWEEN DATE_SUB(DATE(NOW()), INTERVAL 8 DAY) and DATE(now()+ INTERVAL 1 DAY)')
+        ->whereRaw('date(statistic_shows.created_at) BETWEEN '.$first_date.' and '.$second_date.'')
         ->selectRaw('date(statistic_shows.created_at) as created_at, sum(shows_count) as shows_count,sum(phone_shows) as phone_shows,sum(views) as views')
         ->groupBy('created_at')
         ->get();
@@ -118,7 +118,7 @@ class TableController extends Controller
         $array_phone = array();
         $array_views = array();
         foreach($collection_statistic as $collection_item){
-            $chartdata['Labels'][] = $collection_item->created_at;
+            $chartdata['labels'][] = $collection_item->created_at;
             array_push($array_shows,$collection_item->shows_count);
             array_push($array_phone,$collection_item->phone_shows);
             array_push($array_views,$collection_item->views);
@@ -128,17 +128,27 @@ class TableController extends Controller
         $object1 = array();
         $object1['label'] ='Показов объявлений';
         $object1['backgroundColor'] ='#8A2BE2';
+        $object1['borderColor'] ='#8A2BE2';
+        //$object1['borderWidth'] = 2;
+        $object1['fill'] = false;
         $object1['data'] =$array_shows;
+        $object1['pointRadius'] = 4;
         array_push($arrayData, $object1);
         $object2 = array();
         $object2['label'] ='Показов телефонов';
         $object2['backgroundColor'] ='#f87979';
+        $object2['borderColor'] ='#f87979';
+        $object2['fill'] = false;
         $object2['data'] =$array_phone;
+        $object2['pointRadius'] = 4;
         array_push($arrayData, $object2);
         $object3 = array();
         $object3['label'] ='Просмотров объявлений';
         $object3['backgroundColor'] ='#1E90FF';
+        $object3['borderColor'] ='#1E90FF';
+        $object3['fill'] = false;
         $object3['data'] =$array_views;
+        $object3['pointRadius'] = 4;
         array_push($arrayData, $object3);
         $chartdata['datasets'] = $arrayData;
         $array_data['datacollection'] = $chartdata;

@@ -152,15 +152,4 @@ Route::get('test1',function(){
     
     $chartdata['datasets'] = $arrayData;
     return $chartdata;
-    // chartdata: {
-    //     labels: ['January', 'February'],
-    //     datasets: [
-    //       {
-    //         label: 'Data One',
-    //         backgroundColor: '#f87979',
-    //         data: [40, 20]
-    //       }
-    //     ]
-    //   },
-    //return $collection_statistic;
 });
