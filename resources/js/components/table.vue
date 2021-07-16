@@ -1,27 +1,46 @@
 <template>
     <div>
-        <div class="circle-wrapper">
-            <div class="blackcircle">
-                <div class="whitecircle">Hellow</div>
-            </div>
-            <div class="blackcircle">
-                <div class="whitecircle">Hellow</div>
-            </div>
-            <div class="blackcircle">
-                <div class="whitecircle">Hellow</div>
+        <div v-if="flagReady">
+            <p>Общая статистика</p>
+            <div class="circle-wrapper">
+                <div class="blackcircle">
+                    <div class="whitecircle">
+                        <span class="statistic_numeral">{{shows_count}}</span>
+                        <span class ="statistic_text">Показов объявлений</span> 
+                         </div>
+                </div>
+                <div class="blackcircle">
+                    <div class="whitecircle">
+                        <span class="statistic_numeral">{{phone_shows}}</span>
+                        <span class ="statistic_text">Показов телефона</span> 
+                    </div>
+                </div>
+                <div class="blackcircle">
+                    <div class="whitecircle">
+                        <span class="statistic_numeral">{{views}}</span> 
+                        <span class ="statistic_text">Просмотров объявлений</span> 
+                    </div>
+                </div>
+            </div>  
+            <div class="graph">
+                <!-- <div class = "graph_title">Статистика скачиваний <br>{{selectedDate}}<br></div> -->
+                <div class = "graph_wrapper">
+                    <graph :chartData ="datacollection"/>
+                    <!-- <graph :chartData ="datacollection" :selected="selected" :windowWidth="windowWidth" :selectedDate="selectedDate"/> -->
+                </div>
             </div>
         </div>
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
             <h1 class="h2">Циан Автомат</h1>
         </div>
-        <div v-if="!flagTable">
+        <div v-if="!flagReady"> 
             <div class="d-flex justify-content-center mt-4">
                 <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
                     <span class="visually-hidden">Loading...</span>
                 </div>
             </div>
         </div>    
-        <div v-if="flagTable">
+        <div v-if="flagReady">
             <div class="row">
                 <div class="col-3 flex">
                     <label for="example-datepicker-start">С</label>
@@ -132,40 +151,53 @@
     </div>
 </template>
 <script>
+import graph from './Graph'
+
 export default {
-  data(){
-    return{
-      bets: [],
-      start: null,
-      end: null,
-      tabelData: null,
-      checked: false,
-      flagTable: false,
-      activeSortParam: '',
-      id_object: '',
-      auction_lenght: 0,
-      objectPerPage: 100,
-      pageNumber: 1,
-    }
-  },
-  computed:{
-    pages(){
-        return Math.ceil(this.tabelData.length/100);
+     components: {
+        graph,
     },
-    paginatedObject(){
-        let from = (this.pageNumber -1) * this.objectPerPage;
-        let to= from + this.objectPerPage;
-        return this.tabelData.filter(elem => {
-            if(String(this.id_object).toLowerCase()==='') return this.tabelData;
-            return String(elem.id_object).toLowerCase().indexOf(String(this.id_object).toLowerCase()) !== -1
-                    ||String(elem.id_offer).toLowerCase().indexOf(String(this.id_object).toLowerCase()) !== -1;
-        }).slice(from,to);
-    }
-},
-  mounted(){
-      this.getData();
-  },
-  methods:{
+    data(){
+        return{
+        bets: [],
+        start: null,
+        end: null,
+        tabelData: null,
+        checked: false,
+        flagReady: false,
+        activeSortParam: '',
+        id_object: '',
+        auction_lenght: 0,
+        objectPerPage: 100,
+        pageNumber: 1,
+        shows_count: 0,
+        phone_shows: 0,
+        views: 0,
+        datacollection: null,
+        windowWidth: window.innerWidth,
+        }
+    },
+    computed:{
+        pages(){
+            return Math.ceil(this.tabelData.length/100);
+        },
+        paginatedObject(){
+            let from = (this.pageNumber -1) * this.objectPerPage;
+            let to= from + this.objectPerPage;
+            return this.tabelData.filter(elem => {
+                if(String(this.id_object).toLowerCase()==='') return this.tabelData;
+                return String(elem.id_object).toLowerCase().indexOf(String(this.id_object).toLowerCase()) !== -1
+                        ||String(elem.id_offer).toLowerCase().indexOf(String(this.id_object).toLowerCase()) !== -1;
+            }).slice(from,to);
+        }
+    },
+    mounted(){
+        this.getData();
+        window.onresize = () => {
+            this.windowWidth = window.innerWidth
+        }
+    },
+    methods:{
         pageClick(page){
             this.pageNumber = page;
         },
@@ -190,10 +222,14 @@ export default {
                 const response = await axios.get(`/getData?&start=${this.start}&end=${this.end}`);
                 this.tabelData = response.data.table_data;
                 this.auction_lenght = response.data.lenght_auction;
-                this.flagTable = true;
+                this.shows_count = response.data.shows_count;
+                this.phone_shows = response.data.phone_shows;
+                this.views = response.data.views;
+                this.datacollection = response.data.datacollection;
+                this.flagReady = true;
             }
             catch{
-                this.flagTable = false;
+                this.flagReady = false;
             }          
         },
         async postNewBet(bets,id_object, id_company,index){
@@ -311,12 +347,12 @@ var sortByIdOfferBottom  = function (d1, d2) { return (d1.searches_count > d2.se
 }
 .blackcircle {
     background-color:blue;
-     width: 200px;
+    width: 200px;
     height: 200px;
     border-radius:50%; 
-    text-align:center;
-    display: flex;
+    justify-content: center;
     align-items: center;
+    display: flex;
 }
 .whitecircle {
     background-color: white;
@@ -324,12 +360,25 @@ var sortByIdOfferBottom  = function (d1, d2) { return (d1.searches_count > d2.se
     width: 90%;
     height: 90%;
     border-radius:50%;
-    margin: 0 auto;
-    text-align: center;
-    padding-top:40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 } 
 .circle-wrapper{
     display: flex;
     justify-content: space-evenly;
+}
+.statistic_numeral{
+    display: block;
+    font-size: 40px;
+    font-weight: 600;
+}
+.statistic_text{
+    text-align: center;
+    width: 100px;
+    text-align: center;
+    line-height: 15px;
+    font-size: 12px;
 }
 </style>
