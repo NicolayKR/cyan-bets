@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Редактирование фирмы')
+@section('title', 'Редактирование фида')
 
 @section('content')
 <div class="row justify-content-center">

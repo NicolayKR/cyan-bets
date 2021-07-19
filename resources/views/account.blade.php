@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Ваши аккаунты')
+@section('title', 'Ваши фиды')
 
 @section('content')  
     <div class="row justify-content-center">
@@ -13,7 +13,7 @@
                 @endif
             </div>
             <a href="{{route('accounts.create')}}" class="btn btn-primary">
-                Добавить фирму
+                Добавить фид
             </a>
             <div class="table-responsive">
                 <table class="table table-striped table-bordered table-sm">
@@ -52,15 +52,6 @@
                             </tr>
                         @endforelse
                     </tbody>
-                    <tfoot>
-                        <tr>
-                            <td colspan="4">
-                                <ul class="pagination pull-right">
-                                    {{$accounts->links()}}
-                                </ul>
-                            </td>
-                        </tr>
-                    </tfoot>
                 </table>
             </div>  
         </div>

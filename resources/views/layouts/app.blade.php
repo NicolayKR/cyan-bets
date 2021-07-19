@@ -19,7 +19,7 @@
                     <div class="position-sticky pt-3">
                         <ul class="nav flex-column">
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">
+                                <a class="nav-link active" aria-current="page" href="/">
                                     <i class="fas fa-gavel feather feather-home"></i>
                                     Ставки
                                 </a>

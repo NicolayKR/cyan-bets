@@ -52,7 +52,7 @@
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink" >
                 <li><a class="dropdown-item text-center" href="/accounts">
-                    Аккаунты
+                    Фиды
                 </a></li>
                 <li><a class="dropdown-item text-center" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                     Выход

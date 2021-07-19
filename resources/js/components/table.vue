@@ -16,7 +16,7 @@
                     <b-form-datepicker id="example-datepicker-end" v-model="end" :min="start" locale="ru" placeholder="Выберите дату" ></b-form-datepicker>
                 </div>
                 <div class="col-md-1 col-12 d-grid gap-2  flex mt-3">
-                    <button type="button" class="btn btn-outline-dark" @click="getData()">OK</button>
+                    <button type="button" class="btn" @click="getData()">OK</button>
                 </div>
             </div>
             <div class="circle-wrapper mt-4">
@@ -48,7 +48,12 @@
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
             <h1 class="h2">Циан Автомат</h1>
         </div>
-        <div v-if="!flagReady"> 
+        <div v-if="flagEmptyFeed">       
+            <div class="alert alert-primary" role="alert">
+                Введите свой xml-feed в личном кабинете!
+            </div>
+        </div>
+        <div v-if="!flagReady && !flagEmptyFeed"> 
             <div class="d-flex justify-content-center mt-4">
                 <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
                     <span class="visually-hidden">Loading...</span>
@@ -58,12 +63,12 @@
         <div v-if="flagReady">
             <div class="budge-block mt-4">
                 <div class=budge-item>
-                    <button type="button" class="btn btn-outline-dark">
+                    <button type="button" class="btn btn-sm">
                         ВСЕГО <span class="badge bg-secondary">{{this.tabelData.length}}</span>
                     </button>
                 </div>
                 <div class=budge-item>
-                    <button type="button" class="btn btn-outline-dark">
+                    <button type="button" class="btn btn-sm">
                         АУКЦИОН <span class="badge bg-secondary">{{this.auction_lenght}}</span>
                     </button>
                 </div>
@@ -109,7 +114,7 @@
                                 <div class ="flex">
                                     <input type="text" class="form-control me-2 form-control-sm input-value" name="bet" placeholder="" v-model="bets[index]">
                                     <button type="button" @click="postNewBet(bets[index],tabel_item.id_object, tabel_item.id_company,index)" 
-                                    class="btn btn-sm btn-outline-dark">OK</button>
+                                    class="btn btn-sm">OK</button>
                                 </div>
                             </form>
                         </td>
@@ -175,6 +180,7 @@ export default {
         views: 0,
         datacollection: null,
         windowWidth: window.innerWidth,
+        flagEmptyFeed: false
         }
     },
     computed:{
@@ -220,13 +226,18 @@ export default {
         async getData(){
             try{
                 const response = await axios.get(`/getData?&start=${this.start}&end=${this.end}`);
-                this.tabelData = response.data.table_data;
-                this.auction_lenght = response.data.lenght_auction;
-                this.shows_count = response.data.shows_count;
-                this.phone_shows = response.data.phone_shows;
-                this.views = response.data.views;
-                this.datacollection = response.data.datacollection;
-                this.flagReady = true;
+                if(response.data != 0){
+                    this.tabelData = response.data.table_data;
+                    this.auction_lenght = response.data.lenght_auction;
+                    this.shows_count = response.data.shows_count;
+                    this.phone_shows = response.data.phone_shows;
+                    this.views = response.data.views;
+                    this.datacollection = response.data.datacollection;
+                    this.flagReady = true;
+                }
+                else{
+                    this.flagEmptyFeed = true;
+                }
             }
             catch{
                 this.flagReady = false;

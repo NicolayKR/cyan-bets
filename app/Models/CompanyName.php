@@ -16,6 +16,6 @@ class CompanyName extends Model
         'name',
         'xml_feed',
         'cyan_key',
-        'user_id'
+        'user_id',
     ];
 }

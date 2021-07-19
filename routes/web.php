@@ -111,45 +111,23 @@ Route::get('test',function(){
     // }
 });
 Route::get('test1',function(){
-    $collection_statistic = DB::table('current_xmls')
-    ->leftJoin('statistics',function ($join) {
-        $join->on('current_xmls.id_flat', '=', 'statistics.id_flat');
-        $join->on('current_xmls.id_user', '=', 'statistics.id_user');})
-    ->leftJoin('statistic_shows',function ($join) {
-        $join->on('statistics.id_offer', '=', 'statistic_shows.id_offer');
-        $join->on('current_xmls.id_user', '=', 'statistic_shows.id_user');})
-    ->whereRaw('date(statistic_shows.created_at) BETWEEN DATE_SUB(DATE(NOW()), INTERVAL 8 DAY) and DATE(now()+ INTERVAL 1 DAY)')
-    ->selectRaw('date(statistic_shows.created_at) as created_at, sum(shows_count) as shows_count,sum(phone_shows) as phone_shows,sum(views) as views')
-    ->groupBy('created_at')
-    ->get();
-    $chartdata = array();
-    $array_shows = array();
-    $array_phone = array();
-    $array_views = array();
-    foreach($collection_statistic as $collection_item){
-        $chartdata['Labels'][] = $collection_item->created_at;
-        array_push($array_shows,$collection_item->shows_count);
-        array_push($array_phone,$collection_item->phone_shows);
-        array_push($array_views,$collection_item->views);
-    }
-    //Сборка объектов линий
-    $arrayData = array();
-    $object1 = array();
-    $object1['label'] ='Показов объявлений';
-    $object1['backgroundColor'] ='#8A2BE2';
-    $object1['data'] =$array_shows;
-    array_push($arrayData, $object1);
-    $object2 = array();
-    $object2['label'] ='Показов телефонов';
-    $object2['backgroundColor'] ='#f87979';
-    $object2['data'] =$array_phone;
-    array_push($arrayData, $object2);
-    $object3 = array();
-    $object3['label'] ='Просмотров объявлений';
-    $object3['backgroundColor'] ='#1E90FF';
-    $object3['data'] =$array_views;
-    array_push($arrayData, $object3);
     
-    $chartdata['datasets'] = $arrayData;
-    return $chartdata;
+    $first_date = 'DATE_SUB(DATE(NOW()), INTERVAL 8 DAY)';
+    $second_date = 'DATE(now()+ INTERVAL 1 DAY)';
+    $collection = DB::select('SELECT a.id,a.id_flat,a.bet,a.id_user,a.id_company,a.name_agent,a.top
+   
+    FROM `current_xmls` as a
+    where a.id_user = '.Auth::user()->id.'
+    group by a.id,a.id_user');  
+    return $collection;
+    
 });
+// -- b.id_offer,b.url_offer,b.current_bet,b.leader_bet,b.position,b.page, 
+//     -- ROUND((SUM(c.shows_count)/sum(c.searches_count))*100) as coverage,sum(c.searches_count) as searches_count,sum(c.shows_count) as shows_count,
+//     -- sum(phone_shows) as phone_shows,sum(views) as views
+
+//     -- left join `statistics` as b on a.id_flat = b.id_flat and a.id_user = b.id_user
+//     -- left join `statistic_shows` as c on b.id_offer = c.id_offer and a.id_user = c.id_user
+//     -- and date(c.created_at) BETWEEN '.$first_date.' and '.$second_date.' 
+
+    //,b.id_offer,b.url_offer,b.current_bet,b.leader_bet,b.position,b.page');
