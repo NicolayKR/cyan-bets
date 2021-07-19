@@ -1,9 +1,10 @@
 <template>
     <div>
         <div v-if="flagReady">
+            <h1 class="h2 mt-3">Общая статистика</h1>
             <div class="row date-input">
                 <div class="col-md-3 col-12 flex mt-3">
-                    <div class="label-wrapper ">
+                    <div class="label-wrapper text-md-right">
                         <label for="example-datepicker-start" class="text-md-right">С</label>
                     </div>
                     <b-form-datepicker id="example-datepicker-start" v-model="start"  locale="ru" placeholder="Выберите дату" ></b-form-datepicker> 
@@ -14,12 +15,11 @@
                     </div>
                     <b-form-datepicker id="example-datepicker-end" v-model="end" :min="start" locale="ru" placeholder="Выберите дату" ></b-form-datepicker>
                 </div>
-                <div class="col-md-1 col-12 justify-content-center flex mt-3">
+                <div class="col-md-1 col-12 d-grid gap-2  flex mt-3">
                     <button type="button" class="btn btn-outline-dark" @click="getData()">OK</button>
                 </div>
             </div>
-            <h1 class="h2 mt-4">Общая статистика</h1>
-            <div class="circle-wrapper">
+            <div class="circle-wrapper mt-4">
                 <div class="blackcircle">
                     <div class="whitecircle">
                         <span class="statistic_numeral">{{shows_count}}</span>
@@ -183,7 +183,7 @@ export default {
         },
         paginatedObject(){
             let from = (this.pageNumber -1) * this.objectPerPage;
-            let to= from + this.objectPerPage;
+            let to = from + this.objectPerPage;
             return this.tabelData.filter(elem => {
                 if(String(this.id_object).toLowerCase()==='') return this.tabelData;
                 return String(elem.id_object).toLowerCase().indexOf(String(this.id_object).toLowerCase()) !== -1
@@ -334,57 +334,3 @@ var sortByIdObjectBottom  = function (d1, d2) { return (d1.searches_count > d2.s
 var sortByIdOfferTop = function (d1, d2) { return (d1.id_offer < d2.id_offer) ? 1 : -1; };
 var sortByIdOfferBottom  = function (d1, d2) { return (d1.searches_count > d2.searches_count) ? 1 : -1; };
 </script>
-<style scoped>
-.flip-list-move {
-  transition: transform 1s;
-}
-.filter-link{
-    color:black;
-}
-.filter-link:hover{
-    cursor: pointer;
-    color:#2d7ffa;
-}
-.page_active{
-    background: rgb(183, 183, 235);
-}
-.blackcircle {
-    background-color:#2d7ffa;
-    width: 200px;
-    height: 200px;
-    border-radius:50%; 
-    justify-content: center;
-    align-items: center;
-    display: flex;
-}
-.whitecircle {
-    background-color: white;
-    color: black;
-    width: 90%;
-    height: 90%;
-    border-radius:50%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-} 
-.circle-wrapper{
-    display: flex;
-    justify-content: space-evenly;
-}
-.statistic_numeral{
-    display: block;
-    font-size: 40px;
-    font-weight: 600;
-}
-.statistic_text{
-    text-align: center;
-    width: 100px;
-    text-align: center;
-    line-height: 15px;
-    font-size: 12px;
-}
-.table{
-    max-width: 100%;
-}
-</style>
