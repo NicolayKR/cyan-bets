@@ -73,8 +73,10 @@ class UpdateXmlDb extends Command
                 foreach($array['object'] as $item => $current_item) {
                     $current_array['id_flat'] = (int)$current_item['ExternalId'];
                     $current_array['id_company'] = $index_company;
-                    if(array_key_exists('Bet', $current_item)){
-                        $current_bet = $current_item['Bet'];
+                    if(array_key_exists('Auction', $current_item)){
+                        if(array_key_exists('Bet', $current_item['Auction'])){
+                            $current_bet = $current_item['Auction']['Bet'];
+                        }
                     }else{
                         $current_bet = null;
                     }

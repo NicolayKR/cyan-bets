@@ -111,16 +111,52 @@ Route::get('test',function(){
     // }
 });
 Route::get('test1',function(){
-    
-    $first_date = 'DATE_SUB(DATE(NOW()), INTERVAL 8 DAY)';
-    $second_date = 'DATE(now()+ INTERVAL 1 DAY)';
-    $collection = DB::select('SELECT a.id,a.id_flat,a.bet,a.id_user,a.id_company,a.name_agent,a.top
-   
-    FROM `current_xmls` as a
-    where a.id_user = '.Auth::user()->id.'
-    group by a.id,a.id_user');  
-    return $collection;
-    
+    // date_default_timezone_set("Europe/Moscow");
+    // $id = 1;
+    // $collection_firms = CompanyName::select('xml_feed')->where('id','=', $id)->where('user_id', Auth::user()->id)->get();
+    // $array_xml = [];
+    // $array_new = [];
+    // $array_xml_feed = [];
+    // $xml = simplexml_load_file($collection_firms[0]->xml_feed);
+    // $array = json_decode(json_encode($xml),TRUE);
+    // foreach($array['object'] as $item => $current_item) {
+    //     $current_array['id_flat'] = (int)$current_item['ExternalId'];
+    //     $current_array['id_company'] = $id;
+    //     if(array_key_exists('Auction', $current_item)){
+    //         if(array_key_exists('Bet', $current_item['Auction'])){
+    //             $current_bet = $current_item['Auction']['Bet'];
+    //         }
+    //     }else{
+    //         $current_bet = null;
+    //     }
+    //     $current_agent_name = $current_item['SubAgent']['FirstName'].' '.$current_item['SubAgent']['LastName'];
+    //     if(array_key_exists('PublishTerms', $current_item)){
+    //         $current_top = '';
+    //         $current_another_top = '';
+    //         if(array_key_exists('Services', $current_item['PublishTerms']['Terms']['PublishTermSchema'])){
+    //             $current_top = $current_item['PublishTerms']['Terms']['PublishTermSchema']['Services']['ServicesEnum'];
+    //         }
+    //         if(array_key_exists('ExcludedServices', $current_item['PublishTerms']['Terms']['PublishTermSchema'])){
+    //             $current_another_top = $current_item['PublishTerms']['Terms']['PublishTermSchema']['ExcludedServices']['ExcludedServicesEnum'];
+    //         }
+    //         if($current_top == "top3" or $current_another_top == "top3"){
+    //             $top = 1;
+    //         }else{
+    //             $top = 0;
+    //         }
+    //     }else{
+    //         $top = 0;
+    //     }
+    //     $newObject = CurrentXml::create(array(
+    //         'id_flat' =>$current_array['id_flat'],
+    //         'bet'=> $current_bet,
+    //         'id_user'=> $index_user,
+    //         'id_company'=> $current_array['id_company'],
+    //         'name_agent'=>$current_agent_name,
+    //         'top' => $top
+    //     ));
+    //     $newObject->save();
+    // } 
 });
 // -- b.id_offer,b.url_offer,b.current_bet,b.leader_bet,b.position,b.page, 
 //     -- ROUND((SUM(c.shows_count)/sum(c.searches_count))*100) as coverage,sum(c.searches_count) as searches_count,sum(c.shows_count) as shows_count,
