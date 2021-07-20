@@ -58,8 +58,8 @@ class TableController extends Controller
                 if(array_key_exists($item_collection->id_company, $array_bets)){
                     if(array_key_exists($item_collection->id_flat, $array_bets[$item_collection->id_company])){
                         if(array_key_exists('bet', $array_bets[$item_collection->id_company][$item_collection->id_flat])){
-                            $array_data['table_date'][$index]['crm_bet'] = (int)$array_bets[$item_collection->id_company][$item_collection->id_flat]['bet'];
-                            $array_data['table_date'][$index]['id'] = (int)$array_bets[$item_collection->id_company][$item_collection->id_flat]['id'];
+                            $array_data['table_data'][$index]['crm_bet'] = (int)$array_bets[$item_collection->id_company][$item_collection->id_flat]['bet'];
+                            $array_data['table_data'][$index]['id'] = (int)$array_bets[$item_collection->id_company][$item_collection->id_flat]['id'];
                         }
                     }else{
                         $array_data['table_data'][$index]['crm_bet'] = 0;
@@ -69,7 +69,7 @@ class TableController extends Controller
                 else{
                     $array_data['table_data'][$index]['crm_bet'] = 0;
                 }
-                $array_data['table_data'][$index]['auction'] = $item_collection->bet;
+                $array_data['table_data'][$index]['auction'] = (int)$item_collection->bet;
                 if((int)$item_collection->current_bet != 0){
                     $lenght_auction++;
                 }

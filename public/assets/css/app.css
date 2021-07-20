@@ -18009,7 +18009,7 @@ table {
 }
 
 .btn {
-  height: 28px;
+  min-height: 28px;
   text-transform: uppercase;
   text-decoration: none;
   color: #f9f9f9;

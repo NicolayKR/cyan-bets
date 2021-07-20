@@ -57,7 +57,7 @@
                 <li><a class="dropdown-item text-center" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                     Выход
                 </a></li>
-                <b-form id="logout-form" action="logout" method="POST" class="d-none">
+                <b-form id="logout-form" action="/logout" method="POST" class="d-none">
                     <input type="hidden" name="_token" :value="csrf">
                 </b-form>
             </ul>
