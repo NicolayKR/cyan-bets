@@ -63,13 +63,13 @@
                     </div>
                 </div>
                 <h3 class="h3 mt-3">Таблица ставок</h3>
-                <div class="row align-items-center">
+                <div class="row align-items-center mt-4">
                   <div class="d-flex">
-                    <button type="button" class="btn btn-secondary budge-item-text">
+                    <button type="button" class="btn btn-info budge-item-text">
                         ВСЕГО 
                         <span class="badge bg-primary">{{this.tabelData.length}}</span>
                     </button>
-                    <button type="button" class="btn btn-secondary budge-item-text ms-3">
+                    <button type="button" class="btn btn-info budge-item-text ms-3">
                         АУКЦИОН 
                         <span class="badge bg-primary">{{this.auction_lenght}}</span>
                     </button>

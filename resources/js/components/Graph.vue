@@ -17,20 +17,20 @@ export default {
             legend: {
                 display: true,
                 labels:{
-                    fontFamily: "'Lato',sans-serif",
+                    fontFamily: "'Roboto',sans-serif",
                 }
             },
             scales: {
                 xAxes: [{
                     display: true,
                     ticks: { 
-                        fontFamily: "'Lato',sans-serif", 
+                        fontFamily: "'Roboto',sans-serif", 
                         fontColor: '#000'
                     }
                 }],
                 yAxes: [{
                     ticks: {                        
-                        fontFamily: "'Lato',sans-serif", 
+                        fontFamily: "'Roboto',sans-serif", 
                         fontColor: '#000'                           
                     }
                 }]

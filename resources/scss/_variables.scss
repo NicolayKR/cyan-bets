@@ -22,7 +22,6 @@ $cyan: #6cb2eb;
 //Btn
 $btn-padding-y: 8px;
 $btn-padding-x: 16px;
-$btn-border-radius: 16px;
 $btn-transition:  background-color .05s linear,color .05s linear,border-color .05s linear;
 $btn-font-weight: 700;
 $btn-font-size: 12px;
@@ -32,7 +31,7 @@ $btn-font-family: "Roboto",sans-serif;
 $input-font-family: "Roboto",sans-serif;
 $primary: #2b87db;
 //Budge
-$badge-font-size: 0.65rem;
+$badge-font-size: 0.75rem;
 $badge-font-weight: 600;
 //Pagination
 $pagination-color: #505152;
@@ -45,7 +44,8 @@ $table-color: #505152;
 $navbar-dark-hover-color: #fff;
 //spinner
 $spinner-border-width: 7px;
-$secondary: #fff;
+// $secondary: #fff;
+$info: #fff;
 
 
 

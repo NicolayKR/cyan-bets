@@ -1,5 +1,5 @@
-header{
-    background-color: #485359;
+.header{
+    background-color: #485359 !important;
     min-height: 50px !important;
     .nav-link{
         opacity: .7;
@@ -14,4 +14,8 @@ header{
 .navbar-brand {
     background-color: inherit !important;
     box-shadow: none !important;
+}
+header{
+    background-color: $primary;
+    color: #fff;
 }
