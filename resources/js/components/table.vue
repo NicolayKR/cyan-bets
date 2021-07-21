@@ -10,8 +10,8 @@
                 </div>
             </div>
             <div v-if="!flagReady && !flagEmptyFeed"> 
-                <div class="d-flex justify-content-center mt-4 mb-4">
-                    <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+                <div class="d-flex justify-content-center m-5">
+                    <div class="spinner-border text-primary" style="width: 4rem; height: 4rem;" role="status">
                         <span class="visually-hidden">Loading...</span>
                     </div>
                 </div>
@@ -23,13 +23,13 @@
                         <div class="label-wrapper text-md-right">
                             <label for="example-datepicker-start" class="text-md-right">С</label>
                         </div>
-                        <b-form-datepicker id="example-datepicker-start" v-model="start"  locale="ru" placeholder="Выберите дату" ></b-form-datepicker> 
+                        <b-form-datepicker id="example-datepicker-start" v-model="start"  locale="ru" placeholder="Выберите дату"></b-form-datepicker> 
                     </div>
                     <div class="col-md-3 col-12 flex mt-3">
                         <div class="label-wrapper text-md-right">
                             <label for="example-datepicker-end">По</label>
                         </div>
-                        <b-form-datepicker id="example-datepicker-end" v-model="end" :min="start" locale="ru" placeholder="Выберите дату" ></b-form-datepicker>
+                        <b-form-datepicker id="example-datepicker-end" v-model="end" :min="start" locale="ru" placeholder="Выберите дату"></b-form-datepicker>
                     </div>
                     <div class="col-md-1 col-12 d-grid gap-2  flex mt-3">
                         <button type="button" class="btn btn-primary" @click="getData()">OK</button>

@@ -4592,7 +4592,7 @@ textarea.form-control-lg {
 }
 .page-link:focus {
   z-index: 3;
-  color: #272525;
+  color: #fff;
   background-color: none;
   outline: 0;
   box-shadow: none;
@@ -5979,7 +5979,7 @@ textarea.form-control-lg {
   width: 2rem;
   height: 2rem;
   vertical-align: -0.125em;
-  border: 0.25em solid currentColor;
+  border: 7px solid currentColor;
   border-right-color: transparent;
   border-radius: 50%;
   -webkit-animation: 0.75s linear infinite spinner-border;
@@ -17898,6 +17898,11 @@ header .nav-link:hover, header .nav-link:focus {
   color: #fff;
 }
 
+.navbar-brand {
+  background-color: inherit !important;
+  box-shadow: none !important;
+}
+
 #sidebarMenu {
   background-color: #f1f2f3 !important;
 }
@@ -18053,6 +18058,16 @@ th {
 .main-content {
   background-color: #fff !important;
   padding: 30px 32px;
+}
+
+.main-content > div {
+  min-height: 100%;
+}
+
+.spin-table {
+  justify-content: center;
+  align-items: center;
+  display: flex;
 }
 
 .btn {

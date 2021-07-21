@@ -122,4 +122,11 @@ th{
     background-color: #fff !important;
     padding: 30px 32px;
 }
-
+.main-content>div{
+    min-height: 100%;
+}
+.spin-table{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
