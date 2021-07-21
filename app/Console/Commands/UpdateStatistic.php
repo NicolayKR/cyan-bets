@@ -44,6 +44,7 @@ class UpdateStatistic extends Command
      */
     public function handle()
     {
+        set_time_limit(15000);
         $collection_keys = CompanyName::distinct()->select('user_id','cyan_key')->get();
         foreach($collection_keys as $collection_key){
             $url = 'https://public-api.cian.ru/v1/get-order';

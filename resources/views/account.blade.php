@@ -33,7 +33,7 @@
                                 <td>{{$account->cyan_key}}</td>
                                 <td class="text-right">
                                     <form onsubmit="if(confirm('Удалить?')){return true}else{return false}" action="{{ route('accounts.destroy', $account) }}"
-                                    method="post">
+                                    method="post" class="d-flex">
                                         @csrf
                                         <input type="hidden" name="_method" value="DELETE">  
                                         <a href="{{ route('accounts.edit', $account) }}" class="btn btn-default">

@@ -34,12 +34,12 @@
 .statistic_text{
     text-align: center;
     width: 100px;
-    text-align: center;
     line-height: 15px;
     font-size: 12px;
 }
 .label-wrapper{
-    min-width: 20px;
+    min-width: 25px;
+    align-items: center;
 }
 .form-check-padding{
     margin-left: 40px;
@@ -79,6 +79,7 @@
     font-size: 14px;
     font-weight: 600;
     cursor: auto !important;
+    border: 1px solid #ced4da;
 }
 .b-calendar .b-calendar-grid .row {
     --bs-gutter-x: 0;
@@ -106,7 +107,7 @@ table{
     font-size: 14px;
 }
 tbody{
-    font-weight: 600;
+    //font-weight: 600;
 }
 th{
     color: #060606;
@@ -129,4 +130,12 @@ th{
     justify-content: center;
     align-items: center;
     display: flex;
+}
+td{
+    vertical-align: middle;
+}
+.date-text{
+    background: $primary;
+    color: white;
+    font-weight: 700;
 }

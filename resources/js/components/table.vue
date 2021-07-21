@@ -18,21 +18,23 @@
             </div>    
             <div v-if="flagReady">
                 <h3 class="h3 mt-3">Общая статистика</h3>
-                <div class="row date-input">
-                    <div class="col-md-3 col-12 flex mt-3">
-                        <div class="label-wrapper text-md-right">
-                            <label for="example-datepicker-start" class="text-md-right">С</label>
+                <div class="row gy-2 gx-3 align-items-center">
+                    <div class="input-group">
+                        <div class="col-md-3 col-12 d-flex mt-3 ms-3">
+                            <div class="label-wrapper d-flex">
+                                <label for="example-datepicker-start">С</label>
+                            </div>
+                            <b-form-datepicker id="example-datepicker-start" v-model="start"  locale="ru" placeholder="Выберите дату"></b-form-datepicker>
                         </div>
-                        <b-form-datepicker id="example-datepicker-start" v-model="start"  locale="ru" placeholder="Выберите дату"></b-form-datepicker> 
-                    </div>
-                    <div class="col-md-3 col-12 flex mt-3">
-                        <div class="label-wrapper text-md-right">
-                            <label for="example-datepicker-end">По</label>
+                        <div class="col-md-3 col-12 d-flex mt-3 ms-3">
+                            <div class="label-wrapper d-flex">
+                                <label for="example-datepicker-end">По</label>
+                            </div>
+                            <b-form-datepicker id="example-datepicker-end" v-model="end" :min="start" locale="ru" placeholder="Выберите дату"></b-form-datepicker>
                         </div>
-                        <b-form-datepicker id="example-datepicker-end" v-model="end" :min="start" locale="ru" placeholder="Выберите дату"></b-form-datepicker>
-                    </div>
-                    <div class="col-md-1 col-12 d-grid gap-2  flex mt-3">
-                        <button type="button" class="btn btn-primary" @click="getData()">OK</button>
+                        <div class="col-md-1 col-12 d-grid gap-2  d-flex mt-3 ms-3">
+                            <button type="button" class="btn btn-primary" @click="getData()">OK</button>
+                        </div>
                     </div>
                 </div>
                 <div class="circle-wrapper mt-4">
@@ -61,28 +63,26 @@
                     </div>
                 </div>
                 <h3 class="h3 mt-3">Таблица ставок</h3>
-                <div class="budge-block mt-4">
-                    <div class="budge-item">
-                        <button type="button" class="form-control budge-item-text">
-                            ВСЕГО 
-                            <span class="badge bg-primary">{{this.tabelData.length}}</span>
-                        </button>
-                    </div>
-                    <div class="budge-item">
-                        <button type="button" class="form-control budge-item-text">
-                            АУКЦИОН 
-                            <span class="badge bg-primary">{{this.auction_lenght}}</span>
-                        </button>
-                    </div>
-                    <div class="col-4">
+                <div class="row align-items-center">
+                  <div class="d-flex">
+                    <button type="button" class="btn btn-secondary budge-item-text">
+                        ВСЕГО 
+                        <span class="badge bg-primary">{{this.tabelData.length}}</span>
+                    </button>
+                    <button type="button" class="btn btn-secondary budge-item-text ms-3">
+                        АУКЦИОН 
+                        <span class="badge bg-primary">{{this.auction_lenght}}</span>
+                    </button>
+                    <div class="col-4 ms-3">
                         <input type="text" v-model="id_object" placeholder="Поиск по id-объекта или id-циана" class="form-control ms-3"/>
                     </div>
-                    <div class="col-1 form-check form-check-padding flex">
-                        <input class="form-check-input" type="checkbox" v-model="checked" id="flexCheckDefault" @click="sortTable('top')">
+                    <div class="col-1 form-check form-check-padding d-flex ms-3 align-items-center">
+                        <input class="form-check-input ms-3" type="checkbox" v-model="checked" id="flexCheckDefault" @click="sortTable('top')">
                         <label class="form-check-label label-check-top" for="flexCheckDefault">
                             Топ
                         </label>
                     </div>
+                   </div>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered">
@@ -93,7 +93,7 @@
                             <th scope="col"><a @click="sortTable('shows_count')" class="filter-link">Количество показов</a></th>
                             <th scope="col"><a @click="sortTable('phone_shows')" class="filter-link">Количество расхлопов по дням(Показ телефона)</a></th>
                             <th scope="col"><a @click="sortTable('views')" class="filter-link">Количество просмотров по дням</a></th>
-                            <th scope="col">Ставка</th>
+                            <th scope="col" style="width: 8%">Ставка</th>
                             <th scope="col"><a @click="sortTable('crm_bet')" class="filter-link">Текущая ставка (CRM)</a></th>
                             <th scope="col"><a @click="sortTable('cyan_bet')" class="filter-link">Текущая ставка (ЦИАН)</a></th>
                             <th scope="col"><a @click="sortTable('leader_bet')" class="filter-link">Ставка лидера</a></th>
@@ -112,11 +112,11 @@
                             <td>{{tabel_item.phone_shows}}</td>
                             <td>{{tabel_item.views}}</td>
                             <td>
-                                <form>
-                                    <div class ="flex">
-                                        <input type="text" class="form-control me-2 form-control-sm input-value" name="bet" placeholder="" v-model="bets[index]">
+                                <form class="row gy-2 gx-3 align-items-center">
+                                    <div class="d-flex">
+                                        <input type="text" class="form-control form-control-sm input-value" name="bet" placeholder="" v-model="bets[index]">
                                         <button type="button" @click="postNewBet(bets[index],tabel_item.id_object, tabel_item.id_company,index)" 
-                                        class="btn btn-primary btn-sm btn-bet">OK</button>
+                                        class="btn btn-primary btn-sm ms-1">OK</button>
                                     </div>
                                 </form>
                             </td>

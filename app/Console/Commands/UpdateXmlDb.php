@@ -45,6 +45,7 @@ class UpdateXmlDb extends Command
      */
     public function handle()
     {
+        set_time_limit(15000);
         date_default_timezone_set("Europe/Moscow");
         $collection_firms = CompanyName::select('id','xml_feed','user_id')->get();
         $array_xml = [];
