@@ -1,13 +1,13 @@
 header{
+    background-color: #485359;
     min-height: 50px !important;
-}
-.nav-link{
-    color: white;
-}
-.navbar{
-    //align-items: stretch !important;
-    &-brand{
-        // font-size: 30px;
-        // text-align: center;
+    .nav-link{
+        opacity: .7;
+        color: #fff;
+    
+    }
+    .nav-link:hover, .nav-link:focus{
+        opacity: 1;
+        color: #fff;
     }
 }

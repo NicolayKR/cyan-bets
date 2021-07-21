@@ -105,6 +105,9 @@ table{
     line-height: 18px;
     font-size: 14px;
 }
+tbody{
+    font-weight: 600;
+}
 th{
     color: #060606;
     font-size: 12px;
@@ -114,5 +117,9 @@ th{
 }
 .form-check-input{
     cursor: pointer;
+}
+.main-content{
+    background-color: #fff !important;
+    padding: 30px 32px;
 }
 

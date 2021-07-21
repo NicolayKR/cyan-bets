@@ -4245,7 +4245,7 @@ textarea.form-control-lg {
   color: rgba(255, 255, 255, 0.55);
 }
 .navbar-dark .navbar-nav .nav-link:hover, .navbar-dark .navbar-nav .nav-link:focus {
-  color: rgba(255, 255, 255, 0.75);
+  color: #fff;
 }
 .navbar-dark .navbar-nav .nav-link.disabled {
   color: rgba(255, 255, 255, 0.25);
@@ -17886,11 +17886,16 @@ readers do not read off random characters that represent icons */
 }
 
 header {
+  background-color: #485359;
   min-height: 50px !important;
 }
-
-.nav-link {
-  color: white;
+header .nav-link {
+  opacity: 0.7;
+  color: #fff;
+}
+header .nav-link:hover, header .nav-link:focus {
+  opacity: 1;
+  color: #fff;
 }
 
 #sidebarMenu {
@@ -18029,6 +18034,10 @@ table {
   font-size: 14px;
 }
 
+tbody {
+  font-weight: 600;
+}
+
 th {
   color: #060606;
   font-size: 12px;
@@ -18039,6 +18048,11 @@ th {
 
 .form-check-input {
   cursor: pointer;
+}
+
+.main-content {
+  background-color: #fff !important;
+  padding: 30px 32px;
 }
 
 .btn {
@@ -18172,6 +18186,12 @@ body {
   background-color: #f1f2f3 !important;
 }
 
-main {
-  background-color: #fff !important;
+.h2 {
+  font-weight: bold;
+}
+
+h3, .h3 {
+  font-size: 18px;
+  text-transform: uppercase;
+  font-weight: 700;
 }

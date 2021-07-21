@@ -1,158 +1,159 @@
 <template>
     <div>
-        <div v-if="flagReady">
-            <h1 class="h2 mt-3">Общая статистика</h1>
-            <div class="row date-input">
-                <div class="col-md-3 col-12 flex mt-3">
-                    <div class="label-wrapper text-md-right">
-                        <label for="example-datepicker-start" class="text-md-right">С</label>
-                    </div>
-                    <b-form-datepicker id="example-datepicker-start" v-model="start"  locale="ru" placeholder="Выберите дату" ></b-form-datepicker> 
-                </div>
-                <div class="col-md-3 col-12 flex mt-3">
-                    <div class="label-wrapper text-md-right">
-                        <label for="example-datepicker-end">По</label>
-                    </div>
-                    <b-form-datepicker id="example-datepicker-end" v-model="end" :min="start" locale="ru" placeholder="Выберите дату" ></b-form-datepicker>
-                </div>
-                <div class="col-md-1 col-12 d-grid gap-2  flex mt-3">
-                    <button type="button" class="btn btn-primary" @click="getData()">OK</button>
-                </div>
-            </div>
-            <div class="circle-wrapper mt-4">
-                <div class="blackcircle">
-                    <div class="whitecircle">
-                        <span class="statistic_numeral">{{shows_count}}</span>
-                        <span class ="statistic_text">Показов объявлений</span> 
-                         </div>
-                </div>
-                <div class="blackcircle">
-                    <div class="whitecircle">
-                        <span class="statistic_numeral">{{phone_shows}}</span>
-                        <span class ="statistic_text">Показов телефона</span> 
-                    </div>
-                </div>
-                <div class="blackcircle">
-                    <div class="whitecircle">
-                        <span class="statistic_numeral">{{views}}</span> 
-                        <span class ="statistic_text">Просмотров объявлений</span> 
-                    </div>
-                </div>
-            </div>  
-            <div class="graph mt-4">
-                <div class = "graph_wrapper">
-                    <graph :chartData ="datacollection" :windowWidth="windowWidth"/>
-                </div>
-            </div>
-        </div>
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
             <h1 class="h2">Циан Автомат</h1>
         </div>
-        <div v-if="flagEmptyFeed">       
-            <div class="alert alert-primary" role="alert">
-                Введите свой xml-feed в личном кабинете!
-            </div>
-        </div>
-        <div v-if="!flagReady && !flagEmptyFeed"> 
-            <div class="d-flex justify-content-center mt-4">
-                <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
-                    <span class="visually-hidden">Loading...</span>
+        <div class="main-content">
+            <div v-if="flagEmptyFeed">       
+                <div class="alert alert-primary" role="alert">
+                    Введите свой xml-feed в личном кабинете!
                 </div>
             </div>
-        </div>    
-        <div v-if="flagReady">
-            <div class="budge-block mt-4">
-                <div class="budge-item">
-                    <button type="button" class="form-control budge-item-text">
-                        ВСЕГО 
-                        <span class="badge bg-secondary">{{this.tabelData.length}}</span>
-                    </button>
+            <div v-if="!flagReady && !flagEmptyFeed"> 
+                <div class="d-flex justify-content-center mt-4 mb-4">
+                    <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
                 </div>
-                <div class="budge-item">
-                    <button type="button" class="form-control budge-item-text">
-                        АУКЦИОН 
-                        <span class="badge bg-secondary">{{this.auction_lenght}}</span>
-                    </button>
+            </div>    
+            <div v-if="flagReady">
+                <h3 class="h3 mt-3">Общая статистика</h3>
+                <div class="row date-input">
+                    <div class="col-md-3 col-12 flex mt-3">
+                        <div class="label-wrapper text-md-right">
+                            <label for="example-datepicker-start" class="text-md-right">С</label>
+                        </div>
+                        <b-form-datepicker id="example-datepicker-start" v-model="start"  locale="ru" placeholder="Выберите дату" ></b-form-datepicker> 
+                    </div>
+                    <div class="col-md-3 col-12 flex mt-3">
+                        <div class="label-wrapper text-md-right">
+                            <label for="example-datepicker-end">По</label>
+                        </div>
+                        <b-form-datepicker id="example-datepicker-end" v-model="end" :min="start" locale="ru" placeholder="Выберите дату" ></b-form-datepicker>
+                    </div>
+                    <div class="col-md-1 col-12 d-grid gap-2  flex mt-3">
+                        <button type="button" class="btn btn-primary" @click="getData()">OK</button>
+                    </div>
                 </div>
-                <div class="col-4">
-                    <input type="text" v-model="id_object" placeholder="Поиск по id-объекта или id-циана" class="form-control ms-3"/>
+                <div class="circle-wrapper mt-4">
+                    <div class="blackcircle">
+                        <div class="whitecircle">
+                            <span class="statistic_numeral">{{shows_count}}</span>
+                            <span class ="statistic_text">Показов объявлений</span> 
+                            </div>
+                    </div>
+                    <div class="blackcircle">
+                        <div class="whitecircle">
+                            <span class="statistic_numeral">{{phone_shows}}</span>
+                            <span class ="statistic_text">Показов телефона</span> 
+                        </div>
+                    </div>
+                    <div class="blackcircle">
+                        <div class="whitecircle">
+                            <span class="statistic_numeral">{{views}}</span> 
+                            <span class ="statistic_text">Просмотров объявлений</span> 
+                        </div>
+                    </div>
+                </div>  
+                <div class="graph mt-4 mb-5">
+                    <div class = "graph_wrapper">
+                        <graph :chartData ="datacollection" :windowWidth="windowWidth"/>
+                    </div>
                 </div>
-                <div class="col-1 form-check form-check-padding flex">
-                    <input class="form-check-input" type="checkbox" v-model="checked" id="flexCheckDefault" @click="sortTable('top')">
-                    <label class="form-check-label label-check-top" for="flexCheckDefault">
-                        Топ
-                    </label>
+                <h3 class="h3 mt-3">Таблица ставок</h3>
+                <div class="budge-block mt-4">
+                    <div class="budge-item">
+                        <button type="button" class="form-control budge-item-text">
+                            ВСЕГО 
+                            <span class="badge bg-primary">{{this.tabelData.length}}</span>
+                        </button>
+                    </div>
+                    <div class="budge-item">
+                        <button type="button" class="form-control budge-item-text">
+                            АУКЦИОН 
+                            <span class="badge bg-primary">{{this.auction_lenght}}</span>
+                        </button>
+                    </div>
+                    <div class="col-4">
+                        <input type="text" v-model="id_object" placeholder="Поиск по id-объекта или id-циана" class="form-control ms-3"/>
+                    </div>
+                    <div class="col-1 form-check form-check-padding flex">
+                        <input class="form-check-input" type="checkbox" v-model="checked" id="flexCheckDefault" @click="sortTable('top')">
+                        <label class="form-check-label label-check-top" for="flexCheckDefault">
+                            Топ
+                        </label>
+                    </div>
                 </div>
-            </div>
-            <div class="table-responsive">
-                <table class="table table-striped table-bordered">
-                <thead>
-                    <tr>
-                        <th scope="col"><a @click="sortTable('coverage') " class="filter-link">Охват в процентах</a></th>
-                        <th scope="col"><a @click="sortTable('searches_count') " class="filter-link">Количество поисков</a></th>
-                        <th scope="col"><a @click="sortTable('shows_count')" class="filter-link">Количество показов</a></th>
-                        <th scope="col"><a @click="sortTable('phone_shows')" class="filter-link">Количество расхлопов по дням(Показ телефона)</a></th>
-                        <th scope="col"><a @click="sortTable('views')" class="filter-link">Количество просмотров по дням</a></th>
-                        <th scope="col">Ставка</th>
-                        <th scope="col"><a @click="sortTable('crm_bet')" class="filter-link">Текущая ставка (CRM)</a></th>
-                        <th scope="col"><a @click="sortTable('cyan_bet')" class="filter-link">Текущая ставка (ЦИАН)</a></th>
-                        <th scope="col"><a @click="sortTable('leader_bet')" class="filter-link">Ставка лидера</a></th>
-                        <th scope="col"><a @click="sortTable('page')" class="filter-link">Страница</a></th>
-                        <th scope="col"><a @click="sortTable('position')" class="filter-link">Позиция в выдаче</a></th>
-                        <th scope="col"><a @click="sortTable('agent')" class="filter-link">Агент</a></th>
-                        <th scope="col"><a @click="sortTable('id_object')" class="filter-link">ID Объекта</a></th>
-                        <th scope="col"><a @click="sortTable('id_offer')" class="filter-link">ID Циана</a></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for ="(tabel_item,index) in paginatedObject" :key="index" class="flip-list">
-                        <td>{{tabel_item.coverage}}</td>
-                        <td>{{tabel_item.searches_count}}</td>
-                        <td>{{tabel_item.shows_count}}</td>
-                        <td>{{tabel_item.phone_shows}}</td>
-                        <td>{{tabel_item.views}}</td>
-                        <td>
-                            <form>
-                                <div class ="flex">
-                                    <input type="text" class="form-control me-2 form-control-sm input-value" name="bet" placeholder="" v-model="bets[index]">
-                                    <button type="button" @click="postNewBet(bets[index],tabel_item.id_object, tabel_item.id_company,index)" 
-                                    class="btn btn-primary btn-sm btn-bet">OK</button>
-                                </div>
-                            </form>
-                        </td>
-                        <td>{{tabel_item.crm_bet}}</td>
-                        <td>{{tabel_item.cyan_bet}}</td>
-                        <td>{{tabel_item.leader_bet}}</td>
-                        <td>{{tabel_item.page}}</td>
-                        <td>{{tabel_item.position}}</td>
-                        <td>{{tabel_item.agent}}</td>
-                        <td>{{tabel_item.id_object}}</td>
-                        <td>{{tabel_item.id_offer}}</td>
-                    </tr>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="14">
-                            <nav aria-label="Page navigation example">
-                                <ul class="pagination justify-content-center mt-3" >
-                                    <li class="page-item">
-                                        <a class="page-link" href="#" @click="pageClickBack">Назад</a>
-                                    </li>
-                                    <li class="page-item" v-for="page in pages" :key="page">
-                                        <a class="page-link" href="#" 
-                                            @click="pageClick(page)"
-                                            :class="{'page_active':page === pageNumber}"
-                                            >{{page}}</a>
-                                    </li>     
-                                    <li class="page-item">                             
-                                        <a class="page-link" href="#" @click="pageClickUp">Вперед</a>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </td>
-                    </tr>
-                </tfoot>
-                </table>
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col"><a @click="sortTable('coverage') " class="filter-link">Охват в процентах</a></th>
+                            <th scope="col"><a @click="sortTable('searches_count') " class="filter-link">Количество поисков</a></th>
+                            <th scope="col"><a @click="sortTable('shows_count')" class="filter-link">Количество показов</a></th>
+                            <th scope="col"><a @click="sortTable('phone_shows')" class="filter-link">Количество расхлопов по дням(Показ телефона)</a></th>
+                            <th scope="col"><a @click="sortTable('views')" class="filter-link">Количество просмотров по дням</a></th>
+                            <th scope="col">Ставка</th>
+                            <th scope="col"><a @click="sortTable('crm_bet')" class="filter-link">Текущая ставка (CRM)</a></th>
+                            <th scope="col"><a @click="sortTable('cyan_bet')" class="filter-link">Текущая ставка (ЦИАН)</a></th>
+                            <th scope="col"><a @click="sortTable('leader_bet')" class="filter-link">Ставка лидера</a></th>
+                            <th scope="col"><a @click="sortTable('page')" class="filter-link">Страница</a></th>
+                            <th scope="col"><a @click="sortTable('position')" class="filter-link">Позиция в выдаче</a></th>
+                            <th scope="col"><a @click="sortTable('agent')" class="filter-link">Агент</a></th>
+                            <th scope="col"><a @click="sortTable('id_object')" class="filter-link">ID Объекта</a></th>
+                            <th scope="col"><a @click="sortTable('id_offer')" class="filter-link">ID Циана</a></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for ="(tabel_item,index) in paginatedObject" :key="index" class="flip-list">
+                            <td>{{tabel_item.coverage}}</td>
+                            <td>{{tabel_item.searches_count}}</td>
+                            <td>{{tabel_item.shows_count}}</td>
+                            <td>{{tabel_item.phone_shows}}</td>
+                            <td>{{tabel_item.views}}</td>
+                            <td>
+                                <form>
+                                    <div class ="flex">
+                                        <input type="text" class="form-control me-2 form-control-sm input-value" name="bet" placeholder="" v-model="bets[index]">
+                                        <button type="button" @click="postNewBet(bets[index],tabel_item.id_object, tabel_item.id_company,index)" 
+                                        class="btn btn-primary btn-sm btn-bet">OK</button>
+                                    </div>
+                                </form>
+                            </td>
+                            <td>{{tabel_item.crm_bet}}</td>
+                            <td>{{tabel_item.cyan_bet}}</td>
+                            <td>{{tabel_item.leader_bet}}</td>
+                            <td>{{tabel_item.page}}</td>
+                            <td>{{tabel_item.position}}</td>
+                            <td>{{tabel_item.agent}}</td>
+                            <td>{{tabel_item.id_object}}</td>
+                            <td>{{tabel_item.id_offer}}</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="14">
+                                <nav aria-label="Page navigation example">
+                                    <ul class="pagination justify-content-center mt-3" >
+                                        <li class="page-item">
+                                            <a class="page-link" href="#" @click="pageClickBack">Назад</a>
+                                        </li>
+                                        <li class="page-item" v-for="page in pages" :key="page">
+                                            <a class="page-link" href="#" 
+                                                @click="pageClick(page)"
+                                                :class="{'page_active':page === pageNumber}"
+                                                >{{page}}</a>
+                                        </li>     
+                                        <li class="page-item">                             
+                                            <a class="page-link" href="#" @click="pageClickUp">Вперед</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </td>
+                        </tr>
+                    </tfoot>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
