@@ -16,7 +16,7 @@
                     <b-form-datepicker id="example-datepicker-end" v-model="end" :min="start" locale="ru" placeholder="Выберите дату" ></b-form-datepicker>
                 </div>
                 <div class="col-md-1 col-12 d-grid gap-2  flex mt-3">
-                    <button type="button" class="btn" @click="getData()">OK</button>
+                    <button type="button" class="btn btn-primary" @click="getData()">OK</button>
                 </div>
             </div>
             <div class="circle-wrapper mt-4">
@@ -62,14 +62,16 @@
         </div>    
         <div v-if="flagReady">
             <div class="budge-block mt-4">
-                <div class=budge-item>
-                    <button type="button" class="btn btn-sm">
-                        ВСЕГО <span class="badge bg-secondary">{{this.tabelData.length}}</span>
+                <div class="budge-item">
+                    <button type="button" class="form-control budge-item-text">
+                        ВСЕГО 
+                        <span class="badge bg-secondary">{{this.tabelData.length}}</span>
                     </button>
                 </div>
-                <div class=budge-item>
-                    <button type="button" class="btn btn-sm">
-                        АУКЦИОН <span class="badge bg-secondary">{{this.auction_lenght}}</span>
+                <div class="budge-item">
+                    <button type="button" class="form-control budge-item-text">
+                        АУКЦИОН 
+                        <span class="badge bg-secondary">{{this.auction_lenght}}</span>
                     </button>
                 </div>
                 <div class="col-4">
@@ -83,23 +85,23 @@
                 </div>
             </div>
             <div class="table-responsive">
-                <table class="table table-striped table-bordered table-sm">
+                <table class="table table-striped table-bordered">
                 <thead>
                     <tr>
-                    <th scope="col"><a @click="sortTable('coverage') " class="filter-link">ОХВАТ В ПРОЦЕНТАХ</a></th>
-                    <th scope="col"><a @click="sortTable('searches_count') " class="filter-link">КОЛИЧЕСТВО ПОИСКОВ</a></th>
-                    <th scope="col"><a @click="sortTable('shows_count')" class="filter-link">КОЛИЧЕСТВО ПОКАЗОВ</a></th>
-                    <th scope="col"><a @click="sortTable('phone_shows')" class="filter-link">КОЛИЧЕСТВО РАСХЛОПОВ ПО ДНЯМ(ПОКАЗ ТЕЛЕФОНА)</a></th>
-                    <th scope="col"><a @click="sortTable('views')" class="filter-link">КОЛИЧЕСТВО ПРОСМОТРОВ ПО ДНЯМ</a></th>
-                    <th scope="col">СТАВКА</th>
-                    <th scope="col"><a @click="sortTable('crm_bet')" class="filter-link">ТЕКУЩАЯ СТАВКА (CRM)</a></th>
-                    <th scope="col"><a @click="sortTable('cyan_bet')" class="filter-link">ТЕКУЩАЯ СТАВКА (ЦИАН)</a></th>
-                    <th scope="col"><a @click="sortTable('leader_bet')" class="filter-link">СТАВКА ЛИДЕРА</a></th>
-                    <th scope="col"><a @click="sortTable('page')" class="filter-link">СТРАНИЦА</a></th>
-                    <th scope="col"><a @click="sortTable('position')" class="filter-link">ПОЗИЦИЯ В ВЫДАЧЕ</a></th>
-                    <th scope="col"><a @click="sortTable('agent')" class="filter-link">АГЕНТ</a></th>
-                    <th scope="col"><a @click="sortTable('id_object')" class="filter-link">ID ОБЪЕКТА</a></th>
-                    <th scope="col"><a @click="sortTable('id_offer')" class="filter-link">ID ЦИАНА</a></th>
+                        <th scope="col"><a @click="sortTable('coverage') " class="filter-link">Охват в процентах</a></th>
+                        <th scope="col"><a @click="sortTable('searches_count') " class="filter-link">Количество поисков</a></th>
+                        <th scope="col"><a @click="sortTable('shows_count')" class="filter-link">Количество показов</a></th>
+                        <th scope="col"><a @click="sortTable('phone_shows')" class="filter-link">Количество расхлопов по дням(Показ телефона)</a></th>
+                        <th scope="col"><a @click="sortTable('views')" class="filter-link">Количество просмотров по дням</a></th>
+                        <th scope="col">Ставка</th>
+                        <th scope="col"><a @click="sortTable('crm_bet')" class="filter-link">Текущая ставка (CRM)</a></th>
+                        <th scope="col"><a @click="sortTable('cyan_bet')" class="filter-link">Текущая ставка (ЦИАН)</a></th>
+                        <th scope="col"><a @click="sortTable('leader_bet')" class="filter-link">Ставка лидера</a></th>
+                        <th scope="col"><a @click="sortTable('page')" class="filter-link">Страница</a></th>
+                        <th scope="col"><a @click="sortTable('position')" class="filter-link">Позиция в выдаче</a></th>
+                        <th scope="col"><a @click="sortTable('agent')" class="filter-link">Агент</a></th>
+                        <th scope="col"><a @click="sortTable('id_object')" class="filter-link">ID Объекта</a></th>
+                        <th scope="col"><a @click="sortTable('id_offer')" class="filter-link">ID Циана</a></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -114,7 +116,7 @@
                                 <div class ="flex">
                                     <input type="text" class="form-control me-2 form-control-sm input-value" name="bet" placeholder="" v-model="bets[index]">
                                     <button type="button" @click="postNewBet(bets[index],tabel_item.id_object, tabel_item.id_company,index)" 
-                                    class="btn btn-sm">OK</button>
+                                    class="btn btn-primary btn-sm btn-bet">OK</button>
                                 </div>
                             </form>
                         </td>

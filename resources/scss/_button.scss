@@ -1,9 +1,14 @@
 .btn{
-    min-height: 28px;
     text-transform: uppercase;
     text-decoration: none;
+}
+.btn-primary{
     color: #f9f9f9;
-    border: solid #2b87db;
-    cursor: pointer;
-    background-color: #2b87db;
+    &:hover {
+        color: #fff;
+        outline: 0;
+    }
+}
+.btn-bet{
+    border: 3px solid transparent;
 }

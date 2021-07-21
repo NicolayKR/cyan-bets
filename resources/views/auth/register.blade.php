@@ -54,7 +54,7 @@
                                 <button type="submit" class="btn btn-primary">
                                     Регистрация
                                 </button>
-                                <a href="login" class="btn btn-primary">
+                                <a href="login" class="btn btn-primary ms-3">
                                     Назад
                                 </a>
                             </div>

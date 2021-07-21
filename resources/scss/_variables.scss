@@ -3,7 +3,7 @@ $body-bg: #f8fafc;
 $fa-font-path: '/assets/fonts';
 $enable-negative-margins: true;
 // Typography
-$font-family-sans-serif: "Roboto", sans-serif;
+$font-family-sans-serif: "Lato",sans-serif;
 $font-size-base: 0.9rem;
 $line-height-base: 1.6;
 
@@ -20,11 +20,26 @@ $teal: #4dc0b5;
 $cyan: #6cb2eb;
 
 //Btn
-$btn-padding-y: 4px;
-$btn-padding-x: 16px;
+$btn-padding-y: 6px;
+$btn-padding-x: 18px;
 $btn-border-radius: 14px;
 $btn-transition:  background-color .05s linear,color .05s linear,border-color .05s linear;
 $btn-font-weight: 700;
 $btn-font-size: 12px;
 $btn-line-height: 1;
 $btn-border-width: 1px;
+$btn-font-family: "Lato",sans-serif;
+$input-font-family: "Lato",sans-serif;
+$primary: #2b87db;
+//Budge
+$badge-font-size: 0.65rem;
+$badge-font-weight: 600;
+//Pagination
+$pagination-color: #505152;
+$pagination-focus-color: rgb(39, 37, 37);
+$pagination-focus-bg: none;
+$pagination-focus-box-shadow: none;
+//tabeles
+$table-color: #505152;
+
+

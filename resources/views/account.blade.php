@@ -4,7 +4,7 @@
 
 @section('content')  
     <div class="row justify-content-center">
-        <div class="col-11">
+        <div class="col-12">
             <div class="user-text">
                 @if(session('status'))
                 <div class="alert alert-success">
@@ -16,13 +16,13 @@
                 Добавить фид
             </a>
             <div class="table-responsive">
-                <table class="table table-striped table-bordered table-sm">
+                <table class="table table-striped table-bordered">
                     <thead>
                         <tr>
-                            <th scope="col">Название Фида</th>
-                            <th scope="col">XML фид ЦИАН</th>
-                            <th scope="col">API ключ ЦИАН</th>
-                            <th scope="col"></th>
+                            <th scope="col" style="width: 7%">Название Фида</th>
+                            <th scope="col" style="width: 43%">XML фид ЦИАН</th>
+                            <th scope="col" style="width: 47%">API ключ ЦИАН</th>
+                            <th scope="col" style="width: 3%"></th>
                         </tr>
                     </thead>
                     <tbody>

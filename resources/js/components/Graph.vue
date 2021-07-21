@@ -16,18 +16,21 @@ export default {
         option: { 
             legend: {
                 display: true,
+                labels:{
+                    fontFamily: "'Lato',sans-serif",
+                }
             },
             scales: {
                 xAxes: [{
                     display: true,
                     ticks: { 
-                        fontFamily: "'Roboto', sans-serif", 
+                        fontFamily: "'Lato',sans-serif", 
                         fontColor: '#000'
                     }
                 }],
                 yAxes: [{
                     ticks: {                        
-                        fontFamily: "'Roboto', sans-serif", 
+                        fontFamily: "'Lato',sans-serif", 
                         fontColor: '#000'                           
                     }
                 }]
