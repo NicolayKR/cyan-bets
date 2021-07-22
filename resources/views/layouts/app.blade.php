@@ -19,16 +19,30 @@
                     <div class="position-sticky pt-3">
                         <ul class="nav flex-column">
                             <li class="nav-item">
+                                @if (Route::is('index'))
                                 <a class="nav-link active" aria-current="page" href="/">
                                     <i class="fas fa-gavel feather feather-home"></i>
                                     Ставки
                                 </a>
+                                @else
+                                <a class="nav-link" aria-current="page" href="/">
+                                    <i class="fas fa-gavel feather feather-home"></i>
+                                    Ставки
+                                </a>
+                                @endif
                             </li>
                             <li class="nav-item">
+                                @if (Route::is('accounts.index') or Route::is('accounts.create') or Route::is('accounts.edit')) 
+                                <a class="nav-link active" href="/accounts">
+                                <i class="fas fa-atlas feather feather-home"></i>
+                                    Фиды
+                                </a>
+                                @else
                                 <a class="nav-link" href="/accounts">
                                 <i class="fas fa-atlas feather feather-home"></i>
                                     Фиды
                                 </a>
+                                @endif
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">
