@@ -17885,10 +17885,10 @@ readers do not read off random characters that represent icons */
 
 .header {
   background-color: #485359 !important;
-  min-height: 50px !important;
+  min-height: 60px !important;
 }
 .header .nav-link {
-  opacity: 0.7;
+  opacity: 0.8;
   color: #fff;
 }
 .header .nav-link:hover, .header .nav-link:focus {
@@ -18005,6 +18005,8 @@ header {
 }
 
 .budge-item-text {
+  max-width: 130px;
+  min-width: 100px;
   color: #060606;
   font-size: 14px;
   font-weight: 600;
@@ -18078,6 +18080,10 @@ td {
   background: #2b87db;
   color: white;
   font-weight: 700;
+}
+
+.form-check-input {
+  min-width: 15px;
 }
 
 .btn {

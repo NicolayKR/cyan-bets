@@ -1,4 +1,5 @@
 require('./bootstrap');
+require('./script');
 
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue';
 import store from '../vuex/store';

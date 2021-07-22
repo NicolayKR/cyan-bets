@@ -10,37 +10,37 @@
         <ul class="nav col-lg-8">
             <li class="nav-item">
                 <span class="nav-link">
-                    <i class="fas fa-cog"></i>
+                    <i class="fas fa-cog me-2"></i>
                     Версия 1.4.14
                 </span>
             </li>
             <li class="nav-item">
                 <span class="nav-link">
-                    <i class="fas fa-clock"></i>
+                    <i class="fas fa-clock me-2"></i>
                     13:00 25.06.2021
                 </span>
             </li>
             <li class="nav-item">
                 <span class="nav-link">
-                    <i class="fas fa-gavel"></i>
+                    <i class="fas fa-gavel me-2"></i>
                     13:00 25.06.2021
                 </span>
             </li>
             <li class="nav-item">
                 <span class="nav-link">
-                    <i class="fas fa-search-plus"></i>
+                    <i class="fas fa-search-plus me-2"></i>
                     100% (55 из 100)
                 </span>
             </li> 
             <li class="nav-item">
                 <span class="nav-link">
-                    <i class="fas fa-user-clock"></i>
+                    <i class="fas fa-user-clock me-2"></i>
                     19 мин
                 </span>
             </li>
             <li class="nav-item">
                 <span class="nav-link">  
-                    <i class="fas fa-chart-bar"></i>
+                    <i class="fas fa-chart-bar me-2"></i>
                     0%
                 </span>
             </li>
@@ -51,12 +51,12 @@
                 Здравствуйте, {{nameUser}}
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink" >
-                <li><a class="dropdown-item text-center" href="/accounts">
-                    Фиды
-                </a></li>
-                <li><a class="dropdown-item text-center" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                    Выход
-                </a></li>
+                <li>
+                    <a class="dropdown-item text-center" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <i class="fas fa-sign-out-alt pe-1"></i>
+                        Выход
+                    </a>
+                </li>
                 <b-form id="logout-form" action="/logout" method="POST" class="d-none">
                     <input type="hidden" name="_token" :value="csrf">
                 </b-form>

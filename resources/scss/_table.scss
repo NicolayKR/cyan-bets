@@ -75,6 +75,8 @@
     margin-left: 0;
 }
 .budge-item-text{
+    max-width: 130px;
+    min-width: 100px;
     color: #060606;
     font-size: 14px;
     font-weight: 600;
@@ -138,4 +140,7 @@ td{
     background: $primary;
     color: white;
     font-weight: 700;
+}
+.form-check-input{
+    min-width: 15px;
 }

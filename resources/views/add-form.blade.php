@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="row justify-content-center">
-    <main class="py-4 col-md-8 px-md-4">
+    <main class="py-4 col-md-6 px-md-4">
         <div class="user-text">
             @if(session('status'))
             <div class="alert alert-success">
@@ -19,13 +19,13 @@
                     @csrf
                     <div class="form-group row">
                         <label for="name" class="col-md-4 col-form-label text-md-end">Название Фида</label>
-                        <div class="col-md-6">
+                        <div class="col-md-8">
                             <input id="name" type="text" class="form-control" name="company_name" required>
                         </div>
                     </div>
                     <div class="form-group row mt-4">
                         <label for="xml-feed" class="col-md-4 col-form-label text-md-end">Ваш XML фид ЦИАН</label>
-                        <div class="col-md-6">
+                        <div class="col-md-8">
                             <input id="xml-feed" type="text" class="form-control" name="xml_feed" required aria-describedby="xml-feed-Help">
                             <div id="xml-feed-Help" class="form-text">
                                 Укажите ссылку на Ваш XML фид для ЦИАН
@@ -34,7 +34,7 @@
                     </div>
                     <div class="form-group row mt-4">
                         <label for="key-cyan" class="col-md-4 col-form-label text-md-end">API ключ ЦИАН</label>
-                        <div class="col-md-6">
+                        <div class="col-md-8">
                             <input id="key-cyan" type="text" class="form-control" name="key_cyan" required
                             aria-describedby="key-cyan-Help">
                             <div id="xml-feed-Help" class="form-text">
@@ -48,7 +48,7 @@
                             <button type="submit" class="btn btn-primary">
                                 Сохранить
                             </button>
-                            <a href="/accounts" class="btn btn-primary">Назад</a>
+                            <a href="/accounts" class="btn btn-primary ms-2">Назад</a>
                         </div>
                     </div>
                 </form>

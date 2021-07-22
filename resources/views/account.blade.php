@@ -2,7 +2,7 @@
 
 @section('title', 'Ваши фиды')
 
-@section('content')  
+@section('content')
     <div class="row justify-content-center">
         <div class="col-12">
             <div class="user-text">

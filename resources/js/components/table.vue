@@ -3,12 +3,12 @@
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
             <h1 class="h2">Циан Автомат</h1>
         </div>
-        <div class="main-content">
-            <div v-if="flagEmptyFeed">       
-                <div class="alert alert-primary" role="alert">
-                    Введите свой xml-feed в личном кабинете!
-                </div>
+        <div v-if="flagEmptyFeed">       
+            <div class="alert alert-primary" role="alert">
+                Введите свой xml-feed в личном кабинете!
             </div>
+        </div>
+        <div class="main-content">
             <div v-if="!flagReady && !flagEmptyFeed"> 
                 <div class="d-flex justify-content-center m-5">
                     <div class="spinner-border text-primary" style="width: 4rem; height: 4rem;" role="status">
@@ -32,7 +32,7 @@
                             </div>
                             <b-form-datepicker id="example-datepicker-end" v-model="end" :min="start" locale="ru" placeholder="Выберите дату"></b-form-datepicker>
                         </div>
-                        <div class="col-md-1 col-12 d-grid gap-2  d-flex mt-3 ms-3">
+                        <div class="col-md-1 col-12 d-grid gap-2  mt-3 ms-3">
                             <button type="button" class="btn btn-primary" @click="getData()">OK</button>
                         </div>
                     </div>
@@ -63,27 +63,27 @@
                     </div>
                 </div>
                 <h3 class="h3 mt-3">Таблица ставок</h3>
+                
                 <div class="row align-items-center mt-4">
-                  <div class="d-flex">
-                    <button type="button" class="btn btn-info budge-item-text">
+                    <button type="button" class="col-md-1 col-2 btn btn-info budge-item-text ms-3">
                         ВСЕГО 
                         <span class="badge bg-primary">{{this.tabelData.length}}</span>
                     </button>
-                    <button type="button" class="btn btn-info budge-item-text ms-3">
+                    <button type="button" class="col-md-2 col-2 btn btn-info budge-item-text ms-md-3 ms-2">
                         АУКЦИОН 
                         <span class="badge bg-primary">{{this.auction_lenght}}</span>
                     </button>
-                    <div class="col-4 ms-3">
+                    <div class="col-md-7 col-4 ms-md-3 ms-1">
                         <input type="text" v-model="id_object" placeholder="Поиск по id-объекта или id-циана" class="form-control ms-3"/>
                     </div>
-                    <div class="col-1 form-check form-check-padding d-flex ms-3 align-items-center">
+                    <div class="col-md-1 col-2 form-check d-flex align-items-center">
                         <input class="form-check-input ms-3" type="checkbox" v-model="checked" id="flexCheckDefault" @click="sortTable('top')">
                         <label class="form-check-label label-check-top" for="flexCheckDefault">
                             Топ
                         </label>
                     </div>
-                   </div>
                 </div>
+                
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered">
                     <thead>

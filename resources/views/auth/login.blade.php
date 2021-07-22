@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-6">
             <div class="card">
                 <div class="card-header">Авторизация</div>
 
@@ -14,7 +14,7 @@
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">Ваш Email</label>
 
-                            <div class="col-md-6">
+                            <div class="col-md-8">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
                                 @error('email')
@@ -28,7 +28,7 @@
                         <div class="form-group row mt-4">
                             <label for="password" class="col-md-4 col-form-label text-md-right">Ваш пароль</label>
 
-                            <div class="col-md-6">
+                            <div class="col-md-8">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
 
                                 @error('password')
@@ -56,10 +56,9 @@
                                 <button type="submit" class="btn btn-primary">
                                     Вход
                                 </button>
-                                <a href="register" class="btn btn-primary ms-3">
+                                <a href="register" class="btn btn-primary ms-2">
                                     Регистрация
                                 </a>
-
                                 @if (Route::has('password.request'))
                                     <a class="btn btn-link ms-3" href="{{ route('password.request') }}">
                                         Забыли пароль?
