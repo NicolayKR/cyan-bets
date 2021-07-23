@@ -28,7 +28,8 @@ use Illuminate\Support\Facades\DB;
 */
 
 Route::view('/','index')->middleware('auth')->name('index');
-Route::view('add-form', 'add-form')->name('add-form');
+Route::view('/question','question')->middleware('auth')->name('question');
+Route::view('add-form', 'add-form')->middleware('auth')->name('add-form');
 Route::get('/getData','App\Http\Controllers\TableController@getData');
 Route::get('/updateNow/{account}','App\Http\Controllers\XmlController@updateXml')->name('updateNow');
 Route::post('/saveNewBet','App\Http\Controllers\TableController@saveNewBet');

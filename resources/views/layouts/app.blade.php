@@ -56,6 +56,12 @@
                                     Статистика
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/question">
+                                    <i class="far fa-question-circle feather feather-home"></i>
+                                    Вопросы
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </nav>  
