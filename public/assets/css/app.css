@@ -625,7 +625,7 @@ progress {
     max-width: 1140px;
   }
 }
-@media (min-width: 1400px) {
+@media (min-width: 1920px) {
   .container-xxl, .container-xl, .container-lg, .container-md, .container-sm, .container {
     max-width: 1320px;
   }
@@ -847,7 +847,7 @@ progress {
     width: 16.6666666667%;
   }
 }
-@media (min-width: 1400px) {
+@media (min-width: 1920px) {
   .col-xxl {
     flex: 1 0 0%;
   }
@@ -1752,7 +1752,7 @@ progress {
     --bs-gutter-y: 3rem;
   }
 }
-@media (min-width: 1400px) {
+@media (min-width: 1920px) {
   .col-xxl-auto {
     flex: 0 0 auto;
     width: auto;
@@ -2116,7 +2116,7 @@ progress {
     -webkit-overflow-scrolling: touch;
   }
 }
-@media (max-width: 1399.98px) {
+@media (max-width: 1919.98px) {
   .table-responsive-xxl {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
@@ -3582,7 +3582,7 @@ textarea.form-control-lg {
     left: auto;
   }
 }
-@media (min-width: 1400px) {
+@media (min-width: 1920px) {
   .dropdown-menu-xxl-start {
     --bs-position: start;
   }
@@ -4147,7 +4147,7 @@ textarea.form-control-lg {
     display: none;
   }
 }
-@media (min-width: 1400px) {
+@media (min-width: 1920px) {
   .navbar-expand-xxl {
     flex-wrap: nowrap;
     justify-content: flex-start;
@@ -5012,7 +5012,7 @@ textarea.form-control-lg {
     border-left-width: 1px;
   }
 }
-@media (min-width: 1400px) {
+@media (min-width: 1920px) {
   .list-group-horizontal-xxl {
     flex-direction: row;
   }
@@ -5502,7 +5502,7 @@ textarea.form-control-lg {
     border-radius: 0;
   }
 }
-@media (max-width: 1399.98px) {
+@media (max-width: 1919.98px) {
   .modal-fullscreen-xxl-down {
     width: 100vw;
     max-width: none;
@@ -6260,7 +6260,7 @@ textarea.form-control-lg {
     z-index: 1020;
   }
 }
-@media (min-width: 1400px) {
+@media (min-width: 1920px) {
   .sticky-xxl-top {
     position: sticky;
     top: 0;
@@ -10895,7 +10895,7 @@ textarea.form-control-lg {
     text-align: center !important;
   }
 }
-@media (min-width: 1400px) {
+@media (min-width: 1920px) {
   .float-xxl-start {
     float: left !important;
   }
@@ -18116,6 +18116,15 @@ td {
 
 .graph_wrapper > div {
   padding-right: 5px;
+}
+
+.question-dropdown-menu {
+  width: 100%;
+}
+
+.dropdown-item.disabled {
+  color: black;
+  white-space: normal;
 }
 
 body {

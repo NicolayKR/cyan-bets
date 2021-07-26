@@ -64,7 +64,7 @@
                 </div>
                 <h3 class="h3 mt-logic-block">Таблица ставок</h3>
                 <div class="row mt-4">
-                    <div class="col-md-9 col-lg-8">
+                    <div class="col-md-9 col-xxl-8">
                         <div class="row">
                             <div class="col-md-2 d-grid gap-2">
                                 <button type="button" class="btn btn-info budge-item-text d-flex align-items-center">
