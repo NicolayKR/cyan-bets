@@ -56,7 +56,7 @@ class UpdateXmlDb extends Command
         }
         foreach($array_xml as $index_user =>$item_xml){
             foreach($item_xml as $index_company =>$current_item_xml){
-                $xml_feed= CurrentXml::select('id_flat','bet','id_user','id_company','name_agent','top')
+                $xml_feed= CurrentXml::select('id_flat','bet','id_user','price','id_company','name_agent','top')
                                     ->where('id_user', $index_user)
                                     ->where('id_company', $index_company)
                                     ->get()->toArray();
@@ -68,11 +68,13 @@ class UpdateXmlDb extends Command
                     $array_xml_feed[$current_item_feed['id_flat']]['bet']= $current_item_feed['bet'];
                     $array_xml_feed[$current_item_feed['id_flat']]['id_user']= $current_item_feed['id_user'];
                     $array_xml_feed[$current_item_feed['id_flat']]['name_agent']= $current_item_feed['name_agent'];
+                    $array_xml_feed[$current_item_feed['id_flat']]['price']= $current_item_feed['price'];
                     $array_xml_feed[$current_item_feed['id_flat']]['top']= $current_item_feed['top'];
                 }
                 $array_xml_feed_copy = $array_xml_feed;
                 foreach($array['object'] as $item => $current_item) {
                     $current_array['id_flat'] = (int)$current_item['ExternalId'];
+                    $current_array['price'] = (int)$current_item['BargainTerms']['Price'];
                     $current_array['id_company'] = $index_company;
                     if(array_key_exists('Auction', $current_item)){
                         if(array_key_exists('Bet', $current_item['Auction'])){
@@ -106,6 +108,7 @@ class UpdateXmlDb extends Command
                             ->update(array(
                                 'bet' => $current_bet,
                                 'name_agent' =>$current_agent_name,
+                                'price'=> $current_array['price'],
                                 'top' => $top
                             ));
                         unset($array_xml_feed[$current_array['id_flat']]);
@@ -116,6 +119,7 @@ class UpdateXmlDb extends Command
                             'bet'=> $current_bet,
                             'id_user'=> $index_user,
                             'id_company'=> $current_array['id_company'],
+                            'price' => $current_array['price'],
                             'name_agent'=>$current_agent_name,
                             'top' => $top
                         ));

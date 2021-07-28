@@ -40,7 +40,7 @@ class TableController extends Controller
             $array_bets[$current_bet['id_company']][$current_bet['id_flat']]['bet'] =  $current_bet['bet'];
             $array_bets[$current_bet['id_company']][$current_bet['id_flat']]['id'] =  $current_bet['id'];
         }
-        $collection = DB::select('SELECT a.id,a.id_flat,a.bet,a.id_user,a.id_company,a.name_agent,a.top,
+        $collection = DB::select('SELECT a.id,a.id_flat,a.bet,a.id_user,a.id_company,a.name_agent,a.top,a.price,
             b.id_offer,b.url_offer,b.current_bet,b.leader_bet,b.position,b.page, 
             ROUND((SUM(c.shows_count)/sum(c.searches_count))*100) as coverage,sum(c.searches_count) as searches_count,sum(c.shows_count) as shows_count,
             sum(phone_shows) as phone_shows,sum(views) as views
@@ -59,7 +59,7 @@ class TableController extends Controller
                     if(array_key_exists($item_collection->id_flat, $array_bets[$item_collection->id_company])){
                         if(array_key_exists('bet', $array_bets[$item_collection->id_company][$item_collection->id_flat])){
                             $array_data['table_data'][$index]['crm_bet'] = (int)$array_bets[$item_collection->id_company][$item_collection->id_flat]['bet'];
-                            $array_data['table_data'][$index]['id'] = (int)$array_bets[$item_collection->id_company][$item_collection->id_flat]['id'];
+                            $array_data['table_data'][$index]['id'] = $item_collection->id;
                         }
                     }else{
                         $array_data['table_data'][$index]['crm_bet'] = 0;
@@ -73,6 +73,7 @@ class TableController extends Controller
                 if((int)$item_collection->current_bet != 0){
                     $lenght_auction++;
                 }
+                $array_data['table_data'][$index]['price'] = (int)$item_collection->price;
                 $array_data['table_data'][$index]['id_offer'] = (int)$item_collection->id_offer;
                 $array_data['table_data'][$index]['url_offer'] = $item_collection->url_offer;
                 $array_data['table_data'][$index]['leader_bet'] = (int)$item_collection->leader_bet;

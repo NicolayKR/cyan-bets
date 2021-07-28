@@ -108,6 +108,7 @@
                             <th scope="col"><a @click="sortTable('agent')" class="filter-link">Агент</a></th>
                             <th scope="col"><a @click="sortTable('id_object')" class="filter-link">ID Объекта</a></th>
                             <th scope="col"><a @click="sortTable('id_offer')" class="filter-link">ID Циана</a></th>
+                            <th scope="col"><a @click="sortTable('price')" class="filter-link">Цена</a></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -126,6 +127,7 @@
                                             autoHide: true,
                                             hideOnTargetClick:true,
                                             trigger: 'click hover', 
+                                            placement: 'bottom',
                                         }" 
                                          class="form-control form-control-sm input-value" name="bets" :id ="tabel_item.id" v-model="bets[tabel_item.id]">
                                         <button  type="button" @click="postNewBet(bets[tabel_item.id],tabel_item.id_object, tabel_item.id_company,tabel_item.id, tabel_item.top)" class="btn btn-primary btn-sm ms-1">OK</button>
@@ -149,6 +151,7 @@
                             <td>{{tabel_item.agent}}</td>
                             <td>{{tabel_item.id_object}}</td>
                             <td>{{tabel_item.id_offer}}</td>
+                            <td>{{tabel_item.price}}</td>
                         </tr>
                     </tbody>
                     <tfoot>
@@ -364,7 +367,9 @@ export default {
                 case 'id_object': if(this.activeSortParam != 'id_object'){ return this.onSort('id_object', sortByIdObjectTop);}
                                 else{return this.offSort(sortByIdObjectBottom);} 
                 case 'id_offer': if(this.activeSortParam != 'id_offer'){ return this.onSort('id_offer', sortByIdOfferTop);}
-                                else{return this.offSort(sortByIdOfferBottom);}         
+                                else{return this.offSort(sortByIdOfferBottom);}    
+                case 'price': if(this.activeSortParam != 'price'){ return this.onSort('price', sortByPriceTop);}
+                                else{return this.offSort(sortByPriceBottom);}       
             }
         }
     }
@@ -376,25 +381,27 @@ var sortByCoverageBottom = function (d1, d2) {return (d1.coverage > d2.coverage)
 var sortBySearchesCountTop  = function (d1, d2) { return (d1.searches_count < d2.searches_count) ? 1 : -1; };
 var sortBySearchesCountBottom  = function (d1, d2) { return (d1.searches_count > d2.searches_count) ? 1 : -1; };
 var sortByShowsCountTop  = function (d1, d2) { return (d1.shows_count < d2.shows_count) ? 1 : -1; };
-var sortByShowsCountBottom  = function (d1, d2) { return (d1.searches_count > d2.searches_count) ? 1 : -1; };
+var sortByShowsCountBottom  = function (d1, d2) { return (d1.shows_count > d2.shows_count) ? 1 : -1; };
 var sortByPhoneShowsTop  = function (d1, d2) { return (d1.phone_shows < d2.phone_shows) ? 1 : -1; };
-var sortByPhoneShowsBottom  = function (d1, d2) { return (d1.searches_count > d2.searches_count) ? 1 : -1; };
+var sortByPhoneShowsBottom  = function (d1, d2) { return (d1.phone_shows > d2.phone_shows) ? 1 : -1; };
 var sortByViewsTop  = function (d1, d2) { return (d1.views < d2.views) ? 1 : -1; };
-var sortByViewsBottom  = function (d1, d2) { return (d1.searches_count > d2.searches_count) ? 1 : -1; };
+var sortByViewsBottom  = function (d1, d2) { return (d1.views > d2.views) ? 1 : -1; };
 var sortByCrmBetTop  = function (d1, d2) { return (d1.crm_bet < d2.crm_bet) ? 1 : -1; };
-var sortByCrmBetBottom  = function (d1, d2) { return (d1.searches_count > d2.searches_count) ? 1 : -1; };
+var sortByCrmBetBottom  = function (d1, d2) { return (d1.crm_bet > d2.crm_bet) ? 1 : -1; };
 var sortByCyanBetTop  = function (d1, d2) { return (d1.cyan_bet < d2.cyan_bet) ? 1 : -1; };
-var sortByCyanBetBottom  = function (d1, d2) { return (d1.searches_count > d2.searches_count) ? 1 : -1; };
+var sortByCyanBetBottom  = function (d1, d2) { return (d1.cyan_bet > d2.cyan_bet) ? 1 : -1; };
 var sortByLeaderBetTop  = function (d1, d2) { return (d1.leader_bet < d2.leader_bet) ? 1 : -1; };
-var sortByLeaderBetBottom  = function (d1, d2) { return (d1.searches_count > d2.searches_count) ? 1 : -1; };
+var sortByLeaderBetBottom  = function (d1, d2) { return (d1.leader_bet > d2.leader_bet) ? 1 : -1; };
 var sortByPageTop  = function (d1, d2) { return (d1.page < d2.page) ? 1 : -1; };
-var sortByPageBottom  = function (d1, d2) { return (d1.searches_count > d2.searches_count) ? 1 : -1; };
+var sortByPageBottom  = function (d1, d2) { return (d1.page > d2.page) ? 1 : -1; };
 var sortByPositionTop  = function (d1, d2) { return (d1.position < d2.position) ? 1 : -1; };
-var sortByPositionBottom  = function (d1, d2) { return (d1.searches_count > d2.searches_count) ? 1 : -1; };
+var sortByPositionBottom  = function (d1, d2) { return (d1.position > d2.position) ? 1 : -1; };
 var sortByAgentTop  = function (d1, d2) { return (d1.agent.toLowerCase() < d2.agent.toLowerCase()) ? 1 : -1; };
-var sortByAgentBottom  = function (d1, d2) { return (d1.searches_count > d2.searches_count) ? 1 : -1; };
+var sortByAgentBottom  = function (d1, d2) { return (d1.agent.toLowerCase() > d2.agent.toLowerCase()) ? 1 : -1; };
 var sortByIdObjectTop = function (d1, d2) { return (d1.id_object < d2.id_object) ? 1 : -1; };
-var sortByIdObjectBottom  = function (d1, d2) { return (d1.searches_count > d2.searches_count) ? 1 : -1; };
+var sortByIdObjectBottom  = function (d1, d2) { return (d1.id_object > d2.id_object) ? 1 : -1; };
 var sortByIdOfferTop = function (d1, d2) { return (d1.id_offer < d2.id_offer) ? 1 : -1; };
-var sortByIdOfferBottom  = function (d1, d2) { return (d1.searches_count > d2.searches_count) ? 1 : -1; };
+var sortByIdOfferBottom  = function (d1, d2) { return (d1.id_offer > d2.id_offer) ? 1 : -1; };
+var sortByPriceTop = function (d1, d2) { return (d1.price < d2.price) ? 1 : -1; };
+var sortByPriceBottom  = function (d1, d2) { return (d1.price > d2.price) ? 1 : -1; };
 </script>
