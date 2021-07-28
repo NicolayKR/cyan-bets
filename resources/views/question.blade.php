@@ -73,11 +73,23 @@
                     </button>
                 </h2>
                 <div id="panelsStayOpen-collapseSix" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingSix">
-                <div class="accordion-body">
-                    Для получения ключа нужно написать письмо на <a href="import@cian.ru">import@cian.ru</a> с темой "ACCESS KEY" и названием агентства, которое вы представляете. Менеджер уточнит подробности и пришлет ACCESS KEY. После получения ключа, пропишите его в разделе Настройки, в поле "API ключ ЦИАН".
+                    <div class="accordion-body">
+                        Для получения ключа нужно написать письмо на <a href="import@cian.ru">import@cian.ru</a> с темой "ACCESS KEY" и названием агентства, которое вы представляете. Менеджер уточнит подробности и пришлет ACCESS KEY. После получения ключа, пропишите его в разделе Настройки, в поле "API ключ ЦИАН".
+                    </div>
                 </div>
             </div>
-        </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="panelsStayOpen-headingSeven">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseSeven" aria-expanded="false" aria-controls="panelsStayOpen-collapseSeven">
+                    Какие объекты в таблицы подсвечиваются красным?
+                    </button>
+                </h2>
+                <div id="panelsStayOpen-collapseSeven" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingSeven">
+                    <div class="accordion-body">
+                        Объекты, которые на циане имеют отметку ТОП.
+                    </div>  
+                </div>
+            </div>
         </div>
     </main>
 </div>
