@@ -64,7 +64,7 @@
                 </div>
                 <h3 class="h3 mt-logic-block">Таблица ставок</h3>
                 <div class="row mt-4">
-                    <div class="col-md-9 col-xxl-8">
+                    <div class="col-md-9 col-lg-8">
                         <div class="row">
                             <div class="col-md-2 d-grid gap-2">
                                 <button type="button" class="btn btn-info budge-item-text d-flex align-items-center">
@@ -79,11 +79,11 @@
                                 </button>
                             </div>
                             <div class="col-md-7">
-                                <input type="text" placeholder="Поиск по id-объекта или id-циана" class="form-control">
+                                <input type="text" v-model="id_object" placeholder="Поиск по id-объекта или id-циана" class="form-control"/>
                                 </div> 
                                 <div class="col-md-1 d-flex align-items-center">
-                                    <input type="checkbox" id="flexCheckDefault" class="form-check-input"> 
-                                    <label for="flexCheckDefault" class="form-check-label label-check-top ms-1">
+                                    <input class="form-check-input" type="checkbox" v-model="checked" id="flexCheckDefault" @click="sortTable('top')">
+                                    <label class="form-check-label label-check-top ms-1" for="flexCheckDefault">
                                         Топ
                                     </label>
                             </div>
@@ -111,21 +111,36 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for ="(tabel_item,index) in paginatedObject" :key="index" class="flip-list">
+                        <tr v-for ="(tabel_item,index) in paginatedObject" :key="index" class="flip-list" v-bind:class="{topString: tabel_item.top == 1}">
                             <td>{{tabel_item.coverage}}</td>
                             <td>{{tabel_item.searches_count}}</td>
                             <td>{{tabel_item.shows_count}}</td>
                             <td>{{tabel_item.phone_shows}}</td>
                             <td>{{tabel_item.views}}</td>
-                            <td>
+                            <td v-if="tabel_item.top == 1">
                                 <form class="row gy-2 gx-3 align-items-center">
                                     <div class="d-flex">
-                                        <input type="text" class="form-control form-control-sm input-value" name="bet" placeholder="" v-model="bets[index]">
-                                        <button type="button" @click="postNewBet(bets[index],tabel_item.id_object, tabel_item.id_company,index)" 
-                                        class="btn btn-primary btn-sm ms-1">OK</button>
+                                        <input type="text" v-tooltip ="{ 
+                                            content: msg_top, 
+                                            show: isOpen[tabel_item.id], 
+                                            autoHide: true,
+                                            hideOnTargetClick:true,
+                                            trigger: 'click hover', 
+                                        }" 
+                                         class="form-control form-control-sm input-value" name="bets" :id ="tabel_item.id" v-model="bets[tabel_item.id]">
+                                        <button  type="button" @click="postNewBet(bets[tabel_item.id],tabel_item.id_object, tabel_item.id_company,tabel_item.id, tabel_item.top)" class="btn btn-primary btn-sm ms-1">OK</button>
                                     </div>
                                 </form>
                             </td>
+                            <td v-else>
+                                <form class="row gy-2 gx-3 align-items-center">
+                                    <div class="d-flex">
+                                        <input type="text" 
+                                         class="form-control form-control-sm input-value" name="bets" :id ="tabel_item.id" v-model="bets[tabel_item.id]">
+                                        <button  type="button" @click="postNewBet(bets[tabel_item.id],tabel_item.id_object, tabel_item.id_company,tabel_item.id, tabel_item.top)" class="btn btn-primary btn-sm ms-1">OK</button>
+                                    </div>
+                                </form>
+                            </td>    
                             <td>{{tabel_item.crm_bet}}</td>
                             <td>{{tabel_item.cyan_bet}}</td>
                             <td>{{tabel_item.leader_bet}}</td>
@@ -189,7 +204,9 @@ export default {
         views: 0,
         datacollection: null,
         windowWidth: window.innerWidth,
-        flagEmptyFeed: false
+        flagEmptyFeed: false,
+        isOpen: [],
+        msg_top: 'Вводимое число должно делиться на 15',
         }
     },
     computed:{
@@ -243,6 +260,9 @@ export default {
                     this.views = response.data.views;
                     this.datacollection = response.data.datacollection;
                     this.flagReady = true;
+                    this.tabelData.forEach(element => {
+                        this.isOpen[element.id] = false;
+                    });
                 }
                 else{
                     this.flagEmptyFeed = true;
@@ -252,17 +272,41 @@ export default {
                 this.flagReady = false;
             }          
         },
-        async postNewBet(bets,id_object, id_company,index){
-            let fd = new FormData();
-            fd.set('bet', bets);
-            fd.set('id_object', id_object);
-            fd.set('id_company', id_company);
-            await axios.post('/saveNewBet', fd).then(function (response) { 
+        async postNewBet(bets,id_object, id_company,index,top){
+            if (top == 1){
+                this.isOpen[index] = true;
+                if(bets % 15 == 0){
+                    let fd = new FormData();
+                    fd.set('bet', bets);
+                    fd.set('id_object', id_object);
+                    fd.set('id_company', id_company);
+                    await axios.post('/saveNewBet', fd).then(function (response) { 
+                        })
+                    .catch(function (error) {
+                        console.log(error);
+                    })
+                    await this.getDataFromNewBet(id_object, id_company,index);
+                    const item = document.getElementById(index);
+                    item.style.border = '1px solid #ced4da';    
+                }
+                else{
+                    document.getElementById(index).value = "";
+                    const item = document.getElementById(index);
+                    item.style.border = '2px solid #FF4500';        
+                }
+            }
+            else{
+                let fd = new FormData();
+                fd.set('bet', bets);
+                fd.set('id_object', id_object);
+                fd.set('id_company', id_company);
+                await axios.post('/saveNewBet', fd).then(function (response) { 
+                    })
+                .catch(function (error) {
+                    console.log(error);
                 })
-            .catch(function (error) {
-                console.log(error);
-            })
-            await this.getDataFromNewBet(id_object, id_company,index);
+                await this.getDataFromNewBet(id_object, id_company,index);
+            }
         },
         async getDataFromNewBet(id_object,id_company,index){
             try{
