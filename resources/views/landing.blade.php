@@ -36,8 +36,13 @@
 
         <section class="navbar-mobile">
           <nav class="nav nav-navbar mr-auto">
+            @guest
             <a class="nav-link active" href="/index">Вход</a>
             <a class="nav-link" href="register">Регистрация</a>
+            @endguest
+            @auth
+            <a class="nav-link" href="/index">Ставки</a>
+            @endauth
             <a class="nav-link" href="#section-pricing">Pricing</a>
             <a class="nav-link" href="#">Resources</a>
             <a class="nav-link" href="#">Contact</a>
