@@ -80,6 +80,7 @@ export default {
             let month = '';
             let minutes = '';
             let remain = '';
+            let remain_minutes = '';
             if(today.getDate()<10){
                 day = '0'+ today.getDate();
             }
@@ -101,8 +102,15 @@ export default {
                 minutes = String(today.getMinutes());
                 
             }
+            if(60 - today.getMinutes() < 10){
+                remain_minutes = '0'+ String(60 - today.getMinutes());
+            }
+            else{
+                remain_minutes = String(60 - today.getMinutes());
+                
+            }
             this.time = today.getHours()+ ":" + minutes;
-            this.remain = String(24 - today.getHours())+":"+ String(60 - today.getMinutes()); 
+            this.remain = String(24 - today.getHours())+":"+ remain_minutes; 
             this.date = day + '.'+ month + "." + today.getFullYear();
         }, 1000);
     },
