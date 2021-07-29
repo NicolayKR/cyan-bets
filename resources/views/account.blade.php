@@ -20,8 +20,10 @@
                     <thead>
                         <tr>
                             <th scope="col" style="width: 7%">Название Фида</th>
-                            <th scope="col" style="width: 43%">XML фид ЦИАН</th>
-                            <th scope="col" style="width: 47%">API ключ ЦИАН</th>
+                            <th scope="col" style="width: 40%">XML фид ЦИАН</th>
+                            <th scope="col" style="width: 40%">API ключ ЦИАН</th>
+                            <th scope="col" style="width: 5%">Баланс по API</th>
+                            <th scope="col" style="width: 5%">Баллы аукциона </th>
                             <th scope="col" style="width: 3%"></th>
                         </tr>
                     </thead>
@@ -31,6 +33,8 @@
                                 <td>{{$account->name}}</td>
                                 <td>{{$account->xml_feed}}</td>
                                 <td>{{$account->cyan_key}}</td>
+                                <td>{{$account->balance}}</td>
+                                <td>{{$account->auction_points}}</td>
                                 <td class="text-right">
                                     <form onsubmit="if(confirm('Удалить?')){return true}else{return false}" action="{{ route('accounts.destroy', $account) }}"
                                     method="post" class="d-flex">

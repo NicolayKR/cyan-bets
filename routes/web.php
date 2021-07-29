@@ -38,5 +38,6 @@ Route::get('/getDataFromNewBet','App\Http\Controllers\TableController@getDataFro
 Route::get('getName', function(){
     return Auth::user()->name;
 });
+Route::get('getBalance', 'App\Http\Controllers\TableController@getBalance');
 Route::resource('/accounts','App\Http\Controllers\AccountController');
 Auth::routes();

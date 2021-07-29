@@ -24,7 +24,7 @@ class TableController extends Controller
             $first_date = 'DATE_SUB(DATE(NOW()), INTERVAL 8 DAY)';
             $second_date = 'DATE(now()+ INTERVAL 1 DAY)';
         }
-        if($end== 'null'){
+        elseif($end== 'null'){
             $first_date =  "'".(string)$start."'";
             $second_date = 'DATE(now()+ INTERVAL 1 DAY)';
         }
@@ -202,5 +202,21 @@ class TableController extends Controller
                                 ->where('id_user', Auth::user()->id)
                                 ->first();
         return $collection['bet'];
+    }
+    public function getBalance(){
+        $collection_keys = CompanyName::distinct()->select('cyan_key')
+                                    ->where('user_id',Auth::user()->id)->get();
+        $balance = 0;
+        $auction_points = 0;
+        $array_data = [];
+        foreach($collection_keys as $collection_key){
+            $current_item = CompanyName::select('balance','auction_points')
+                        ->where('cyan_key', $collection_key['cyan_key'])->get();
+            $balance = $balance + $current_item[0]['balance'];
+            $auction_points = $auction_points + $current_item[0]['auction_points'];
+        }
+        $array_data['balance'] = $balance;
+        $array_data['auction_points'] = $auction_points; 
+        return $array_data; 
     }
 }

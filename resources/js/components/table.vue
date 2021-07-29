@@ -138,6 +138,14 @@
                                 <form class="row gy-2 gx-3 align-items-center">
                                     <div class="d-flex">
                                         <input type="text" 
+                                        <input type="text" v-tooltip ="{ 
+                                            content: msg_no_top, 
+                                            show: isOpen[tabel_item.id], 
+                                            autoHide: true,
+                                            hideOnTargetClick:true,
+                                            trigger: 'click hover', 
+                                            placement: 'bottom',
+                                        }" 
                                          class="form-control form-control-sm input-value" name="bets" :id ="tabel_item.id" v-model="bets[tabel_item.id]">
                                         <button  type="button" @click="postNewBet(bets[tabel_item.id],tabel_item.id_object, tabel_item.id_company,tabel_item.id, tabel_item.top)" class="btn btn-primary btn-sm ms-1">OK</button>
                                     </div>
@@ -210,6 +218,7 @@ export default {
         flagEmptyFeed: false,
         isOpen: [],
         msg_top: 'Вводимое число должно делиться на 15',
+        msg_no_top: 'Вводимое число должно делиться на 5',
         }
     },
     computed:{
@@ -300,16 +309,25 @@ export default {
                 }
             }
             else{
-                let fd = new FormData();
-                fd.set('bet', bets);
-                fd.set('id_object', id_object);
-                fd.set('id_company', id_company);
-                await axios.post('/saveNewBet', fd).then(function (response) { 
+                this.isOpen[index] = true;
+                if(bets % 5 == 0){
+                    let fd = new FormData();
+                    fd.set('bet', bets);
+                    fd.set('id_object', id_object);
+                    fd.set('id_company', id_company);
+                    await axios.post('/saveNewBet', fd).then(function (response) { 
+                        })
+                    .catch(function (error) {
+                        console.log(error);
                     })
-                .catch(function (error) {
-                    console.log(error);
-                })
-                await this.getDataFromNewBet(id_object, id_company,index);
+                    await this.getDataFromNewBet(id_object, id_company,index);
+                }
+                else{
+                    document.getElementById(index).value = "";
+                    this.bets[index] = '';
+                    const item = document.getElementById(index);
+                    item.style.border = '2px solid #FF4500';        
+                }
             }
         },
         async getDataFromNewBet(id_object,id_company,index){

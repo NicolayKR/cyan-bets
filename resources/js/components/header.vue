@@ -10,41 +10,28 @@
         <ul class="nav col-lg-8">
             <li class="nav-item">
                 <span class="nav-link">
-                    <i class="fas fa-cog me-2"></i>
-                    Версия 1.4.14
+                    <i class="fas fa-clock me-1"></i>
+                    <span class = "me-2">{{this.time}}</span>{{this.date}}
                 </span>
             </li>
             <li class="nav-item">
                 <span class="nav-link">
-                    <i class="fas fa-clock me-2"></i>
-                    13:00 25.06.2021
+                    <i class="fas fa-gavel me-1"></i>
+                    {{this.remain}}
                 </span>
             </li>
             <li class="nav-item">
                 <span class="nav-link">
-                    <i class="fas fa-gavel me-2"></i>
-                    13:00 25.06.2021
-                </span>
-            </li>
-            <li class="nav-item">
-                <span class="nav-link">
-                    <i class="fas fa-search-plus me-2"></i>
-                    100% (55 из 100)
+                    <i class="fas fa-dollar-sign me-1"></i>
+                    {{this.balance}}
                 </span>
             </li> 
             <li class="nav-item">
                 <span class="nav-link">
-                    <i class="fas fa-user-clock me-2"></i>
-                    19 мин
+                    <i class="far fa-registered me-1"></i>
+                    {{this.auction_points}}
                 </span>
-            </li>
-            <li class="nav-item">
-                <span class="nav-link">  
-                    <i class="fas fa-chart-bar me-2"></i>
-                    0%
-                </span>
-            </li>
-            
+            </li>    
         </ul>
         <div class="nav-item col-lg-2 dropdown">
             <a class="nav-link dropdown-toggle text-end" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -70,10 +57,54 @@ export default {
         return {
             csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
             nameUser: null,
+            date: null,
+            interval: null,
+            time: null,
+            remain: null,
+            balance: 0,
+            auction_points: 0,
         }
+    },
+    beforeDestroy() {
+        clearInterval(this.interval);
     },
     mounted(){
         this.getUserName();
+        this.getBalance();
+    },
+    created(){
+
+        this.interval = setInterval(()=>{
+            const today = new Date();
+            let day = '';
+            let month = '';
+            let minutes = '';
+            let remain = '';
+            if(today.getDate()<10){
+                day = '0'+ today.getDate();
+            }
+            else{
+                day = String(today.getDate());
+                
+            }
+            if(today.getMonth()+1<10){
+                month = '0'+ (today.getMonth()+1);    
+            }
+            else{
+                month  = String(today.getMonth()+1);
+                
+            }
+            if(today.getMinutes()<10){
+                minutes = '0'+ today.getMinutes();
+            }
+            else{
+                minutes = String(today.getMinutes());
+                
+            }
+            this.time = today.getHours()+ ":" + minutes;
+            this.remain = String(24 - today.getHours())+":"+ String(60 - today.getMinutes()); 
+            this.date = day + '.'+ month + "." + today.getFullYear();
+        }, 1000);
     },
     methods: {
         submit : function(){
@@ -83,7 +114,13 @@ export default {
             axios.get('/getName').then(response => {
                 this.nameUser = response.data;
             });
-        }
+        },
+        getBalance(){
+            axios.get('/getBalance').then(response => {
+                this.balance = response.data.balance;
+                this.auction_points = response.data.auction_points;
+            });
+        },
   } 
 }
 </script>

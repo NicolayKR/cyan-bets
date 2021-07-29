@@ -28,7 +28,7 @@ class AccountController extends Controller
     public function index()
     {
         return view('account', [
-            'accounts' => CompanyName::select('id','name','cyan_key','xml_feed','user_id')
+            'accounts' => CompanyName::select('id','name','cyan_key','xml_feed','balance','auction_points','user_id')
                 ->where('user_id','=', Auth::user()->id)->get()]);
     }
 

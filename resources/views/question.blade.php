@@ -81,12 +81,49 @@
             <div class="accordion-item">
                 <h2 class="accordion-header" id="panelsStayOpen-headingSeven">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseSeven" aria-expanded="false" aria-controls="panelsStayOpen-collapseSeven">
-                    Какие объекты в таблицы подсвечиваются красным?
+                    Какие объекты в таблицы подсвечиваются фиолетовым?
                     </button>
                 </h2>
                 <div id="panelsStayOpen-collapseSeven" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingSeven">
                     <div class="accordion-body">
                         Объекты, которые на циане имеют отметку ТОП.
+                    </div>  
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="panelsStayOpen-headingNine">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseNine" aria-expanded="false" aria-controls="panelsStayOpen-collapseNine">
+                    Как определяется баланс и количество баллов аукциона, и как часто он обновляется?
+                    </button>
+                </h2>
+                <div id="panelsStayOpen-collapseNine" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingNine">
+                    <div class="accordion-body">
+                        Баланс и баллы аукциона суммируеются по всем вашим ключам API указанных во вкладке ФИДЫ, не учитывая повторные API (если у вас к одному аккаунту, привязаны несколько фидов и вы их добавили сюда). Они обновляются раз в пол часа, как и сам ваш xml-файл, который мы вам формируем.
+                    </div>  
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="panelsStayOpen-headingEight">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseEight" aria-expanded="false" aria-controls="panelsStayOpen-collapseEight">
+                    Что означают иконки в самом верху страницы?
+                    </button>
+                </h2>
+                <div id="panelsStayOpen-collapseEight" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingEight">
+                    <div class="accordion-body">
+                        <ul>
+                            <li>
+                                <i class="fas fa-clock me-1"></i> - Текущая дата и время
+                            </li>
+                            <li>
+                                <i class="fas fa-gavel me-1"></i> - Вреия до взимания платы за объекты, которые учавствуют в аукционе.
+                            </li>
+                            <li>
+                                <i class="fas fa-dollar-sign me-1"></i> - Ваш текущий баланс по всем фидам, указанным в личном кабинете. Также во вкладке ФИДЫ - есть баланс по каждому отдельному фиду (без учета повторения ключа циан, то есть несколько API могут повторяться, но в шапке страницы учитывается бюджет без повторов). Баланс определяется в рублях.
+                            </li>
+                            <li>
+                                <i class="far fa-registered me-1"></i> - Количество ваших очков аукциона (1 очко = 1 рубль).
+                            </li>
+                        </ul>   
                     </div>  
                 </div>
             </div>
