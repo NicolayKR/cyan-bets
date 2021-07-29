@@ -19,6 +19,12 @@
                     <div class="position-sticky pt-3">
                         <ul class="nav flex-column">
                             <li class="nav-item">
+                                <a {!! (Route::is('/') ? 'class="nav-link active"' : 'class="nav-link"') !!} aria-current="page" href="/">
+                                    <i class="fas fa-home feather feather-home"></i>
+                                    Главная
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a {!! (Route::is('index') ? 'class="nav-link active"' : 'class="nav-link"') !!} aria-current="page" href="/index">
                                     <i class="fas fa-gavel feather feather-home"></i>
                                     Ставки
