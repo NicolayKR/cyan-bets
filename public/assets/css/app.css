@@ -17886,6 +17886,7 @@ readers do not read off random characters that represent icons */
 .header {
   background-color: #485359 !important;
   min-height: 60px !important;
+  z-index: 1081;
 }
 .header .nav-link {
   opacity: 0.8;
