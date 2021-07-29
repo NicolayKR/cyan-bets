@@ -37,7 +37,7 @@
         <section class="navbar-mobile">
           <nav class="nav nav-navbar mr-auto">
             <a class="nav-link active" href="/index">Вход</a>
-            <a class="nav-link" href="#section-features">Features</a>
+            <a class="nav-link" href="register">Регистрация</a>
             <a class="nav-link" href="#section-pricing">Pricing</a>
             <a class="nav-link" href="#">Resources</a>
             <a class="nav-link" href="#">Contact</a>

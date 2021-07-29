@@ -56,8 +56,8 @@
                                 <button type="submit" class="btn btn-primary">
                                     Вход
                                 </button>
-                                <a href="register" class="btn btn-primary ms-2">
-                                    Регистрация
+                                <a href="/" class="btn btn-primary ms-2">
+                                    Назад
                                 </a>
                                 @if (Route::has('password.request'))
                                     <a class="btn btn-link ms-2" href="{{ route('password.request') }}">

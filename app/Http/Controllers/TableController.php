@@ -24,6 +24,10 @@ class TableController extends Controller
             $first_date = 'DATE_SUB(DATE(NOW()), INTERVAL 8 DAY)';
             $second_date = 'DATE(now()+ INTERVAL 1 DAY)';
         }
+        if($end== 'null'){
+            $first_date =  "'".(string)$start."'";
+            $second_date = 'DATE(now()+ INTERVAL 1 DAY)';
+        }
         else{
             $first_date =  "'".(string)$start."'";
             $second_date = "'".(string)$end."'";

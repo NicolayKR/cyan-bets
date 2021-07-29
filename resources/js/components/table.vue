@@ -91,7 +91,7 @@
                     </div>
                 </div>
                 <div class="table-responsive">
-                    <table class="table table-striped table-bordered">
+                    <table class="table table-bordered">
                     <thead>
                         <tr>
                             <th scope="col"><a @click="sortTable('coverage') " class="filter-link">Охват в процентах</a></th>
@@ -294,6 +294,7 @@ export default {
                 }
                 else{
                     document.getElementById(index).value = "";
+                    this.bets[index] = '';
                     const item = document.getElementById(index);
                     item.style.border = '2px solid #FF4500';        
                 }
@@ -326,6 +327,10 @@ export default {
         },
         onSort(name, nameFunc){
             this.activeSortParam = name;
+            var items = document.getElementsByTagName('input');
+                for (var i=0; i < items.length; i++){
+                    items[i].style.border = '1px solid #ced4da'
+                }
             if(this.activeSortParam == 'top'){
                 this.checked=true;
             }else{
@@ -334,6 +339,10 @@ export default {
             return this.tabelData.sort(nameFunc);
         },
         offSort(nameFunc){
+            var items = document.getElementsByTagName('input');
+                for (var i=0; i < items.length; i++){
+                    items[i].style.border = '1px solid #ced4da'
+                }
             this.checked=false;
             this.activeSortParam = '#'; 
             return this.tabelData.sort(nameFunc);
