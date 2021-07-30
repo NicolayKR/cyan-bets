@@ -27,8 +27,8 @@
 					<div class="navbar-left mr-4">
 						<button class="navbar-toggler" type="button"><span class="navbar-toggler-icon"></span></button>
 						<a class="navbar-brand" href="#">
-							<img class="logo-dark" src="../assets/img/logo-dark.png" alt="logo">
-							<img class="logo-light" src="../assets/img/logo-light.png" alt="logo">
+							<img class="logo-dark" src="assets/img/logo-dark.png" alt="logo">
+							<img class="logo-light" src="assets/img/logo-light.png" alt="logo">
 						</a>
 					</div>
 
@@ -45,11 +45,12 @@
 							<a class="nav-link landing-nav-link" href="#">Resources</a>
 							<a class="nav-link landing-nav-link" href="#">Contact</a>
 						</nav>
-
+                        @guest
 						<div class="d-none d-stick-block">
-							<a class="btn btn-sm btn-light ml-lg-5 mr-2" href="#">Login</a>
-							<a class="btn btn-sm btn-success" href="#">Sign up</a>
+							<a class="btn btn-sm btn-light ml-lg-5 mr-2" href="#">Войти</a>
+							<a class="btn btn-sm btn-success" href="#">Зарегистрироваться</a>
 						</div>
+                        @endguest
 					</section>
 
 				</div>
@@ -69,7 +70,7 @@
 						</div>
 
 						<div class="col-lg-5 ml-auto">
-							<img class="mt-5" src="../assets/img/preview/laptop-1.png" alt="img">
+							<img class="mt-5" src="assets/img/laptop-1.png" alt="img">
 						</div>
 
 					</div>
@@ -97,7 +98,7 @@
 			<div class="row gap-y">
 
 				<div class="col-md-8 mx-auto">
-					<img src="../assets/img/preview/dribbble-9.gif" alt="..." data-aos="fade-up" data-aos-duration="2000">
+					<img src="assets/img/dribbble-9.gif" alt="..." data-aos="fade-up" data-aos-duration="2000">
 				</div>
 
 
@@ -217,7 +218,7 @@
 				</div>
 
 				<div class="col-md-5 order-md-first">
-					<img class="rounded shadow-2" src="../assets/img/preview/dribbble-6.png" alt="...">
+					<img class="rounded shadow-2" src="assets/img/dribbble-6.png" alt="...">
 				</div>
 			</div>
 
@@ -232,7 +233,7 @@
 				</div>
 
 				<div class="col-md-5">
-					<img class="rounded shadow-2" src="../assets/img/preview/dribbble-7.png" alt="...">
+					<img class="rounded shadow-2" src="assets/img/dribbble-7.png" alt="...">
 				</div>
 			</div>
 
@@ -247,7 +248,7 @@
 				</div>
 
 				<div class="col-md-5 order-md-first">
-					<img class="rounded shadow-2" src="../assets/img/preview/dribbble-8.png" alt="...">
+					<img class="rounded shadow-2" src="assets/img/dribbble-8.png" alt="...">
 				</div>
 			</div>
 
@@ -406,7 +407,7 @@
 				<div class="row gap-y align-items-center">
 
 					<div class="col-md-3 text-center text-md-left">
-						<a href="#"><img src="../assets/img/logo-dark.png" alt="logo"></a>
+						<a href="#"><img src="assets/img/logo-dark.png" alt="logo"></a>
 					</div>
 
 					<div class="col-md-6">
