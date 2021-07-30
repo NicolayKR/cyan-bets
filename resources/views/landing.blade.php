@@ -34,25 +34,31 @@
 					<section class="navbar-mobile">
 						<nav class="nav nav-navbar mr-auto">
 							@guest
-							<a class="nav-link landing-nav-link active" href="/index">Вход</a>
-							<a class="nav-link landing-nav-link" href="register">Регистрация</a>
+							<a class="nav-link  d-stick-none" href="/index">Вход</a>
+							<a class="nav-link d-stick-none" href="register">Регистрация</a>
 							@endguest
 							@auth
-							<a class="nav-link landing-nav-link" href="/index">Ставки</a>
+							<a class="nav-link " href="/index">Ставки</a>
 							@endauth
-							<a class="nav-link landing-nav-link" href="#section-pricing">Pricing</a>
-							<a class="nav-link landing-nav-link" href="#">Resources</a>
-							<a class="nav-link landing-nav-link" href="#">Contact</a>
+							<a class="nav-link " href="#section-pricing">Pricing</a>
+							<a class="nav-link " href="#">Resources</a>
+							<a class="nav-link " href="#">Contact</a>
+                            @auth
+                            <a href="{{ url('/logout') }}" class="nav-link text-end" >
+                                Выход
+                            </a>
+                            @endauth
 						</nav>
                         @guest
 						<div class="d-none d-stick-block">
-							<a class="btn btn-sm btn-light ml-lg-5 mr-2" href="#">Войти</a>
-							<a class="btn btn-sm btn-success" href="#">Зарегистрироваться</a>
+							<a class="btn btn-sm btn-light ml-lg-5 mr-2" href="/index">Войти</a>
+							<a class="btn btn-sm btn-success" href="register">Зарегистрироваться</a>
 						</div>
                         @endguest
 					</section>
 
 				</div>
+                
 			</nav>
 			<header id="home" class="header text-white h-fullscreen text-center text-lg-left" style="background-color: #24292e">
 				<canvas class="constellation" data-color="rgba(255,255,255,0.3)"></canvas>

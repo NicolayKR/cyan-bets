@@ -40,6 +40,7 @@ Route::get('/getDataFromNewBet','App\Http\Controllers\TableController@getDataFro
 Route::get('getName', function(){
     return Auth::user()->name;
 });
+Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::get('/getBalance', 'App\Http\Controllers\TableController@getBalance');
 Route::get('/getErrors', 'App\Http\Controllers\TableController@getErrors');
 Route::resource('/accounts','App\Http\Controllers\AccountController');
