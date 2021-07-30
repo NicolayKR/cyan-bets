@@ -16,7 +16,7 @@
                 Добавить фид
             </a>
             <div class="table-responsive">
-                <table class="table table-striped table-bordered">
+                <table class="table bg-light table-bordered">
                     <thead>
                         <tr>
                             <th scope="col" style="width: 7%">Название Фида</th>
