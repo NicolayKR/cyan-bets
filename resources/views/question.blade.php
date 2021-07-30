@@ -127,6 +127,19 @@
                     </div>  
                 </div>
             </div>
+                    <div class="accordion-item">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingTen">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTen" aria-expanded="false" aria-controls="panelsStayOpen-collapseTen">
+                            Какие объеты расположены в разделе "Ошибочные объекты"?
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseTen" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTen">
+                        <div class="accordion-body">
+                            Объекты которые являются не опубликованными (разделе "Ошибочные объекты" в ID цина будет так и написано) по какой-либо причины указанный в стробце ошибок. Также стоит обратить внимания на предупреждения, так как они будут засорять ваш личный кабинет циана. Поэтому от них нужно своевременно избавляться. 
+                        </div>  
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
 </div>

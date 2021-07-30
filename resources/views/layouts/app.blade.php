@@ -56,11 +56,17 @@
                                 </a>
                             </li>
                             <li class="nav-item">
+                                <a {!! (Route::is('errors') ? 'class="nav-link active"' : 'class="nav-link"') !!} href="/errors">
+                                <i class="fas fa-exclamation-triangle feather feather-home"></i>
+                                    Ошибочные объекты
+                                </a>
+                               
+                            </li>
+                            <li class="nav-item">
                                 <a {!! (Route::is('question') ? 'class="nav-link active"' : 'class="nav-link"') !!} href="/question">
                                 <i class="far fa-question-circle feather feather-home"></i>
                                     Вопросы
                                 </a>
-                               
                             </li>
                         </ul>
                     </div>

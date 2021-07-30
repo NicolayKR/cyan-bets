@@ -80,12 +80,12 @@
                             </div>
                             <div class="col-md-7">
                                 <input type="text" v-model="id_object" placeholder="Поиск по id-объекта или id-циана" class="form-control"/>
-                                </div> 
-                                <div class="col-md-1 d-flex align-items-center">
-                                    <input class="form-check-input" type="checkbox" v-model="checked" id="flexCheckDefault" @click="sortTable('top')">
-                                    <label class="form-check-label label-check-top ms-1" for="flexCheckDefault">
-                                        Топ
-                                    </label>
+                            </div> 
+                            <div class="col-md-1 d-flex align-items-center">
+                                <input class="form-check-input" type="checkbox" v-model="checked" id="flexCheckDefault" @click="sortTable('top')">
+                                <label class="form-check-label label-check-top ms-1" for="flexCheckDefault">
+                                    Топ
+                                </label>
                             </div>
                         </div>
                     </div>

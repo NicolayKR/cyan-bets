@@ -41,6 +41,7 @@ class UpdateStatisticShows extends Command
     public function handle()
     {
         set_time_limit(30000);
+        date_default_timezone_set("Europe/Moscow");
         $collection_keys = CompanyName::distinct()->select('user_id','cyan_key')->get();
         foreach($collection_keys as $collection_key){
             $url = 'https://public-api.cian.ru/v1/get-my-offers?source=upload&statuses=published';

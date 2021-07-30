@@ -44,6 +44,7 @@ class updateBalance extends Command
      */
     public function handle()
     {
+        date_default_timezone_set("Europe/Moscow");
         $collection_keys = CompanyName::distinct()->select('id','user_id','cyan_key')->get();
         foreach($collection_keys as $collection_key){
             $url = 'https://public-api.cian.ru/v1/get-my-balance';
