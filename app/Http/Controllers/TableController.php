@@ -21,7 +21,7 @@ class TableController extends Controller
         $start = $request->query('start'); 
         $end = $request->query('end'); 
         if($start == 'null' and $end== 'null'){
-            $first_date = 'DATE_SUB(DATE(NOW()), INTERVAL 8 DAY)';
+            $first_date = 'DATE_SUB(DATE(NOW()), INTERVAL 9 DAY)';
             $second_date = 'DATE(now()+ INTERVAL 1 DAY)';
         }
         elseif($end== 'null'){

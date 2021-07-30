@@ -8,7 +8,7 @@
                 Введите свой xml-feed в личном кабинете!
             </div>
         </div>
-        <div class="main-content">
+        <div class="main">
             <div v-if="!flagReady && !flagEmptyFeed"> 
                 <div class="d-flex justify-content-center m-5">
                     <div class="spinner-border text-primary" style="width: 4rem; height: 4rem;" role="status">
@@ -137,7 +137,6 @@
                             <td v-else>
                                 <form class="row gy-2 gx-3 align-items-center">
                                     <div class="d-flex">
-                                        <input type="text" 
                                         <input type="text" v-tooltip ="{ 
                                             content: msg_no_top, 
                                             show: isOpen[tabel_item.id], 
