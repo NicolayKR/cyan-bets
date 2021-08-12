@@ -14,13 +14,13 @@
 		<link href="{{ asset('assets/css/app2.css') }}" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-		<script type="text/javascript" src="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.9.0/slick/slick.min.js"></script>
-		<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.9.0/slick/slick.css"/>
+		<!-- <script type="text/javascript" src="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.9.0/slick/slick.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.9.0/slick/slick.css"/> -->
 <!-- Добавляем тему по умолчанию из CDN -->
-		<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.9.0/slick/slick-theme.css"/>
+		<!-- <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.9.0/slick/slick-theme.css"/> -->
 		<!-- Favicons -->
-		<link rel="apple-touch-icon" href="../assets/img/apple-touch-icon.png">
-		<link rel="icon" href="../assets/img/favicon.png">
+		<!-- <link rel="apple-touch-icon" href="../assets/img/apple-touch-icon.png">
+		<link rel="icon" href="../assets/img/favicon.png"> -->
 	</head>
 	<body>
 		<div id="app">
@@ -28,30 +28,29 @@
 		<nav class="navbar navbar-expand-lg navbar-light navbar-stick-dark" data-navbar="sticky">
 		<div class="container">
 			<div class="row">
-			<div class="col-4 col-lg-auto1 mr-auto mx-lg-auto d-flex align-items-center">
-				<button class="navbar-toggler" type="button"><span class="navbar-toggler-icon"></span></button>
-			<a class="navbar-brand" href="#">
-				<img class="logo-dark" src="assets/img/logo2.svg" alt="logo">
-				<img class="logo-light" src="assets/img/logo.png" alt="logo">
-			</a>
-			</div>
-			<section class="col-lg-4 navbar-mobile">
-				<nav class="nav nav-navbar mr-lg-auto mx-lg-auto">
-				<a class="nav-link active" href="/index">Оптимизатор бюджета ЦИАН</a>
-				</nav>
-			</section>
-			<div class="col-auto col-lg-4 text-right">
-				@guest
-				<a class="btn btn-sm btn-round btn-outline-success d-none d-lg-inline-block mr-2" href="/login">Войти</a>
-				<a class="btn btn-sm btn-round btn-success" href="/register">Регистрация</a>
-				@endguest
-				@auth
-				<a href="{{ url('/logout') }}" class="btn btn-sm btn-round btn-outline-success d-none d-lg-inline-block text-end" >
-					Выход
-				</a>
-				@endauth
-			</div>
-
+				<div class="col-4 col-lg-auto1 mr-auto mx-lg-auto d-flex align-items-center">
+					<button class="navbar-toggler" type="button"><span class="navbar-toggler-icon"></span></button>
+					<a class="navbar-brand" href="#">
+						<img class="logo-dark" src="assets/img/logo2.svg" alt="logo">
+						<img class="logo-light" src="assets/img/logo.png" alt="logo">
+					</a>	
+				</div>
+				<section class="col-lg-4 navbar-mobile">
+					<nav class="nav nav-navbar mr-lg-auto mx-lg-auto">
+					<a class="nav-link active" href="/index">Оптимизатор бюджета ЦИАН</a>
+					</nav>
+				</section>
+				<div class="col-auto col-lg-4 text-right">
+					@guest
+					<a class="btn btn-sm btn-round btn-outline-success d-lg-inline-block mr-2" href="/login">Войти</a>
+					<a class="btn btn-sm btn-round btn-success" href="/register">Регистрация</a>
+					@endguest
+					@auth
+					<a href="{{ url('/logout') }}" class="btn btn-sm btn-round btn-outline-success d-lg-inline-block text-end" >
+						Выход
+					</a>
+					@endauth
+				</div>
 			</div>
 		</div>
 		</nav><!-- /.navbar -->
@@ -297,7 +296,7 @@
 					<img class="logo-light" src="assets/img/logo2.svg" alt="logo">
 				</a>
 			</div>
-			<section class="col-lg-6 navbar-mobile">
+			<section class="col-lg-6">
 				<nav class="nav nav-navbar mr-lg-auto mx-lg-auto">
 				<a class="nav-link active" href="/index">Оптимизатор бюджета ЦИАН</a>
 				</nav>

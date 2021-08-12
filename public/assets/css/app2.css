@@ -32775,6 +32775,12 @@ a.text-lightest:focus {
 .ms-1 {
   margin-left: 5px;
 }
+
+@media (min-width: 980px) {
+  .container-img {
+    min-width: 800px;
+  }
+}
 .block-number {
   text-align: center;
   font-weight: bold;
