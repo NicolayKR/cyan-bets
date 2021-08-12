@@ -18222,6 +18222,11 @@ td {
   z-index: 1;
 }
 
+.container-img {
+  max-width: 400px;
+  max-height: 400px;
+}
+
 body {
   font-size: 0.875rem;
 }

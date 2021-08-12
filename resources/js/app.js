@@ -1,7 +1,7 @@
 require('./bootstrap');
 require('./script');
 require('./landing/landing');
-require('./landing/landing.min');
+require('./landing/landing2.min');
 
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue';
 import store from '../vuex/store';

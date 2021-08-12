@@ -14,6 +14,10 @@
 		<link href="{{ asset('assets/css/app2.css') }}" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+		<script type="text/javascript" src="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.9.0/slick/slick.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.9.0/slick/slick.css"/>
+<!-- Добавляем тему по умолчанию из CDN -->
+		<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.9.0/slick/slick-theme.css"/>
 		<!-- Favicons -->
 		<link rel="apple-touch-icon" href="../assets/img/apple-touch-icon.png">
 		<link rel="icon" href="../assets/img/favicon.png">
@@ -21,416 +25,299 @@
 	<body>
 		<div id="app">
 		<!-- Navbar -->
-			<nav class="navbar navbar-expand-lg navbar-light navbar-stick-dark" data-navbar="smart">
-				<div class="container">
-					<div class="navbar-left mr-4">
-						<button class="navbar-toggler" type="button"><span class="navbar-toggler-icon"></span></button>
-						<a class="navbar-brand" href="#">
-							<img class="logo-dark" src="assets/img/logo-dark.png" alt="logo">
-							<img class="logo-light" src="assets/img/logo-light.png" alt="logo">
-						</a>
-					</div>
-
-					<section class="navbar-mobile">
-						<nav class="nav nav-navbar mr-auto">
-							@guest
-							<a class="nav-link  d-stick-none" href="/index">Вход</a>
-							<a class="nav-link d-stick-none" href="register">Регистрация</a>
-							@endguest
-							@auth
-							<a class="nav-link " href="/index">Ставки</a>
-							@endauth
-							<a class="nav-link " href="#section-pricing">Pricing</a>
-							<a class="nav-link " href="#">Resources</a>
-							<a class="nav-link " href="#">Contact</a>
-                            @auth
-                            <a href="{{ url('/logout') }}" class="nav-link text-end" >
-                                Выход
-                            </a>
-                            @endauth
-						</nav>
-                        @guest
-						<div class="d-none d-stick-block">
-							<a class="btn btn-sm btn-light ml-lg-5 mr-2" href="/index">Войти</a>
-							<a class="btn btn-sm btn-success" href="register">Зарегистрироваться</a>
-						</div>
-                        @endguest
-					</section>
-
-				</div>
-                
-			</nav>
-			<header id="home" class="header text-white h-fullscreen text-center text-lg-left" style="background-color: #24292e">
-				<canvas class="constellation" data-color="rgba(255,255,255,0.3)"></canvas>
-				<div class="container">
-					<div class="row align-items-center h-100">
-
-						<div class="col-lg-6">
-							<h1>How developers work</h1>
-							<p class="lead mt-5 mb-8">Support your workflow with lightweight tools and features. Then work how you work best—we'll follow your lead.</p>
-							<p class="gap-xy">
-								<a class="btn btn-round btn-outline-light mw-150" href="#">Learn more</a>
-								<a class="btn btn-round btn-light mw-150" href="#">Sign up</a>
-							</p>
-						</div>
-
-						<div class="col-lg-5 ml-auto">
-							<img class="mt-5" src="assets/img/laptop-1.png" alt="img">
-						</div>
-
-					</div>
-				</div>
-			</header>
-			<!-- Main Content -->
-			<main class="main-content">
-
-	<!--
-	|‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
-	| Welcome
-	|‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
-	!-->
-	<section class="section">
+		<nav class="navbar navbar-expand-lg navbar-light navbar-stick-dark" data-navbar="sticky">
 		<div class="container">
-			<header class="section-header">
-				<small>Welcome</small>
-				<h2>Get a Better Understanding</h2>
-				<hr>
-				<p class="lead">Holisticly implement fully tested process improvements rather than dynamic internal.</p>
-			</header>
-
-
-
-			<div class="row gap-y">
-
-				<div class="col-md-8 mx-auto">
-					<img src="assets/img/dribbble-9.gif" alt="..." data-aos="fade-up" data-aos-duration="2000">
-				</div>
-
-
-				<div class="w-100"></div>
-
-
-				<div class="col-md-6 col-xl-4">
-					<div class="media">
-						<div class="lead-6 line-height-1 text-dark mr-5"><i class="icon-mobile"></i></div>
-						<div class="media-body">
-							<h5>Responsive</h5>
-							<p>Your website works on any device: desktop, tablet or mobile.</p>
-						</div>
-					</div>
-				</div>
-
-
-				<div class="col-md-6 col-xl-4">
-					<div class="media">
-						<div class="lead-6 line-height-1 text-primary mr-5"><i class="icon-gears"></i></div>
-						<div class="media-body">
-							<h5>Customizable</h5>
-							<p>You can easily read, edit, and write your own code, or change everything.</p>
-						</div>
-					</div>
-				</div>
-
-
-				<div class="col-md-6 col-xl-4">
-					<div class="media">
-						<div class="lead-6 line-height-1 text-info mr-5"><i class="icon-tools"></i></div>
-						<div class="media-body">
-							<h5>UI Kit</h5>
-							<p>There is a bunch of useful and necessary elements for developing your website.</p>
-						</div>
-					</div>
-				</div>
-
-
-				<div class="col-md-6 col-xl-4">
-					<div class="media">
-						<div class="lead-6 line-height-1 text-warning mr-5"><i class="icon-layers"></i></div>
-						<div class="media-body">
-							<h5>Lego Base</h5>
-							<p>You can find our code well organized, commented and readable.</p>
-						</div>
-					</div>
-				</div>
-
-
-				<div class="col-md-6 col-xl-4">
-					<div class="media">
-						<div class="lead-6 line-height-1 text-danger mr-5"><i class="icon-recycle"></i></div>
-						<div class="media-body">
-							<h5>Clean Code</h5>
-							<p>As you can see in the source code, we provided a clean code.</p>
-						</div>
-					</div>
-				</div>
-
-
-				<div class="col-md-6 col-xl-4">
-					<div class="media">
-						<div class="lead-6 line-height-1 text-success mr-5"><i class="icon-chat"></i></div>
-						<div class="media-body">
-							<h5>Support</h5>
-							<p>When you purchase this template, you'll freely receive future updates.</p>
-						</div>
-					</div>
-				</div>
-
+			<div class="row">
+			<div class="col-4 col-lg-auto1 mr-auto mx-lg-auto d-flex align-items-center">
+				<button class="navbar-toggler" type="button"><span class="navbar-toggler-icon"></span></button>
+			<a class="navbar-brand" href="#">
+				<img class="logo-dark" src="assets/img/logo2.svg" alt="logo">
+				<img class="logo-light" src="assets/img/logo.png" alt="logo">
+			</a>
+			</div>
+			<section class="col-lg-4 navbar-mobile">
+				<nav class="nav nav-navbar mr-lg-auto mx-lg-auto">
+				<a class="nav-link active" href="/index">Оптимизатор бюджета ЦИАН</a>
+				</nav>
+			</section>
+			<div class="col-auto col-lg-4 text-right">
+				@guest
+				<a class="btn btn-sm btn-round btn-outline-success d-none d-lg-inline-block mr-2" href="/login">Войти</a>
+				<a class="btn btn-sm btn-round btn-success" href="/register">Регистрация</a>
+				@endguest
+				@auth
+				<a href="{{ url('/logout') }}" class="btn btn-sm btn-round btn-outline-success d-none d-lg-inline-block text-end" >
+					Выход
+				</a>
+				@endauth
 			</div>
 
-		</div>
-	</section>
-
-
-	<!--
-	|‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
-	| CTA
-	|‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
-	!-->
-	<section class="section py-7" style="background-color: #8ea6e6">
-		<div class="container">
-			<div class="row gap-y align-items-center">
-				<div class="col-md-9">
-					<h4 class="mb-0 text-white text-center text-md-left">Want a bite? You're in the right place!</h4>
-				</div>
-
-				<div class="col-md-3 text-center text-md-right">
-					<a class="btn btn-lg btn-round btn-light" href="#">Take a test drive</a>
-				</div>
 			</div>
 		</div>
-	</section>
+		</nav><!-- /.navbar -->
 
 
-	<!--
-	|‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
-	| Features
-	|‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
-	!-->
-	<section id="section-features" class="section bg-gray">
-		<div class="container">
-			<header class="section-header">
-				<small>Feature</small>
-				<h2>More to Discover</h2>
-				<hr>
-				<p class="lead">We waited until we could do it right. Then we did! Instead of creating a carbon copy.</p>
-			</header>
+		<!-- Header -->
+		<header class="header text-white h-fullscreen pb-0 overflow-hidden" style="background-image: url(../assets/img/vector/16.png); background-color: #262a37;">
+		<div class="overlay opacity-95" style="background-image: linear-gradient(to bottom, #09203f 0%, #537895 100%);"></div>
+		<div class="container text-center">
+			<div class="row align-items-center h-100">
 
-
-			<div class="row gap-y align-items-center">
-				<div class="col-md-6 ml-auto">
-					<h4>Getting Started page</h4>
-					<p>As part of efforts to improve user onboarding, I shipped an experiment to a subset of new users showing them a Getting Started page immediately after signup to help them get to what we think are some of the most important actions for new users to take. We compared the subset of users against a control group to see whether such an experience improved engagement over a period of time.</p>
-				</div>
-
-				<div class="col-md-5 order-md-first">
-					<img class="rounded shadow-2" src="assets/img/dribbble-6.png" alt="...">
-				</div>
+			<div class="col-md-8 mx-auto">
+				<h1>Побеждайте интеллектом, а не бюджетами.</h1>
+				<p class="lead mt-4 mb-7">Повысьте количество клиентов при меньшем бюджете. Мы покажем какие объявления нужно продвигать и суммы на каждое  с точностью до рубля. Распределим бюджеты в 1 клик.</p>
+				<a class="btn btn-xl btn-round btn-primary px-8" href="/index">Попробуйте бесплатно</a>
 			</div>
 
-
-			<hr class="my-8">
-
-
-			<div class="row gap-y align-items-center">
-				<div class="col-md-6 mr-auto">
-					<h4>Outdated comments toggling</h4>
-					<p>Last week we shipped outdated comments...well, brought them back, actually. We used to show collapsed comments on outdated diffs as a single line, but removed that when we shipped code review recently. We brought that back last week with an improvement: you can now toggle open threads on outdated diffs in a review individually.</p>
-				</div>
-
-				<div class="col-md-5">
-					<img class="rounded shadow-2" src="assets/img/dribbble-7.png" alt="...">
-				</div>
+			<div class="col-md-8 mx-auto align-self-end">
+				<img class="mt-7" src="assets/img/content.png" alt="img" data-aos="fade-up">
 			</div>
 
-
-			<hr class="my-8">
-
-
-			<div class="row gap-y align-items-center">
-				<div class="col-md-6 ml-auto">
-					<h4>Code review illustrations</h4>
-					<p>Less an illustration, and more a literal proxy. These show up when the feature's introduced. Monotonectally leverage existing standards compliant ideas with distributed data. Efficiently simplify cross-unit systems whereas adaptive testing. Monotonectally leverage existing standards compliant ideas with distributed data. Efficiently simplify cross-unit systems whereas adaptive testing.</p>
-				</div>
-
-				<div class="col-md-5 order-md-first">
-					<img class="rounded shadow-2" src="assets/img/dribbble-8.png" alt="...">
-				</div>
 			</div>
-
-
 		</div>
-	</section>
+		</header><!-- /.header -->
 
 
-	<!--
-	|‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
-	| Pricing
-	|‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
-	!-->
-	<section id="section-pricing" class="section">
-		<div class="container">
-			<header class="section-header">
-				<small>Plans</small>
-				<h2>Pricing</h2>
-				<hr>
-				<p class="lead">Choose any of the following plans to get start with. You can start with the FREE plan to see our web application at first. You can always change your plan from your account.</p>
-			</header>
+		<!-- Main Content -->
+		<main class="main-content">
 
+		<!--
+		|‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
+		| Features
+		|‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
+		!-->
+		<section class="section bg-gray overflow-hidden">
+			<div class="container-fluid">
+			<div class="row gap-y align-items-center">
 
-			<div class="text-center my-7">
-				<div class="btn-group btn-group-toggle" data-toggle="buttons">
-					<label class="btn btn-round btn-outline-secondary w-150 active">
-						<input type="radio" name="pricing" value="monthly" autocomplete="off" checked> Monthly
-					</label>
-					<label class="btn btn-round btn-outline-secondary w-150">
-						<input type="radio" name="pricing" value="yearly" autocomplete="off"> Yearly
-					</label>
+				<div class="col-md-4 mx-auto text-center">
+					<div class="container-img">
+						<img class="border shadow-7" src="assets/img/block-1.png" alt="..." data-aos="fade-right">
+					</div>
 				</div>
-			</div>
 
+
+				<div class="col-md-4 mx-auto">
+				<h3>Результат нашего клиента: 1-ое место с двукратным отрывом от ближайшего конкурента при меньшем бюджете!</h3>
+				<p>Умные алгоритмы продвижения позволили компании «Наследие» всего за полтора месяца занять лидирующие позиции в Ростове-на-Дону, при этом рекламный бюджет удалось сократить, т. к. агенты перестали справляться с потоком лидов.</p>
+				<a href="#">Узнать подробнее<i class="fas fa-arrow-right ms-1"></i></a>
+				</div>
+
+			</div>
+			</div>
+		</section>
+
+
+		<section class="section overflow-hidden">
+			<div class="container-fluid">
+			<div class="row gap-y align-items-center">
+
+				<div class="col-md-4 mx-auto text-center">
+				<img class="border shadow-7" src="assets/img/block-2.png" alt="..." data-aos="fade-left">
+				</div>
+
+
+				<div class="col-md-4 mx-auto order-md-first">
+				<h3>Мы используем самые передовые математические модели и алгоритмы.</h3>
+				<p>За построение математических моделей и финансовую математику отвечают практикующие дипломированные специалисты с опытом работы и преподавания в немецких и лучших российских университетах.</p>
+				<a href="#">Узнать подробнее<i class="fas fa-arrow-right ms-1"></i></a>
+				</div>
+
+			</div>
+			</div>
+		</section>
+
+
+		<section class="section bg-gray overflow-hidden">
+			<div class="container-fluid">
+			<div class="row gap-y align-items-center">
+
+				<div class="col-md-4 mx-auto text-center">
+				<img class="border shadow-7" src="assets/img/block-3.png" alt="..." data-aos="fade-right">
+				</div>
+
+
+				<div class="col-md-4 mx-auto">
+				<h3>Опыт более 10 лет в разработке приложений для риэлторов.</h3>
+				<p>Наша команда автоматизирует работу агентств недвижимости с 2009 года. Нами создано более 20 CRM и ERP систем, большое количество ПО различного назначения.</p>
+				<a href="#">Узнать подробнее<i class="fas fa-arrow-right ms-1"></i></a>
+				</div>
+
+			</div>
+			</div>
+		</section>
+
+		<!--
+		|‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
+		| Teamwork To The Next Level
+		|‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
+		!-->
+		<section class="section">
+			<div class="container">
+			<header class="section-header">
+				<h2>Преимущества  Оптимизатора бюджета ЦИАН</h2>
+				<hr>
+			</header>
 
 			<div class="row gap-y text-center">
 
-				<div class="col-md-4">
-					<div class="pricing-1">
-						<p class="plan-name">Free</p>
-						<br>
-						<h2 class="price">0</h2>
-						<p class="small">&nbsp;</p>
-
-						<div class="text-muted">
-							<small>1 Repository</small><br>
-							<small>1 Private Project</small><br>
-							<small>100 MB Attachment</small><br>
-						</div>
-
-						<br>
-						<p class="text-center py-3">
-							<a class="btn btn-primary" href="#">Get started</a>
-						</p>
-					</div>
+				<div class="col-md-6 col-xl-4 feature-1">
+				<p class="feature-icon lead-8 text-info"><img src="assets/img/block-4-icon-1.png"></p>
+				<h5>Подходит для компаний любого размера.</h5>
+				<p class="text-muted">Нам не важно сколько у Вас объектов в рекламе 20 или 20 000.</p>
 				</div>
 
-
-				<div class="col-md-4">
-					<div class="pricing-1 popular">
-						<p class="plan-name">Personal</p>
-						<br>
-						<h2 class="price text-success">
-							<span class="price-unit">$</span>
-							<span data-bind-radio="pricing" data-monthly="9" data-yearly="99">9</span>
-							<span class="plan-period" data-bind-radio="pricing" data-monthly="/mo" data-yearly="/yr">/mo</span>
-						</h2>
-						<p class="small">&nbsp;</p>
-
-						<div class="text-muted">
-							<small>1 Repository</small><br>
-							<small>10 Private Project</small><br>
-							<small>10 GB attachment</small><br>
-						</div>
-
-						<br>
-						<p class="text-center py-3">
-							<a class="btn btn-success" href="#" data-bind-href="pricing" data-monthly="#monthly" data-yearly="#yearly">Get started</a>
-						</p>
-					</div>
+				<div class="col-md-6 col-xl-4 feature-1">
+				<p class="feature-icon lead-8 text-danger"><img src="assets/img/block-4-icon-2.png"></p>
+				<h5>Маркетинг в один клик.</h5>
+				<p class="text-muted">Выбирайте из нескольких автостратегий: минимальная цена лида, максимальное количество клиентов, либо сбалансированный вариант. Кроме того, можно настроить все вручную.</p>
 				</div>
 
-
-				<div class="col-md-4">
-					<div class="pricing-1">
-						<p class="plan-name">Team</p>
-						<br>
-						<h2 class="price">
-							<span class="price-unit">$</span>
-							<span data-bind-radio="pricing" data-monthly="39" data-yearly="399">39</span>
-							<span class="plan-period" data-bind-radio="pricing" data-monthly="/mo" data-yearly="/yr">/mo</span>
-						</h2>
-						<p class="small">&nbsp;</p>
-
-						<div class="text-muted">
-							<small>5 Repository</small><br>
-							<small>25 Private Project</small><br>
-							<small>100 GB attachments</small><br>
-						</div>
-
-						<br>
-						<p class="text-center py-3">
-							<a class="btn btn-primary" href="#" data-bind-href="pricing" data-monthly="#monthly" data-yearly="#yearly">Get started</a>
-						</p>
-					</div>
+				<div class="col-md-6 col-xl-4 feature-1">
+				<p class="feature-icon lead-8 text-success"><img src="assets/img/block-4-icon-3.png"></p>
+				<h5>Дружелюбная поддержка.</h5>
+				<p class="text-muted">Мы с радостью проконсультируем не только по работе нашей системы, но и по любым другим вопросам маркетинга, лидогенерации, CRM и IT.</p>
 				</div>
 
 			</div>
 
-
-		</div>
-	</section>
-
-
-	<!--
-	|‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
-	| Signup
-	|‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
-	!-->
-	<section class="section bg-gray text-center">
-		<div class="container">
-
-			<header class="section-header">
-				<small>Try It Now</small>
-				<h2 class="lead-8"><strong>Get Started Free</strong></h2>
-				<hr>
-				<p class="lead">Sign up for free and become one of the millions of people around the world who have fallen in love with TheSaaS.</p>
-			</header>
-
-
-			<div class="row">
-				<form class="col-md-4 col-xl-4 mx-auto input-border">
-					<div class="form-group">
-						<input type="text" class="form-control form-control-lg" placeholder="Name">
-					</div>
-
-					<div class="form-group">
-						<input type="text" class="form-control form-control-lg" placeholder="Email">
-					</div>
-
-					<div class="form-group">
-						<input type="password" class="form-control form-control-lg" placeholder="Password">
-					</div>
-
-					<button class="btn btn-block btn-xl btn-success">Sign up</button>
-					<p class="small mt-3 opacity-70">or use your <a href="#">Facebook account</a></p>
-				</form>
 			</div>
+		</section>
 
-		</div>
-	</section>
-    </div>
-</main>
-		<footer class="footer">
+
+		<!--
+		|‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
+		| Pricing
+		|‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
+		!-->
+		<section class="section bg-gray">
 			<div class="container">
-				<div class="row gap-y align-items-center">
+			<div class="row gap-y align-items-center">
 
-					<div class="col-md-3 text-center text-md-left">
-						<a href="#"><img src="assets/img/logo-dark.png" alt="logo"></a>
+				<div class="col-md-4">
+				<p class="lead-7 text-dark fw-600 lh-2">Цены</p>
+
+				<div class="btn-group btn-group-toggle my-7" data-toggle="buttons">
+					<label class="btn btn-round btn-outline-dark w-150">
+					<input type="radio" name="pricing" value="monthly" autocomplete="off"> Месяц
+					</label>
+					<label class="btn btn-round btn-outline-dark w-150 active">
+					<input type="radio" name="pricing" value="yearly" autocomplete="off" checked> Год
+					</label>
+				</div>
+
+				<p class="lead">Стоимость оптимизатора гораздо ниже экономии бюджета.</p>
+				</div>
+
+
+				<div class="col-md-7 ml-auto">
+				<div class="row gap-y">
+
+					<div class="col-md-6">
+					<div class="card text-center shadow-1 hover-shadow-9">
+						<div class="card-img-top text-white bg-img h-200 d-flex align-items-center" style="background-image: url(assets/img/standart.jpg)" data-overlay="1">
+						<div class="position-relative w-100">
+							<p class="lead-4 fw-600 ls-1 mb-0">Старндартный</p>
+							<p><span data-bind-radio="pricing" data-monthly="Месячный" data-yearly="Годовой">Месячный</span> Пакет</p>
+						</div>
+						</div>
+						<div class="card-body py-6">
+						<p class="lead-7 fw-600 text-dark mb-0">
+							<span data-bind-radio="pricing" data-monthly="6000/мес." data-yearly="4000/мес.">6000/мес.</span><br>
+						</p>
+						<p>
+							<strong>1 месяц бесплатно</strong>
+							<br>
+							Количество объявлений не ограничено. Обновление в сутки не ограничено. 
+				
+						</p>
+						<br>
+						<div>
+							<a class="btn btn-round btn-outline-secondary w-200" href="#" data-bind-href="pricing" data-monthly="#monthly" data-yearly="#yearly">Купить</a>
+						</div>
+						</div>
+					</div>
 					</div>
 
 					<div class="col-md-6">
-						<div class="nav nav-center">
-							<a class="nav-link" href="#">About</a>
-							<a class="nav-link" href="#">Blog</a>
-							<a class="nav-link" href="#">Policy</a>
-							<a class="nav-link" href="#">Contact</a>
+					<div class="card text-center shadow-1 hover-shadow-9">
+						<div class="card-img-top text-white bg-img h-200 d-flex align-items-center" style="background-image: url(assets/img/advanced.jpg)" data-overlay="2">
+						<div class="position-relative w-100">
+							<p class="lead-4 fw-600 ls-1 mb-0">Расширенный</p>
+							<p><span data-bind-radio="pricing" data-monthly="Месячный" data-yearly="Годовой">Годовой</span> Пакет</p>
+						</div>
+						</div>
+						<div class="card-body py-6">
+						<p class="lead-7 fw-600 text-dark mb-0">
+							<span data-bind-radio="pricing" data-monthly="10000/мес." data-yearly="7000/мес.">10000/мес</span><br>
+						</p>
+						<p>
+							3 часа времени нашего маркетолога для анализа ставок/консультации по любым вопросам лидогенерации.
+						</p>
+						<br>
+						<div>
+							<a class="btn btn-round btn-secondary w-200" href="#" data-bind-href="pricing" data-monthly="#monthly" data-yearly="#yearly">Купить</a>
+						</div>
 						</div>
 					</div>
-
-					<div class="col-md-3 text-center text-md-right">
-						<small>© 2020. All rights reserved.</small>
 					</div>
 
 				</div>
-			</div>
-		</footer><!-- /.footer -->
+				</div>
 
+			</div>
+			</div>
+		</section>
+
+		<!--
+		|‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
+		| CTA
+		|‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
+		!-->
+		<section class="section bg-gray text-center">
+			<div class="container">
+			<h2 class="mb-6"><strong>Получите преимущество надо конкурентами.</strong></h2>
+			<!-- <p class="lead text-muted">The best sharing and storage solution for your business</p> -->
+			<hr class="w-5 my-7">
+			<a class="btn btn-lg btn-round btn-primary" href="/index">Попробовать бесплатно</a>
+			</div>
+		</section>
+
+
+		</main>
+
+
+		<!-- Footer -->
+		<footer class="footer text-white bt-0 py-7" style="background-image: linear-gradient(135deg, #4481eb 0%, #04befe 100%);">
+		<div class="container">
+			<div class="row align-items-center">
+
+			<div class="col-md-3">
+				<a class="navbar-brand" href="#">
+					<img class="logo-light" src="assets/img/logo2.svg" alt="logo">
+				</a>
+			</div>
+			<section class="col-lg-6 navbar-mobile">
+				<nav class="nav nav-navbar mr-lg-auto mx-lg-auto">
+				<a class="nav-link active" href="/index">Оптимизатор бюджета ЦИАН</a>
+				</nav>
+			</section>
+			<div class="col-md-3 text-center text-md-left mt-5 mt-md-0">
+				<div class="social social-bg-dark">
+				<a class="social-facebook" href="#"><i class="fa fa-facebook"></i></a>
+				<a class="social-twitter" href="#"><i class="fa fa-twitter"></i></a>
+				<a class="social-instagram" href="#"><i class="fa fa-instagram"></i></a>
+				<a class="social-youtube" href="#"><i class="fa fa-youtube"></i></a>
+				<a class="social-dribbble" href="#"><i class="fa fa-dribbble"></i></a>
+				</div>
+			</div>
+			<div class="col-12 text-center">
+				<br>
+				<small>© TheThemeio 2020, All rights reserved.</small>
+			</div>
+
+			</div>
+		</div>
+		</footer><!-- /.footer -->
 	</body>
 </html>

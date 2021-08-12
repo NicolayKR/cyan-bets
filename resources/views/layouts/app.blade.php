@@ -7,9 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title')</title>
     <!-- Scripts -->
-    @if !(Route::is('login') or Route::is('register'))
     <script src="{{ asset('assets/js/app.js') }}" defer></script>
-    @endif
     <link href="{{ asset('assets/css/app.css') }}" rel="stylesheet">
 </head>
 <body>
