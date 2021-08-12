@@ -28,9 +28,9 @@
 		<nav class="navbar navbar-expand-lg navbar-light navbar-stick-dark" data-navbar="sticky">
 		<div class="container">
 			<div class="row">
-				<div class="col-4 col-lg-auto1 mr-auto mx-lg-auto d-flex align-items-center">
+				<div class="col-auto col-md-4 col-lg-auto1 mr-auto mx-lg-auto d-flex align-items-center">
 					<button class="navbar-toggler" type="button"><span class="navbar-toggler-icon"></span></button>
-					<a class="navbar-brand" href="#">
+					<a class="navbar-brand" href="#" id="logo-top">
 						<img class="logo-dark" src="assets/img/logo2.svg" alt="logo">
 						<img class="logo-light" src="assets/img/logo.png" alt="logo">
 					</a>	
@@ -296,7 +296,7 @@
 					<img class="logo-light" src="assets/img/logo2.svg" alt="logo">
 				</a>
 			</div>
-			<section class="col-lg-6">
+			<section class="col-lg-6 navbar-mobile">
 				<nav class="nav nav-navbar mr-lg-auto mx-lg-auto">
 				<a class="nav-link active" href="/index">Оптимизатор бюджета ЦИАН</a>
 				</nav>

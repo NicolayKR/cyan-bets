@@ -32775,12 +32775,6 @@ a.text-lightest:focus {
 .ms-1 {
   margin-left: 5px;
 }
-
-@media (min-width: 980px) {
-  .container-img {
-    min-width: 800px;
-  }
-}
 .block-number {
   text-align: center;
   font-weight: bold;
@@ -32933,6 +32927,16 @@ a.text-lightest:focus {
 @media (max-width: 400px) {
   body > .footer .social a:last-child,
 body > .footer .nav a:last-child {
+    display: none;
+  }
+}
+@media (min-width: 980px) {
+  .container-img {
+    min-width: 800px;
+  }
+}
+@media (max-width: 570px) {
+  #logo-top {
     display: none;
   }
 }
