@@ -14,7 +14,7 @@
 		<link rel="stylesheet" href="{{ asset('assets/css/app2.min.css') }}" as="style"></link>
 	</head>
 	<body>
-		<div id="app">
+		<div id="app2">
 		<!-- Navbar -->
 		<nav class="navbar navbar-expand-lg navbar-light navbar-stick-dark" data-navbar="sticky">
 		<div class="container">
@@ -216,10 +216,8 @@
 							<span data-bind-radio="pricing" data-monthly="6000/мес." data-yearly="4000/мес.">6000/мес.</span><br>
 						</p>
 						<p>
-							<strong>1 месяц бесплатно</strong>
-							<br>
+							<strong>1 месяц бесплатно. </strong>
 							Количество объявлений не ограничено. Обновление в сутки не ограничено. 
-				
 						</p>
 						<br>
 						<div>
