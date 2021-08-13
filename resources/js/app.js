@@ -4,7 +4,6 @@ require('./landing/landing');
 require('./landing/landing2.min');
 
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue';
-import store from '../vuex/store';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 import VueCharts from 'vue-chartjs';
 import Vue from "vue";
@@ -24,5 +23,4 @@ Vue.component('modal-contact', require('./components/ContactModal').default);
 
 new Vue({
     el: '#app',
-    store,
 });

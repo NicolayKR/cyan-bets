@@ -7,7 +7,7 @@
         <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <ul class="nav col-sm-12 col-md-6">
+        <ul class="nav col-sm-12 col-md-6 col-lg-8">
             <li class="nav-item">
                 <span class="nav-link">
                     <i class="fas fa-clock me-1"></i>
@@ -33,7 +33,7 @@
                 </span>
             </li>    
         </ul>
-        <div class="nav-item col-md-3 dropdown">
+        <div class="nav-item col-md-3 col-lg-2 dropdown">
             <a class="nav-link dropdown-toggle text-end" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Здравствуйте, {{nameUser}}
             </a>

@@ -10,17 +10,8 @@
 		<title>Биддер ЦИАН</title>
 
 		<!-- Styles -->
-		<script src="{{ asset('assets/js/app.min.js') }}" defer></script>
-		<link href="{{ asset('assets/css/app2.min.css') }}" rel="stylesheet">
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-		<!-- <script type="text/javascript" src="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.9.0/slick/slick.min.js"></script>
-		<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.9.0/slick/slick.css"/> -->
-<!-- Добавляем тему по умолчанию из CDN -->
-		<!-- <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.9.0/slick/slick-theme.css"/> -->
-		<!-- Favicons -->
-		<!-- <link rel="apple-touch-icon" href="../assets/img/apple-touch-icon.png">
-		<link rel="icon" href="../assets/img/favicon.png"> -->
+		<script rel="preload" src="{{ asset('assets/js/app2.min.js') }}" defer></script>
+		<link rel="stylesheet" href="{{ asset('assets/css/app2.min.css') }}" as="style"></link>
 	</head>
 	<body>
 		<div id="app">

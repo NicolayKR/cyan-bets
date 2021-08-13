@@ -64,21 +64,21 @@
                 </div>
                 <h3 class="h3 mt-logic-block">Таблица ставок</h3>
                 <div class="row mt-4">
-                    <div class="col-md-9 col-lg-8">
+                    <div class="col-md-9 col-lg-10">
                         <div class="row">
-                            <div class="col-6 col-sm-4 col-md-5 d-grid gap-2 mt-2">
-                                <button type="button" class="btn btn-info budge-item-text d-flex align-items-center">
+                            <div class="col-6 col-sm-4 col-md-5 col-lg-3 col-xl-2 d-grid gap-2 mt-2">
+                                <button type="button" class="btn btn-info budge-item-text d-flex align-items-center justify-content-center">
                                     ВСЕГО 
-                                    <span class="badge bg-primary">{{this.tabelData.length}}</span>
+                                    <span class="badge bg-primary ms-1">{{this.tabelData.length}}</span>
                                 </button>
                             </div>
-                            <div class="col-6 col-sm-4 col-md-5 d-grid gap-2 mt-2">
-                                <button type="button" class="btn btn-info budge-item-text d-flex align-items-center">
+                            <div class="col-6 col-sm-4 col-md-5 col-lg-3 col-xl-2 d-grid gap-2 mt-2">
+                                <button type="button" class="btn btn-info budge-item-text d-flex align-items-center justify-content-center">
                                     АУКЦИОН 
-                                    <span class="badge bg-primary">{{this.auction_lenght}}</span>
+                                    <span class="badge bg-primary ms-1">{{this.auction_lenght}}</span>
                                 </button>
                             </div>
-                            <div class="col-12 col-sm-12 col-md-10 mt-2">
+                            <div class="col-12 col-sm-12 col-md-11 col-lg-9 col-xl-7 mt-2">
                                 <input type="text" v-model="id_object" placeholder="Поиск по id-объекта или id-циана" class="form-control"/>
                             </div> 
                             <div class="col-1 d-flex align-items-center mt-2">

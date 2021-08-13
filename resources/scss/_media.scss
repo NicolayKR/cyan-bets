@@ -19,3 +19,17 @@
         max-width: 85px;
     }
 }
+@media(max-width:466px){
+    .blackcircle {
+        width: 100px;
+        height: 100px;
+    }
+    .statistic_numeral{
+        font-size:25px;
+        
+    }
+    .statistic_text{
+        font-size: 8px;
+        max-width: 75px;
+    }
+}
