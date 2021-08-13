@@ -7,10 +7,10 @@
                     <li v-for="error in errors" :key="error">{{ error }}</li>
                 </ul>
             </div>
-            <div v-if="status == 1" class="alert alert-success mb-2" role="alert">
+            <div v-if="status==1" class="alert alert-success mb-2" role="alert">
                 Ваша заявка принята, скоро с вами свяжутся.
             </div>
-            <div v-if="status == 0" class="alert alert-success mb-2" role="alert">
+            <div v-if="status==0" class="alert alert-success mb-2" role="alert">
                 Что-то пошло не так, сообщение не было отправлено.
             </div>
             <div class="modal-header">
@@ -45,8 +45,10 @@ export default {
     },
     methods:{
         postForm(){
-            if (this.name!='' && this.age!='') {
+            this.status = null;
+            if (this.name!='' && this.email!='') {
                 axios.get(`/postMail?&name=${this.name}&email=${this.email}&phone=${this.phone}&message=${this.message}`).then(response => {
+                    this.errors = [];
                     this.name = '';
                     this.email = '';
                     this.phone = '';

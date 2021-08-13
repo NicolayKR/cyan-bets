@@ -1,7 +1,7 @@
 let mix = require('laravel-mix');
-mix.js('resources/js/app.js', 'public/assets/js').vue()
-        .sass('resources/scss/scss-landing/app.scss', 'public/assets/css/app2.css')
-        .sass('resources/scss/app.scss', 'public/assets/css');
+mix.js('resources/js/app.js', 'public/assets/js/app.min.js').vue()
+        .sass('resources/scss/scss-landing/app.scss', 'public/assets/css/app2.min.css')
+        .sass('resources/scss/app.scss', 'public/assets/css/app.min.css');
 
 // Если не нужен сервер статики, закомментировать...
 // const browserSync = require("browser-sync").create();

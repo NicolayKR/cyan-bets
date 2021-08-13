@@ -19,7 +19,4 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     });
     $("div.pswp").remove();
-    // $(window).click(function(event){
-    //     $('#example-datepicker-end__dialog_').attr('x-placement', 'bottom-start');
-    // });
 });
