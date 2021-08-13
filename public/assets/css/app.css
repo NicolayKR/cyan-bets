@@ -17911,9 +17911,9 @@ header {
   background-color: #f1f2f3 !important;
 }
 
-@media (max-width: 980px) {
+@media (max-width: 899px) {
   #sidebarMenu {
-    padding-top: 30vh;
+    padding-top: 15vh;
   }
 }
 .flex {
@@ -18114,6 +18114,27 @@ td {
   border: 3px solid transparent;
 }
 
+@media (max-width: 980px) {
+  .blackcircle {
+    width: 150px;
+    height: 150px;
+  }
+}
+@media (max-width: 590px) {
+  .blackcircle {
+    width: 120px;
+    height: 120px;
+  }
+
+  .statistic_numeral {
+    font-size: 30px;
+  }
+
+  .statistic_text {
+    font-size: 10px;
+    max-width: 85px;
+  }
+}
 .graph_wrapper {
   border: 1px solid #ced4da;
   border-top: none;
@@ -18121,6 +18142,15 @@ td {
 
 .graph_wrapper > div {
   padding-right: 5px;
+}
+
+.form-control .text-muted {
+  display: flex;
+  align-items: center;
+}
+
+#example-datepicker-end__dialog_, #example-datepicker-start__dialog_ {
+  z-index: 10000;
 }
 
 .tooltip {

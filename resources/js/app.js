@@ -20,6 +20,7 @@ Vue.use(VueCharts);
 Vue.component('header-component', require('./components/header').default);
 Vue.component('table-component', require('./components/table').default);
 Vue.component('table-errors-component', require('./components/table_errors').default);
+Vue.component('modal-contact', require('./components/ContactModal').default);
 
 new Vue({
     el: '#app',

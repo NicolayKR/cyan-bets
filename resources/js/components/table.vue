@@ -20,19 +20,19 @@
                 <h3 class="h3 mt-3">Общая статистика</h3>
                 <div class="gy-2 gx-3 align-items-center">
                     <div class="row ">
-                        <div class="col-md-3 col-12 d-flex mt-3">
+                        <div class="col-md-10 col-lg-4 col-xl-3 col-9 d-flex mt-3">
                             <div class="label-wrapper d-flex">
                                 <label for="example-datepicker-start">С</label>
                             </div>
                             <b-form-datepicker id="example-datepicker-start" v-model="start"  locale="ru" placeholder="Выберите дату"></b-form-datepicker>
                         </div>
-                        <div class="col-md-3 col-12 d-flex mt-3">
+                        <div class="col-md-10 col-lg-4 col-xl-3 col-9 d-flex mt-3">
                             <div class="label-wrapper d-flex">
                                 <label for="example-datepicker-end">По</label>
                             </div>
                             <b-form-datepicker id="example-datepicker-end" v-model="end" :min="start" locale="ru" placeholder="Выберите дату"></b-form-datepicker>
                         </div>
-                        <div class="col-md-1 col-12 d-grid gap-2  mt-3">
+                        <div class="col-md-3 col-lg-1 col-4 d-grid gap-2  mt-3">
                             <button type="button" class="btn btn-primary" @click="getData()">OK</button>
                         </div>
                     </div>
@@ -66,22 +66,22 @@
                 <div class="row mt-4">
                     <div class="col-md-9 col-lg-8">
                         <div class="row">
-                            <div class="col-md-2 d-grid gap-2">
+                            <div class="col-6 col-sm-4 col-md-5 d-grid gap-2 mt-2">
                                 <button type="button" class="btn btn-info budge-item-text d-flex align-items-center">
                                     ВСЕГО 
                                     <span class="badge bg-primary">{{this.tabelData.length}}</span>
                                 </button>
                             </div>
-                            <div class="col-md-2 d-grid gap-2">
+                            <div class="col-6 col-sm-4 col-md-5 d-grid gap-2 mt-2">
                                 <button type="button" class="btn btn-info budge-item-text d-flex align-items-center">
                                     АУКЦИОН 
                                     <span class="badge bg-primary">{{this.auction_lenght}}</span>
                                 </button>
                             </div>
-                            <div class="col-md-7">
+                            <div class="col-12 col-sm-12 col-md-10 mt-2">
                                 <input type="text" v-model="id_object" placeholder="Поиск по id-объекта или id-циана" class="form-control"/>
                             </div> 
-                            <div class="col-md-1 d-flex align-items-center">
+                            <div class="col-1 d-flex align-items-center mt-2">
                                 <input class="form-check-input" type="checkbox" v-model="checked" id="flexCheckDefault" @click="sortTable('top')">
                                 <label class="form-check-label label-check-top ms-1" for="flexCheckDefault">
                                     Топ

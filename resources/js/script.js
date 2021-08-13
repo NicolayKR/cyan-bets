@@ -10,4 +10,16 @@ window.addEventListener('DOMContentLoaded', () => {
              }
         }
 	});
+    $(window).resize(function(){
+        let header = $('#main-header').height();
+        if($(window).width()< 899){
+            $('#sidebarMenu').css({
+                'padding-top': header
+            });
+        }
+    });
+    $("div.pswp").remove();
+    // $(window).click(function(event){
+    //     $('#example-datepicker-end__dialog_').attr('x-placement', 'bottom-start');
+    // });
 });

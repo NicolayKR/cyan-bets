@@ -14,6 +14,9 @@ use App\Models\errors_publish;
 use DiDom\Document;
 use DiDom\Query; 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ContactForm;
+use App\Models\MailPost;
 
 
 class TableController extends Controller
@@ -244,5 +247,25 @@ class TableController extends Controller
             }
         }
         return $final_arr;
+    }
+    public function postMail(Request $request){
+        try{
+        $toEmail = 'n.kryuchkov@enterprise-it.ru';
+        $email = $request->query('email');
+        $name = $request->query('name');
+        $phone = $request->query('phone');
+        $mess=$request->query('message');
+        $newMess = MailPost::create(array(
+            'name'=>$name,
+            'email'=>$email,
+            'phone'=>$phone,
+            'message'=>$mess
+        ));
+        $newMess->save();
+        Mail::to($toEmail)->send(new ContactForm($name, $email, $phone, $mess));
+        return 1;
+    }catch(Exception $e){
+        return 0;
+        }   
     }
 }

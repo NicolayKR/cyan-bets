@@ -1,5 +1,5 @@
 <template>
-    <header class="header navbar navbar-dark sticky-top flex-md-nowrap p-0">
+    <header class="header navbar navbar-dark sticky-top flex-md-nowrap p-0" id="main-header">
         <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="/index">
             <i class="fab fa-atlassian"></i>
             Циан автомат
@@ -7,7 +7,7 @@
         <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <ul class="nav col-lg-8">
+        <ul class="nav col-sm-12 col-md-6">
             <li class="nav-item">
                 <span class="nav-link">
                     <i class="fas fa-clock me-1"></i>
@@ -33,7 +33,7 @@
                 </span>
             </li>    
         </ul>
-        <div class="nav-item col-lg-2 dropdown">
+        <div class="nav-item col-md-3 dropdown">
             <a class="nav-link dropdown-toggle text-end" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Здравствуйте, {{nameUser}}
             </a>
@@ -119,7 +119,7 @@ export default {
             this.$refs.form.submit();
             },
         getUserName(){
-            axios.get('/getName').then(response => {
+            axios.get(`/getName?&item=${this.current_item}`).then(response => {
                 this.nameUser = response.data;
             });
         },

@@ -1,8 +1,14 @@
-@media(min-width:980px){
+@media(min-width:1740px){
     .container-img{
         min-width: 800px; 
      
-    }
+    }  
+}
+@media(min-width:1450px) and (max-width:1740px){
+    .container-img{
+        min-width: 650px; 
+     
+    }  
 }
 @media(max-width:570px){
     #logo-top{

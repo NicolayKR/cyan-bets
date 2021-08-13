@@ -15,7 +15,9 @@ use App\Models\StatisticShows;
 use App\Models\errors_publish;
 use Gaarf\XmlToPhp\Convertor;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ContactForm;
+use App\Models\MailPost;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,29 +46,27 @@ Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::get('/getBalance', 'App\Http\Controllers\TableController@getBalance');
 Route::get('/getErrors', 'App\Http\Controllers\TableController@getErrors');
 Route::resource('/accounts','App\Http\Controllers\AccountController');
+Route::get('/postMail', 'App\Http\Controllers\TableController@postMail');
 Auth::routes();
 Route::get('test', function(){
-    // $final_arr = [];
-    // $collection_errors =  DB::table('errors_publishes')
-    // ->join('current_xmls',function ($join) {
-    //     $join->on('current_xmls.id_flat', '=', 'errors_publishes.id_object');
-    //     $join->on('current_xmls.id_user', '=', 'errors_publishes.id_user');})
-    // ->join('company_names',function ($join) {
-    //     $join->on('current_xmls.id_company', '=', 'company_names.id');
-    //     $join->on('current_xmls.id_user', '=', 'company_names.user_id');})
-    //     ->select('company_names.name','errors_publishes.id_object','errors_publishes.id_offer','errors_publishes.errors','errors_publishes.warning')
-    //     ->where('current_xmls.id_user', Auth::user()->id)
-    //     ->whereRaw('date(errors_publishes.updated_at) = DATE(NOW())')->get();
-    // foreach($collection_errors as $index=>$errors){
-    //     $final_arr[$index]['name_company'] = $errors->name;
-    //     $final_arr[$index]['id_object'] = $errors->id_object;
-    //     $final_arr[$index]['errors'] = $errors->errors;
-    //     $final_arr[$index]['warning'] = $errors->warning;
-    //     if($errors->id_offer == null)
-    //         $final_arr[$index]['id_offer'] = 'Не опубликован';
-    //     else{
-    //         $final_arr[$index]['id_offer'] = $errors->id_offer;
-    //     }
-    // }
-    // return $final_arr;
+
+    //try{
+        $toEmail = 'n.kryuchkov@enterprise-it.ru';
+        $email = 'n.kryuchkov@enterprise-it.ru';
+        $name = 'n.kryuchkov@enterprise-it.ru';
+    
+        $phone = 'n.kryuchkov@enterprise-it.ru';
+        $mess='n.kryuchkov@enterprise-it.ru';
+        $newMess = MailPost::create(array(
+            'name'=>$name,
+            'email'=>$email,
+            'phone'=>$phone,
+            'message'=>$mess
+        ));
+        $newMess->save();
+        Mail::to($toEmail)->send(new ContactForm($name, $email, $phone, $mess));
+        return 1;
+    //}catch(Exception $e){
+     //   return 0;
+   //     }   
 });

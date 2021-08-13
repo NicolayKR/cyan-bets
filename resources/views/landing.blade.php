@@ -57,7 +57,7 @@
 
 
 		<!-- Header -->
-		<header class="header text-white h-fullscreen pb-0 overflow-hidden" style="background-image: url(../assets/img/vector/16.png); background-color: #262a37;">
+		<header class="header text-white h-fullscreen pb-0 overflow-hidden" style="background-image: url(/assets/img/16.png); background-color: #262a37;">
 		<div class="overlay opacity-95" style="background-image: linear-gradient(to bottom, #09203f 0%, #537895 100%);"></div>
 		<div class="container text-center">
 			<div class="row align-items-center h-100">
@@ -99,7 +99,7 @@
 				<div class="col-md-4 mx-auto">
 				<h3>Результат нашего клиента: 1-ое место с двукратным отрывом от ближайшего конкурента при меньшем бюджете!</h3>
 				<p>Умные алгоритмы продвижения позволили компании «Наследие» всего за полтора месяца занять лидирующие позиции в Ростове-на-Дону, при этом рекламный бюджет удалось сократить, т. к. агенты перестали справляться с потоком лидов.</p>
-				<a href="#">Узнать подробнее<i class="fas fa-arrow-right ms-1"></i></a>
+				<a href="#" data-toggle="modal" data-target="#myModal">Узнать подробнее<i class="fas fa-arrow-right ms-1"></i></a>
 				</div>
 
 			</div>
@@ -119,7 +119,7 @@
 				<div class="col-md-4 mx-auto order-md-first">
 				<h3>Мы используем самые передовые математические модели и алгоритмы.</h3>
 				<p>За построение математических моделей и финансовую математику отвечают практикующие дипломированные специалисты с опытом работы и преподавания в немецких и лучших российских университетах.</p>
-				<a href="#">Узнать подробнее<i class="fas fa-arrow-right ms-1"></i></a>
+				<a href="#" data-toggle="modal" data-target="#myModal">Узнать подробнее<i class="fas fa-arrow-right ms-1"></i></a>
 				</div>
 
 			</div>
@@ -139,7 +139,7 @@
 				<div class="col-md-4 mx-auto">
 				<h3>Опыт более 10 лет в разработке приложений для риэлторов.</h3>
 				<p>Наша команда автоматизирует работу агентств недвижимости с 2009 года. Нами создано более 20 CRM и ERP систем, большое количество ПО различного назначения.</p>
-				<a href="#">Узнать подробнее<i class="fas fa-arrow-right ms-1"></i></a>
+					<a href="#" data-toggle="modal" data-target="#myModal">Узнать подробнее<i class="fas fa-arrow-right ms-1"></i></a>
 				</div>
 
 			</div>
@@ -281,11 +281,32 @@
 			<a class="btn btn-lg btn-round btn-primary" href="/index">Попробовать бесплатно</a>
 			</div>
 		</section>
-
-
 		</main>
-
-
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<modal-contact/>
+			<!-- <form class="" action="/postMail" method="post">
+				@csrf
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title" id="myModalLabel">Форма обратной связи</h4>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						</div>
+						<div class="modal-body"> 
+							<input type="text" name="name" id="name" placeholder="Введите ваше имя *" required="" class="form-control mt-2" />
+							<input type="text" name="surname" id="surname" placeholder="Введите вашу фамилию *" required="" class="form-control mt-2" />
+							<input type="email" name="email" id="email" placeholder="Введите вашу почту *" required="" class="form-control mt-2" />
+							<input type="email" name="email" id="email" placeholder="Введите номер телефона" class="form-control mt-2" />
+							<textarea rows="4" name="mess" id="mess" placeholder="Ваше сообщение" class="form-control mt-2"></textarea>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-outline-primary" data-dismiss="modal">Отмена</button>
+							<button type="submit" class="btn btn-outline-primary ms-2">Отправить</button>
+						</div>
+					</div>
+				</div>
+			</form> -->
+		</div>
 		<!-- Footer -->
 		<footer class="footer text-white bt-0 py-7" style="background-image: linear-gradient(135deg, #4481eb 0%, #04befe 100%);">
 		<div class="container">
