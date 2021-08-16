@@ -19,22 +19,22 @@
 		<nav class="navbar navbar-expand-lg navbar-light navbar-stick-dark" data-navbar="sticky">
 		<div class="container">
 			<div class="row">
-				<div class="col-auto col-md-4 col-lg-auto1 mr-auto mx-lg-auto d-flex align-items-center">
+				<div class="col-3 col-sm-4 col-lg-3 mr-auto mx-lg-auto d-flex align-items-center">
 					<button class="navbar-toggler" type="button"><span class="navbar-toggler-icon"></span></button>
 					<a class="navbar-brand" href="#" id="logo-top">
-						<img class="logo-dark" src="assets/img/logo2.svg" alt="logo">
+						<div class="logo-wrapper mt-2"><img class="logo-dark" src="assets/img/logo.png" alt="logo"></div>
 						<img class="logo-light" src="assets/img/logo.png" alt="logo">
 					</a>	
 				</div>
-				<section class="col-lg-4 navbar-mobile">
-					<nav class="nav nav-navbar mr-lg-auto mx-lg-auto">
-					<a class="nav-link active" href="/index">Оптимизатор бюджета ЦИАН</a>
+				<section class="col-lg-6 navbar-mobile">
+					<nav class="nav nav-navbar mr-lg-auto mx-lg-auto mt-1">
+					<a class="nav-link active" href="/index"><span class="fs-head">Оптимизатор бюджета <span class="we-cian">ЦИАН</span></span></a>
 					</nav>
 				</section>
-				<div class="col-auto col-lg-4 text-right">
+				<div class="col-9 col-sm-7 col-lg-3 d-flex justify-content-end">
 					@guest
-					<a class="btn btn-sm btn-round btn-outline-success d-lg-inline-block mr-2" href="/login">Войти</a>
-					<a class="btn btn-sm btn-round btn-success" href="/register">Регистрация</a>
+					<a class="btn btn-sm btn-round btn-success mt-1" href="/register">Регистрация</a>
+					<a class="btn btn-sm btn-round btn-outline-success d-lg-inline-block ms-1 mt-1" href="/login">Войти</a>
 					@endguest
 					@auth
 					<a href="{{ url('/logout') }}" class="btn btn-sm btn-round btn-outline-success d-lg-inline-block text-end" >
@@ -54,7 +54,7 @@
 			<div class="row align-items-center h-100">
 
 			<div class="col-md-8 mx-auto">
-				<h1>Побеждайте интеллектом, а не бюджетами.</h1>
+				<h1 style="font-size: 35px"><span class="main-title">ПОБЕЖДАЙТЕ <span class="prim">ИНТЕЛЛЕКТОМ</span>,<br> <span style="text-decoration:line-through">а не бюджетами</span>.</span></h1>
 				<p class="lead mt-4 mb-7">Повысьте количество клиентов при меньшем бюджете. Мы покажем какие объявления нужно продвигать и суммы на каждое  с точностью до рубля. Распределим бюджеты в 1 клик.</p>
 				<a class="btn btn-xl btn-round btn-primary px-8" href="/index">Попробуйте бесплатно</a>
 			</div>
@@ -184,15 +184,15 @@
 			<div class="container">
 			<div class="row gap-y align-items-center">
 
-				<div class="col-md-4">
+				<div class="col-md-6">
 				<p class="lead-7 text-dark fw-600 lh-2">Цены</p>
 
 				<div class="btn-group btn-group-toggle my-7" data-toggle="buttons">
 					<label class="btn btn-round btn-outline-dark w-150">
-					<input type="radio" name="pricing" value="monthly" autocomplete="off"> Месяц
+					<input type="radio" name="pricing" value="monthly" autocomplete="off"> Месячный
 					</label>
 					<label class="btn btn-round btn-outline-dark w-150 active">
-					<input type="radio" name="pricing" value="yearly" autocomplete="off" checked> Год
+					<input type="radio" name="pricing" value="yearly" autocomplete="off" checked> Годовой
 					</label>
 				</div>
 
@@ -200,11 +200,11 @@
 				</div>
 
 
-				<div class="col-md-7 ml-auto">
+				<div class="col-md-6 ml-auto">
 				<div class="row gap-y">
 
-					<div class="col-md-6">
-					<div class="card text-center shadow-1 hover-shadow-9">
+					<div class="col-md-12 col-xl-6">
+					<div class="card text-center shadow-1 hover-shadow-9 py-6">
 						<div class="card-img-top text-white bg-img h-200 d-flex align-items-center" style="background-image: url(assets/img/standart.jpg)" data-overlay="1">
 						<div class="position-relative w-100">
 							<p class="lead-4 fw-600 ls-1 mb-0">Старндартный</p>
@@ -212,23 +212,22 @@
 						</div>
 						</div>
 						<div class="card-body py-6">
-						<p class="lead-7 fw-600 text-dark mb-0">
-							<span data-bind-radio="pricing" data-monthly="6000/мес." data-yearly="4000/мес.">6000/мес.</span><br>
+						<p class="lead-6 fw-600 text-dark mb-0">
+							<span data-bind-radio="pricing" data-monthly="6000 ₽" data-yearly="4000 ₽" id="cost-1">6000 ₽/мес.</span><br>
 						</p>
 						<p>
-							<strong>1 месяц бесплатно. </strong>
+							<span class="badge bg-success" style="color:white; font-size:16px;">1 месяц бесплатно</span><br>
 							Количество объявлений не ограничено. Обновление в сутки не ограничено. 
 						</p>
-						<br>
-						<div>
-							<a class="btn btn-round btn-outline-secondary w-200" href="#" data-bind-href="pricing" data-monthly="#monthly" data-yearly="#yearly">Купить</a>
 						</div>
+						<div class="d-flex mr-auto ml-auto">
+							<a class="btn btn-round btn-primary w-200" href="#" data-bind-href="pricing" data-monthly="#monthly" data-yearly="#yearly">Купить</a>
 						</div>
 					</div>
 					</div>
 
-					<div class="col-md-6">
-					<div class="card text-center shadow-1 hover-shadow-9">
+					<div class="col-md-12 col-xl-6">
+					<div class="card text-center shadow-1 hover-shadow-9 py-6">
 						<div class="card-img-top text-white bg-img h-200 d-flex align-items-center" style="background-image: url(assets/img/advanced.jpg)" data-overlay="2">
 						<div class="position-relative w-100">
 							<p class="lead-4 fw-600 ls-1 mb-0">Расширенный</p>
@@ -236,16 +235,15 @@
 						</div>
 						</div>
 						<div class="card-body py-6">
-						<p class="lead-7 fw-600 text-dark mb-0">
-							<span data-bind-radio="pricing" data-monthly="10000/мес." data-yearly="7000/мес.">10000/мес</span><br>
+						<p class="lead-6 fw-600 text-dark mb-0">
+							<span data-bind-radio="pricing" data-monthly="10000 ₽" data-yearly="7000 ₽" id="cost-2">10000 ₽/мес</span><br>
 						</p>
 						<p>
 							3 часа времени нашего маркетолога для анализа ставок/консультации по любым вопросам лидогенерации.
 						</p>
-						<br>
-						<div>
-							<a class="btn btn-round btn-secondary w-200" href="#" data-bind-href="pricing" data-monthly="#monthly" data-yearly="#yearly">Купить</a>
 						</div>
+						<div class="d-flex mr-auto ml-auto">
+							<a class="btn btn-round btn-primary w-200" href="#" data-bind-href="pricing" data-monthly="#monthly" data-yearly="#yearly">Купить</a>
 						</div>
 					</div>
 					</div>
@@ -265,7 +263,7 @@
 		<section class="section bg-gray text-center">
 			<div class="container">
 			<h2 class="mb-6"><strong>Получите преимущество надо конкурентами.</strong></h2>
-			<!-- <p class="lead text-muted">The best sharing and storage solution for your business</p> -->
+			<p class="lead text-muted">Побеждайте интеллектом, а не бюджетами</p>
 			<hr class="w-5 my-7">
 			<a class="btn btn-lg btn-round btn-primary" href="/index">Попробовать бесплатно</a>
 			</div>
@@ -273,44 +271,20 @@
 		</main>
 		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 			<modal-contact/>
-			<!-- <form class="" action="/postMail" method="post">
-				@csrf
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h4 class="modal-title" id="myModalLabel">Форма обратной связи</h4>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						</div>
-						<div class="modal-body"> 
-							<input type="text" name="name" id="name" placeholder="Введите ваше имя *" required="" class="form-control mt-2" />
-							<input type="text" name="surname" id="surname" placeholder="Введите вашу фамилию *" required="" class="form-control mt-2" />
-							<input type="email" name="email" id="email" placeholder="Введите вашу почту *" required="" class="form-control mt-2" />
-							<input type="email" name="email" id="email" placeholder="Введите номер телефона" class="form-control mt-2" />
-							<textarea rows="4" name="mess" id="mess" placeholder="Ваше сообщение" class="form-control mt-2"></textarea>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-outline-primary" data-dismiss="modal">Отмена</button>
-							<button type="submit" class="btn btn-outline-primary ms-2">Отправить</button>
-						</div>
-					</div>
-				</div>
-			</form> -->
 		</div>
 		<!-- Footer -->
 		<footer class="footer text-white bt-0 py-7" style="background-image: linear-gradient(135deg, #4481eb 0%, #04befe 100%);">
 		<div class="container">
 			<div class="row align-items-center">
 
-			<div class="col-md-3">
+			<div class="col-12 col-md-3 d-flex justify-content-center text-center">
 				<a class="navbar-brand" href="#">
-					<img class="logo-light" src="assets/img/logo2.svg" alt="logo">
+					<img class="logo-light" src="assets/img/logo.png" alt="logo">
 				</a>
 			</div>
-			<section class="col-lg-6 navbar-mobile">
-				<nav class="nav nav-navbar mr-lg-auto mx-lg-auto">
-				<a class="nav-link active" href="/index">Оптимизатор бюджета ЦИАН</a>
-				</nav>
-			</section>
+			<div class="col-12 col-md-6 col-lg-6 d-flex justify-content-center text-center">
+				<a class="nav-link active" href="/index"><span class="fs-head">Оптимизатор бюджета <span class="we-cian">ЦИАН</span></span></a>
+			</div>
 			<div class="col-md-3 text-center text-md-left mt-5 mt-md-0">
 				<div class="social social-bg-dark">
 				<a class="social-facebook" href="#"><i class="fa fa-facebook"></i></a>

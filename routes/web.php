@@ -49,24 +49,6 @@ Route::resource('/accounts','App\Http\Controllers\AccountController');
 Route::get('/postMail', 'App\Http\Controllers\TableController@postMail');
 Auth::routes();
 Route::get('test', function(){
-
-    //try{
-        $toEmail = 'n.kryuchkov@enterprise-it.ru';
-        $email = 'n.kryuchkov@enterprise-it.ru';
-        $name = 'n.kryuchkov@enterprise-it.ru';
     
-        $phone = 'n.kryuchkov@enterprise-it.ru';
-        $mess='n.kryuchkov@enterprise-it.ru';
-        $newMess = MailPost::create(array(
-            'name'=>$name,
-            'email'=>$email,
-            'phone'=>$phone,
-            'message'=>$mess
-        ));
-        $newMess->save();
-        Mail::to($toEmail)->send(new ContactForm($name, $email, $phone, $mess));
-        return 1;
-    //}catch(Exception $e){
-     //   return 0;
-   //     }   
+    
 });

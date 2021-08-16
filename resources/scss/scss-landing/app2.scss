@@ -4736,7 +4736,7 @@ input[type="button"].btn-block {
 
 .card-body {
     flex: 1 1 auto;
-    padding: 1.25rem
+    padding: 1.25rem;
 }
 
 .card-title {
@@ -26586,7 +26586,7 @@ a.text-lightest:focus {
 }
 
 .lead-6 {
-    font-size: 2.34375rem !important
+    font-size: 2.25rem !important
 }
 
 .lead-7 {
@@ -26850,5 +26850,26 @@ a.text-lightest:focus {
 }
 .ms-1{
     margin-left: 5px;
+}
+.navbar-brand img {
+    max-height: 46px !important;
+}
+.we-cian{
+    font-weight: 700;
+    font-size: 18px;
+}
+.fs-head{
+    font-size: initial;
+    text-transform: uppercase;
+}
+.prim{
+    color: #71ccea;
+    font-weight: 600;
+}
+.month-cost{
+    font-size: 30px;
+}
+.logo-wrapper{
+    max-width: 160px;
 }
 /*# sourceMappingURL=page.min.css.map */

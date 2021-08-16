@@ -53,13 +53,19 @@ class updateBalance extends Command
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
             $curl_response = curl_exec($curl);
             $res = json_decode($curl_response,true);
+            $auction_point = 0;
+            if(sizeof($res['result']['auctionPoints']) == 0){
+                $auction_point = 0;
+            }else{
+                $auction_point = $res['result']['auctionPoints'][0]['amount'];
+            }
             curl_close($curl);
             CompanyName::where('id', $collection_key->id)->
                         where('user_id', $collection_key->user_id)-> 
                         where('cyan_key', $collection_key->cyan_key)->  
                         update(array(
                             'balance'=> $res['result']['totalBalance'],
-                            'auction_points'=>$res['result']['auctionPoints'][0]['amount'],
+                            'auction_points'=>$auction_point,
                         ));
             }
     }
