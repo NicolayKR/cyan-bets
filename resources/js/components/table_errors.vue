@@ -1,9 +1,9 @@
 <template>
     <div class="table-responsive">
-        <div class="col-md-7">
+        <div class="col-md-10 d-lg-block d-none">
             <input type="text" v-model="id_object" placeholder="Поиск по id-объекта или id-циана" class="form-control"/>
         </div> 
-        <table v-if="flagTabel" class="table table-bordered bg-light mt-3">
+        <table v-if="flagTabel" class="table table-bordered bg-light mt-3 d-lg-block d-none">
             <thead>
                 <tr>
                     <th scope="col" style="width: 4%">Название ФИДА</th>
@@ -18,8 +18,8 @@
                     <td>{{tabel_item.name_company}}</td>
                     <td>{{tabel_item.id_object}}</td>
                     <td>{{tabel_item.id_offer}}</td>
-                    <td>{{tabel_item.errors}}</td>
-                    <td>{{tabel_item.warning}}</td>
+                    <td><div class="table-container">{{tabel_item.errors}}</div></td>
+                    <td><div class="table-container">{{tabel_item.warning}}</div></td>
                 </tr>
             </tbody>
             <tfoot v-if="flagLenght">
@@ -45,6 +45,46 @@
                 </tr>
             </tfoot>
         </table>
+        <div class="col-md-10">
+            <input type="text" v-model="id_object" placeholder="Поиск по id-объекта или id-циана" class="form-control"/>
+        </div> 
+        <div class="table-wrapper">
+            <table v-if="flagTabel" class="table table-bordered bg-light mt-3 d-block">
+                <thead>
+                </thead>
+                <tbody>
+                    <tr v-for ="(tabel_item,index) in paginatedObject" :key="index" class="flip-list d-block">
+                        <td class="d-block">Название ФИДА: {{tabel_item.name_company}}</td>
+                        <td class="d-block">ID объекта: {{tabel_item.id_object}}</td>
+                        <td class="d-block">ID Циана: {{tabel_item.id_offer}}</td>
+                        <td class="d-block"><div class="table-container">Ошибка: {{tabel_item.errors}}</div></td>
+                        <td class="d-block"><div class="table-container">Предупреждение: {{tabel_item.warning}}</div></td>
+                    </tr>
+                </tbody>
+                <tfoot v-if="flagLenght">
+                    <tr>
+                        <td colspan="5">
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination justify-content-center mt-3" >
+                                    <li class="page-item">
+                                        <a class="page-link" href="#" @click="pageClickBack">Назад</a>
+                                    </li>
+                                    <li class="page-item" v-for="page in pages" :key="page">
+                                        <a class="page-link" href="#" 
+                                            @click="pageClick(page)"
+                                            :class="{'page_active':page === pageNumber}"
+                                            >{{page}}</a>
+                                    </li>     
+                                    <li class="page-item">                             
+                                        <a class="page-link" href="#" @click="pageClickUp">Вперед</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
     </div>
 </template>
 

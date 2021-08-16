@@ -151,12 +151,8 @@ td{
     //color: #fff !important; 
     //font-weight: 700;
 }
-.table_wrapp {
-    margin-top: 10px;
-    margin-bottom: 0;
-    background-color: white;
-    width: 100%;
-}
-.table-responsive {
-    display: table !important;
+.table-container{
+    max-width: 500px;
+    min-width: 100px;
+    word-break: break-all;
 }

@@ -31,7 +31,7 @@
                         @forelse($accounts as $account)
                             <tr>
                                 <td>{{$account->name}}</td>
-                                <td>{{$account->xml_feed}}</td>
+                                <td><div class="table-container">{{$account->xml_feed}}</div></td>
                                 <td><div class="table-container">{{$account->cyan_key}}</div></td>
                                 <td>{{$account->balance}}</td>
                                 <td>{{$account->auction_points}}</td>

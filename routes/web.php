@@ -49,6 +49,17 @@ Route::resource('/accounts','App\Http\Controllers\AccountController');
 Route::get('/postMail', 'App\Http\Controllers\TableController@postMail');
 Auth::routes();
 Route::get('test', function(){
-    
+    $final_array = [];
+    $collection = CompanyName::select('id','name','cyan_key','xml_feed','balance','auction_points','user_id')
+                ->where('user_id','=', Auth::user()->id)->get();
+    foreach($collection as $collection_item){
+        $final_array[$collection_item->name]['id'] = $collection_item->id;
+        $final_array[$collection_item->name]['name'] = $collection_item->name;
+        $final_array[$collection_item->name]['cyan_key'] = $collection_item->cyan_key;
+        $final_array[$collection_item->name]['xml_feed'] = $collection_item->xml_feed;
+        $final_array[$collection_item->name]['balance'] = $collection_item->balance;
+        $final_array[$collection_item->name]['auction_points'] = $collection_item->auction_points;
+    }
+    return $final_array;
     
 });
