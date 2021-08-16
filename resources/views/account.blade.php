@@ -32,7 +32,7 @@
                             <tr>
                                 <td>{{$account->name}}</td>
                                 <td>{{$account->xml_feed}}</td>
-                                <td>{{$account->cyan_key}}</td>
+                                <td><div class="table-container">{{$account->cyan_key}}</div></td>
                                 <td>{{$account->balance}}</td>
                                 <td>{{$account->auction_points}}</td>
                                 <td class="text-right">

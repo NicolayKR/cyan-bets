@@ -228,7 +228,7 @@
 						</p>
 						</div>
 						<div class="d-flex mr-auto ml-auto">
-							<a class="btn btn-round btn-primary w-200" href="#" data-bind-href="pricing" data-monthly="#monthly" data-yearly="#yearly">Купить</a>
+							<a class="btn btn-round btn-primary w-200" data-toggle="modal" data-target="#myModal" href="#" data-bind-href="pricing" data-monthly="#monthly" data-yearly="#yearly">Купить</a>
 						</div>
 					</div>
 					</div>
@@ -250,7 +250,7 @@
 						</p>
 						</div>
 						<div class="d-flex mr-auto ml-auto">
-							<a class="btn btn-round btn-primary w-200" href="#" data-bind-href="pricing" data-monthly="#monthly" data-yearly="#yearly">Купить</a>
+							<a class="btn btn-round btn-primary w-200" href="#" data-toggle="modal" data-target="#myModal" data-bind-href="pricing" data-monthly="#monthly" data-yearly="#yearly">Купить</a>
 						</div>
 					</div>
 					</div>
@@ -286,7 +286,9 @@
 
 			<div class="col-12 col-md-3 d-flex justify-content-center text-center">
 				<a class="navbar-brand" href="#">
-					<img class="logo-light" src="assets/img/logo.png" alt="logo">
+					<div class="logo-wrapper mt-2">
+						<img class="logo-light" src="assets/img/logo.png" alt="logo">
+					</div>
 				</a>
 			</div>
 			<div class="col-12 col-md-6 col-lg-6 d-flex justify-content-center text-center">
