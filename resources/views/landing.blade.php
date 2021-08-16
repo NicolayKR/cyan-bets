@@ -12,6 +12,13 @@
 		<!-- Styles -->
 		<script rel="preload" src="{{ asset('assets/js/app2.min.js') }}" defer></script>
 		<link rel="stylesheet" href="{{ asset('assets/css/app2.min.css') }}" as="style"></link>
+		<link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
+		<link rel="manifest" href="assets/favicon/site.webmanifest">
+		<link rel="mask-icon" href="assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
+		<meta name="msapplication-TileColor" content="#da532c">
+		<meta name="theme-color" content="#ffffff">
 	</head>
 	<body>
 		<div id="app2">
@@ -54,7 +61,7 @@
 			<div class="row align-items-center h-100">
 
 			<div class="col-md-8 mx-auto">
-				<h1 style="font-size: 35px"><span class="main-title">ПОБЕЖДАЙТЕ <span class="prim">ИНТЕЛЛЕКТОМ</span>,<br> <span style="text-decoration:line-through">а не бюджетами</span>.</span></h1>
+				<h1 style="font-size: 35px"><span class="main-title">ПОБЕЖДАЙТЕ <span class="prim">ИНТЕЛЛЕКТОМ</span>,<br>а не бюджетами.</span></h1>
 				<p class="lead mt-4 mb-7">Повысьте количество клиентов при меньшем бюджете. Мы покажем какие объявления нужно продвигать и суммы на каждое  с точностью до рубля. Распределим бюджеты в 1 клик.</p>
 				<a class="btn btn-xl btn-round btn-primary px-8" href="/index">Попробуйте бесплатно</a>
 			</div>

@@ -250,7 +250,7 @@ class TableController extends Controller
     }
     public function postMail(Request $request){
         try{
-        $toEmail = 'n.kryuchkov@enterprise-it.ru';
+        $toEmail = 'web@enterprise-it.ru';
         $email = $request->query('email');
         $name = $request->query('name');
         $phone = $request->query('phone');

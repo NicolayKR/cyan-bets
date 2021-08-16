@@ -17911,11 +17911,6 @@ header {
   background-color: #f1f2f3 !important;
 }
 
-@media (max-width: 899px) {
-  #sidebarMenu {
-    padding-top: 15vh;
-  }
-}
 .flex {
   display: flex;
   align-items: center;
@@ -18095,6 +18090,17 @@ td {
 
 .topString {
   background-color: #E7ECFF;
+}
+
+.table_wrapp {
+  margin-top: 10px;
+  margin-bottom: 0;
+  background-color: white;
+  width: 100%;
+}
+
+.table-responsive {
+  display: table !important;
 }
 
 .btn {

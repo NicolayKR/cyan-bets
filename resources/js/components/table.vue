@@ -94,6 +94,8 @@
                     <table class="table table-bordered">
                     <thead>
                         <tr>
+                            <th scope="col"><a @click="sortTable('id_object')" class="filter-link">ID Объекта</a></th>
+                            <th scope="col"><a @click="sortTable('id_offer')" class="filter-link">ID Циана</a></th>
                             <th scope="col"><a @click="sortTable('coverage') " class="filter-link">Охват в процентах</a></th>
                             <th scope="col"><a @click="sortTable('searches_count') " class="filter-link">Количество поисков</a></th>
                             <th scope="col"><a @click="sortTable('shows_count')" class="filter-link">Количество показов</a></th>
@@ -106,13 +108,13 @@
                             <th scope="col"><a @click="sortTable('page')" class="filter-link">Страница</a></th>
                             <th scope="col"><a @click="sortTable('position')" class="filter-link">Позиция в выдаче</a></th>
                             <th scope="col"><a @click="sortTable('agent')" class="filter-link">Агент</a></th>
-                            <th scope="col"><a @click="sortTable('id_object')" class="filter-link">ID Объекта</a></th>
-                            <th scope="col"><a @click="sortTable('id_offer')" class="filter-link">ID Циана</a></th>
                             <th scope="col"><a @click="sortTable('price')" class="filter-link">Цена</a></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr v-for ="(tabel_item,index) in paginatedObject" :key="index" class="flip-list" v-bind:class="{topString: tabel_item.top == 1}">
+                            <td>{{tabel_item.id_object}}</td>
+                            <td>{{tabel_item.id_offer}}</td>
                             <td>{{tabel_item.coverage}}</td>
                             <td>{{tabel_item.searches_count}}</td>
                             <td>{{tabel_item.shows_count}}</td>
@@ -156,8 +158,6 @@
                             <td>{{tabel_item.page}}</td>
                             <td>{{tabel_item.position}}</td>
                             <td>{{tabel_item.agent}}</td>
-                            <td>{{tabel_item.id_object}}</td>
-                            <td>{{tabel_item.id_offer}}</td>
                             <td>{{tabel_item.price}}</td>
                         </tr>
                     </tbody>
