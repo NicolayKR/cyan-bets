@@ -195,16 +195,16 @@
 					<input type="radio" name="pricing" value="yearly" autocomplete="off" checked> Годовой
 					</label>
 				</div>
-
 				<p class="lead">Стоимость оптимизатора гораздо ниже экономии бюджета.</p>
+				<p class="fw-400">
+					<a target="_blank" href="storage/Тарифы.pdf">Узнать подробнее о тарифах<i class="fas fa-arrow-right ms-1"></i></a>
+				</p>
 				</div>
-
-
 				<div class="col-md-6 ml-auto">
 				<div class="row gap-y">
 
 					<div class="col-md-12 col-xl-6">
-					<div class="card text-center shadow-1 hover-shadow-9 py-6">
+					<div class="card text-center shadow-1 hover-shadow-9 pb-6">
 						<div class="card-img-top text-white bg-img h-200 d-flex align-items-center" style="background-image: url(assets/img/standart.jpg)" data-overlay="1">
 						<div class="position-relative w-100">
 							<p class="lead-4 fw-600 ls-1 mb-0">Старндартный</p>
@@ -213,7 +213,7 @@
 						</div>
 						<div class="card-body py-6">
 						<p class="lead-6 fw-600 text-dark mb-0">
-							<span data-bind-radio="pricing" data-monthly="6000 ₽" data-yearly="4000 ₽" id="cost-1">6000 ₽/мес.</span><br>
+							<span data-bind-radio="pricing" data-monthly="6000" data-yearly="4000" id="cost-1">6000 ₽/мес.</span><br>
 						</p>
 						<p>
 							<span class="badge bg-success" style="color:white; font-size:16px;">1 месяц бесплатно</span><br>
@@ -227,7 +227,7 @@
 					</div>
 
 					<div class="col-md-12 col-xl-6">
-					<div class="card text-center shadow-1 hover-shadow-9 py-6">
+					<div class="card text-center shadow-1 hover-shadow-9 pb-6">
 						<div class="card-img-top text-white bg-img h-200 d-flex align-items-center" style="background-image: url(assets/img/advanced.jpg)" data-overlay="2">
 						<div class="position-relative w-100">
 							<p class="lead-4 fw-600 ls-1 mb-0">Расширенный</p>
@@ -236,7 +236,7 @@
 						</div>
 						<div class="card-body py-6">
 						<p class="lead-6 fw-600 text-dark mb-0">
-							<span data-bind-radio="pricing" data-monthly="10000 ₽" data-yearly="7000 ₽" id="cost-2">10000 ₽/мес</span><br>
+							<span data-bind-radio="pricing" data-monthly="10000" data-yearly="7000" id="cost-2">10000 ₽/мес</span><br>
 						</p>
 						<p>
 							3 часа времени нашего маркетолога для анализа ставок/консультации по любым вопросам лидогенерации.
