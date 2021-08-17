@@ -19,4 +19,10 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     });
     $("div.pswp").remove();
+    $(window).click(function(event){
+		if($(event.target).attr('id')!='hamburger' && $('#sidebarMenu').hasClass('show')){	
+            event.preventDefault();
+			$('#sidebarMenu').removeClass('show');
+		}
+	});
 });

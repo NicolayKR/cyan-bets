@@ -1968,10 +1968,10 @@ pre code {
     font-size: .9375rem;
     font-weight: 300;
     line-height: 1.9;
-    color: #999;
+    color: #000000;
     background-color: #fff;
     background-clip: padding-box;
-    border: 1px solid #eaeff4;
+    border: 1px solid #b8bfc5;
     border-radius: 2px;
     transition: all 0.3s ease-out
 }
@@ -1990,7 +1990,7 @@ pre code {
 .form-control:focus {
     color: #323d47;
     background-color: #fff;
-    border-color: #f1f2f3;
+    border-color: #066df3;
     outline: 0;
     box-shadow: 0 0 40px rgba(0, 0, 0, 0.045)
 }
@@ -2133,7 +2133,6 @@ textarea.form-control {
 
 .form-check-input {
     position: absolute;
-    margin-top: .3rem;
     margin-left: -1.25rem
 }
 
@@ -26874,4 +26873,22 @@ a.text-lightest:focus {
 .logo-wrapper{
     max-width: 160px;
 }
+.ms-2{
+    margin-left:20px;
+}
+#nav3, #nav3 li {
+    padding: 0;
+  }
+  #nav3 {
+    text-align: center; /* пункты и текст горизонтально по центру */
+  }
+  #nav3 li {
+    display: inline-block;
+  }
+  #nav3 a {
+    display: block;
+    color: #fff;
+    text-decoration: none;
+  }
+
 /*# sourceMappingURL=page.min.css.map */

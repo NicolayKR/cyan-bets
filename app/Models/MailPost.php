@@ -11,6 +11,6 @@ class MailPost extends Model
     protected $fillable = [
         'name',
         'email',
-        'phone','message'
+        'phone','message','status'
     ];
 }

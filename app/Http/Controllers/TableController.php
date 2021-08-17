@@ -16,6 +16,7 @@ use DiDom\Query;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ContactForm;
+use App\Mail\RegisterForm;
 use App\Models\MailPost;
 
 
@@ -263,10 +264,52 @@ class TableController extends Controller
             'name'=>$name,
             'email'=>$email,
             'phone'=>$phone,
-            'message'=>$mess
+            'message'=>$mess,
+            'status'=>0
         ));
         $newMess->save();
         Mail::to($toEmail)->send(new ContactForm($name, $email, $phone, $mess));
+        return 1;
+    }catch(Exception $e){
+        return 0;
+        }   
+    }
+    public function regMail(Request $request){
+        try{
+        $toEmail = 'web@enterprise-it.ru';
+        $email = $request->query('email');
+        $name = $request->query('name');
+        $phone = $request->query('phone');
+        $newMess = MailPost::create(array(
+            'name'=>$name,
+            'email'=>$email,
+            'phone'=>$phone,
+            'message'=>'Регистрация',
+            'status'=>1
+        ));
+        $newMess->save();
+        Mail::to($toEmail)->send(new RegisterForm($name, $email, $phone));
+        return 1;
+    }catch(Exception $e){
+        return 0;
+        }   
+    }
+    public function buyMail(Request $request){
+        try{
+        $toEmail = 'n.kryuchkov@enterprise-it.ru';
+        $email = $request->query('email');
+        $name = $request->query('name');
+        $phone = $request->query('phone');
+        $tariph = $request->query('tariph');
+        $newMess = MailPost::create(array(
+            'name'=>$name,
+            'email'=>$email,
+            'phone'=>$phone,
+            'message'=>'Покупка тарифа:'.$tariph,
+            'status'=>2
+        ));
+        $newMess->save();
+        Mail::to($toEmail)->send(new BuyForm($name, $email, $phone, $tariph));
         return 1;
     }catch(Exception $e){
         return 0;

@@ -19,6 +19,7 @@ class CreateMailPostsTable extends Migration
             $table->string('email');
             $table->string('phone')->nullable();
             $table->text('message')->nullable();
+            $table->integer('status');
             $table->timestamps();
         });
     }

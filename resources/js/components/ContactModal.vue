@@ -18,14 +18,22 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body"> 
-                <input type="text" name="name" id="name" placeholder="Введите ваше имя *" v-model="name" required class="form-control mt-2" />
-                <input type="email" name="email" id="email" placeholder="Введите вашу почту *" v-model="email" required class="form-control mt-2" />
-                <input type="email" name="phone" id="phone" placeholder="Введите номер телефона" v-model="phone" class="form-control mt-2" />
-                <textarea rows="4" name="mess" id="mess" placeholder="Ваше сообщение" v-model="message" class="form-control mt-2"></textarea>
+                <label for="name" class="form-label">Ваше имя:</label>
+                <input type="text" name="name" id="name" placeholder="Введите ваше имя *" v-model="name" required class="form-control mt-1" />
+                <label for="email" class="form-label">Ваша почта:</label>
+                <input type="email" name="email" id="email" placeholder="Введите вашу почту *" v-model="email" required class="form-control mt-1" />
+                <label for="phone" class="form-label">Ваш номер телефона:</label>
+                <input type="phone" name="phone" id="phone" placeholder="Введите номер телефона *" v-model="phone" class="form-control mt-1" />
+                <label for="mess" class="form-label">Ваше сообщение:</label>
+                <textarea rows="4" name="mess" id="mess" placeholder="Ваше сообщение" v-model="message" class="form-control mt-1"></textarea>
+                <div class="form-check d-flex align-items-center mt-2">
+                    <input type="checkbox" class="form-check-input" name="accses_policy" id="accses_policy" required :value="checked" v-model="checked">
+                    <label class="form-check-label" for="accses_policy">Я принимаю условия <a href="https://enterprise-it.ru/policy/" target="_blank"> политики конфиденциальности</a></label>  
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Отмена</button>
-                <button type="submit" class="btn btn-outline-primary ms-2" @click="postForm()">Отправить</button>
+                <button type="submit" class="btn btn-primary ms-2" @click="postForm()">Отправить</button>
             </div>
         </div>
     </div>
@@ -41,12 +49,16 @@ export default {
             message:'',
             status: null,
             errors: [],
+            checked: false,
         }
+    },
+    watch:{
+         
     },
     methods:{
         postForm(){
             this.status = null;
-            if (this.name!='' && this.email!='') {
+            if (this.name!='' && this.email!='' && this.checked == true) {
                 axios.get(`/postMail?&name=${this.name}&email=${this.email}&phone=${this.phone}&message=${this.message}`).then(response => {
                     this.errors = [];
                     this.name = '';
@@ -63,7 +75,15 @@ export default {
             if ( this.email == '') {
                 this.errors.push('Требуется указать почту.');
                 }
+            if ( this.phone == '') {
+                this.errors.push('Требуется указать номер телефона.');
+                }
+            if ( this.checked == false) {
+                this.errors.push('Примите политику конфидконфиденциальности.');
             }
+            
+            }
+            
         }
     }
 }

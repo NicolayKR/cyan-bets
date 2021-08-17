@@ -17909,6 +17909,7 @@ header {
 
 #sidebarMenu {
   background-color: #f1f2f3 !important;
+  width: 160px;
 }
 
 .flex {
@@ -18314,6 +18315,12 @@ td {
   top: 145px;
 }
 
+.tool-xs {
+  position: absolute;
+  top: -18px;
+  right: -6px;
+}
+
 .btn {
   text-transform: uppercase;
   text-decoration: none;
@@ -18391,14 +18398,37 @@ td {
     line-height: 10px;
   }
 }
-@media (max-width: 1570px) {
+@media (max-width: 1024px) {
   .d-table-xs-show {
     display: block !important;
   }
 }
-@media (min-width: 1570px) {
+@media (min-width: 1024px) {
   .d-table-hidden {
     display: block !important;
+  }
+}
+.index-part {
+  padding-left: 180px;
+  padding-right: 20px;
+}
+
+@media (max-width: 768px) {
+  .index-part {
+    padding-left: 20px;
+  }
+
+  .header-padding {
+    padding-right: 70px;
+  }
+
+  #sidebarMenu {
+    width: 40%;
+  }
+}
+@media (max-width: 469px) {
+  #sidebarMenu {
+    padding-top: 80px;
   }
 }
 .graph_wrapper {
@@ -18641,4 +18671,8 @@ h3, .h3 {
 .form-control-bet {
   min-width: 50px;
   max-width: 110px;
+}
+
+.dNone {
+  display: none;
 }

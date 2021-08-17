@@ -17,6 +17,7 @@ use Gaarf\XmlToPhp\Convertor;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ContactForm;
+use App\Mail\RegisterForm;
 use App\Models\MailPost;
 
 /*
@@ -47,36 +48,27 @@ Route::get('/getBalance', 'App\Http\Controllers\TableController@getBalance');
 Route::get('/getErrors', 'App\Http\Controllers\TableController@getErrors');
 Route::resource('/accounts','App\Http\Controllers\AccountController');
 Route::get('/postMail', 'App\Http\Controllers\TableController@postMail');
+Route::get('/regMail', 'App\Http\Controllers\TableController@regMail');
+Route::get('/buyMail', 'App\Http\Controllers\TableController@buyMail');
 Auth::routes();
 Route::get('test', function(){
-    $final_arr = [];
-        $collection_errors =  DB::table('errors_publishes')
-        ->join('current_xmls',function ($join) {
-            $join->on('current_xmls.id_flat', '=', 'errors_publishes.id_object');
-            $join->on('current_xmls.id_user', '=', 'errors_publishes.id_user');})
-        ->join('company_names',function ($join) {
-            $join->on('current_xmls.id_company', '=', 'company_names.id');
-            $join->on('current_xmls.id_user', '=', 'company_names.user_id');})
-            ->select('company_names.name','errors_publishes.id_object','errors_publishes.id_offer','errors_publishes.errors','errors_publishes.warning')
-            ->where('current_xmls.id_user', Auth::user()->id)
-            ->whereRaw('date(errors_publishes.updated_at) = DATE(NOW())')->get();
-        return $collection_errors;
-        if(sizeof($collection_errors) == 0){
-            return 0;
-        }else{
-            foreach($collection_errors as $index=>$errors){
-                $final_arr[$index]['name_company'] = $errors->name;
-                $final_arr[$index]['id_object'] = $errors->id_object;
-                $final_arr[$index]['errors'] = $errors->errors;
-                $final_arr[$index]['warning'] = $errors->warning;
-                if($errors->id_offer == null)
-                    $final_arr[$index]['id_offer'] = 'Не опубликован';
-                else{
-                    $final_arr[$index]['id_offer'] = $errors->id_offer;
-                }
-            }
-            return $final_arr;
-        }
+
+        $toEmail = 'n.kryuchkov@enterprise-it.ru';
+        $email = '11';
+        $name ='11';
+        $phone = 'n.kryuchkov@enterprise-it.ru';
+        $newMess = MailPost::create(array(
+            'name'=>$name,
+            'email'=>$email,
+            'phone'=>$phone,
+            'message'=>'Регистрация',
+            'status'=>1
+        ));
+        $newMess->save();
+        Mail::to($toEmail)->send(new RegisterForm($name, $email, $phone));
+        return 1;
+
+    
     // $final_array = [];
     // $collection = CompanyName::select('id','name','cyan_key','xml_feed','balance','auction_points','user_id')
     //             ->where('user_id','=', Auth::user()->id)->get();

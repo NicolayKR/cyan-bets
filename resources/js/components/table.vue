@@ -90,23 +90,23 @@
                         </div>
                     </div>
                 </div>
-                <div class="table-responsive d-table-hidden d-none">
+                <div class="table-responsive" v-bind:class="{dNone: windowWidth <= 1024}">
                     <table class="table table-bordered">
                     <thead>
                         <tr>
                             <th scope="col"><a @click="sortTable('id_object')" class="filter-link">ID Объекта</a></th>
                             <th scope="col"><a @click="sortTable('id_offer')" class="filter-link">ID Циана</a></th>
-                            <th scope="col"><a @click="sortTable('coverage') " class="filter-link">Охват в процентах</a></th>
-                            <th scope="col"><a @click="sortTable('searches_count') " class="filter-link">Количество поисков</a></th>
-                            <th scope="col"><a @click="sortTable('shows_count')" class="filter-link">Количество показов</a></th>
-                            <th scope="col"><a @click="sortTable('phone_shows')" class="filter-link">Количество расхлопов по дням(Показ телефона)</a></th>
-                            <th scope="col"><a @click="sortTable('views')" class="filter-link">Количество просмотров по дням</a></th>
+                            <th scope="col"><a @click="sortTable('coverage') " class="filter-link"><div v-if="windowWidth>1572">Охват в процентах</div><div v-else class="position-relative">Охват<i class="fas fa-question-circle ms-1 tool-xs"></i></div></a></th>
+                            <th scope="col"><a @click="sortTable('searches_count') " class="filter-link"><span v-if="windowWidth>1572">Количество поисков</span><span v-else class="position-relative">Поисков<i class="fas fa-question-circle tool-xs"/></span></a></th>
+                            <th scope="col"><a @click="sortTable('shows_count')" class="filter-link"><span v-if="windowWidth>1572">Количество показов</span><span v-else class="position-relative">Показов<i class="fas fa-question-circle tool-xs"/></span></a></th>
+                            <th scope="col"><a @click="sortTable('phone_shows')" class="filter-link"><span v-if="windowWidth>1572">Количество расхлопов по дням(Показ телефона)</span><span v-else class="position-relative">Расхлопов<i class="fas fa-question-circle tool-xs tool-xs"/></span></a></th>
+                            <th scope="col"><a @click="sortTable('views')" class="filter-link"><span v-if="windowWidth>1572">Количество просмотров по дням</span><span v-else class="position-relative">Просмотров<i class="fas fa-question-circle tool-xs"/></span></a></th>
                             <th scope="col" style="width: 8%">Ставка</th>
-                            <th scope="col"><a @click="sortTable('crm_bet')" class="filter-link">Текущая ставка (CRM)</a></th>
-                            <th scope="col"><a @click="sortTable('cyan_bet')" class="filter-link">Текущая ставка (ЦИАН)</a></th>
+                            <th scope="col"><a @click="sortTable('crm_bet')" class="filter-link"><span v-if="windowWidth>1572">Текущая ставка (CRM)</span><span v-else class="position-relative">Ставка (CRM)</span></a></th>
+                            <th scope="col"><a @click="sortTable('cyan_bet')" class="filter-link"><span v-if="windowWidth>1572">Текущая ставка (ЦИАН)</span><span v-else class="position-relative">Ставка (ЦИАН)</span></a></th>
                             <th scope="col"><a @click="sortTable('leader_bet')" class="filter-link">Ставка лидера</a></th>
                             <th scope="col"><a @click="sortTable('page')" class="filter-link">Страница</a></th>
-                            <th scope="col"><a @click="sortTable('position')" class="filter-link">Позиция в выдаче</a></th>
+                            <th scope="col"><a @click="sortTable('position')" class="filter-link"><span v-if="windowWidth>1572">Позиция в выдаче</span><span v-else class="position-relative">Позиция<i class="fas fa-question-circle tool-xs"></i></span></a></th>
                             <th scope="col"><a @click="sortTable('agent')" class="filter-link">Агент</a></th>
                             <th scope="col"><a @click="sortTable('price')" class="filter-link">Цена</a></th>
                         </tr>
@@ -131,7 +131,7 @@
                                             trigger: 'click hover', 
                                             placement: 'bottom',
                                         }" 
-                                         class="form-control form-control-sm input-value" name="bets" :id ="tabel_item.id" v-model="bets[tabel_item.id]">
+                                         class="form-control form-control-sm form-control-bet input-value" name="bets" :id ="tabel_item.id" v-model="bets[tabel_item.id]">
                                         <button  type="button" @click="postNewBet(bets[tabel_item.id],tabel_item.id_object, tabel_item.id_company,tabel_item.id, tabel_item.top)" class="btn btn-primary btn-sm ms-1">OK</button>
                                     </div>
                                 </form>
@@ -147,7 +147,7 @@
                                             trigger: 'click hover', 
                                             placement: 'bottom',
                                         }" 
-                                         class="form-control form-control-sm input-value" name="bets" :id ="tabel_item.id" v-model="bets[tabel_item.id]">
+                                         class="form-control form-control-sm form-control-bet input-value" name="bets" :id ="tabel_item.id" v-model="bets[tabel_item.id]">
                                         <button  type="button" @click="postNewBet(bets[tabel_item.id],tabel_item.id_object, tabel_item.id_company,tabel_item.id, tabel_item.top)" class="btn btn-primary btn-sm ms-1">OK</button>
                                     </div>
                                 </form>
@@ -163,7 +163,7 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td colspan="14">
+                            <td colspan="15">
                                 <nav aria-label="Page navigation example">
                                     <ul class="pagination justify-content-center mt-3" >
                                         <li class="page-item">
@@ -185,7 +185,7 @@
                     </tfoot>
                     </table>
                 </div>
-                <div class="table-wrapper d-table-xs-show d-none mt-2">
+                <div class="table-wrapper mt-2" v-bind:class="{dNone: windowWidth > 1024}">
                     <table class="table table-bordered d-block">
                     <thead class="d-none">
                         <tr>
@@ -243,7 +243,7 @@
                     </tbody>
                     <tfoot class="d-block">
                         <tr class="d-block">
-                            <td colspan="14" class="d-block">
+                            <td colspan="15" class="d-block">
                                 <nav aria-label="Page navigation example">
                                     <ul class="pagination justify-content-center mt-3" >
                                         <li class="page-item">
@@ -298,6 +298,7 @@ export default {
         isOpen: [],
         msg_top: 'Вводимое число должно делиться на 15',
         msg_no_top: 'Вводимое число должно делиться на 5',
+        windowWidth: window.innerWidth,
         }
     },
     computed:{
@@ -317,7 +318,7 @@ export default {
     mounted(){
         this.getData();
         window.onresize = () => {
-            this.windowWidth = window.innerWidth
+            this.windowWidth = window.innerWidth;
         }
     },
     methods:{

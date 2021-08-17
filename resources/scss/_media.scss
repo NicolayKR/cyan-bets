@@ -54,13 +54,34 @@
         line-height: 10px;
     }
 }
-@media(max-width:1570px){
+@media(max-width:1024px){
     .d-table-xs-show{
         display: block !important;
     }
 }
-@media(min-width:1570px){
+@media(min-width:1024px){
     .d-table-hidden{
         display: block !important;
+    }
+}
+.index-part{
+    padding-left:180px; 
+    padding-right:20px;
+}
+@media(max-width:768px){
+.index-part{
+    padding-left:20px; 
+
+    }
+.header-padding{
+    padding-right: 70px;
+    }
+#sidebarMenu {
+    width: 40%;
+}
+}
+@media(max-width:469px){
+    #sidebarMenu{
+        padding-top: 80px;
     }
 }

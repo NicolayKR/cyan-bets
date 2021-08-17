@@ -40,7 +40,6 @@
 				</section>
 				<div class="col-9 col-sm-7 col-lg-3 d-flex justify-content-end">
 					@guest
-					<a class="btn btn-sm btn-round btn-success mt-1" href="/register">Регистрация</a>
 					<a class="btn btn-sm btn-round btn-outline-success d-lg-inline-block ms-1 mt-1" href="/login">Войти</a>
 					@endguest
 					@auth
@@ -63,7 +62,7 @@
 			<div class="col-md-8 mx-auto">
 				<h1 style="font-size: 35px"><span class="main-title">ПОБЕЖДАЙТЕ <span class="prim">ИНТЕЛЛЕКТОМ</span>,<br>а не бюджетами.</span></h1>
 				<p class="lead mt-4 mb-7">Повысьте количество клиентов при меньшем бюджете. Мы покажем какие объявления нужно продвигать и суммы на каждое  с точностью до рубля. Распределим бюджеты в 1 клик.</p>
-				<a class="btn btn-xl btn-round btn-primary px-8" href="/index">Попробуйте бесплатно</a>
+				<a href="#" data-toggle="modal" data-target="#RegisterModal" class="btn btn-xl btn-round btn-primary px-8">Попробуйте бесплатно</a>
 			</div>
 
 			<div class="col-md-8 mx-auto align-self-end">
@@ -191,7 +190,7 @@
 			<div class="container">
 			<div class="row gap-y align-items-center">
 
-				<div class="col-md-6">
+				<div class="col-md-5">
 				<p class="lead-7 text-dark fw-600 lh-2">Цены</p>
 
 				<div class="btn-group btn-group-toggle my-7" data-toggle="buttons">
@@ -207,20 +206,20 @@
 					<a target="_blank" href="storage/Тарифы.pdf">Узнать подробнее о тарифах<i class="fas fa-arrow-right ms-1"></i></a>
 				</p>
 				</div>
-				<div class="col-md-6 ml-auto">
+				<div class="col-md-7 ml-auto">
 				<div class="row gap-y">
 
 					<div class="col-md-12 col-xl-6">
 					<div class="card text-center shadow-1 hover-shadow-9 pb-6">
 						<div class="card-img-top text-white bg-img h-200 d-flex align-items-center" style="background-image: url(assets/img/standart.jpg)" data-overlay="1">
 						<div class="position-relative w-100">
-							<p class="lead-4 fw-600 ls-1 mb-0">Старндартный</p>
+							<p class="lead-4 fw-600 ls-1 mb-0">Стандартный</p>
 							<p><span data-bind-radio="pricing" data-monthly="Месячный" data-yearly="Годовой">Месячный</span> Пакет</p>
 						</div>
 						</div>
 						<div class="card-body py-6">
 						<p class="lead-6 fw-600 text-dark mb-0">
-							<span data-bind-radio="pricing" data-monthly="6000" data-yearly="4000" id="cost-1">6000 ₽/мес.</span><br>
+							<span data-bind-radio="pricing" data-monthly="От 6000" data-yearly="От 4000" id="cost-1">6000 ₽/мес.</span><br>
 						</p>
 						<p>
 							<span class="badge bg-success" style="color:white; font-size:16px;">1 месяц бесплатно</span><br>
@@ -228,7 +227,7 @@
 						</p>
 						</div>
 						<div class="d-flex mr-auto ml-auto">
-							<a class="btn btn-round btn-primary w-200" data-toggle="modal" data-target="#myModal" href="#" data-bind-href="pricing" data-monthly="#monthly" data-yearly="#yearly">Купить</a>
+							<a href="#" data-toggle="modal" data-target="#BuyModal" class="btn btn-round btn-primary w-200" data-bind-href="pricing" data-monthly="#monthly" data-yearly="#yearly">Купить</a>
 						</div>
 					</div>
 					</div>
@@ -243,7 +242,7 @@
 						</div>
 						<div class="card-body py-6">
 						<p class="lead-6 fw-600 text-dark mb-0">
-							<span data-bind-radio="pricing" data-monthly="10000" data-yearly="7000" id="cost-2">10000 ₽/мес</span><br>
+							<span data-bind-radio="pricing" data-monthly="От 10000" data-yearly="От 7000" id="cost-2">10000 ₽/мес</span><br>
 						</p>
 						<p>
 							3 часа времени нашего маркетолога для анализа ставок/консультации по любым вопросам лидогенерации.
@@ -272,12 +271,18 @@
 			<h2 class="mb-6"><strong>Получите преимущество над конкурентами.</strong></h2>
 			<p class="lead text-muted">Побеждайте интеллектом, а не бюджетами</p>
 			<hr class="w-5 my-7">
-			<a class="btn btn-lg btn-round btn-primary" href="/index">Попробовать бесплатно</a>
+				<a href="#" data-toggle="modal" data-target="#RegisterModal" class="btn btn-lg btn-round btn-primary">Попробуйте бесплатно</a>
 			</div>
 		</section>
 		</main>
 		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 			<modal-contact/>
+		</div>
+		<div class="modal fade" id="RegisterModal" tabindex="-1" role="dialog" aria-labelledby="RegisterModalLabel">
+			<register-modal/>
+		</div>
+		<div class="modal fade" id="BuyModal" tabindex="-1" role="dialog" aria-labelledby="BuyModalLabel">
+			<buy-modal :tariph="1"/>
 		</div>
 		<!-- Footer -->
 		<footer class="footer text-white bt-0 py-7" style="background-image: linear-gradient(135deg, #4481eb 0%, #04befe 100%);">
@@ -304,8 +309,20 @@
 				</div>
 			</div>
 			<div class="col-12 text-center">
+				<ul id="nav3">
+					<li>
+						<i class="fas fa-phone-square-alt"></i>
+						<span class = "ms-1">8-(863)-296-0455</span>
+					</li>
+					<li class="ms-2">
+						<i class="fas fa-envelope"></i>
+						<span class = "ms-1">web@enterprise-it.ru</span>
+					</li>  
+				</ul>
+			</div>
+			<div class="col-12 text-center">
 				<br>
-				<small>© TheThemeio 2020, All rights reserved.</small>
+				<small>© Интернет-агентство «IT Enterprise»</small>
 			</div>
 
 			</div>
