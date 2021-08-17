@@ -67,13 +67,13 @@
                     <div class="col-md-9 col-lg-10">
                         <div class="row">
                             <div class="col-6 col-sm-4 col-md-5 col-lg-3 col-xl-2 d-grid gap-2 mt-2">
-                                <button type="button" class="btn btn-info budge-item-text d-flex align-items-center justify-content-center">
+                                <button type="button" class="btn btn-info btn-p budge-item-text d-flex align-items-center justify-content-center">
                                     ВСЕГО 
                                     <span class="badge bg-primary ms-1">{{this.tabelData.length}}</span>
                                 </button>
                             </div>
                             <div class="col-6 col-sm-4 col-md-5 col-lg-3 col-xl-2 d-grid gap-2 mt-2">
-                                <button type="button" class="btn btn-info budge-item-text d-flex align-items-center justify-content-center">
+                                <button type="button" class="btn btn-p btn-info budge-item-text d-flex align-items-center justify-content-center">
                                     АУКЦИОН 
                                     <span class="badge bg-primary ms-1">{{this.auction_lenght}}</span>
                                 </button>
@@ -90,7 +90,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="table-responsive">
+                <div class="table-responsive d-table-hidden d-none">
                     <table class="table table-bordered">
                     <thead>
                         <tr>
@@ -164,6 +164,86 @@
                     <tfoot>
                         <tr>
                             <td colspan="14">
+                                <nav aria-label="Page navigation example">
+                                    <ul class="pagination justify-content-center mt-3" >
+                                        <li class="page-item">
+                                            <a class="page-link" href="#" @click="pageClickBack">Назад</a>
+                                        </li>
+                                        <li class="page-item" v-for="page in pages" :key="page">
+                                            <a class="page-link" href="#" 
+                                                @click="pageClick(page)"
+                                                :class="{'page_active':page === pageNumber}"
+                                                >{{page}}</a>
+                                        </li>     
+                                        <li class="page-item">                             
+                                            <a class="page-link" href="#" @click="pageClickUp">Вперед</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </td>
+                        </tr>
+                    </tfoot>
+                    </table>
+                </div>
+                <div class="table-wrapper d-table-xs-show d-none mt-2">
+                    <table class="table table-bordered d-block">
+                    <thead class="d-none">
+                        <tr>
+                        </tr>
+                    </thead>
+                    <tbody class="d-block">
+                        <tr v-for ="(tabel_item,index) in paginatedObject" :key="index" class="flip-list d-block mt-2" v-bind:class="{topString: tabel_item.top == 1}">
+                            <td class="d-block"><span class="xs-table-name">ID Объекта:</span> {{tabel_item.id_object}}</td>
+                            <td class="d-block"><span class="xs-table-name">ID Циана:</span> {{tabel_item.id_offer}}</td>
+                            <td class="d-block"><span class="xs-table-name">Охват в процентах:</span> {{tabel_item.coverage}}</td>
+                            <td class="d-block"><span class="xs-table-name">Количество поисков:</span> {{tabel_item.searches_count}}</td>
+                            <td class="d-block"><span class="xs-table-name">Количество показов:</span> {{tabel_item.shows_count}}</td>
+                            <td class="d-block"><span class="xs-table-name">Количество расхлопов по дням(Показ телефона):</span> {{tabel_item.phone_shows}}</td>
+                            <td class="d-block"><span class="xs-table-name">Количество просмотров по дням:</span> {{tabel_item.views}}</td>
+                            <td class="d-block d-flex align-items-center" v-if="tabel_item.top == 1"><span class="xs-table-name">Ставка:</span> 
+                                <form class="row gy-2 gx-3 align-items-center ms-1">
+                                    <div class="d-flex">
+                                        <input type="text" v-tooltip ="{ 
+                                            content: msg_top, 
+                                            show: isOpen[tabel_item.id], 
+                                            autoHide: true,
+                                            hideOnTargetClick:true,
+                                            trigger: 'click hover', 
+                                            placement: 'bottom',
+                                        }" 
+                                         class="form-control form-control-sm form-control-bet input-value" name="bets" :id ="tabel_item.id" v-model="bets[tabel_item.id]">
+                                        <button  type="button" @click="postNewBet(bets[tabel_item.id],tabel_item.id_object, tabel_item.id_company,tabel_item.id, tabel_item.top)" class="btn btn-primary btn-sm ms-1">OK</button>
+                                    </div>
+                                </form>
+                            </td>
+                            <td class="d-block d-flex align-items-center" v-else><span class="xs-table-name">Ставка:</span> 
+                                <form class="row gy-2 gx-3 align-items-center ms-1">
+                                    <div class="d-flex">
+                                        <input type="text" v-tooltip ="{ 
+                                            content: msg_no_top, 
+                                            show: isOpen[tabel_item.id], 
+                                            autoHide: true,
+                                            hideOnTargetClick:true,
+                                            trigger: 'click hover', 
+                                            placement: 'bottom',
+                                        }" 
+                                         class="form-control form-control-sm form-control-bet input-value" name="bets" :id ="tabel_item.id" v-model="bets[tabel_item.id]">
+                                        <button  type="button" @click="postNewBet(bets[tabel_item.id],tabel_item.id_object, tabel_item.id_company,tabel_item.id, tabel_item.top)" class="btn btn-primary btn-sm ms-1">OK</button>
+                                    </div>
+                                </form>
+                            </td>    
+                            <td class="d-block"><span class="xs-table-name">Текущая ставка (CRM):</span> {{tabel_item.crm_bet}}</td>
+                            <td class="d-block"><span class="xs-table-name">Текущая ставка (ЦИАН):</span> {{tabel_item.cyan_bet}}</td>
+                            <td class="d-block"><span class="xs-table-name">Ставка лидера:</span> {{tabel_item.leader_bet}}</td>
+                            <td class="d-block"><span class="xs-table-name">Страница:</span> {{tabel_item.page}}</td>
+                            <td class="d-block"><span class="xs-table-name">Позиция в выдаче:</span> {{tabel_item.position}}</td>
+                            <td class="d-block"><span class="xs-table-name">Агент:</span> {{tabel_item.agent}}</td>
+                            <td class="d-block"><span class="xs-table-name">Цена:</span> {{tabel_item.price}}</td>
+                        </tr>
+                    </tbody>
+                    <tfoot class="d-block">
+                        <tr class="d-block">
+                            <td colspan="14" class="d-block">
                                 <nav aria-label="Page navigation example">
                                     <ul class="pagination justify-content-center mt-3" >
                                         <li class="page-item">

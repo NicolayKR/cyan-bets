@@ -33,3 +33,34 @@
         max-width: 75px;
     }
 }
+@media(max-width:400px){
+    .blackcircle {
+        width: 80px;
+        height: 80px;
+    }
+    .budge-item-text{
+        font-size: 12px;
+    }
+    .btn-p{
+        padding: 8px  12px !important;
+    }
+    .statistic_numeral{
+        font-size:20px;
+        
+    }
+    .statistic_text{
+        font-size: 8px;
+        max-width: 50px;
+        line-height: 10px;
+    }
+}
+@media(max-width:1570px){
+    .d-table-xs-show{
+        display: block !important;
+    }
+}
+@media(min-width:1570px){
+    .d-table-hidden{
+        display: block !important;
+    }
+}

@@ -12,7 +12,7 @@ window.addEventListener('DOMContentLoaded', () => {
 	});
     $(window).resize(function(){
         let header = $('#main-header').height();
-        if($(window).width()< 899 && $(window).width()> 767){
+        if($(window).width()> 767 && $(window).width()< 899){
             $('#sidebarMenu').css({
                 'padding-top': header
             });

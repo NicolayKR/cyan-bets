@@ -8,12 +8,12 @@
                 <tr>
                     <th scope="col" style="width: 4%">Название ФИДА</th>
                     <th scope="col" style="width: 5%">ID объекта</th>
-                    <th scope="col" style="width: 5%">ID Циана</th>
+                    <th scope="col" style="width: 9%">ID Циана</th>
                     <th scope="col" style="width: 43%">Ошибка</th>
-                    <th scope="col" style="width: 43%">Предупреждение</th>
+                    <th scope="col" style="width: 39%">Предупреждение</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody v-if="tabelData!=0">
                 <tr v-for ="(tabel_item,index) in paginatedObject" :key="index" class="flip-list">
                     <td>{{tabel_item.name_company}}</td>
                     <td>{{tabel_item.id_object}}</td>
@@ -22,7 +22,7 @@
                     <td><div class="table-container">{{tabel_item.warning}}</div></td>
                 </tr>
             </tbody>
-            <tfoot v-if="flagLenght">
+            <tfoot v-if="flagLenght && tabelData!=0">
                 <tr>
                     <td colspan="5">
                         <nav aria-label="Page navigation example">
@@ -44,26 +44,31 @@
                     </td>
                 </tr>
             </tfoot>
+            <tbody v-if="tabelData==0" class="d-block">
+                <tr class="d-block">
+                    <td colspan="5" class="text-center d-block"><h3 class="mt-1">Ошибки отсутствуют</h3></td>
+                </tr>
+            </tbody>
         </table>
-        <div class="col-md-10">
+        <div class="col-md-10 d-lg-none d-block">
             <input type="text" v-model="id_object" placeholder="Поиск по id-объекта или id-циана" class="form-control"/>
         </div> 
-        <div class="table-wrapper">
+        <div class="table-wrapper d-block d-lg-none">
             <table v-if="flagTabel" class="table table-bordered bg-light mt-3 d-block">
-                <thead>
+                <thead class="d-none">
                 </thead>
-                <tbody>
+                <tbody class="d-block">
                     <tr v-for ="(tabel_item,index) in paginatedObject" :key="index" class="flip-list d-block">
-                        <td class="d-block">Название ФИДА: {{tabel_item.name_company}}</td>
-                        <td class="d-block">ID объекта: {{tabel_item.id_object}}</td>
-                        <td class="d-block">ID Циана: {{tabel_item.id_offer}}</td>
-                        <td class="d-block"><div class="table-container">Ошибка: {{tabel_item.errors}}</div></td>
-                        <td class="d-block"><div class="table-container">Предупреждение: {{tabel_item.warning}}</div></td>
+                        <td class="d-block"><span class="xs-table-name">Название ФИДА:</span> {{tabel_item.name_company}}</td>
+                        <td class="d-block"><span class="xs-table-name">ID объекта:</span> {{tabel_item.id_object}}</td>
+                        <td class="d-block"><span class="xs-table-name">ID Циана:</span> {{tabel_item.id_offer}}</td>
+                        <td class="d-block"><div class="table-container"><span class="xs-table-name">Ошибка:</span> {{tabel_item.errors}}</div></td>
+                        <td class="d-block"><div class="table-container"><span class="xs-table-name">Предупреждение:</span> {{tabel_item.warning}}</div></td>
                     </tr>
                 </tbody>
-                <tfoot v-if="flagLenght">
-                    <tr>
-                        <td colspan="5">
+                <tfoot v-if="flagLenght" class="d-block">
+                    <tr class="d-block">
+                        <td colspan="5" class="d-block">
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination justify-content-center mt-3" >
                                     <li class="page-item">
@@ -83,6 +88,11 @@
                         </td>
                     </tr>
                 </tfoot>
+                <tbody class="d-block" v-if="tabelData==0">
+                    <tr class="d-block">
+                        <td colspan="5" class="text-center d-block"><h3 class="mt-1">Ошибки отсутствуют</h3></td>
+                    </tr>
+                </tbody>
             </table>
         </div>
     </div>
@@ -97,7 +107,7 @@ export default {
         return{
             tabelData: null,
             flagTabel: false,
-            objectPerPage: 50,
+            objectPerPage: 100,
             pageNumber: 1,
             flagLenght:false,
             id_object: '',
@@ -105,7 +115,7 @@ export default {
     },
     computed:{
         pages(){
-            return Math.ceil(this.tabelData.length/50);
+            return Math.ceil(this.tabelData.length/100);
         },
         paginatedObject(){
             let from = (this.pageNumber -1) * this.objectPerPage;

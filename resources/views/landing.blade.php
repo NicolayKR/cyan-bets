@@ -269,7 +269,7 @@
 		!-->
 		<section class="section bg-gray text-center">
 			<div class="container">
-			<h2 class="mb-6"><strong>Получите преимущество надо конкурентами.</strong></h2>
+			<h2 class="mb-6"><strong>Получите преимущество над конкурентами.</strong></h2>
 			<p class="lead text-muted">Побеждайте интеллектом, а не бюджетами</p>
 			<hr class="w-5 my-7">
 			<a class="btn btn-lg btn-round btn-primary" href="/index">Попробовать бесплатно</a>
