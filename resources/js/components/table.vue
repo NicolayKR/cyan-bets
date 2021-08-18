@@ -91,7 +91,7 @@
                     </div>
                 </div>
                 <div class="table-responsive" v-bind:class="{dNone: windowWidth <= 1024}">
-                    <table class="table table-bordered">
+                    <table class="table table-bordered" v-if="windowWidth<=1373" style="font-size:12px;">
                     <thead>
                         <tr>
                             <th scope="col"><a @click="sortTable('id_object')" class="filter-link">ID Объекта</a></th>
