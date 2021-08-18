@@ -56,6 +56,11 @@
         min-height: 205px;
     }
 }
+@media(min-width:992px) and (max-width:1200px){
+    .fs-head {
+        font-size: 14px;
+    }
+}
 @media(max-width:992px){
     .d-xs-block{
         display: block !important;
