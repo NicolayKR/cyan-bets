@@ -82,6 +82,11 @@
 }
 @media(max-width:469px){
     #sidebarMenu{
-        padding-top: 80px;
+        padding-top: 80px !important;
+    }
+}
+@media(min-width:767px) and (max-width:800px){
+    #sidebarMenu{
+        padding-top: 80px !important;
     }
 }

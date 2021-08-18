@@ -96,17 +96,73 @@
                         <tr>
                             <th scope="col"><a @click="sortTable('id_object')" class="filter-link">ID Объекта</a></th>
                             <th scope="col"><a @click="sortTable('id_offer')" class="filter-link">ID Циана</a></th>
-                            <th scope="col"><a @click="sortTable('coverage') " class="filter-link"><div v-if="windowWidth>1572">Охват в процентах</div><div v-else class="position-relative">Охват<i class="fas fa-question-circle ms-1 tool-xs"></i></div></a></th>
-                            <th scope="col"><a @click="sortTable('searches_count') " class="filter-link"><span v-if="windowWidth>1572">Количество поисков</span><span v-else class="position-relative">Поисков<i class="fas fa-question-circle tool-xs"/></span></a></th>
-                            <th scope="col"><a @click="sortTable('shows_count')" class="filter-link"><span v-if="windowWidth>1572">Количество показов</span><span v-else class="position-relative">Показов<i class="fas fa-question-circle tool-xs"/></span></a></th>
-                            <th scope="col"><a @click="sortTable('phone_shows')" class="filter-link"><span v-if="windowWidth>1572">Количество расхлопов по дням(Показ телефона)</span><span v-else class="position-relative">Расхлопов<i class="fas fa-question-circle tool-xs tool-xs"/></span></a></th>
-                            <th scope="col"><a @click="sortTable('views')" class="filter-link"><span v-if="windowWidth>1572">Количество просмотров по дням</span><span v-else class="position-relative">Просмотров<i class="fas fa-question-circle tool-xs"/></span></a></th>
+                            <th scope="col"><div v-if="windowWidth>1572"><a @click="sortTable('coverage')" class="filter-link">Охват в процентах</a></div><div v-else class="position-relative"><a @click="sortTable('coverage')" class="filter-link">Охват</a><i v-tooltip ="{ 
+                                            content: 'Охват в процентах', 
+                                            show: false, 
+                                            autoHide: true,
+                                            hideOnTargetClick:true,
+                                            trigger: 'click hover', 
+                                            placement: 'bottom',
+                                        }" class="fas fa-question-circle ms-1 tool-xs"></i></div></th>
+                            <th scope="col"><div v-if="windowWidth>1572"><a @click="sortTable('searches_count')" class="filter-link">Количество поисков</a></div><div v-else class="position-relative"><a @click="sortTable('searches_count')" class="filter-link">Поисков</a><i v-tooltip ="{ 
+                                            content: 'Количество поисков', 
+                                            show: false, 
+                                            autoHide: true,
+                                            hideOnTargetClick:true,
+                                            trigger: 'click hover', 
+                                            placement: 'bottom',
+                                        }" class="fas fa-question-circle ms-1 tool-xs"></i></div></th>
+                            <th scope="col"><div v-if="windowWidth>1572"><a @click="sortTable('shows_count')" class="filter-link">Количество показов</a></div><div v-else class="position-relative"><a @click="sortTable('shows_count')" class="filter-link">Показов</a><i v-tooltip ="{ 
+                                            content: 'Количество показов', 
+                                            show: false, 
+                                            autoHide: true,
+                                            hideOnTargetClick:true,
+                                            trigger: 'click hover', 
+                                            placement: 'bottom',
+                                        }" class="fas fa-question-circle ms-1 tool-xs"></i></div></th>
+                            <th scope="col"><div v-if="windowWidth>1572"><a @click="sortTable('phone_shows')" class="filter-link">Количество расхлопов по дням(Показ телефона)</a></div><div v-else class="position-relative"><a @click="sortTable('phone_shows')" class="filter-link">Расхлопов</a><i v-tooltip ="{ 
+                                            content: 'Количество расхлопов по дням(Показ телефона)', 
+                                            show: false, 
+                                            autoHide: true,
+                                            hideOnTargetClick:true,
+                                            trigger: 'click hover', 
+                                            placement: 'bottom',
+                                        }" class="fas fa-question-circle ms-1 tool-xs"></i></div></th>
+                            <th scope="col"><div v-if="windowWidth>1572"><a @click="sortTable('views')" class="filter-link">Количество просмотров по дням</a></div><div v-else class="position-relative"><a @click="sortTable('views')" class="filter-link">Просмотров</a><i v-tooltip ="{ 
+                                            content: 'Количество просмотров по дням', 
+                                            show: false, 
+                                            autoHide: true,
+                                            hideOnTargetClick:true,
+                                            trigger: 'click hover', 
+                                            placement: 'bottom',
+                                        }" class="fas fa-question-circle ms-1 tool-xs"></i></div></th>
                             <th scope="col" style="width: 8%">Ставка</th>
-                            <th scope="col"><a @click="sortTable('crm_bet')" class="filter-link"><span v-if="windowWidth>1572">Текущая ставка (CRM)</span><span v-else class="position-relative">Ставка (CRM)</span></a></th>
-                            <th scope="col"><a @click="sortTable('cyan_bet')" class="filter-link"><span v-if="windowWidth>1572">Текущая ставка (ЦИАН)</span><span v-else class="position-relative">Ставка (ЦИАН)</span></a></th>
+                            <th scope="col"><div v-if="windowWidth>1572"><a @click="sortTable('crm_bet')" class="filter-link">Текущая ставка (CRM)</a></div><div v-else class="position-relative"><a @click="sortTable('crm_bet')" class="filter-link">Ставка (CRM)</a><i v-tooltip ="{ 
+                                            content: 'Текущая ставка (CRM)', 
+                                            show: false, 
+                                            autoHide: true,
+                                            hideOnTargetClick:true,
+                                            trigger: 'click hover', 
+                                            placement: 'bottom',
+                                        }" class="fas fa-question-circle ms-1 tool-xs-1"></i></div></th>
+                            <th scope="col"><div v-if="windowWidth>1572"><a @click="sortTable('cyan_bet')" class="filter-link">Текущая ставка (ЦИАН)</a></div><div v-else class="position-relative"><a @click="sortTable('cyan_bet')" class="filter-link">Ставка (ЦИАН)</a><i v-tooltip ="{ 
+                                            content: 'Текущая ставка (ЦИАН)', 
+                                            show: false, 
+                                            autoHide: true,
+                                            hideOnTargetClick:true,
+                                            trigger: 'click hover', 
+                                            placement: 'bottom',
+                                        }" class="fas fa-question-circle ms-1 tool-xs-1"></i></div></th>
                             <th scope="col"><a @click="sortTable('leader_bet')" class="filter-link">Ставка лидера</a></th>
                             <th scope="col"><a @click="sortTable('page')" class="filter-link">Страница</a></th>
-                            <th scope="col"><a @click="sortTable('position')" class="filter-link"><span v-if="windowWidth>1572">Позиция в выдаче</span><span v-else class="position-relative">Позиция<i class="fas fa-question-circle tool-xs"></i></span></a></th>
+                            <th scope="col"><div v-if="windowWidth>1572"><a @click="sortTable('position')" class="filter-link">Позиция в выдаче</a></div><div v-else class="position-relative"><a @click="sortTable('position')" class="filter-link">Позиция</a><i v-tooltip ="{ 
+                                            content: 'Позиция в выдаче', 
+                                            show: false, 
+                                            autoHide: true,
+                                            hideOnTargetClick:true,
+                                            trigger: 'click hover', 
+                                            placement: 'bottom',
+                                        }" class="fas fa-question-circle ms-1 tool-xs"></i></div></th>
                             <th scope="col"><a @click="sortTable('agent')" class="filter-link">Агент</a></th>
                             <th scope="col"><a @click="sortTable('price')" class="filter-link">Цена</a></th>
                         </tr>

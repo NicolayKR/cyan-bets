@@ -370,6 +370,13 @@ td{
 }
 .tool-xs{
     position: absolute;
-    top: -18px;
-    right: -6px;
+    top: -20px;
+    right: -7px;
+    color: $primary;
+}
+.tool-xs-1 {
+    position: absolute;
+    top: -7px;
+    right: -7px;
+    color: $primary;
 }
