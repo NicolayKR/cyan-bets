@@ -19,19 +19,19 @@
             </div>
             <div class="modal-body"> 
                 <div class="mb-3">
-                    <label for="name" class="form-label">Ваше имя:</label>
-                    <input type="text" name="name" id="name" placeholder="Введите ваше имя *" v-model="name" required class="form-control" />
+                    <label for="name" class="form-label">Ваше имя <span style="color:red;">*</span></label>
+                    <input type="text" name="name" id="name" placeholder="Введите ваше имя" v-model="name" required class="form-control" />
                 </div>
                 <div class="mb-3">
-                    <label for="email" class="form-label">Email:</label>
-                    <input type="email" name="email" id="email" placeholder="Введите вашу почту *" v-model="email" required class="form-control" />
+                    <label for="email" class="form-label">Email <span style="color:red;">*</span></label>
+                    <input type="email" name="email" id="email" placeholder="Введите вашу почту" v-model="email" required class="form-control" />
                 </div>
                 <div class="mb-3">
-                    <label for="phone" class="form-label">Телефон:</label>
-                    <input type="phone" name="phone" id="phone" placeholder="Введите номер телефона *" v-model="phone" class="form-control" />
+                    <label for="phone" class="form-label">Телефон <span style="color:red;">*</span></label>
+                    <input type="phone" name="phone" id="phone" placeholder="Введите номер телефона" v-model="phone" class="form-control" />
                 </div>
                 <div class="mb-3">
-                    <label for="mess" class="form-label">Сообщение:</label>
+                    <label for="mess" class="form-label">Сообщение</label>
                     <textarea rows="4" name="mess" id="mess" placeholder="Ваше сообщение" v-model="message" class="form-control"></textarea>
                 </div>
                 <div class="form-check d-flex align-items-center mt-2">

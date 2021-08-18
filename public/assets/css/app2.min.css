@@ -10477,6 +10477,7 @@ input[type=button].btn-block {
   background-color: transparent;
   border: 1px solid transparent;
   border-radius: 0.25rem;
+  z-index: 100000;
 }
 
 .navbar-toggler:hover,
@@ -32212,7 +32213,7 @@ a.text-lightest:focus {
 
 .h-fullscreen,
 .h-100vh {
-  height: 100vh !important;
+  height: auto !important;
 }
 
 .mw-fullscreen,
@@ -32500,7 +32501,8 @@ a.text-lightest:focus {
 }
 
 .lead-6 {
-  font-size: 2.25rem !important;
+  font-size: 2.15rem !important;
+  line-height: 50px;
 }
 
 .lead-7 {
@@ -32800,20 +32802,20 @@ a.text-lightest:focus {
   margin-left: 20px;
 }
 
-#nav3, #nav3 li {
+#nav3, #nav4, #nav3 li, #nav4 li {
   padding: 0;
 }
 
-#nav3 {
+#nav3, #nav4 {
   text-align: center;
   /* пункты и текст горизонтально по центру */
 }
 
-#nav3 li {
+#nav3 li, #nav4 li {
   display: inline-block;
 }
 
-#nav3 a {
+#nav3 a, #nav4 a {
   display: block;
   color: #fff;
   text-decoration: none;
@@ -32821,6 +32823,32 @@ a.text-lightest:focus {
 
 .container-img {
   max-height: 450px;
+}
+
+.main-title {
+  font-size: 32px;
+}
+
+.ul-better {
+  padding: 0;
+  text-align: left;
+  margin: 0 50px;
+}
+
+ul.ul-better li {
+  list-style: none;
+  font-size: 18px;
+  padding-left: 40px;
+  position: relative;
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+
+ul.ul-better li i {
+  font-size: 22px;
+  position: absolute;
+  left: 0;
+  top: 3px;
 }
 .block-number {
   text-align: center;
@@ -33030,5 +33058,14 @@ body > .footer .nav a:last-child {
   .card-body {
     max-height: 400px;
     min-height: 205px;
+  }
+}
+@media (max-width: 992px) {
+  .d-xs-block {
+    display: block !important;
+  }
+
+  .d-xs-none {
+    display: none;
   }
 }

@@ -97,19 +97,19 @@
                 </div>
                 <div class="modal-body"> 
                     <div class="mb-3">
-                        <label for="name-buy" class="form-label">Ваше имя:</label>
-                        <input type="text" name="name-buy" id="name-buy" placeholder="Введите ваше имя *" v-model="name" required class="form-control" />
+                        <label for="name-buy" class="form-label">Ваше имя <span style="color:red;">*</span></label>
+                        <input type="text" name="name-buy" id="name-buy" placeholder="Введите ваше имя" v-model="name" required class="form-control" />
                     </div>
                     <div class="mb-3">
-                    <label for="email-buy" class="form-label">Email:</label>
+                    <label for="email-buy" class="form-label">Email <span style="color:red;">*</span></label>
                     <input type="email" name="email-buy" id="email-buy" placeholder="Введите вашу почту *" v-model="email" required class="form-control" />
                     </div>
                     <div class="mb-3">
-                        <label for="phone-buy" class="form-label">Телефон:</label>
-                        <input type="phone" name="phone-buy" id="phone-buy" placeholder="Введите номер телефона *" v-model="phone" class="form-control" />
+                        <label for="phone-buy" class="form-label">Телефон <span style="color:red;">*</span></label>
+                        <input type="phone" name="phone-buy" id="phone-buy" placeholder="Введите номер телефона" v-model="phone" class="form-control" />
                     </div>
                     <div class="mb-3">
-                        <label for="select-tariph" class="form-label">Выберите тариф:</label>
+                        <label for="select-tariph" class="form-label">Выберите тариф</label>
                         <select class="form-select form-control mt-1" aria-label="Default select example" name="select-tariph" id="select-tariph">
                             <option v-if="this.activeTariph == 1 && this.BuyTariph == 1" selected>Стандартный Месячный Пакет, от 6000 ₽/мес.</option>
                             <option v-else>Стандартный Месячный Пакет, от 6000 ₽/мес.</option>

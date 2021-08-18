@@ -19,14 +19,14 @@
             </div>
             <div class="modal-body">
                 <div class="mb-3"> 
-                    <label for="name-reg" class="form-label">Ваше имя:</label>
-                    <input type="text" name="name-reg" id="name-reg" placeholder="Введите ваше имя *" v-model="name" required class="form-control" /></div>
+                    <label for="name-reg" class="form-label">Ваше имя <span style="color:red;">*</span></label>
+                    <input type="text" name="name-reg" id="name-reg" placeholder="Введите ваше имя" v-model="name" required class="form-control" /></div>
                 <div class="mb-3"> 
-                <label for="email-reg" class="form-label">Email:</label>
-                <input type="email" name="email-reg" id="email-reg" placeholder="Введите вашу почту *" v-model="email" required class="form-control " /></div>
+                <label for="email-reg" class="form-label">Email <span style="color:red;">*</span></label>
+                <input type="email" name="email-reg" id="email-reg" placeholder="Введите вашу почту" v-model="email" required class="form-control " /></div>
                 <div class="mb-3"> 
-                <label for="phone-reg" class="form-label">Телефон:</label>
-                <input type="phone" name="phone-reg" id="phone-reg" placeholder="Введите номер телефона *" v-model="phone" class="form-control mt-1" /></div>
+                <label for="phone-reg" class="form-label">Телефон <span style="color:red;">*</span></label>
+                <input type="phone" name="phone-reg" id="phone-reg" placeholder="Введите номер телефона" v-model="phone" class="form-control mt-1" /></div>
                 <div class="form-check d-flex align-items-center mt-2">
                     <input type="checkbox" class="form-check-input" name="accses_policy" id="accses_policy_2" required :value="checked" v-model="checked" style="top: 7px;">
                     <label class="form-check-label" for="accses_policy_2">Я принимаю условия <a href="https://enterprise-it.ru/policy/" target="_blank"> политики конфиденциальности</a></label>  

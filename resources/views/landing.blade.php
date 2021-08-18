@@ -24,19 +24,56 @@
 		<div id="app2">
 		<!-- Navbar -->
 		<nav class="navbar navbar-expand-lg navbar-light navbar-stick-dark" data-navbar="sticky">
+		<button class="navbar-toggler" type="button" style="position: absolute;"><span class="navbar-toggler-icon"></span></button>
 		<div class="container">
 			<div class="row">
 				<div class="col-3 col-sm-4 col-lg-3 mr-auto mx-lg-auto d-flex align-items-center">
-					<button class="navbar-toggler" type="button"><span class="navbar-toggler-icon"></span></button>
-					<a class="navbar-brand" href="#" id="logo-top">
+					<a class="navbar-brand d-xs-none" href="#" id="logo-top">
 						<div class="logo-wrapper mt-2"><img class="logo-dark" src="assets/img/logo.png" alt="logo"></div>
-						<img class="logo-light" src="assets/img/logo.png" alt="logo">
+						<img class="logo-light " src="assets/img/logo.png" alt="logo">
 					</a>	
 				</div>
 				<section class="col-lg-6 navbar-mobile">
-					<nav class="nav nav-navbar mr-lg-auto mx-lg-auto mt-1">
-					<a class="nav-link active" href="/index"><span class="fs-head">Оптимизатор бюджета <span class="we-cian">ЦИАН</span></span></a>
+					<nav class="nav nav-navbar mr-lg-auto mx-lg-auto mt-1 d-xs-none">
+					<a class="nav-link active" href="/index"><span class="fs-head">Автоматический оптимизатор бюджета <span class="we-cian">ЦИАН</span></span></a>
 					</nav>
+					<div class="row align-items-center d-none d-xs-block">
+						<div class="col-12 col-md-12 d-flex justify-content-center text-center">
+							<a class="navbar-brand" href="#">
+								<div class="logo-wrapper mt-6 mb-3">
+									<img src="assets/img/logo.png" alt="logo">
+								</div>
+							</a>
+						</div>
+						<div class="col-12 col-md-12 d-flex justify-content-center text-center">
+							<a class="nav-link" href="/index"><span class="fs-head">Автоматический оптимизатор бюджета <span class="we-cian">ЦИАН</span></span></a>
+						</div>
+						<div class="col-md-12 text-center text-md-left mt-5 mt-md-0">
+							<div class="social social-bg-dark">
+								<a class="social-facebook" href="#"><i class="fa fa-facebook"></i></a>
+								<a class="social-twitter" href="#"><i class="fa fa-twitter"></i></a>
+								<a class="social-instagram" href="#"><i class="fa fa-instagram"></i></a>
+								<a class="social-youtube" href="#"><i class="fa fa-youtube"></i></a>
+								<a class="social-dribbble" href="#"><i class="fa fa-dribbble"></i></a>
+							</div>
+						</div>
+						<div class="col-12 text-center">
+							<ul id="nav4">
+								<li>
+									<i class="fas fa-phone-square-alt"></i>
+									<span class = "ms-1">8 (863) 296-0455</span>
+								</li>
+								<li class="ms-2">
+									<i class="fas fa-envelope"></i>
+									<span class = "ms-1">web@enterprise-it.ru</span>
+								</li>  
+							</ul>
+						</div>
+						<div class="col-12 text-center">
+							<br>
+							<small>© Интернет-агентство «IT Enterprise»</small>
+						</div>
+					</div>
 				</section>
 				<div class="col-9 col-sm-7 col-lg-3 d-flex justify-content-end">
 					@guest
@@ -61,8 +98,30 @@
 			<div class="row align-items-center h-100">
 
 			<div class="col-md-8 mx-auto">
-				<h1 style="font-size: 35px"><span class="main-title">ПОБЕЖДАЙТЕ <span class="prim">ИНТЕЛЛЕКТОМ</span>,<br>а не бюджетами.</span></h1>
-				<p class="lead mt-4 mb-7">Повысьте количество клиентов при меньшем бюджете. Мы покажем какие объявления нужно продвигать и суммы на каждое  с точностью до рубля. Распределим бюджеты в 1 клик.</p>
+				<p class="lead-6 mt-4 mb-5" style="color:white;">Получите до 40% больше звонков при экономии до 50% рекламного<br> бюджета на ЦИАН</p>
+				<ul class="ul-better">
+					<li>
+						<i class="far fa-check-square"></i>
+						<span>Зарегистрируйтесь</span>
+					</li>
+					<li>
+						<i class="far fa-check-square"></i>
+						<span>Подключите свой кабинет циан к программе</span>
+					</li>
+					<li>
+						<i class="far fa-check-square"></i>
+						<span>Программа проанализирует вашу статистику и даст рекомендации</span>
+					</li>
+					<li>
+						<i class="far fa-check-square"></i>
+						<span>Выставите ставки на аукционах для наиболее популярных и результативных объявлений</span>
+					</li>
+					<li>
+						<i class="far fa-check-square"></i>
+						<span>Поздравляем! Вы получается больше звонков, при меньшем расходе бюджета</span>
+					</li>
+				</ul>	
+				<h1 style="font-size: 35px" class="mt-6 mb-6"><span class="main-title">ПОБЕЖДАЙТЕ <span class="prim">ИНТЕЛЛЕКТОМ</span>,<br>а не бюджетами.</span></h1>
 				<a href="#" data-toggle="modal" data-target="#RegisterModal" class="btn btn-xl btn-round btn-primary px-8">Попробуйте бесплатно</a>
 			</div>
 
@@ -227,7 +286,7 @@
 				<ul id="nav3">
 					<li>
 						<i class="fas fa-phone-square-alt"></i>
-						<span class = "ms-1">8-(863)-296-0455</span>
+						<span class = "ms-1">8 (863) 296-0455</span>
 					</li>
 					<li class="ms-2">
 						<i class="fas fa-envelope"></i>
