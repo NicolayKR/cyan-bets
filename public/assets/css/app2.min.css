@@ -6191,7 +6191,7 @@ section {
 
 body {
   margin: 0;
-  font-family: "Open Sans", sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 0.9375rem;
   font-weight: 300;
   line-height: 1.9;
@@ -6366,7 +6366,6 @@ th {
 
 label {
   display: inline-block;
-  margin-bottom: 0.5rem;
 }
 
 button {
@@ -12132,7 +12131,7 @@ a.close.disabled {
   z-index: 1070;
   display: block;
   margin: 0;
-  font-family: "Open Sans", sans-serif;
+  font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 400;
   line-height: 1.9;
@@ -12257,7 +12256,7 @@ a.close.disabled {
   z-index: 1060;
   display: block;
   max-width: 276px;
-  font-family: "Open Sans", sans-serif;
+  font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 400;
   line-height: 1.9;
@@ -23408,7 +23407,7 @@ body[data-aos-easing=ease-in-out-quart] [data-aos],
 }
 
 .lity-close {
-  font-family: "Open Sans", sans-serif;
+  font-family: "Roboto", sans-serif;
   font-weight: 100;
   opacity: 0.6;
   padding: 0.5rem 1rem;
@@ -23421,7 +23420,7 @@ body[data-aos-easing=ease-in-out-quart] [data-aos],
 .lity-close:focus,
 .lity-close:active,
 .lity-close:visited {
-  font-family: "Open Sans", sans-serif;
+  font-family: "Roboto", sans-serif;
   font-weight: 100;
   opacity: 1;
   padding: 0.5rem 1rem;
@@ -24403,7 +24402,7 @@ h6.bold::before,
 }
 
 .heading-alt {
-  font-family: "Open Sans", sans-serif;
+  font-family: "Roboto", sans-serif;
   letter-spacing: 0;
 }
 
@@ -28213,13 +28212,6 @@ button:focus {
 
 .form-control.is-invalid {
   transition: border 0.3s ease-out;
-}
-
-label {
-  font-weight: 400;
-  font-size: 13px;
-  letter-spacing: 0.5px;
-  margin-bottom: 4px;
 }
 
 label.require::after {
@@ -32405,11 +32397,11 @@ a.text-lightest:focus {
 }
 
 .font-body {
-  font-family: "Open Sans", sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 .font-title {
-  font-family: Dosis, sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 .fs-6,

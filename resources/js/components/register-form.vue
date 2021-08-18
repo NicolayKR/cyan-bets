@@ -14,16 +14,19 @@
                 Что-то пошло не так.
             </div>
             <div class="modal-header">
-                <h4 class="modal-title" id="RegisterModalLabel">Форма регистрации</h4>
+                <h4 class="modal-title" id="RegisterModalLabel">Регистрация</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
-            <div class="modal-body"> 
-                <label for="name-reg" class="form-label">Ваше имя:</label>
-                <input type="text" name="name-reg" id="name-reg" placeholder="Введите ваше имя *" v-model="name" required class="form-control mt-1" />
-                <label for="email-reg" class="form-label">Ваша почта:</label>
-                <input type="email" name="email-reg" id="email-reg" placeholder="Введите вашу почту *" v-model="email" required class="form-control mt-1" />
-                <label for="phone-reg" class="form-label">Ваш номер телефона:</label>
-                <input type="phone" name="phone-reg" id="phone-reg" placeholder="Введите номер телефона *" v-model="phone" class="form-control mt-1" />
+            <div class="modal-body">
+                <div class="mb-3"> 
+                    <label for="name-reg" class="form-label">Ваше имя:</label>
+                    <input type="text" name="name-reg" id="name-reg" placeholder="Введите ваше имя *" v-model="name" required class="form-control" /></div>
+                <div class="mb-3"> 
+                <label for="email-reg" class="form-label">Email:</label>
+                <input type="email" name="email-reg" id="email-reg" placeholder="Введите вашу почту *" v-model="email" required class="form-control " /></div>
+                <div class="mb-3"> 
+                <label for="phone-reg" class="form-label">Телефон:</label>
+                <input type="phone" name="phone-reg" id="phone-reg" placeholder="Введите номер телефона *" v-model="phone" class="form-control mt-1" /></div>
                 <div class="form-check d-flex align-items-center mt-2">
                     <input type="checkbox" class="form-check-input" name="accses_policy" id="accses_policy_2" required :value="checked" v-model="checked" style="top: 7px;">
                     <label class="form-check-label" for="accses_policy_2">Я принимаю условия <a href="https://enterprise-it.ru/policy/" target="_blank"> политики конфиденциальности</a></label>  

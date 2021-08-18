@@ -14,18 +14,26 @@
                 Что-то пошло не так, сообщение не было отправлено.
             </div>
             <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">Форма обратной связи</h4>
+                <h4 class="modal-title" id="myModalLabel">Узнать подробнее</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body"> 
-                <label for="name" class="form-label">Ваше имя:</label>
-                <input type="text" name="name" id="name" placeholder="Введите ваше имя *" v-model="name" required class="form-control mt-1" />
-                <label for="email" class="form-label">Ваша почта:</label>
-                <input type="email" name="email" id="email" placeholder="Введите вашу почту *" v-model="email" required class="form-control mt-1" />
-                <label for="phone" class="form-label">Ваш номер телефона:</label>
-                <input type="phone" name="phone" id="phone" placeholder="Введите номер телефона *" v-model="phone" class="form-control mt-1" />
-                <label for="mess" class="form-label">Ваше сообщение:</label>
-                <textarea rows="4" name="mess" id="mess" placeholder="Ваше сообщение" v-model="message" class="form-control mt-1"></textarea>
+                <div class="mb-3">
+                    <label for="name" class="form-label">Ваше имя:</label>
+                    <input type="text" name="name" id="name" placeholder="Введите ваше имя *" v-model="name" required class="form-control" />
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email:</label>
+                    <input type="email" name="email" id="email" placeholder="Введите вашу почту *" v-model="email" required class="form-control" />
+                </div>
+                <div class="mb-3">
+                    <label for="phone" class="form-label">Телефон:</label>
+                    <input type="phone" name="phone" id="phone" placeholder="Введите номер телефона *" v-model="phone" class="form-control" />
+                </div>
+                <div class="mb-3">
+                    <label for="mess" class="form-label">Сообщение:</label>
+                    <textarea rows="4" name="mess" id="mess" placeholder="Ваше сообщение" v-model="message" class="form-control"></textarea>
+                </div>
                 <div class="form-check d-flex align-items-center mt-2">
                     <input type="checkbox" class="form-check-input" name="accses_policy" id="accses_policy" required :value="checked" v-model="checked">
                     <label class="form-check-label" for="accses_policy">Я принимаю условия <a href="https://enterprise-it.ru/policy/" target="_blank"> политики конфиденциальности</a></label>  

@@ -40,6 +40,7 @@
 				</section>
 				<div class="col-9 col-sm-7 col-lg-3 d-flex justify-content-end">
 					@guest
+					<a href="#" data-toggle="modal" data-target="#RegisterModal" class="btn btn-sm btn-round btn-success d-lg-inline-block ms-1 mt-1">Регистрация</a>
 					<a class="btn btn-sm btn-round btn-outline-success d-lg-inline-block ms-1 mt-1" href="/login">Войти</a>
 					@endguest
 					@auth
