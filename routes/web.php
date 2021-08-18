@@ -53,20 +53,20 @@ Route::get('/buyMail', 'App\Http\Controllers\TableController@buyMail');
 Auth::routes();
 Route::get('test', function(){
 
-        $toEmail = 'n.kryuchkov@enterprise-it.ru';
-        $email = '11';
-        $name ='11';
-        $phone = 'n.kryuchkov@enterprise-it.ru';
-        $newMess = MailPost::create(array(
-            'name'=>$name,
-            'email'=>$email,
-            'phone'=>$phone,
-            'message'=>'Регистрация',
-            'status'=>1
-        ));
-        $newMess->save();
-        Mail::to($toEmail)->send(new RegisterForm($name, $email, $phone));
-        return 1;
+    $toEmail = 'n.kryuchkov@enterprise-it.ru';
+    $email = 'n.kryuchkov@enterprise-it.ru';
+    $name = 'n.kryuchkov@enterprise-it.ru';
+    $phone ='n.kryuchkov@enterprise-it.ru';
+    $tariph = 'n.kryuchkov@enterprise-it.ru';
+    $newMess = MailPost::create(array(
+        'name'=>$name,
+        'email'=>$email,
+        'phone'=>$phone,
+        'message'=>'Покупка тарифа:'.$tariph,
+        'status'=>2
+    ));
+    $newMess->save();
+    Mail::to($toEmail)->send(new BuyForm($name, $email, $phone, $tariph));
 
     
     // $final_array = [];

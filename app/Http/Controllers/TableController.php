@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ContactForm;
 use App\Mail\RegisterForm;
+use App\Mail\BuyForm;
 use App\Models\MailPost;
 
 
@@ -296,7 +297,7 @@ class TableController extends Controller
     }
     public function buyMail(Request $request){
         try{
-        $toEmail = 'n.kryuchkov@enterprise-it.ru';
+        $toEmail = 'web@enterprise-it.ru';
         $email = $request->query('email');
         $name = $request->query('name');
         $phone = $request->query('phone');

@@ -85,15 +85,12 @@
 		<section class="section bg-gray overflow-hidden">
 			<div class="container-fluid">
 			<div class="row gap-y align-items-center">
-
-				<div class="col-md-4 mx-auto text-center">
+				<div class="col-md-6 col-lg-5 col-xl-4 mx-auto text-center">
 					<div class="container-img">
 						<img class="border shadow-7" src="assets/img/block-1.png" alt="..." data-aos="fade-right">
 					</div>
 				</div>
-
-
-				<div class="col-md-4 mx-auto">
+				<div class="col-md-6 col-lg-6 col-xl-5 mx-auto">
 				<h3>Результат нашего клиента: 1-ое место с двукратным отрывом от ближайшего конкурента при меньшем бюджете!</h3>
 				<p>Умные алгоритмы продвижения позволили компании «Наследие» всего за полтора месяца занять лидирующие позиции в Ростове-на-Дону, при этом рекламный бюджет удалось сократить, т. к. агенты перестали справляться с потоком лидов.</p>
 				<a href="#" data-toggle="modal" data-target="#myModal">Узнать подробнее<i class="fas fa-arrow-right ms-1"></i></a>
@@ -107,13 +104,14 @@
 		<section class="section overflow-hidden">
 			<div class="container-fluid">
 			<div class="row gap-y align-items-center">
-
-				<div class="col-md-4 mx-auto text-center">
-				<img class="border shadow-7" src="assets/img/block-2.png" alt="..." data-aos="fade-left">
+				<div class="col-md-6 col-lg-5 col-xl-4  mx-auto text-center">
+					<div class="container-img2">
+						<img class="border shadow-7" src="assets/img/block-2.png" alt="..." data-aos="fade-left">
+					</div>
 				</div>
 
 
-				<div class="col-md-4 mx-auto order-md-first">
+				<div class="col-md-6 col-lg-6 col-xl-5 mx-auto order-md-first">
 				<h3>Мы используем самые передовые математические модели и алгоритмы.</h3>
 				<p>За построение математических моделей и финансовую математику отвечают практикующие дипломированные специалисты с опытом работы и преподавания в немецких и лучших российских университетах.</p>
 				<a href="#" data-toggle="modal" data-target="#myModal">Узнать подробнее<i class="fas fa-arrow-right ms-1"></i></a>
@@ -127,13 +125,14 @@
 		<section class="section bg-gray overflow-hidden">
 			<div class="container-fluid">
 			<div class="row gap-y align-items-center">
-
-				<div class="col-md-4 mx-auto text-center">
-				<img class="border shadow-7" src="assets/img/block-3.png" alt="..." data-aos="fade-right">
+				<div class="col-md-6 col-lg-5 col-xl-4  mx-auto text-center">
+					
+						<img class="border shadow-7" src="assets/img/block-3.png" alt="..." data-aos="fade-right">
+					
 				</div>
 
 
-				<div class="col-md-4 mx-auto">
+				<div class="col-md-6 col-lg-6 col-xl-5 mx-auto">
 				<h3>Опыт более 10 лет в разработке приложений для риэлторов.</h3>
 				<p>Наша команда автоматизирует работу агентств недвижимости с 2009 года. Нами создано более 20 CRM и ERP систем, большое количество ПО различного назначения.</p>
 					<a href="#" data-toggle="modal" data-target="#myModal">Узнать подробнее<i class="fas fa-arrow-right ms-1"></i></a>
@@ -186,103 +185,18 @@
 		| Pricing
 		|‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
 		!-->
-		<section class="section bg-gray">
-			<div class="container">
-			<div class="row gap-y align-items-center">
-
-				<div class="col-md-5">
-				<p class="lead-7 text-dark fw-600 lh-2">Цены</p>
-
-				<div class="btn-group btn-group-toggle my-7" data-toggle="buttons">
-					<label class="btn btn-round btn-outline-dark w-150">
-					<input type="radio" name="pricing" value="monthly" autocomplete="off"> Месячный
-					</label>
-					<label class="btn btn-round btn-outline-dark w-150 active">
-					<input type="radio" name="pricing" value="yearly" autocomplete="off" checked> Годовой
-					</label>
-				</div>
-				<p class="lead">Стоимость оптимизатора гораздо ниже экономии бюджета.</p>
-				<p class="fw-400">
-					<a target="_blank" href="storage/Тарифы.pdf">Узнать подробнее о тарифах<i class="fas fa-arrow-right ms-1"></i></a>
-				</p>
-				</div>
-				<div class="col-md-7 ml-auto">
-				<div class="row gap-y">
-
-					<div class="col-md-12 col-xl-6">
-					<div class="card text-center shadow-1 hover-shadow-9 pb-6">
-						<div class="card-img-top text-white bg-img h-200 d-flex align-items-center" style="background-image: url(assets/img/standart.jpg)" data-overlay="1">
-						<div class="position-relative w-100">
-							<p class="lead-4 fw-600 ls-1 mb-0">Стандартный</p>
-							<p><span data-bind-radio="pricing" data-monthly="Месячный" data-yearly="Годовой">Месячный</span> Пакет</p>
-						</div>
-						</div>
-						<div class="card-body py-6">
-						<p class="lead-6 fw-600 text-dark mb-0">
-							<span data-bind-radio="pricing" data-monthly="От 6000" data-yearly="От 4000" id="cost-1">6000 ₽/мес.</span><br>
-						</p>
-						<p>
-							<span class="badge bg-success" style="color:white; font-size:16px;">1 месяц бесплатно</span><br>
-							Количество объявлений не ограничено. Обновление в сутки не ограничено. 
-						</p>
-						</div>
-						<div class="d-flex mr-auto ml-auto">
-							<a href="#" data-toggle="modal" data-target="#BuyModal" class="btn btn-round btn-primary w-200" data-bind-href="pricing" data-monthly="#monthly" data-yearly="#yearly">Купить</a>
-						</div>
-					</div>
-					</div>
-
-					<div class="col-md-12 col-xl-6">
-					<div class="card text-center shadow-1 hover-shadow-9 pb-6">
-						<div class="card-img-top text-white bg-img h-200 d-flex align-items-center" style="background-image: url(assets/img/advanced.jpg)" data-overlay="2">
-						<div class="position-relative w-100">
-							<p class="lead-4 fw-600 ls-1 mb-0">Расширенный</p>
-							<p><span data-bind-radio="pricing" data-monthly="Месячный" data-yearly="Годовой">Годовой</span> Пакет</p>
-						</div>
-						</div>
-						<div class="card-body py-6">
-						<p class="lead-6 fw-600 text-dark mb-0">
-							<span data-bind-radio="pricing" data-monthly="От 10000" data-yearly="От 7000" id="cost-2">10000 ₽/мес</span><br>
-						</p>
-						<p>
-							3 часа времени нашего маркетолога для анализа ставок/консультации по любым вопросам лидогенерации.
-						</p>
-						</div>
-						<div class="d-flex mr-auto ml-auto">
-							<a class="btn btn-round btn-primary w-200" href="#" data-toggle="modal" data-target="#myModal" data-bind-href="pricing" data-monthly="#monthly" data-yearly="#yearly">Купить</a>
-						</div>
-					</div>
-					</div>
-
-				</div>
-				</div>
-
-			</div>
-			</div>
-		</section>
-
+		<buy-block/>
 		<!--
 		|‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
 		| CTA
 		|‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
 		!-->
-		<section class="section bg-gray text-center">
-			<div class="container">
-			<h2 class="mb-6"><strong>Получите преимущество над конкурентами.</strong></h2>
-			<p class="lead text-muted">Побеждайте интеллектом, а не бюджетами</p>
-			<hr class="w-5 my-7">
-				<a href="#" data-toggle="modal" data-target="#RegisterModal" class="btn btn-lg btn-round btn-primary">Попробуйте бесплатно</a>
-			</div>
-		</section>
 		</main>
 		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 			<modal-contact/>
 		</div>
 		<div class="modal fade" id="RegisterModal" tabindex="-1" role="dialog" aria-labelledby="RegisterModalLabel">
 			<register-modal/>
-		</div>
-		<div class="modal fade" id="BuyModal" tabindex="-1" role="dialog" aria-labelledby="BuyModalLabel">
-			<buy-modal :tariph="1"/>
 		</div>
 		<!-- Footer -->
 		<footer class="footer text-white bt-0 py-7" style="background-image: linear-gradient(135deg, #4481eb 0%, #04befe 100%);">
