@@ -19,7 +19,7 @@
 </head>
 <body>
     <div id="app">
-        <main class="py-4">
+        <main class="py-6 autorize-back">
             @yield('content')
         </main>
     </div>

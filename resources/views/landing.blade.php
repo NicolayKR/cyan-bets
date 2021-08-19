@@ -7,7 +7,7 @@
 		<meta name="description" content="">
 		<meta name="keywords" content="">
 
-		<title>Биддер ЦИАН</title>
+		<title>Оптимизатор бюджета ЦИАН</title>
 
 		<!-- Styles -->
 		<script rel="preload" src="{{ asset('assets/js/app2.min.js') }}" defer></script>

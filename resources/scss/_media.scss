@@ -84,9 +84,17 @@
     #sidebarMenu{
         padding-top: 80px !important;
     }
+    .btn {
+        font-size: 11px;
+    }
 }
 @media(min-width:767px) and (max-width:800px){
     #sidebarMenu{
         padding-top: 80px !important;
+    }
+}
+@media(min-width:1024px) and (max-width:1380px){
+    table{
+        font-size: 12px;
     }
 }

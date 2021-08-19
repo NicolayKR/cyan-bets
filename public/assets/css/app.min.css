@@ -18438,10 +18438,19 @@ td {
   #sidebarMenu {
     padding-top: 80px !important;
   }
+
+  .btn {
+    font-size: 11px;
+  }
 }
 @media (min-width: 767px) and (max-width: 800px) {
   #sidebarMenu {
     padding-top: 80px !important;
+  }
+}
+@media (min-width: 1024px) and (max-width: 1380px) {
+  table {
+    font-size: 12px;
   }
 }
 .graph_wrapper {
@@ -18561,11 +18570,40 @@ td {
   z-index: 1;
 }
 
-.container-img {
-  max-width: 400px;
-  max-height: 400px;
+.autorize-back {
+  background-color: #262a37;
+  height: 100vh;
+  position: relative;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  overflow: hidden !important;
 }
 
+.login-back {
+  height: 100vh;
+  background-image: linear-gradient(#09203f 0%, #537895 100%);
+  opacity: 0.95 !important;
+}
+
+.login-wrapper {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 430px) {
+  .reset-pass-btn {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .reset-pass-btn-ms {
+    margin-left: 0 !important;
+    margin-top: 10px;
+  }
+}
 body {
   font-size: 0.875rem;
 }
