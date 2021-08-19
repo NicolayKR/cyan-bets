@@ -11,12 +11,12 @@
 
 		<!-- Styles -->
 		<script rel="preload" src="{{ asset('assets/js/app2.min.js') }}" defer></script>
-		<link rel="stylesheet" href="{{ asset('assets/css/app2.min.css') }}" as="style"></link>
-		<link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
-		<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
-		<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
-		<link rel="manifest" href="assets/favicon/site.webmanifest">
-		<link rel="mask-icon" href="assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
+		<link rel="preload stylesheet" href="{{ asset('assets/css/app2.min.css') }}" as="style"></link>
+		<link rel="preload apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
+		<link rel="preload icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+		<link rel="preload icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
+		<link rel="preload manifest" href="assets/favicon/site.webmanifest">
+		<link rel="preload mask-icon" href="assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
 		<meta name="msapplication-TileColor" content="#da532c">
 		<meta name="theme-color" content="#ffffff">
 	</head>
@@ -35,7 +35,7 @@
 				</div>
 				<section class="col-lg-6 navbar-mobile">
 					<nav class="nav nav-navbar mr-lg-auto mx-lg-auto mt-1 d-xs-none">
-					<a class="nav-link active" href="/index"><span class="fs-head">Автоматический оптимизатор бюджета <span class="we-cian">ЦИАН</span></span></a>
+					<a class="nav-link active" href="#"><span class="fs-head">Автоматический оптимизатор бюджета <span class="we-cian">ЦИАН</span></span></a>
 					</nav>
 					<div class="row align-items-center d-none d-xs-block">
 						<div class="col-12 col-md-12 d-flex justify-content-center text-center">
@@ -46,7 +46,7 @@
 							</a>
 						</div>
 						<div class="col-12 col-md-12 d-flex justify-content-center text-center">
-							<a class="nav-link" href="/index"><span class="fs-head">Автоматический оптимизатор бюджета <span class="we-cian">ЦИАН</span></span></a>
+							<a class="nav-link" href="#"><span class="fs-head">Автоматический оптимизатор бюджета <span class="we-cian">ЦИАН</span></span></a>
 						</div>
 						<div class="col-md-12 text-center text-md-left mt-5 mt-md-0">
 							<div class="social social-bg-dark">
@@ -81,8 +81,8 @@
 					<a class="btn btn-sm btn-round btn-outline-success d-lg-inline-block ms-1 mt-1" href="/login">Войти</a>
 					@endguest
 					@auth
-					<a href="{{ url('/logout') }}" class="btn btn-sm btn-round btn-outline-success d-lg-inline-block text-end" >
-						Выход
+					<a href="{{ url('/index') }}" class="btn btn-sm btn-round btn-outline-success d-lg-inline-block text-end" >
+						Личный кабинет
 					</a>
 					@endauth
 				</div>
@@ -271,7 +271,7 @@
 				</a>
 			</div>
 			<div class="col-12 col-md-6 col-lg-6 d-flex justify-content-center text-center">
-				<a class="nav-link active" href="/index"><span class="fs-head">Оптимизатор бюджета <span class="we-cian">ЦИАН</span></span></a>
+				<a class="nav-link active" href="#"><span class="fs-head">Оптимизатор бюджета <span class="we-cian">ЦИАН</span></span></a>
 			</div>
 			<div class="col-md-3 text-center text-md-left mt-5 mt-md-0">
 				<div class="social social-bg-dark">
