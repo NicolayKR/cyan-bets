@@ -39,14 +39,11 @@
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
                 <li>
-                    <a class="dropdown-item text-start" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <a class="dropdown-item text-start" href="/logout">
                         <i class="fas fa-sign-out-alt pe-1"></i>
                         Выход
                     </a>
                 </li>
-                <b-form id="logout-form" action="/logout" method="POST" class="d-none">
-                    <input type="hidden" name="_token" :value="csrf">
-                </b-form>
             </ul>
         </div>
     </header>
