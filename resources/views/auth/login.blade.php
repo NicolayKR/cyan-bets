@@ -59,11 +59,9 @@
                                     <a href="/" class="btn btn-primary ms-2">
                                         Назад
                                     </a>
-                                    @if (Route::has('password.request'))
-                                        <a class="btn btn-link ms-2" href="{{ route('password.request') }}">
-                                            Забыли пароль?
-                                        </a>
-                                    @endif
+                                    <a class="btn btn-link ms-2" href="{{ route('password.request') }}">
+                                        Забыли пароль?
+                                    </a>
                                 </div>
                             </div>
                         </form>

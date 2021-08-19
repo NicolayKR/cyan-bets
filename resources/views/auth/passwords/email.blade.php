@@ -1,5 +1,5 @@
 @extends('layouts.authoriz')
-
+@section('title', 'Сброс пароля')
 @section('content')
 <div class="login-back">
     <div class="container login-wrapper">
