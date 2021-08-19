@@ -56,6 +56,9 @@ Route::get('/password/reset', 'App\Http\Controllers\Auth\ForgotPasswordControlle
 Route::post('/password/email', 'App\Http\Controllers\Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
 Route::get('/password/reset/{token}', 'App\Http\Controllers\Auth\ResetPasswordController@showResetForm')->name('password.reset');
 Route::post('/password/reset', 'App\Http\Controllers\Auth\ResetPasswordController@reset')->name('password.update');
+Route::get('/post', function () {
+    return view('mail.test_post');
+})->name('post');
 Route::get('test', function(){
 
     $toEmail = 'n.kryuchkov@enterprise-it.ru';
