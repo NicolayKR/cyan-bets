@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\ContactForm;
 use App\Mail\RegisterForm;
 use App\Models\MailPost;
+use App\Mail\TestMail;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,20 +62,9 @@ Route::get('/post', function () {
 })->name('post');
 Route::get('test', function(){
 
-    $toEmail = 'n.kryuchkov@enterprise-it.ru';
-    $email = 'n.kryuchkov@enterprise-it.ru';
-    $name = 'n.kryuchkov@enterprise-it.ru';
-    $phone ='n.kryuchkov@enterprise-it.ru';
-    $tariph = 'n.kryuchkov@enterprise-it.ru';
-    $newMess = MailPost::create(array(
-        'name'=>$name,
-        'email'=>$email,
-        'phone'=>$phone,
-        'message'=>'Покупка тарифа:'.$tariph,
-        'status'=>2
-    ));
-    $newMess->save();
-    Mail::to($toEmail)->send(new BuyForm($name, $email, $phone, $tariph));
+    $toEmail = 'krjuchkovkolja@mail.ru';
+    
+    Mail::to($toEmail)->send(new TestMail());
 
     
     // $final_array = [];

@@ -97,25 +97,25 @@
                                                                 <tr>
                                                                     <td align="center" style="color: #fff; font-size:22px; line-height: 30px;">
                                                                         <table style="padding: 0 10px; color:#fff;font-family:'helvetica' , 'arial' , sans-serif;">
-                                                                            <tr style="height: 50px;">
-                                                                                <td><img src="assets/img/checked.png" style="width:22px; padding-top:3px; left:0;"></img></td>
-                                                                                <td style="padding-left:20px;">Зарегистрируйтесь</td>
+                                                                            <tr>
+                                                                                <td><img src="https://cian.enterprise-it.ru/assets/img/checked.png" style="width:22px; padding-top:3px; left:0;"></img><br><br></td>
+                                                                                <td style="padding-left:20px;">Зарегистрируйтесь<br><br></td>
                                                                             </tr>
-                                                                            <tr style="height: 50px;">
-                                                                                <td><img src="assets/img/checked.png" style="width:22px; padding-top:3px; left:0;"></img></td>
-                                                                                <td style="padding-left:20px;">Подключите свой кабинет циан к программе</td>
+                                                                            <tr>
+                                                                                <td><img src="https://cian.enterprise-it.ru/assets/img/checked.png" style="width:22px; padding-top:3px; left:0;"></img><br><br></td>
+                                                                                <td style="padding-left:20px;">Подключите свой кабинет циан к программе<br><br></td>
                                                                             </tr>
-                                                                            <tr style="height: 50px;">
-                                                                                <td><img src="assets/img/checked.png" style="width:22px; padding-top:3px; left:0;"></img></td>
-                                                                                <td style="padding-left:20px;">Программа проанализирует вашу статистику и даст рекомендации</td>
+                                                                            <tr>
+                                                                                <td><img src="https://cian.enterprise-it.ru/assets/img/checked.png" style="width:22px; padding-top:3px; left:0;"></img><br><br></td>
+                                                                                <td style="padding-left:20px;">Программа проанализирует вашу статистику и даст рекомендации<br><br></td>
                                                                             </tr>
-                                                                            <tr style="height: 70px;">
-                                                                                <td><img src="assets/img/checked.png" style="width:22px; padding-top:3px; left:0;"></img></td>
-                                                                                <td style="padding-left:20px;">Выставите ставки на аукционах для наиболее популярных и результативных объявлений</td>
+                                                                            <tr>
+                                                                                <td><img src="https://cian.enterprise-it.ru/assets/img/checked.png" style="width:22px; padding-top:3px; left:0;"></img><br><br></td>
+                                                                                <td style="padding-left:20px;">Выставите ставки на аукционах для наиболее популярных и результативных объявлений<br><br></td>
                                                                             </tr>
-                                                                            <tr style="height: 70px;">
-                                                                                <td><img src="assets/img/checked.png" style="width:22px; padding-top:3px; left:0;"></img></td>
-                                                                                <td style="padding-left:20px;">Поздравляем! Вы получается больше звонков, при меньшем расходе бюджета</td>
+                                                                            <tr>
+                                                                                <td><img src="https://cian.enterprise-it.ru/assets/img/checked.png" style="width:22px; padding-top:3px; left:0;"></img><br><br></td>
+                                                                                <td style="padding-left:20px;">Поздравляем! Вы получается больше звонков, при меньшем расходе бюджета<br><br></td>
                                                                             </tr>
                                                                         </table>
                                                                     </td>
@@ -137,7 +137,7 @@
                                                 <td colspan="1" height="10" style="font-size:0px;height:10px;line-height:10px"></td>
                                             </tr>
                                             <tr>
-                                                <td align="center" style="font-size:0">
+                                                <td align="center" style="font-size:16px">
                                                     <div style="display:inline-block;max-width:400px;vertical-align:middle;width:100%">
                                                         <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-spacing:0px;max-width:400px">
                                                             <tbody>
@@ -189,7 +189,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td colspan="1" height="10" style="font-size:0px;height:10px;line-height:10px"></td>
+                                                <td colspan="1" height="1" style="font-size:0px;height:1px;line-height:10px"></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -200,21 +200,18 @@
                                     <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-spacing:0px;max-width:540px">
                                         <tbody>
                                             <tr>
-                                                <td colspan="1" height="10" style="font-size:0px;height:10px;line-height:10px"></td>
+                                                <td colspan="1" height="10" style="font-size:16px;height:10px;line-height:10px"></td>
                                             </tr>
                                             <tr>
-                                                <td align="center" style="font-size:0">
+                                                <td align="center" style="font-size:16px">
                                                     <div style="display:inline-block;max-width:540px;vertical-align:middle;width:100%">
                                                         <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-spacing:0px;max-width:300px">
                                                             <tbody>
                                                                 <tr>
                                                                     <td align="center">
-                                                                        <p>Оптимизатор бюджата ЦИАН</p>
-
-                                                                        <p>Телефон: 8 (863) 296-0455<br>Почта: web@enterprise-it.ru</p>
-
-                                                                        <p>© Интернет-агентство «IT Enterprise»</p>
-                                                                    
+                                                                        <span>Оптимизатор бюджата ЦИАН</span><br><br>
+                                                                        <span>Телефон: 8 (863) 296-0455<br>Почта: web@enterprise-it.ru</span><br><br>
+                                                                        <span>© Интернет-агентство «IT Enterprise»</span><br><br>
                                                                     </td>
                                                                 </tr>
                                                             </tbody>
