@@ -61,10 +61,21 @@ Route::get('/post', function () {
     return view('mail.test_post');
 })->name('post');
 Route::get('test', function(){
-
-    $toEmail = 'krjuchkovkolja@mail.ru';
+    // date_default_timezone_set("Europe/Moscow");
+    // $collection_keys = CompanyName::distinct()->select('id','user_id','cyan_key')->get();
+    // foreach($collection_keys as $collection_key){
+    //     $url = 'https://public-api.cian.ru/v1/get-my-balance';
+    //     $curl = curl_init($url);
+    //     curl_setopt($curl, CURLOPT_HTTPHEADER, array("Authorization: Bearer " .$collection_key->cyan_key));
+    //     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    //     $curl_response = curl_exec($curl);
+    //     $res = json_decode($curl_response,true);
+    //     return $res;
+    // }
+   
+    // $toEmail = 'krjuchkovkolja@mail.ru';
     
-    Mail::to($toEmail)->send(new TestMail());
+    // Mail::to($toEmail)->send(new TestMail());
 
     
     // $final_array = [];

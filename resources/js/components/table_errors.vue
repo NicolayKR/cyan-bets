@@ -44,7 +44,7 @@
                     </td>
                 </tr>
             </tfoot>
-            <tbody v-if="tabelData==0" class="d-block">
+            <tbody v-if="this.tabelData == 0" class="d-block">
                 <tr class="d-block">
                     <td colspan="5" class="text-center d-block"><h3 class="mt-1">Ошибки отсутствуют</h3></td>
                 </tr>
@@ -88,7 +88,7 @@
                         </td>
                     </tr>
                 </tfoot>
-                <tbody class="d-block" v-if="tabelData==0">
+                <tbody class="d-block" v-if="this.tabelData==0">
                     <tr class="d-block">
                         <td colspan="5" class="text-center d-block"><h3 class="mt-1">Ошибки отсутствуют</h3></td>
                     </tr>
@@ -120,11 +120,15 @@ export default {
         paginatedObject(){
             let from = (this.pageNumber -1) * this.objectPerPage;
             let to = from + this.objectPerPage;
+            if(this.tabelData!=0){
             return this.tabelData.filter(elem => {
                 if(String(this.id_object).toLowerCase()==='') return this.tabelData;
                 return String(elem.id_object).toLowerCase().indexOf(String(this.id_object).toLowerCase()) !== -1
                         ||String(elem.id_offer).toLowerCase().indexOf(String(this.id_object).toLowerCase()) !== -1;
             }).slice(from,to);
+            }else{
+                return 0;
+            }
         }
     },
     mounted(){
