@@ -43,18 +43,6 @@
                 </div>
             </div>
             <div class="accordion-item">
-                <h2 class="accordion-header" id="panelsStayOpen-headingFour">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="false" aria-controls="panelsStayOpen-collapseFour">
-                        Как добавить фид?
-                    </button>
-                </h2>
-                <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFour">
-                    <div class="accordion-body">
-                        Новый фид можно добавить в вашем личном кабинете, который открывается при нажатии на раздел фиды в боковом меню. Каждый новый добавленный фид проходит валидацию, чтобы выбранный вами xml - файл был доступен, а данный по API - циана было возможно получить.
-                    </div>
-                </div>
-            </div>
-            <div class="accordion-item">
                 <h2 class="accordion-header" id="panelsStayOpen-headingFive">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFive" aria-expanded="false" aria-controls="panelsStayOpen-collapseFive">
                         Почему есть поля с нулевым ID Циана?
@@ -112,16 +100,13 @@
                     <div class="accordion-body">
                         <ul>
                             <li>
-                                <i class="fas fa-clock me-1"></i> - Текущая дата и время
+                                <i class="fas fa-clock me-1"></i> - Остаток дней, до конца подписки.
                             </li>
                             <li>
-                                <i class="fas fa-gavel me-1"></i> - Вреия до взимания платы за объекты, которые учавствуют в аукционе.
+                                <i class="far fa-registered me-1"></i> - Дневной расход в рублях - сколько денег вы сегодня потратили на ставки.
                             </li>
                             <li>
-                                <i class="fas fa-dollar-sign me-1"></i> - Ваш текущий баланс по всем фидам, указанным в личном кабинете. Также во вкладке ФИДЫ - есть баланс по каждому отдельному фиду (без учета повторения ключа циан, то есть несколько API могут повторяться, но в шапке страницы учитывается бюджет без повторов). Баланс определяется в рублях.
-                            </li>
-                            <li>
-                                <i class="far fa-registered me-1"></i> - Количество ваших очков аукциона (1 очко = 1 рубль).
+                                <i class="fas fa-chess me-1"></i> - Выбранная стратегия.
                             </li>
                         </ul>   
                     </div>  

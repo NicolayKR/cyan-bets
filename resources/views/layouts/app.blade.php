@@ -51,15 +51,9 @@
                                 @endif
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="/strategy">
                                     <i class="fas fa-clipboard-list feather feather-home"></i>
                                     Стратегия
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <i class="fas fa-chart-bar feather feather-home"></i>
-                                    Статистика
                                 </a>
                             </li>
                             <li class="nav-item">

@@ -18407,8 +18407,33 @@ td {
   }
 }
 @media (max-width: 1024px) {
-  .d-table-xs-show {
+  .d-vis-flex {
+    display: flex !important;
+    align-items: center;
+  }
+
+  .d-vis {
     display: block !important;
+  }
+
+  .d-tool-tip-style {
+    display: flex;
+    align-items: center;
+  }
+
+  table, tbody, tr, td, tfood {
+    display: block;
+  }
+
+  thead {
+    display: none;
+  }
+
+  .mt-xs-2 {
+    margin-top: 0.5rem !important;
+  }
+  .mt-xs-2 :first-child {
+    margin-top: 0 !important;
   }
 }
 @media (min-width: 1024px) {
@@ -18722,8 +18747,4 @@ h3, .h3 {
 .form-control-bet {
   min-width: 50px;
   max-width: 110px;
-}
-
-.dNone {
-  display: none;
 }

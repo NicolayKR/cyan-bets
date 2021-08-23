@@ -11,31 +11,25 @@
             <li class="nav-item">
                 <span class="nav-link">
                     <i class="fas fa-clock me-1"></i>
-                    <span class = "me-2">{{this.time}}</span>{{this.date}}
+                    <span class = "me-2">Осталось:</span>{{this.days_left}} дней
                 </span>
             </li>
-            <li class="nav-item">
-                <span class="nav-link">
-                    <i class="fas fa-gavel me-1"></i>
-                    {{this.remain}}
-                </span>
-            </li>
-            <li class="nav-item">
-                <span class="nav-link">
-                    <i class="fas fa-dollar-sign me-1"></i>
-                    {{this.balance}}
-                </span>
-            </li> 
             <li class="nav-item">
                 <span class="nav-link">
                     <i class="far fa-registered me-1"></i>
-                    {{this.auction_points}}
+                    Потрачено: {{this.budget}} Р
+                </span>
+            </li>  
+            <li class="nav-item">
+                <span class="nav-link">
+                    <i class="fas fa-chess me-1"></i>
+                    Выбранная стратегия: Не используется
                 </span>
             </li>    
         </ul>
         <div class="nav-item col-md-3 col-lg-2 dropdown">
             <a class="nav-link dropdown-toggle text-end" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Здравствуйте, {{nameUser}}
+                Здравствуйте, {{this.nameUser}}
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
                 <li>
@@ -53,77 +47,27 @@ export default {
     data() {
         return {
             csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-            nameUser: null,
-            date: null,
-            interval: null,
-            time: null,
-            remain: null,
-            balance: 0,
-            auction_points: 0,
+            nameUser: '',
+            budget: 0,
+            days_left: 0,
         }
-    },
-    beforeDestroy() {
-        clearInterval(this.interval);
     },
     mounted(){
         this.getUserName();
-        this.getBalance();
     },
     created(){
 
-        this.interval = setInterval(()=>{
-            const today = new Date();
-            let day = '';
-            let month = '';
-            let minutes = '';
-            let remain = '';
-            let remain_minutes = '';
-            if(today.getDate()<10){
-                day = '0'+ today.getDate();
-            }
-            else{
-                day = String(today.getDate());
-                
-            }
-            if(today.getMonth()+1<10){
-                month = '0'+ (today.getMonth()+1);    
-            }
-            else{
-                month  = String(today.getMonth()+1);
-                
-            }
-            if(today.getMinutes()<10){
-                minutes = '0'+ today.getMinutes();
-            }
-            else{
-                minutes = String(today.getMinutes());
-                
-            }
-            if(60 - today.getMinutes() < 10){
-                remain_minutes = '0'+ String(60 - today.getMinutes());
-            }
-            else{
-                remain_minutes = String(60 - today.getMinutes());
-                
-            }
-            this.time = today.getHours()+ ":" + minutes;
-            this.remain = String(24 - today.getHours())+":"+ remain_minutes; 
-            this.date = day + '.'+ month + "." + today.getFullYear();
-        }, 1000);
     },
     methods: {
         submit : function(){
             this.$refs.form.submit();
             },
         getUserName(){
-            axios.get(`/getName?&item=${this.current_item}`).then(response => {
-                this.nameUser = response.data;
-            });
-        },
-        getBalance(){
-            axios.get('/getBalance').then(response => {
-                this.balance = response.data.balance;
-                this.auction_points = response.data.auction_points;
+            axios.get(`/getHeaderData`).then(response => {
+                console.log(response.data)
+                this.nameUser = response.data.name;
+                this.budget = response.data.budget_days;
+                this.days_left = response.data.days_left;
             });
         },
   } 

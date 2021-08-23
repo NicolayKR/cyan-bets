@@ -33,6 +33,7 @@ use App\Mail\TestMail;
 */
 
 Route::view('/','landing')->name('land');
+Route::view('/strategy','strategy')->middleware('auth')->name('strategy');
 Route::view('/index','index')->middleware('auth')->name('index');
 Route::view('/question','question')->middleware('auth')->name('question');
 Route::view('/errors','errors')->middleware('auth')->name('errors');
@@ -41,11 +42,8 @@ Route::get('/getData','App\Http\Controllers\TableController@getData')->middlewar
 Route::get('/updateNow/{account}','App\Http\Controllers\XmlController@updateXml')->name('updateNow');
 Route::post('/saveNewBet','App\Http\Controllers\TableController@saveNewBet')->middleware('auth');
 Route::get('/getDataFromNewBet','App\Http\Controllers\TableController@getDataFromNewBet')->middleware('auth');
-Route::get('getName', function(){
-    return Auth::user()->name;
-})->middleware('auth');
+Route::get('getHeaderData','App\Http\Controllers\HeaderController@getHeaderData')->middleware('auth');
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
-Route::get('/getBalance', 'App\Http\Controllers\TableController@getBalance')->middleware('auth');
 Route::get('/getErrors', 'App\Http\Controllers\TableController@getErrors')->middleware('auth');
 Route::resource('/accounts','App\Http\Controllers\AccountController')->middleware('auth');
 Route::get('/postMail', 'App\Http\Controllers\TableController@postMail')->middleware('auth');
@@ -61,34 +59,32 @@ Route::get('/post', function () {
     return view('mail.test_post');
 })->name('post');
 Route::get('test', function(){
-    // date_default_timezone_set("Europe/Moscow");
-    // $collection_keys = CompanyName::distinct()->select('id','user_id','cyan_key')->get();
-    // foreach($collection_keys as $collection_key){
-    //     $url = 'https://public-api.cian.ru/v1/get-my-balance';
-    //     $curl = curl_init($url);
-    //     curl_setopt($curl, CURLOPT_HTTPHEADER, array("Authorization: Bearer " .$collection_key->cyan_key));
-    //     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-    //     $curl_response = curl_exec($curl);
-    //     $res = json_decode($curl_response,true);
-    //     return $res;
-    // }
-   
-    // $toEmail = 'krjuchkovkolja@mail.ru';
-    
-    // Mail::to($toEmail)->send(new TestMail());
-
-    
-    // $final_array = [];
-    // $collection = CompanyName::select('id','name','cyan_key','xml_feed','balance','auction_points','user_id')
-    //             ->where('user_id','=', Auth::user()->id)->get();
-    // foreach($collection as $collection_item){
-    //     $final_array[$collection_item->name]['id'] = $collection_item->id;
-    //     $final_array[$collection_item->name]['name'] = $collection_item->name;
-    //     $final_array[$collection_item->name]['cyan_key'] = $collection_item->cyan_key;
-    //     $final_array[$collection_item->name]['xml_feed'] = $collection_item->xml_feed;
-    //     $final_array[$collection_item->name]['balance'] = $collection_item->balance;
-    //     $final_array[$collection_item->name]['auction_points'] = $collection_item->auction_points;
-    // }
-    // return $final_array;
-    
+    date_default_timezone_set("Europe/Moscow");
+    $sum = 0;
+    $final_array = [];
+    $d = Auth::user()->paid_month;   
+    $today  = date("y-m-d");
+    $dateAt = strtotime('+'.$d.' MONTH', strtotime($today));
+    $lastDay = date('Y-m-d', $dateAt);
+    $d1_ts = strtotime($today);
+    $d2_ts = strtotime($lastDay);
+    $seconds = abs($d1_ts - $d2_ts);
+    $days = floor($seconds / 86400);
+    $collection = DB::table('current_xmls')
+    ->leftJoin('bets',function ($join) {
+        $join->on('current_xmls.id_flat', '=', 'bets.id_flat');
+        $join->on('current_xmls.id_user', '=', 'bets.id_user');})
+    ->whereRaw('date(current_xmls.updated_at) = date(now())')
+    ->where('current_xmls.id_user', Auth::user()->id)
+    ->select('current_xmls.id_flat','current_xmls.bet')->selectRaw('bets.bet as crm_bets')->get();
+    foreach($collection as $item){
+        if($item->bet >= $item->crm_bets){
+            $sum = $sum + $item->bet;
+        }else{
+            $sum = $sum + $item->crm_bets;
+        }
+    }
+    $final_array['days_left'] = $days;
+    $final_array['budget_days'] = $sum;
+    return $final_array;
 });

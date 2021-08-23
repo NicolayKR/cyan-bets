@@ -55,8 +55,28 @@
     }
 }
 @media(max-width:1024px){
-    .d-table-xs-show{
+    .d-vis-flex{
+        display: flex !important;
+        align-items:center;
+    }
+    .d-vis{
         display: block !important;
+    }
+    .d-tool-tip-style{
+        display:flex;
+        align-items:center;
+    }
+    table, tbody,tr,td,tfood{
+        display: block;
+    }
+    thead{
+        display: none;
+    }
+    .mt-xs-2{
+        :first-child{
+            margin-top: 0 !important;
+        }
+        margin-top: 0.5rem !important;
     }
 }
 @media(min-width:1024px){

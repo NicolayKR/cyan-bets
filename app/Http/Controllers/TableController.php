@@ -98,7 +98,7 @@ class TableController extends Controller
                 //Текущая фирма 
                 $array_data['table_data'][$index]['id_company'] = (int)$item_collection->id_company;
                 //Ставка на циан
-                $array_data['table_data'][$index]['cyan_bet'] = (int)$item_collection->current_bet;
+                $array_data['table_data'][$index]['cyan_bet'] = (int)$item_collection->bet;
                 //Агент
                 $array_data['table_data'][$index]['agent'] = $item_collection->name_agent;
                 $array_data['table_data'][$index]['id_object'] =(int) $item_collection->id_flat;
