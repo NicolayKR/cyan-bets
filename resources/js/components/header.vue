@@ -64,7 +64,6 @@ export default {
             },
         getUserName(){
             axios.get(`/getHeaderData`).then(response => {
-                console.log(response.data)
                 this.nameUser = response.data.name;
                 this.budget = response.data.budget_days;
                 this.days_left = response.data.days_left;
