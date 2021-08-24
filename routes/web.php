@@ -60,9 +60,8 @@ Route::get('/post', function () {
 })->name('post');
 Route::get('test', function(){
     date_default_timezone_set("Europe/Moscow");
-    $sum = 0;
-    $final_array = [];
-    $d = Auth::user()->paid_month;   
+    $d = Auth::user()->paid_month;
+    $left = Auth::user()->left_day;  
     $today  = date("y-m-d");
     $dateAt = strtotime('+'.$d.' MONTH', strtotime($today));
     $lastDay = date('Y-m-d', $dateAt);
@@ -70,21 +69,21 @@ Route::get('test', function(){
     $d2_ts = strtotime($lastDay);
     $seconds = abs($d1_ts - $d2_ts);
     $days = floor($seconds / 86400);
-    $collection = DB::table('current_xmls')
-    ->leftJoin('bets',function ($join) {
-        $join->on('current_xmls.id_flat', '=', 'bets.id_flat');
-        $join->on('current_xmls.id_user', '=', 'bets.id_user');})
-    ->whereRaw('date(current_xmls.updated_at) = date(now())')
-    ->where('current_xmls.id_user', Auth::user()->id)
-    ->select('current_xmls.id_flat','current_xmls.bet')->selectRaw('bets.bet as crm_bets')->get();
-    foreach($collection as $item){
-        if($item->bet >= $item->crm_bets){
-            $sum = $sum + $item->bet;
-        }else{
-            $sum = $sum + $item->crm_bets;
+    if($left == null){
+        Auth::user()->update(array(
+            'left_day'=>$days,
+        ));
+    }else{
+        if($left!=0){
+            Auth::user()->update(array(
+                'left_day'=>(int)$left-1,
+            ));
+        }
+        else{
+            Auth::user()->update(array(
+                'paid_month'=>0,
+                'left_day'=>NULL,
+            ));
         }
     }
-    $final_array['days_left'] = $days;
-    $final_array['budget_days'] = $sum;
-    return $final_array;
 });

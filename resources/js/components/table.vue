@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-2 pb-2 mb-3">
             <h1 class="h2">Циан Автомат</h1>
         </div>
         <div v-if="flagEmptyFeed">       
@@ -90,7 +90,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="mt-2">
+                <div class="table-responsive">
                     <table class="table table-bordered">
                     <thead>
                         <tr>
@@ -322,6 +322,7 @@ export default {
                 const response = await axios.get(`/getData?&start=${this.start}&end=${this.end}`);
                 if(response.data != 0){
                     this.tabelData = response.data.table_data;
+                    console.log(this.tabelData)
                     this.auction_lenght = response.data.lenght_auction;
                     this.shows_count = response.data.shows_count;
                     this.phone_shows = response.data.phone_shows;

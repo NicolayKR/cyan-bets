@@ -51,7 +51,7 @@
                                 @endif
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/strategy">
+                                <a  {!! (Route::is('strategy') ? 'class="nav-link active"' : 'class="nav-link"') !!}  href="/strategy">
                                     <i class="fas fa-clipboard-list feather feather-home"></i>
                                     Стратегия
                                 </a>

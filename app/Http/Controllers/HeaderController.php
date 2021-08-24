@@ -13,14 +13,7 @@ class HeaderController extends Controller
         date_default_timezone_set("Europe/Moscow");
         $sum = 0;
         $final_array = [];
-        $d = Auth::user()->paid_month;   
-        $today  = date("y-m-d");
-        $dateAt = strtotime('+'.$d.' MONTH', strtotime($today));
-        $lastDay = date('Y-m-d', $dateAt);
-        $d1_ts = strtotime($today);
-        $d2_ts = strtotime($lastDay);
-        $seconds = abs($d1_ts - $d2_ts);
-        $days = floor($seconds / 86400);
+        $days = Auth::user()->left_day;   
         $collection = DB::table('current_xmls')
         ->leftJoin('bets',function ($join) {
             $join->on('current_xmls.id_flat', '=', 'bets.id_flat');

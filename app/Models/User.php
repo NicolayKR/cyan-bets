@@ -22,6 +22,8 @@ class User extends Authenticatable
         'password',
         'paid_month',
         'paid_tariph',
+        'left_day',
+        
     ];
 
     /**

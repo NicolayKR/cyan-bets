@@ -78,6 +78,7 @@ class TableController extends Controller
                 }
                 else{
                     $array_data['table_data'][$index]['crm_bet'] = 0;
+                    $array_data['table_data'][$index]['id'] = $item_collection->id;
                 }
                 $array_data['table_data'][$index]['auction'] = (int)$item_collection->bet;
                 if((int)$item_collection->current_bet != 0){

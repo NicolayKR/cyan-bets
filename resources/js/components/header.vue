@@ -11,13 +11,13 @@
             <li class="nav-item">
                 <span class="nav-link">
                     <i class="fas fa-clock me-1"></i>
-                    <span class = "me-2">Осталось:</span>{{this.days_left}} дней
+                    <span class = "me-2">Осталось дней:</span>{{this.days_left}}
                 </span>
             </li>
             <li class="nav-item">
                 <span class="nav-link">
                     <i class="far fa-registered me-1"></i>
-                    Потрачено: {{this.budget}} Р
+                    Дневной расход: {{this.budget}} Р
                 </span>
             </li>  
             <li class="nav-item">

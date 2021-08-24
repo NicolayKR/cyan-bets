@@ -34,6 +34,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('update:statistic')->everyMinute()->timezone("Europe/Moscow");
         $schedule->command('update:balance')->everyMinute()->timezone("Europe/Moscow");
         $schedule->command('update:errors')->everyMinute()->timezone("Europe/Moscow");
+        $schedule->command('update:countDays')->everyMinute()->timezone("Europe/Moscow");
     }
 
     /**

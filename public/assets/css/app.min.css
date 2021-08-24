@@ -17986,7 +17986,7 @@ header {
 }
 
 .table-responsive {
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 .budge-block {
@@ -18439,6 +18439,11 @@ td {
 @media (min-width: 1024px) {
   .d-table-hidden {
     display: block !important;
+  }
+}
+@media (max-width: 1056px) {
+  .position-sticky {
+    padding-top: 2rem !important;
   }
 }
 .index-part {
