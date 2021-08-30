@@ -7,6 +7,19 @@
     <main class="py-4 col-md-10 px-md-4">
         <div class="accordion" id="accordionPanelsStayOpenExample">
             <div class="accordion-item">
+                <h2 class="accordion-header" id="panelsStayOpen-headingNull">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseNull" aria-expanded="false" aria-controls="panelsStayOpen-collapseNull">
+                        Когда я смогу воспользоваться стратегиями? Как мне понять какие объекты стоит самому продвигать?
+                    </button>
+                </h2>
+                <div id="panelsStayOpen-collapseNull" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingNull">
+                    <div class="accordion-body">
+                    Для использования автоматической стратегии, потребуется анализ показателей на ЦИАН всей Вашей базы объектов. Обычно, это занимает 2-3 недели.<br>
+                    Однако советы по поднятию будут доступны уже через 5 дней. Зеленым будут подсвечены объекты, которые стоит продвинуть, красным, которые были продвинуты зря.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
                 <h2 class="accordion-header" id="panelsStayOpen-headingOne">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="false" aria-controls="panelsStayOpen-collapseOne">
                         Как часто собирается статистика фидов?
@@ -112,7 +125,7 @@
                     </div>  
                 </div>
             </div>
-                    <div class="accordion-item">
+                <div class="accordion-item">
                     <h2 class="accordion-header" id="panelsStayOpen-headingTen">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTen" aria-expanded="false" aria-controls="panelsStayOpen-collapseTen">
                             Какие объеты расположены в разделе "Ошибочные объекты"?
