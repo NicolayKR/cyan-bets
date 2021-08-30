@@ -1,6 +1,5 @@
 require('../bootstrap');
 require('../script');
-require('./jquery.maskedinput.min');
 require('./landing');
 require('./landing2.min');
 

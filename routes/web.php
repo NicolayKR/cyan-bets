@@ -61,30 +61,17 @@ Route::get('/post', function () {
 })->name('post');
 Route::get('test', function(){
     
-    date_default_timezone_set("Europe/Moscow");
-        $collection_keys = CompanyName::distinct()->select('id','user_id','cyan_key')->get();
-        foreach($collection_keys as $collection_key){
-            $url = "https://public-api.cian.ru/v1/get-my-balance";
-            $curl = curl_init($url);
-            curl_setopt($curl, CURLOPT_HTTPHEADER, array("Authorization: Bearer " .$collection_key->cyan_key));
-            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-            $curl_response = curl_exec($curl);
-            $res = json_decode($curl_response,true);
-            return $res;
-            $auction_point = 0;
-            if(sizeof($res['result']['auctionPoints']) == 0){
-                $auction_point = 0;
-            }else{
-                $auction_point = $res['result']['auctionPoints'][0]['amount'];
-            }
-            curl_close($curl);
-            CompanyName::where('id', $collection_key->id)->
-                        where('user_id', $collection_key->user_id)-> 
-                        where('cyan_key', $collection_key->cyan_key)->  
-                        update(array(
-                            'balance'=> $res['result']['totalBalance'],
-                            'auction_points'=>$auction_point,
-                        ));
-            }
-        
+    $toEmail = 'n.kryuchkov@enterprise-it.ru';
+        $email ='n.kryuchkov@enterprise-it.ru';
+        $name = 'Крючков';
+        $phone = '11111111111';
+        $newMess = MailPost::create(array(
+            'name'=>$name,
+            'email'=>$email,
+            'phone'=>$phone,
+            'message'=>'Регистрация',
+            'status'=>1
+        ));
+        $newMess->save();
+        Mail::to($toEmail)->send(new RegisterForm($name, $email, $phone));
 });
