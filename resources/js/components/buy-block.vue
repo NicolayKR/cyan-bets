@@ -106,7 +106,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="phone-buy" class="form-label">Телефон <span style="color:red;">*</span></label>
-                        <input type="phone" name="phone-buy" id="phone-buy" placeholder="Введите номер телефона" v-model="phone" class="form-control" />
+                        <input type="phone" name="phone-buy" id="phone-buy" v-phone placeholder="Введите номер телефона" v-model="phone" class="form-control phone" />
                     </div>
                     <div class="mb-3">
                         <label for="select-tariph" class="form-label">Выберите тариф</label>
@@ -140,6 +140,8 @@
 </template>
 
 <script>
+
+
 export default {
     data(){
         return{

@@ -28,7 +28,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="phone" class="form-label">Телефон <span style="color:red;">*</span></label>
-                    <input type="phone" name="phone" id="phone" placeholder="Введите номер телефона" v-model="phone" class="form-control" />
+                    <input type="phone" name="phone" id="phone" v-phone placeholder="Введите номер телефона" v-model="phone" class="form-control phone" />
                 </div>
                 <div class="mb-3">
                     <label for="mess" class="form-label">Сообщение</label>

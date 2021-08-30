@@ -40,8 +40,7 @@ $(function() {
       transport: 'beacon'
     });
   });
-  
-  
+
   $(document).on('click', '.fo-icon, .fo-popup', function() {
     ga('send', 'event', {
       eventCategory: 'Formito - TheSaaS',
