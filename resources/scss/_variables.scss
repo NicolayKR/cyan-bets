@@ -20,6 +20,7 @@ $teal: #4dc0b5;
 $cyan: #6cb2eb;
 
 //Btn
+$enable-negative-margins: true;
 $btn-padding-y: 8px;
 $btn-padding-x: 16px;
 $btn-transition:  background-color .05s linear,color .05s linear,border-color .05s linear;
@@ -46,6 +47,14 @@ $navbar-dark-hover-color: #fff;
 $spinner-border-width: 7px;
 // $secondary: #fff;
 $info: #fff;
-
+//Grid
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1920px
+);
 
 

@@ -1,0 +1,7 @@
+.form-control .text-muted{
+    display: flex;
+    align-items: center;
+}
+#example-datepicker-end__dialog_,#example-datepicker-start__dialog_{
+    z-index:10000;
+}

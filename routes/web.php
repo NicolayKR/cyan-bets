@@ -12,9 +12,15 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\CurrentXml;
 use App\Models\Statistic;
 use App\Models\StatisticShows;
+use App\Models\errors_publish;
 use Gaarf\XmlToPhp\Convertor;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ContactForm;
+use App\Mail\RegisterForm;
+use App\Models\MailPost;
+use App\Mail\TestMail;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,15 +33,87 @@ use Illuminate\Support\Facades\DB;
 |
 */
 
-Route::view('/','index')->middleware('auth')->name('index');
+Route::view('/','landing')->name('land');
+Route::view('/strategy','strategy')->middleware('auth')->name('strategy');
+Route::view('/index','index')->middleware('auth')->name('index');
 Route::view('/question','question')->middleware('auth')->name('question');
+Route::view('/errors','errors')->middleware('auth')->name('errors');
 Route::view('add-form', 'add-form')->middleware('auth')->name('add-form');
-Route::get('/getData','App\Http\Controllers\TableController@getData');
+Route::get('/getData','App\Http\Controllers\TableController@getData')->middleware('auth');
 Route::get('/updateNow/{account}','App\Http\Controllers\XmlController@updateXml')->name('updateNow');
-Route::post('/saveNewBet','App\Http\Controllers\TableController@saveNewBet');
-Route::get('/getDataFromNewBet','App\Http\Controllers\TableController@getDataFromNewBet');
-Route::get('getName', function(){
-    return Auth::user()->name;
+Route::post('/saveNewBet','App\Http\Controllers\TableController@saveNewBet')->middleware('auth');
+Route::get('/getDataFromNewBet','App\Http\Controllers\TableController@getDataFromNewBet')->middleware('auth');
+Route::get('getHeaderData','App\Http\Controllers\HeaderController@getHeaderData')->middleware('auth');
+Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
+Route::get('/getErrors', 'App\Http\Controllers\TableController@getErrors')->middleware('auth');
+Route::resource('/accounts','App\Http\Controllers\AccountController')->middleware('auth');
+Route::get('/postMail', 'App\Http\Controllers\TableController@postMail');
+Route::get('/regMail', 'App\Http\Controllers\TableController@regMail');
+Route::get('/buyMail', 'App\Http\Controllers\TableController@buyMail');
+Route::get('/login', 'App\Http\Controllers\Auth\LoginController@showLoginForm')->name('login');
+Route::post('/login', 'App\Http\Controllers\Auth\LoginController@login');
+Route::get('/password/reset', 'App\Http\Controllers\Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+Route::post('/password/email', 'App\Http\Controllers\Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+Route::get('/password/reset/{token}', 'App\Http\Controllers\Auth\ResetPasswordController@showResetForm')->name('password.reset');
+Route::post('/password/reset', 'App\Http\Controllers\Auth\ResetPasswordController@reset')->name('password.update');
+Route::get('/post', function () {
+    return view('mail.test_post');
+})->name('post');
+Route::get('test', function(){
+    set_time_limit(15000);
+        date_default_timezone_set("Europe/Moscow");
+        $collection_keys = CompanyName::distinct()->select('user_id','cyan_key')->get();
+        foreach($collection_keys as $collection_key){
+            $collection_object = errors_publish::select('id_object')->where('id_user', $collection_key->user_id)->get();
+            $array_object = [];
+            foreach($collection_object as $current_object){
+                $array_object[$current_object['id_object']] = $current_object['id_object'];
+            }
+            $url = 'https://public-api.cian.ru/v1/get-order';
+            $curl = curl_init($url);
+            curl_setopt($curl, CURLOPT_HTTPHEADER, array("Authorization: Bearer " .$collection_key->cyan_key));
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+            $curl_response = curl_exec($curl);
+            $res = json_decode($curl_response);
+            curl_close($curl);
+            $current_error ='';
+            $current_warning = '';
+            return $res;
+        if($res->result->offers) {
+            foreach ($res->result->offers as $item) {
+                if ($item->externalId > 0) {
+                    if(!empty($item->errors) or !empty($item->warnings)){      
+                        if(empty($item->errors)){
+                            $current_warning = $item->warnings[0];
+                            $current_error = 'Ошибок нет';
+                        }
+                        if(empty($item->warnings)){
+                            $current_error = $item->errors[0];
+                            $current_warning = 'Предупреждений нет';
+                        }
+                        if(array_key_exists($item->externalId, $array_object)){
+                            errors_publish::where('id_user', $collection_key->user_id)->where('id_object', $item->externalId)
+                                            ->update(array(
+                                                'id_offer'=>$item->offerId,
+                                                'errors'=>$current_error,
+                                                'warning'=>$current_warning,
+                                            ));
+                        }
+                        else{
+                            $newError = errors_publish::create(array(
+                                'id_object'=>$item->externalId,
+                                'id_offer'=>$item->offerId,
+                                'errors'=>$current_error,
+                                'warning'=>$current_warning,
+                                'id_user'=>$collection_key->user_id
+                            ));
+                            $newError->save();
+                        }
+                    }
+                }
+            }
+        }
+            
+        }
+        errors_publish::whereRaw('date(updated_at) < DATE_SUB(DATE(NOW()), INTERVAL 8 DAY)')->delete();
 });
-Route::resource('/accounts','App\Http\Controllers\AccountController');
-Auth::routes();

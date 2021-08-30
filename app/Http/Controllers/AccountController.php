@@ -28,7 +28,7 @@ class AccountController extends Controller
     public function index()
     {
         return view('account', [
-            'accounts' => CompanyName::select('id','name','cyan_key','xml_feed','user_id')
+            'accounts' => CompanyName::select('id','name','cyan_key','xml_feed','balance','auction_points','user_id')
                 ->where('user_id','=', Auth::user()->id)->get()]);
     }
 
@@ -101,6 +101,7 @@ class AccountController extends Controller
             Storage::put('public/'.Auth::user()->id.'/'.$id_user.'/crm-xml-feed.xml', $xml);
             $url = url(Storage::url('public/'.Auth::user()->id.'/'.$id_user.'/crm-xml-feed.xml'));
             $this->updateCurrentXmlBD($id_user);
+            $this->updateBalance();
             $textFromForm = 'Пропишите следующую ссылку на XML фид, в Вашем личном кабинете ЦИАН:'.$url;
             return redirect()->route('accounts.edit', $newCompany)->with('status', $textFromForm);  
         }
@@ -224,4 +225,23 @@ class AccountController extends Controller
             $newObject->save();
             } 
         }
+    public function updateBalance(){
+        $collection_keys = CompanyName::distinct()->select('id','user_id','cyan_key')->get();
+        foreach($collection_keys as $collection_key){
+            $url = 'https://public-api.cian.ru/v1/get-my-balance';
+            $curl = curl_init($url);
+            curl_setopt($curl, CURLOPT_HTTPHEADER, array("Authorization: Bearer " .$collection_key->cyan_key));
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+            $curl_response = curl_exec($curl);
+            $res = json_decode($curl_response,true);
+            curl_close($curl);
+            CompanyName::where('id', $collection_key->id)->
+                        where('user_id', $collection_key->user_id)-> 
+                        where('cyan_key', $collection_key->cyan_key)->  
+                        update(array(
+                            'balance'=> $res['result']['totalBalance'],
+                            'auction_points'=>$res['result']['auctionPoints'][0]['amount'],
+                        ));
+            }
+    }
 }

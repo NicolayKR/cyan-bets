@@ -1,0 +1,30 @@
+.autorize-back{
+    background-color: rgb(38, 42, 55); 
+    height:100vh;
+    position: relative;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    overflow: hidden !important;
+}
+.login-back{
+    height:100vh; 
+    background-image: linear-gradient(rgb(9, 32, 63) 0%, rgb(83, 120, 149) 100%); 
+    opacity: 0.95 !important;
+}
+.login-wrapper{
+    height:100vh; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+}
+@media(max-width:430px){
+    .reset-pass-btn{
+        display: flex;
+        flex-direction: column;
+    }  
+    .reset-pass-btn-ms{
+        margin-left: 0 !important; 
+        margin-top: 10px;
+    } 
+}

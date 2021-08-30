@@ -10,9 +10,15 @@ use App\Models\Bets;
 use App\Models\CurrentXml;
 use App\Models\Statistic;
 use App\Models\StatisticShows;
+use App\Models\errors_publish;
 use DiDom\Document;
 use DiDom\Query; 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ContactForm;
+use App\Mail\RegisterForm;
+use App\Mail\BuyForm;
+use App\Models\MailPost;
 
 
 class TableController extends Controller
@@ -21,7 +27,11 @@ class TableController extends Controller
         $start = $request->query('start'); 
         $end = $request->query('end'); 
         if($start == 'null' and $end== 'null'){
-            $first_date = 'DATE_SUB(DATE(NOW()), INTERVAL 8 DAY)';
+            $first_date = 'DATE_SUB(DATE(NOW()), INTERVAL 7 DAY)';
+            $second_date = 'DATE(now()+ INTERVAL 1 DAY)';
+        }
+        elseif($end== 'null'){
+            $first_date =  "'".(string)$start."'";
             $second_date = 'DATE(now()+ INTERVAL 1 DAY)';
         }
         else{
@@ -40,7 +50,7 @@ class TableController extends Controller
             $array_bets[$current_bet['id_company']][$current_bet['id_flat']]['bet'] =  $current_bet['bet'];
             $array_bets[$current_bet['id_company']][$current_bet['id_flat']]['id'] =  $current_bet['id'];
         }
-        $collection = DB::select('SELECT a.id,a.id_flat,a.bet,a.id_user,a.id_company,a.name_agent,a.top,
+        $collection = DB::select('SELECT a.id,a.id_flat,a.bet,a.id_user,a.id_company,a.name_agent,a.top,a.price,
             b.id_offer,b.url_offer,b.current_bet,b.leader_bet,b.position,b.page, 
             ROUND((SUM(c.shows_count)/sum(c.searches_count))*100) as coverage,sum(c.searches_count) as searches_count,sum(c.shows_count) as shows_count,
             sum(phone_shows) as phone_shows,sum(views) as views
@@ -59,7 +69,7 @@ class TableController extends Controller
                     if(array_key_exists($item_collection->id_flat, $array_bets[$item_collection->id_company])){
                         if(array_key_exists('bet', $array_bets[$item_collection->id_company][$item_collection->id_flat])){
                             $array_data['table_data'][$index]['crm_bet'] = (int)$array_bets[$item_collection->id_company][$item_collection->id_flat]['bet'];
-                            $array_data['table_data'][$index]['id'] = (int)$array_bets[$item_collection->id_company][$item_collection->id_flat]['id'];
+                            $array_data['table_data'][$index]['id'] = $item_collection->id;
                         }
                     }else{
                         $array_data['table_data'][$index]['crm_bet'] = 0;
@@ -68,11 +78,13 @@ class TableController extends Controller
                 }
                 else{
                     $array_data['table_data'][$index]['crm_bet'] = 0;
+                    $array_data['table_data'][$index]['id'] = $item_collection->id;
                 }
                 $array_data['table_data'][$index]['auction'] = (int)$item_collection->bet;
                 if((int)$item_collection->current_bet != 0){
                     $lenght_auction++;
                 }
+                $array_data['table_data'][$index]['price'] = (int)$item_collection->price;
                 $array_data['table_data'][$index]['id_offer'] = (int)$item_collection->id_offer;
                 $array_data['table_data'][$index]['url_offer'] = $item_collection->url_offer;
                 $array_data['table_data'][$index]['leader_bet'] = (int)$item_collection->leader_bet;
@@ -87,7 +99,7 @@ class TableController extends Controller
                 //Текущая фирма 
                 $array_data['table_data'][$index]['id_company'] = (int)$item_collection->id_company;
                 //Ставка на циан
-                $array_data['table_data'][$index]['cyan_bet'] = (int)$item_collection->current_bet;
+                $array_data['table_data'][$index]['cyan_bet'] = (int)$item_collection->bet;
                 //Агент
                 $array_data['table_data'][$index]['agent'] = $item_collection->name_agent;
                 $array_data['table_data'][$index]['id_object'] =(int) $item_collection->id_flat;
@@ -197,5 +209,112 @@ class TableController extends Controller
                                 ->where('id_user', Auth::user()->id)
                                 ->first();
         return $collection['bet'];
+    }
+    public function getBalance(){
+        $collection_keys = CompanyName::distinct()->select('cyan_key')
+                                    ->where('user_id',Auth::user()->id)->get();
+        $balance = 0;
+        $auction_points = 0;
+        $array_data = [];
+        foreach($collection_keys as $collection_key){
+            $current_item = CompanyName::select('balance','auction_points')
+                        ->where('cyan_key', $collection_key['cyan_key'])->get();
+            $balance = $balance + $current_item[0]['balance'];
+            $auction_points = $auction_points + $current_item[0]['auction_points'];
+        }
+        $array_data['balance'] = $balance;
+        $array_data['auction_points'] = $auction_points; 
+        return $array_data; 
+    }
+    public function getErrors(){
+        $final_arr = [];
+        $collection_errors =  DB::table('errors_publishes')
+        ->join('current_xmls',function ($join) {
+            $join->on('current_xmls.id_flat', '=', 'errors_publishes.id_object');
+            $join->on('current_xmls.id_user', '=', 'errors_publishes.id_user');})
+        ->join('company_names',function ($join) {
+            $join->on('current_xmls.id_company', '=', 'company_names.id');
+            $join->on('current_xmls.id_user', '=', 'company_names.user_id');})
+            ->select('company_names.name','errors_publishes.id_object','errors_publishes.id_offer','errors_publishes.errors','errors_publishes.warning')
+            ->where('current_xmls.id_user', Auth::user()->id)
+            ->whereRaw('date(errors_publishes.updated_at) = DATE(NOW())')->get();
+        if(sizeof($collection_errors) == 0){
+            return 0;
+        }else{
+            foreach($collection_errors as $index=>$errors){
+                $final_arr[$index]['name_company'] = $errors->name;
+                $final_arr[$index]['id_object'] = $errors->id_object;
+                $final_arr[$index]['errors'] = $errors->errors;
+                $final_arr[$index]['warning'] = $errors->warning;
+                if($errors->id_offer == null)
+                    $final_arr[$index]['id_offer'] = 'Не опубликован';
+                else{
+                    $final_arr[$index]['id_offer'] = $errors->id_offer;
+                }
+            }
+            return $final_arr;
+        }
+    }
+    public function postMail(Request $request){
+        try{
+        $toEmail = 'web@enterprise-it.ru';
+        $email = $request->query('email');
+        $name = $request->query('name');
+        $phone = $request->query('phone');
+        $mess=$request->query('message');
+        $newMess = MailPost::create(array(
+            'name'=>$name,
+            'email'=>$email,
+            'phone'=>$phone,
+            'message'=>$mess,
+            'status'=>0
+        ));
+        $newMess->save();
+        Mail::to($toEmail)->send(new ContactForm($name, $email, $phone, $mess));
+        return 1;
+    }catch(Exception $e){
+        return 0;
+        }   
+    }
+    public function regMail(Request $request){
+        try{
+        $toEmail = 'web@enterprise-it.ru';
+        $email = $request->query('email');
+        $name = $request->query('name');
+        $phone = $request->query('phone');
+        $newMess = MailPost::create(array(
+            'name'=>$name,
+            'email'=>$email,
+            'phone'=>$phone,
+            'message'=>'Регистрация',
+            'status'=>1
+        ));
+        $newMess->save();
+        Mail::to($toEmail)->send(new RegisterForm($name, $email, $phone));
+        return 1;
+    }catch(Exception $e){
+        return 0;
+        }   
+    }
+    public function buyMail(Request $request){
+        try{
+        $toEmail = 'web@enterprise-it.ru';
+        $email = $request->query('email');
+        $name = $request->query('name');
+        $phone = $request->query('phone');
+        $tariph = $request->query('tariph');
+        $newMess = MailPost::create(array(
+            'name'=>$name,
+            'email'=>$email,
+            'phone'=>$phone,
+            'message'=>'Покупка тарифа:'.$tariph,
+            'status'=>2
+        ));
+        $newMess->save();
+        Mail::to($toEmail)->send(new BuyForm($name, $email, $phone, $tariph));
+        return 1;
+    }catch(Exception $e){
+        return 0;
+        }   
     }
 }

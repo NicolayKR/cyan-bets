@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-2 pb-2 mb-3">
             <h1 class="h2">Циан Автомат</h1>
         </div>
         <div v-if="flagEmptyFeed">       
@@ -8,7 +8,7 @@
                 Введите свой xml-feed в личном кабинете!
             </div>
         </div>
-        <div class="main-content">
+        <div class="main">
             <div v-if="!flagReady && !flagEmptyFeed"> 
                 <div class="d-flex justify-content-center m-5">
                     <div class="spinner-border text-primary" style="width: 4rem; height: 4rem;" role="status">
@@ -20,19 +20,19 @@
                 <h3 class="h3 mt-3">Общая статистика</h3>
                 <div class="gy-2 gx-3 align-items-center">
                     <div class="row ">
-                        <div class="col-md-3 col-12 d-flex mt-3">
+                        <div class="col-md-10 col-lg-4 col-xl-3 col-9 d-flex mt-3">
                             <div class="label-wrapper d-flex">
                                 <label for="example-datepicker-start">С</label>
                             </div>
                             <b-form-datepicker id="example-datepicker-start" v-model="start"  locale="ru" placeholder="Выберите дату"></b-form-datepicker>
                         </div>
-                        <div class="col-md-3 col-12 d-flex mt-3">
+                        <div class="col-md-10 col-lg-4 col-xl-3 col-9 d-flex mt-3">
                             <div class="label-wrapper d-flex">
                                 <label for="example-datepicker-end">По</label>
                             </div>
                             <b-form-datepicker id="example-datepicker-end" v-model="end" :min="start" locale="ru" placeholder="Выберите дату"></b-form-datepicker>
                         </div>
-                        <div class="col-md-1 col-12 d-grid gap-2  mt-3">
+                        <div class="col-md-3 col-lg-1 col-4 d-grid gap-2  mt-3">
                             <button type="button" class="btn btn-primary" @click="getData()">OK</button>
                         </div>
                     </div>
@@ -64,24 +64,24 @@
                 </div>
                 <h3 class="h3 mt-logic-block">Таблица ставок</h3>
                 <div class="row mt-4">
-                    <div class="col-md-9 col-lg-8">
+                    <div class="col-md-9 col-lg-10">
                         <div class="row">
-                            <div class="col-md-2 d-grid gap-2">
-                                <button type="button" class="btn btn-info budge-item-text d-flex align-items-center">
+                            <div class="col-6 col-sm-4 col-md-5 col-lg-3 col-xl-2 d-grid gap-2 mt-2">
+                                <button type="button" class="btn btn-info btn-p budge-item-text d-flex align-items-center justify-content-center">
                                     ВСЕГО 
-                                    <span class="badge bg-primary">{{this.tabelData.length}}</span>
+                                    <span class="badge bg-primary ms-1">{{this.tabelData.length}}</span>
                                 </button>
                             </div>
-                            <div class="col-md-2 d-grid gap-2">
-                                <button type="button" class="btn btn-info budge-item-text d-flex align-items-center">
+                            <div class="col-6 col-sm-4 col-md-5 col-lg-3 col-xl-2 d-grid gap-2 mt-2">
+                                <button type="button" class="btn btn-p btn-info budge-item-text d-flex align-items-center justify-content-center">
                                     АУКЦИОН 
-                                    <span class="badge bg-primary">{{this.auction_lenght}}</span>
+                                    <span class="badge bg-primary ms-1">{{this.auction_lenght}}</span>
                                 </button>
                             </div>
-                            <div class="col-md-7">
+                            <div class="col-12 col-sm-12 col-md-11 col-lg-9 col-xl-7 mt-2">
                                 <input type="text" v-model="id_object" placeholder="Поиск по id-объекта или id-циана" class="form-control"/>
                             </div> 
-                            <div class="col-md-1 d-flex align-items-center">
+                            <div class="col-1 d-flex align-items-center mt-2">
                                 <input class="form-check-input" type="checkbox" v-model="checked" id="flexCheckDefault" @click="sortTable('top')">
                                 <label class="form-check-label label-check-top ms-1" for="flexCheckDefault">
                                     Топ
@@ -91,54 +91,135 @@
                     </div>
                 </div>
                 <div class="table-responsive">
-                    <table class="table table-striped table-bordered">
+                    <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th scope="col"><a @click="sortTable('coverage') " class="filter-link">Охват в процентах</a></th>
-                            <th scope="col"><a @click="sortTable('searches_count') " class="filter-link">Количество поисков</a></th>
-                            <th scope="col"><a @click="sortTable('shows_count')" class="filter-link">Количество показов</a></th>
-                            <th scope="col"><a @click="sortTable('phone_shows')" class="filter-link">Количество расхлопов по дням(Показ телефона)</a></th>
-                            <th scope="col"><a @click="sortTable('views')" class="filter-link">Количество просмотров по дням</a></th>
-                            <th scope="col" style="width: 8%">Ставка</th>
-                            <th scope="col"><a @click="sortTable('crm_bet')" class="filter-link">Текущая ставка (CRM)</a></th>
-                            <th scope="col"><a @click="sortTable('cyan_bet')" class="filter-link">Текущая ставка (ЦИАН)</a></th>
-                            <th scope="col"><a @click="sortTable('leader_bet')" class="filter-link">Ставка лидера</a></th>
-                            <th scope="col"><a @click="sortTable('page')" class="filter-link">Страница</a></th>
-                            <th scope="col"><a @click="sortTable('position')" class="filter-link">Позиция в выдаче</a></th>
-                            <th scope="col"><a @click="sortTable('agent')" class="filter-link">Агент</a></th>
                             <th scope="col"><a @click="sortTable('id_object')" class="filter-link">ID Объекта</a></th>
                             <th scope="col"><a @click="sortTable('id_offer')" class="filter-link">ID Циана</a></th>
+                            <th scope="col"><div v-if="windowWidth>1572"><a @click="sortTable('coverage')" class="filter-link">Охват в процентах</a></div><div v-else class="position-relative"><a @click="sortTable('coverage')" class="filter-link">Охват</a><i v-tooltip ="{ 
+                                            content: 'Охват в процентах', 
+                                            show: false, 
+                                            autoHide: true,
+                                            hideOnTargetClick:true,
+                                            trigger: 'click hover', 
+                                            placement: 'bottom',
+                                        }" class="fas fa-question-circle ms-1 tool-xs"></i></div></th>
+                            <th scope="col"><div v-if="windowWidth>1572"><a @click="sortTable('searches_count')" class="filter-link">Количество поисков</a></div><div v-else class="position-relative"><a @click="sortTable('searches_count')" class="filter-link">Поисков</a><i v-tooltip ="{ 
+                                            content: 'Количество поисков', 
+                                            show: false, 
+                                            autoHide: true,
+                                            hideOnTargetClick:true,
+                                            trigger: 'click hover', 
+                                            placement: 'bottom',
+                                        }" class="fas fa-question-circle ms-1 tool-xs"></i></div></th>
+                            <th scope="col"><div v-if="windowWidth>1572"><a @click="sortTable('shows_count')" class="filter-link">Количество показов</a></div><div v-else class="position-relative"><a @click="sortTable('shows_count')" class="filter-link">Показов</a><i v-tooltip ="{ 
+                                            content: 'Количество показов', 
+                                            show: false, 
+                                            autoHide: true,
+                                            hideOnTargetClick:true,
+                                            trigger: 'click hover', 
+                                            placement: 'bottom',
+                                        }" class="fas fa-question-circle ms-1 tool-xs"></i></div></th>
+                            <th scope="col"><div v-if="windowWidth>1572"><a @click="sortTable('phone_shows')" class="filter-link">Количество расхлопов по дням(Показ телефона)</a></div><div v-else class="position-relative"><a @click="sortTable('phone_shows')" class="filter-link">Расхлопов</a><i v-tooltip ="{ 
+                                            content: 'Количество расхлопов по дням(Показ телефона)', 
+                                            show: false, 
+                                            autoHide: true,
+                                            hideOnTargetClick:true,
+                                            trigger: 'click hover', 
+                                            placement: 'bottom',
+                                        }" class="fas fa-question-circle ms-1 tool-xs"></i></div></th>
+                            <th scope="col"><div v-if="windowWidth>1572"><a @click="sortTable('views')" class="filter-link">Количество просмотров по дням</a></div><div v-else class="position-relative"><a @click="sortTable('views')" class="filter-link">Просмотров</a><i v-tooltip ="{ 
+                                            content: 'Количество просмотров по дням', 
+                                            show: false, 
+                                            autoHide: true,
+                                            hideOnTargetClick:true,
+                                            trigger: 'click hover', 
+                                            placement: 'bottom',
+                                        }" class="fas fa-question-circle ms-1 tool-xs"></i></div></th>
+                            <th scope="col" style="width: 8%">Ставка</th>
+                            <th scope="col"><div v-if="windowWidth>1572"><a @click="sortTable('crm_bet')" class="filter-link">Текущая ставка (CRM)</a></div><div v-else class="position-relative"><a @click="sortTable('crm_bet')" class="filter-link">Ставка (CRM)</a><i v-tooltip ="{ 
+                                            content: 'Текущая ставка (CRM)', 
+                                            show: false, 
+                                            autoHide: true,
+                                            hideOnTargetClick:true,
+                                            trigger: 'click hover', 
+                                            placement: 'bottom',
+                                        }" class="fas fa-question-circle ms-1 tool-xs-1"></i></div></th>
+                            <th scope="col"><div v-if="windowWidth>1572"><a @click="sortTable('cyan_bet')" class="filter-link">Текущая ставка (ЦИАН)</a></div><div v-else class="position-relative"><a @click="sortTable('cyan_bet')" class="filter-link">Ставка (ЦИАН)</a><i v-tooltip ="{ 
+                                            content: 'Текущая ставка (ЦИАН)', 
+                                            show: false, 
+                                            autoHide: true,
+                                            hideOnTargetClick:true,
+                                            trigger: 'click hover', 
+                                            placement: 'bottom',
+                                        }" class="fas fa-question-circle ms-1 tool-xs-1"></i></div></th>
+                            <th scope="col"><a @click="sortTable('leader_bet')" class="filter-link">Ставка лидера</a></th>
+                            <th scope="col"><a @click="sortTable('page')" class="filter-link">Страница</a></th>
+                            <th scope="col"><div v-if="windowWidth>1572"><a @click="sortTable('position')" class="filter-link">Позиция в выдаче</a></div><div v-else class="position-relative"><a @click="sortTable('position')" class="filter-link">Позиция</a><i v-tooltip ="{ 
+                                            content: 'Позиция в выдаче', 
+                                            show: false, 
+                                            autoHide: true,
+                                            hideOnTargetClick:true,
+                                            trigger: 'click hover', 
+                                            placement: 'bottom',
+                                        }" class="fas fa-question-circle ms-1 tool-xs"></i></div></th>
+                            <th scope="col"><a @click="sortTable('agent')" class="filter-link">Агент</a></th>
+                            <th scope="col"><a @click="sortTable('price')" class="filter-link">Цена</a></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for ="(tabel_item,index) in paginatedObject" :key="index" class="flip-list">
-                            <td>{{tabel_item.coverage}}</td>
-                            <td>{{tabel_item.searches_count}}</td>
-                            <td>{{tabel_item.shows_count}}</td>
-                            <td>{{tabel_item.phone_shows}}</td>
-                            <td>{{tabel_item.views}}</td>
-                            <td>
+                        <tr v-for ="(tabel_item,index) in paginatedObject" :key="index" class="flip-list mt-xs-2" v-bind:class="{topString: tabel_item.top == 1}">
+                            <td class="d-vis-flex"><span class="d-none d-vis xs-table-name me-1">ID объекта: </span>{{tabel_item.id_object}}</td>
+                            <td class="d-vis-flex"><span class="d-none d-vis xs-table-name me-1">ID Циана: </span>{{tabel_item.id_offer}}</td>
+                            <td class="d-vis-flex"><span class="d-none d-vis xs-table-name me-1">Охват в процентах: </span>{{tabel_item.coverage}}</td>
+                            <td class="d-vis-flex"><span class="d-none d-vis xs-table-name me-1">Количество поисков: </span>{{tabel_item.searches_count}}</td>
+                            <td class="d-vis-flex"><span class="d-none d-vis xs-table-name me-1">Количество показов: </span>{{tabel_item.shows_count}}</td>
+                            <td class="d-vis-flex"><span class="d-none d-vis xs-table-name me-1">Количество расхлопов по дням(Показ телефона): </span>{{tabel_item.phone_shows}}</td>
+                            <td class="d-vis-flex"><span class="d-none d-vis xs-table-name me-1">Количество просмотров по дням: </span>{{tabel_item.views}}</td>
+                            <td v-if="tabel_item.top == 1" class="d-tool-tip-style d-vis-flex"><span class="d-none d-vis xs-table-name me-1">Ставка: </span>
                                 <form class="row gy-2 gx-3 align-items-center">
                                     <div class="d-flex">
-                                        <input type="text" class="form-control form-control-sm input-value" name="bet" placeholder="" v-model="bets[index]">
-                                        <button type="button" @click="postNewBet(bets[index],tabel_item.id_object, tabel_item.id_company,index)" 
-                                        class="btn btn-primary btn-sm ms-1">OK</button>
+                                        <input type="text" v-tooltip ="{ 
+                                            content: msg_top, 
+                                            show: isOpen[tabel_item.id], 
+                                            autoHide: true,
+                                            hideOnTargetClick:true,
+                                            trigger: 'click hover', 
+                                            placement: 'bottom',
+                                        }" 
+                                         class="form-control form-control-sm form-control-bet input-value" name="bets" :id ="tabel_item.id" v-model="bets[tabel_item.id]">
+                                        <button  type="button" @click="postNewBet(bets[tabel_item.id],tabel_item.id_object, tabel_item.id_company,tabel_item.id, tabel_item.top)" class="btn btn-primary btn-sm ms-1">OK</button>
                                     </div>
                                 </form>
                             </td>
-                            <td>{{tabel_item.crm_bet}}</td>
-                            <td>{{tabel_item.cyan_bet}}</td>
-                            <td>{{tabel_item.leader_bet}}</td>
-                            <td>{{tabel_item.page}}</td>
-                            <td>{{tabel_item.position}}</td>
-                            <td>{{tabel_item.agent}}</td>
-                            <td>{{tabel_item.id_object}}</td>
-                            <td>{{tabel_item.id_offer}}</td>
+                            <td v-else class="d-tool-tip-style d-vis-flex"><span class="d-none d-vis xs-table-name me-1">Ставка: </span>
+                                <form class="row gy-2 gx-3 align-items-center">
+                                    <div class="d-flex">
+                                        <input type="text" v-tooltip ="{ 
+                                            content: msg_no_top, 
+                                            show: isOpen[tabel_item.id], 
+                                            autoHide: true,
+                                            hideOnTargetClick:true,
+                                            trigger: 'click hover', 
+                                            placement: 'bottom',
+                                        }" 
+                                         class="form-control form-control-sm form-control-bet input-value" name="bets" :id ="tabel_item.id" v-model="bets[tabel_item.id]">
+                                        <button  type="button" @click="postNewBet(bets[tabel_item.id],tabel_item.id_object, tabel_item.id_company,tabel_item.id, tabel_item.top)" class="btn btn-primary btn-sm ms-1">OK</button>
+                                    </div>
+                                </form>
+                            </td>    
+                            <td class="d-vis-flex"><span class="d-none d-vis xs-table-name me-1">Текущая ставка (CRM): </span>{{tabel_item.crm_bet}}</td>
+                            <td class="d-vis-flex"><span class="d-none d-vis xs-table-name me-1">Текущая ставка (ЦИАН): </span>{{tabel_item.cyan_bet}}</td>
+                            <td class="d-vis-flex"><span class="d-none d-vis xs-table-name me-1">Ставка лидера: </span>{{tabel_item.leader_bet}}</td>
+                            <td class="d-vis-flex"><span class="d-none d-vis xs-table-name me-1">Страница: </span>{{tabel_item.page}}</td>
+                            <td class="d-vis-flex"><span class="d-none d-vis xs-table-name me-1">Позиция в выдаче: </span>{{tabel_item.position}}</td>
+                            <td class="d-vis-flex"><span class="d-none d-vis xs-table-name me-1">Агент: </span>{{tabel_item.agent}}</td>
+                            <td class="d-vis-flex"><span class="d-none d-vis xs-table-name me-1">Цена: </span>{{tabel_item.price}}</td>
                         </tr>
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td colspan="14">
+                            <td colspan="15">
                                 <nav aria-label="Page navigation example">
                                     <ul class="pagination justify-content-center mt-3" >
                                         <li class="page-item">
@@ -189,7 +270,11 @@ export default {
         views: 0,
         datacollection: null,
         windowWidth: window.innerWidth,
-        flagEmptyFeed: false
+        flagEmptyFeed: false,
+        isOpen: [],
+        msg_top: 'Вводимое число должно делиться на 15',
+        msg_no_top: 'Вводимое число должно делиться на 5',
+        windowWidth: window.innerWidth,
         }
     },
     computed:{
@@ -209,7 +294,7 @@ export default {
     mounted(){
         this.getData();
         window.onresize = () => {
-            this.windowWidth = window.innerWidth
+            this.windowWidth = window.innerWidth;
         }
     },
     methods:{
@@ -243,6 +328,9 @@ export default {
                     this.views = response.data.views;
                     this.datacollection = response.data.datacollection;
                     this.flagReady = true;
+                    this.tabelData.forEach(element => {
+                        this.isOpen[element.id] = false;
+                    });
                 }
                 else{
                     this.flagEmptyFeed = true;
@@ -252,17 +340,51 @@ export default {
                 this.flagReady = false;
             }          
         },
-        async postNewBet(bets,id_object, id_company,index){
-            let fd = new FormData();
-            fd.set('bet', bets);
-            fd.set('id_object', id_object);
-            fd.set('id_company', id_company);
-            await axios.post('/saveNewBet', fd).then(function (response) { 
-                })
-            .catch(function (error) {
-                console.log(error);
-            })
-            await this.getDataFromNewBet(id_object, id_company,index);
+        async postNewBet(bets,id_object, id_company,index,top){
+            if (top == 1){
+                this.isOpen[index] = true;
+                if(bets % 15 == 0){
+                    let fd = new FormData();
+                    fd.set('bet', bets);
+                    fd.set('id_object', id_object);
+                    fd.set('id_company', id_company);
+                    await axios.post('/saveNewBet', fd).then(function (response) { 
+                        })
+                    .catch(function (error) {
+                        console.log(error);
+                    })
+                    await this.getDataFromNewBet(id_object, id_company,index);
+                    const item = document.getElementById(index);
+                    item.style.border = '1px solid #ced4da';    
+                }
+                else{
+                    document.getElementById(index).value = "";
+                    this.bets[index] = '';
+                    const item = document.getElementById(index);
+                    item.style.border = '2px solid #FF4500';        
+                }
+            }
+            else{
+                this.isOpen[index] = true;
+                if(bets % 5 == 0){
+                    let fd = new FormData();
+                    fd.set('bet', bets);
+                    fd.set('id_object', id_object);
+                    fd.set('id_company', id_company);
+                    await axios.post('/saveNewBet', fd).then(function (response) { 
+                        })
+                    .catch(function (error) {
+                        console.log(error);
+                    })
+                    await this.getDataFromNewBet(id_object, id_company,index);
+                }
+                else{
+                    document.getElementById(index).value = "";
+                    this.bets[index] = '';
+                    const item = document.getElementById(index);
+                    item.style.border = '2px solid #FF4500';        
+                }
+            }
         },
         async getDataFromNewBet(id_object,id_company,index){
             try{
@@ -279,6 +401,10 @@ export default {
         },
         onSort(name, nameFunc){
             this.activeSortParam = name;
+            var items = document.getElementsByTagName('input');
+                for (var i=0; i < items.length; i++){
+                    items[i].style.border = '1px solid #ced4da'
+                }
             if(this.activeSortParam == 'top'){
                 this.checked=true;
             }else{
@@ -287,6 +413,10 @@ export default {
             return this.tabelData.sort(nameFunc);
         },
         offSort(nameFunc){
+            var items = document.getElementsByTagName('input');
+                for (var i=0; i < items.length; i++){
+                    items[i].style.border = '1px solid #ced4da'
+                }
             this.checked=false;
             this.activeSortParam = '#'; 
             return this.tabelData.sort(nameFunc);
@@ -320,7 +450,9 @@ export default {
                 case 'id_object': if(this.activeSortParam != 'id_object'){ return this.onSort('id_object', sortByIdObjectTop);}
                                 else{return this.offSort(sortByIdObjectBottom);} 
                 case 'id_offer': if(this.activeSortParam != 'id_offer'){ return this.onSort('id_offer', sortByIdOfferTop);}
-                                else{return this.offSort(sortByIdOfferBottom);}         
+                                else{return this.offSort(sortByIdOfferBottom);}    
+                case 'price': if(this.activeSortParam != 'price'){ return this.onSort('price', sortByPriceTop);}
+                                else{return this.offSort(sortByPriceBottom);}       
             }
         }
     }
@@ -332,25 +464,27 @@ var sortByCoverageBottom = function (d1, d2) {return (d1.coverage > d2.coverage)
 var sortBySearchesCountTop  = function (d1, d2) { return (d1.searches_count < d2.searches_count) ? 1 : -1; };
 var sortBySearchesCountBottom  = function (d1, d2) { return (d1.searches_count > d2.searches_count) ? 1 : -1; };
 var sortByShowsCountTop  = function (d1, d2) { return (d1.shows_count < d2.shows_count) ? 1 : -1; };
-var sortByShowsCountBottom  = function (d1, d2) { return (d1.searches_count > d2.searches_count) ? 1 : -1; };
+var sortByShowsCountBottom  = function (d1, d2) { return (d1.shows_count > d2.shows_count) ? 1 : -1; };
 var sortByPhoneShowsTop  = function (d1, d2) { return (d1.phone_shows < d2.phone_shows) ? 1 : -1; };
-var sortByPhoneShowsBottom  = function (d1, d2) { return (d1.searches_count > d2.searches_count) ? 1 : -1; };
+var sortByPhoneShowsBottom  = function (d1, d2) { return (d1.phone_shows > d2.phone_shows) ? 1 : -1; };
 var sortByViewsTop  = function (d1, d2) { return (d1.views < d2.views) ? 1 : -1; };
-var sortByViewsBottom  = function (d1, d2) { return (d1.searches_count > d2.searches_count) ? 1 : -1; };
+var sortByViewsBottom  = function (d1, d2) { return (d1.views > d2.views) ? 1 : -1; };
 var sortByCrmBetTop  = function (d1, d2) { return (d1.crm_bet < d2.crm_bet) ? 1 : -1; };
-var sortByCrmBetBottom  = function (d1, d2) { return (d1.searches_count > d2.searches_count) ? 1 : -1; };
+var sortByCrmBetBottom  = function (d1, d2) { return (d1.crm_bet > d2.crm_bet) ? 1 : -1; };
 var sortByCyanBetTop  = function (d1, d2) { return (d1.cyan_bet < d2.cyan_bet) ? 1 : -1; };
-var sortByCyanBetBottom  = function (d1, d2) { return (d1.searches_count > d2.searches_count) ? 1 : -1; };
+var sortByCyanBetBottom  = function (d1, d2) { return (d1.cyan_bet > d2.cyan_bet) ? 1 : -1; };
 var sortByLeaderBetTop  = function (d1, d2) { return (d1.leader_bet < d2.leader_bet) ? 1 : -1; };
-var sortByLeaderBetBottom  = function (d1, d2) { return (d1.searches_count > d2.searches_count) ? 1 : -1; };
+var sortByLeaderBetBottom  = function (d1, d2) { return (d1.leader_bet > d2.leader_bet) ? 1 : -1; };
 var sortByPageTop  = function (d1, d2) { return (d1.page < d2.page) ? 1 : -1; };
-var sortByPageBottom  = function (d1, d2) { return (d1.searches_count > d2.searches_count) ? 1 : -1; };
+var sortByPageBottom  = function (d1, d2) { return (d1.page > d2.page) ? 1 : -1; };
 var sortByPositionTop  = function (d1, d2) { return (d1.position < d2.position) ? 1 : -1; };
-var sortByPositionBottom  = function (d1, d2) { return (d1.searches_count > d2.searches_count) ? 1 : -1; };
+var sortByPositionBottom  = function (d1, d2) { return (d1.position > d2.position) ? 1 : -1; };
 var sortByAgentTop  = function (d1, d2) { return (d1.agent.toLowerCase() < d2.agent.toLowerCase()) ? 1 : -1; };
-var sortByAgentBottom  = function (d1, d2) { return (d1.searches_count > d2.searches_count) ? 1 : -1; };
+var sortByAgentBottom  = function (d1, d2) { return (d1.agent.toLowerCase() > d2.agent.toLowerCase()) ? 1 : -1; };
 var sortByIdObjectTop = function (d1, d2) { return (d1.id_object < d2.id_object) ? 1 : -1; };
-var sortByIdObjectBottom  = function (d1, d2) { return (d1.searches_count > d2.searches_count) ? 1 : -1; };
+var sortByIdObjectBottom  = function (d1, d2) { return (d1.id_object > d2.id_object) ? 1 : -1; };
 var sortByIdOfferTop = function (d1, d2) { return (d1.id_offer < d2.id_offer) ? 1 : -1; };
-var sortByIdOfferBottom  = function (d1, d2) { return (d1.searches_count > d2.searches_count) ? 1 : -1; };
+var sortByIdOfferBottom  = function (d1, d2) { return (d1.id_offer > d2.id_offer) ? 1 : -1; };
+var sortByPriceTop = function (d1, d2) { return (d1.price < d2.price) ? 1 : -1; };
+var sortByPriceBottom  = function (d1, d2) { return (d1.price > d2.price) ? 1 : -1; };
 </script>

@@ -1,0 +1,125 @@
+@media(max-width:980px){
+    .blackcircle {
+        width: 150px;
+        height: 150px;
+    }
+    
+}
+@media(max-width:590px){
+    .blackcircle {
+        width: 120px;
+        height: 120px;
+    }
+    .statistic_numeral{
+        font-size:30px;
+        
+    }
+    .statistic_text{
+        font-size: 10px;
+        max-width: 85px;
+    }
+}
+@media(max-width:466px){
+    .blackcircle {
+        width: 100px;
+        height: 100px;
+    }
+    .statistic_numeral{
+        font-size:25px;
+        
+    }
+    .statistic_text{
+        font-size: 8px;
+        max-width: 75px;
+    }
+}
+@media(max-width:400px){
+    .blackcircle {
+        width: 80px;
+        height: 80px;
+    }
+    .budge-item-text{
+        font-size: 12px;
+    }
+    .btn-p{
+        padding: 8px  12px !important;
+    }
+    .statistic_numeral{
+        font-size:20px;
+        
+    }
+    .statistic_text{
+        font-size: 8px;
+        max-width: 50px;
+        line-height: 10px;
+    }
+}
+@media(max-width:1024px){
+    .d-vis-flex{
+        display: flex !important;
+        align-items:center;
+    }
+    .d-vis{
+        display: block !important;
+    }
+    .d-tool-tip-style{
+        display:flex;
+        align-items:center;
+    }
+    table, tbody,tr,td,tfood{
+        display: block;
+    }
+    thead{
+        display: none;
+    }
+    .mt-xs-2{
+        :first-child{
+            margin-top: 0 !important;
+        }
+        margin-top: 0.5rem !important;
+    }
+}
+@media(min-width:1024px){
+    .d-table-hidden{
+        display: block !important;
+    }
+}
+@media(max-width:1056px){
+    .position-sticky{
+        padding-top:2rem !important; 
+    }
+}
+.index-part{
+    padding-left:180px; 
+    padding-right:20px;
+}
+@media(max-width:768px){
+.index-part{
+    padding-left:20px; 
+
+    }
+.header-padding{
+    padding-right: 70px;
+    }
+#sidebarMenu {
+    width: 40%;
+}
+}
+@media(max-width:469px){
+    #sidebarMenu{
+        padding-top: 80px !important;
+    }
+    .btn {
+        font-size: 11px;
+    }
+}
+@media(min-width:767px) and (max-width:800px){
+    #sidebarMenu{
+        padding-top: 80px !important;
+    }
+}
+@media(min-width:1024px) and (max-width:1380px){
+    table{
+        font-size: 12px;
+    }
+}

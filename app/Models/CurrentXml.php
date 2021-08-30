@@ -12,6 +12,7 @@ class CurrentXml extends Model
         'id_flat',
         'bet',
         'name_agent',
+        'price',
         'id_user',
         'id_company',
         'top'

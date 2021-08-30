@@ -16,11 +16,15 @@
 @import 'sidebar';
 @import 'table';
 @import 'button';
+@import 'media';
 @import 'graph';
+@import 'data-picker';
+@import 'tooltip';
+@import 'autorize';
 @import 'dashboard.scss';
 
 body{
-    background-color: #f1f2f3 !important;
+    background-color: #f1f2f3;
 }
 .h2{
     font-weight: bold;
@@ -30,8 +34,9 @@ h3{
     text-transform: uppercase;
     font-weight: 700;
 }
-.form-control{
+.form-control-bet{
     min-width: 50px;
+    max-width: 110px;
 }
 
 

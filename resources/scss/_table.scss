@@ -63,7 +63,7 @@
     padding-top: 5px;
 }
 .table-responsive{
-    margin-top: 20px;
+    margin-top: 10px;
 }
 .budge-block{
     display: flex;
@@ -107,9 +107,6 @@ table{
     line-height: 18px;
     font-size: 14px;
 }
-tbody{
-    //font-weight: 600;
-}
 th{
     color: #060606;
     font-size: 12px;
@@ -120,11 +117,11 @@ th{
 .form-check-input{
     cursor: pointer;
 }
-.main-content{
+.main{
     background-color: #fff !important;
     padding: 30px 32px;
 }
-.main-content>div{
+.main>div{
     min-height: 100%;
 }
 .spin-table{
@@ -148,4 +145,238 @@ td{
 }
 .badge{
     margin-left: auto;
+}
+.topString{
+    background-color: #E7ECFF;
+    //color: #fff !important; 
+    //font-weight: 700;
+}
+.table-container{
+    max-width: 500px;
+    min-width: 100px;
+    word-break: break-all;
+}
+.xs-table-name{
+    color: #060606;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 14px;
+    text-align: left;
+}
+.detail-carousel .ribbon {
+    position: absolute;
+    top: 20px;
+    left: 4px;
+    z-index: 999
+}
+
+.detail-carousel .ribbon+.ribbon {
+    top: 80px
+}
+
+.detail-carousel .ribbon+.ribbon+.ribbon {
+    top: 145px
+}
+.btn.btn-expand,
+.ribbon {
+    position: absolute;
+    text-align: center
+}
+
+.ribbon {
+    top: 10px;
+    left: -11px;
+    z-index: 900;
+    display: inline-block;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: .8rem;
+    line-height: 1.5;
+    text-transform: uppercase;
+    letter-spacing: .3em;
+    padding: 3px 15px 5px;
+    color: #fff
+}
+
+.ribbon+.ribbon {
+    top: 60px
+}
+
+.ribbon+.ribbon+.ribbon {
+    top: 110px
+}
+
+.ribbon+.ribbon+.ribbon+.ribbon {
+    top: 160px
+}
+
+.ribbon:before {
+    content: "";
+    border-left: 12px solid transparent;
+    border-right: 0 solid transparent;
+    border-top: 14px solid #1460a0;
+    position: absolute;
+    bottom: -14px;
+    left: 0
+}
+
+.ribbonPrimary {
+    background-color: #3494e6 !important
+}
+
+.ribbonPrimary:before {
+    border-top-color: #1460a0
+}
+
+.ribbonSecondary {
+    background-color: #868e96 !important
+}
+
+.ribbonSecondary:before {
+    border-top-color: #555b61
+}
+
+.ribbonSuccess {
+    background-color: #28a745 !important
+}
+
+.ribbonSuccess:before {
+    border-top-color: #145523
+}
+
+.ribbonInfo {
+    background-color: #17a2b8 !important
+}
+
+.ribbonInfo:before {
+    border-top-color: #0c525d
+}
+
+.ribbonWarning {
+    background-color: #ffd65a !important
+}
+
+.ribbonWarning:before {
+    border-top-color: #f3b700
+}
+
+.ribbonDanger {
+    background-color: #dc3545 !important
+}
+
+.ribbonDanger:before {
+    border-top-color: #921925
+}
+
+.ribbonLight {
+    background-color: #f8f9fa !important
+}
+
+.ribbonLight:before {
+    border-top-color: #bdc6d0
+}
+
+.ribbonDark {
+    background-color: #343a40 !important
+}
+
+.ribbonDark:before {
+    border-top-color: #060708
+}
+
+.ribbon-gray-100 {
+    background-color: #f8f9fa !important
+}
+
+.ribbon-gray-100:before {
+    border-top-color: #bdc6d0
+}
+
+.ribbon-gray-200 {
+    background-color: #e9ecef !important
+}
+
+.ribbon-gray-200:before {
+    border-top-color: #aeb9c4
+}
+
+.ribbon-gray-300 {
+    background-color: #dee2e6 !important
+}
+
+.ribbon-gray-300:before {
+    border-top-color: #a4afba
+}
+
+.ribbon-gray-400 {
+    background-color: #ced4da !important
+}
+
+.ribbon-gray-400:before {
+    border-top-color: #94a1ae
+}
+
+.ribbon-gray-500 {
+    background-color: #adb5bd !important
+}
+
+.ribbon-gray-500:before {
+    border-top-color: #748290
+}
+
+.ribbon-gray-600 {
+    background-color: #868e96 !important
+}
+
+.ribbon-gray-600:before {
+    border-top-color: #555b61
+}
+
+.ribbon-gray-700 {
+    background-color: #495057 !important
+}
+
+.ribbon-gray-700:before {
+    border-top-color: #1a1d20
+}
+
+.ribbon-gray-800 {
+    background-color: #343a40 !important
+}
+
+.ribbon-gray-800:before {
+    border-top-color: #060708
+}
+
+.ribbon-gray-900 {
+    background-color: #212529 !important
+}
+
+.ribbon-gray-900:before {
+    border-top-color: #000
+}
+.quickview .ribbon {
+    position: absolute;
+    top: 30px;
+    left: -12px;
+    z-index: 999
+}
+
+.quickview .ribbon+.ribbon {
+    top: 80px
+}
+
+.quickview .ribbon+.ribbon+.ribbon {
+    top: 145px
+}
+.tool-xs{
+    position: absolute;
+    top: -20px;
+    right: -7px;
+    color: $primary;
+}
+.tool-xs-1 {
+    position: absolute;
+    top: -7px;
+    right: -7px;
+    color: $primary;
 }
