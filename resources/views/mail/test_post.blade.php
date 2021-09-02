@@ -209,7 +209,7 @@
                                                             <tbody>
                                                                 <tr>
                                                                     <td align="center">
-                                                                        <span>Оптимизатор бюджата ЦИАН</span><br><br>
+                                                                        <span>Оптимизатор бюджета ЦИАН</span><br><br>
                                                                         <span>Телефон: 8 (863) 296-0455<br>Почта: web@enterprise-it.ru</span><br><br>
                                                                         <span>© Интернет-агентство «IT Enterprise»</span><br><br>
                                                                     </td>

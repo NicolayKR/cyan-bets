@@ -1,8 +1,7 @@
 <template>
     <header class="header navbar navbar-dark sticky-top flex-md-nowrap p-0" id="main-header">
         <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="/index">
-            <i class="fab fa-atlassian"></i>
-            Циан автомат
+            <img :src="this.logo"/>
         </a>
         <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation" id="hamburger">
             <span class="navbar-toggler-icon"></span>
@@ -50,6 +49,7 @@ export default {
             nameUser: '',
             budget: 0,
             days_left: 0,
+            logo:'',
         }
     },
     mounted(){
@@ -67,6 +67,7 @@ export default {
                 this.nameUser = response.data.name;
                 this.budget = response.data.budget_days;
                 this.days_left = response.data.days_left;
+                this.logo = response.data.logo;
             });
         },
   } 

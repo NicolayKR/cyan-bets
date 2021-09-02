@@ -26,7 +26,7 @@
                 <input type="email" name="email-reg" id="email-reg" placeholder="Введите вашу почту" v-model="email" required class="form-control " /></div>
                 <div class="mb-3"> 
                 <label for="phone-reg" class="form-label">Телефон <span style="color:red;">*</span></label>
-                <input type="phone" name="phone-reg" id="phone-reg" placeholder="Введите номер телефона" v-model="phone" class="form-control mt-1" /></div>
+                <input type="phone" name="phone-reg" id="phone-reg" v-phone placeholder="Введите номер телефона" v-model="phone" class="form-control mt-1 phone" /></div>
                 <div class="form-check d-flex align-items-center mt-2">
                     <input type="checkbox" class="form-check-input" name="accses_policy" id="accses_policy_2" required :value="checked" v-model="checked" style="top: 7px;">
                     <label class="form-check-label" for="accses_policy_2">Я принимаю условия <a href="https://enterprise-it.ru/policy/" target="_blank"> политики конфиденциальности</a></label>  

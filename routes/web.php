@@ -13,6 +13,7 @@ use App\Models\CurrentXml;
 use App\Models\Statistic;
 use App\Models\StatisticShows;
 use App\Models\errors_publish;
+use App\Models\User;
 use Gaarf\XmlToPhp\Convertor;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -35,6 +36,8 @@ use App\Mail\TestMail;
 Route::view('/','landing')->name('land');
 Route::view('/strategy','strategy')->middleware('auth')->name('strategy');
 Route::view('/index','index')->middleware('auth')->name('index');
+Route::get('registration4549', 'App\Http\Controllers\Auth\RegisterController@showRegistrationForm')->name('register');
+Route::post('registration4549', 'App\Http\Controllers\Auth\RegisterController@register');
 Route::view('/question','question')->middleware('auth')->name('question');
 Route::view('/errors','errors')->middleware('auth')->name('errors');
 Route::view('add-form', 'add-form')->middleware('auth')->name('add-form');
@@ -59,31 +62,6 @@ Route::get('/post', function () {
     return view('mail.test_post');
 })->name('post');
 Route::get('test', function(){
-    date_default_timezone_set("Europe/Moscow");
-    $d = Auth::user()->paid_month;
-    $left = Auth::user()->left_day;  
-    $today  = date("y-m-d");
-    $dateAt = strtotime('+'.$d.' MONTH', strtotime($today));
-    $lastDay = date('Y-m-d', $dateAt);
-    $d1_ts = strtotime($today);
-    $d2_ts = strtotime($lastDay);
-    $seconds = abs($d1_ts - $d2_ts);
-    $days = floor($seconds / 86400);
-    if($left == null){
-        Auth::user()->update(array(
-            'left_day'=>$days,
-        ));
-    }else{
-        if($left!=0){
-            Auth::user()->update(array(
-                'left_day'=>(int)$left-1,
-            ));
-        }
-        else{
-            Auth::user()->update(array(
-                'paid_month'=>0,
-                'left_day'=>NULL,
-            ));
-        }
-    }
+    
+    
 });

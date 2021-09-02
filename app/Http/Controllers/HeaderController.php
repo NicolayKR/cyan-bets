@@ -14,6 +14,18 @@ class HeaderController extends Controller
         $sum = 0;
         $final_array = [];
         $days = Auth::user()->left_day;   
+        if($days == null){
+            $d = Auth::user()->paid_month;
+            $today  = date("y-m-d");
+            $dateAt = strtotime('+'.$d.' MONTH', strtotime($today));
+            $lastDay = date('Y-m-d', $dateAt);
+            $d1_ts = strtotime($today);
+            $d2_ts = strtotime($lastDay);
+            $seconds = abs($d1_ts - $d2_ts);
+            $final_array['days_left'] = floor($seconds / 86400);
+        }else{
+            $final_array['days_left'] = $days;
+        }
         $collection = DB::table('current_xmls')
         ->leftJoin('bets',function ($join) {
             $join->on('current_xmls.id_flat', '=', 'bets.id_flat');
@@ -28,7 +40,7 @@ class HeaderController extends Controller
                 $sum = $sum + $item->crm_bets;
             }
         }
-        $final_array['days_left'] = $days;
+        $final_array['logo'] = '/assets/img/logo_'.Auth::user()->id.'_cl.png';
         $final_array['budget_days'] = $sum;
         $final_array['name'] = Auth::user()->name;
         return $final_array;
