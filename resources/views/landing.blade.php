@@ -118,7 +118,7 @@
 					</li>
 					<li>
 						<i class="far fa-check-square"></i>
-						<span>Поздравляем! Вы получается больше звонков, при меньшем расходе бюджета</span>
+						<span>Поздравляем! Вы получаетe больше звонков, при меньшем расходе бюджета</span>
 					</li>
 				</ul>	
 				<h1 style="font-size: 35px" class="mt-6 mb-6"><span class="main-title">ПОБЕЖДАЙТЕ <span class="prim">ИНТЕЛЛЕКТОМ</span>,<br>а не бюджетами.</span></h1>

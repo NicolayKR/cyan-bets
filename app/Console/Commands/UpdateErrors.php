@@ -59,40 +59,40 @@ class UpdateErrors extends Command
             curl_close($curl);
             $current_error ='';
             $current_warning = '';
-            if ($res->result->offers) {
-                foreach ($res->result->offers as $item) {
-                    if ($item->externalId > 0) {
-                        if(!empty($item->errors) or !empty($item->warnings)){      
-                            if(empty($item->errors)){
-                                $current_warning = $item->warnings[0];
-                                $current_error = 'Ошибок нет';
-                            }
-                            if(empty($item->warnings)){
-                                $current_error = $item->errors[0];
-                                $current_warning = 'Предупреждений нет';
-                            }
-                            if(array_key_exists($item->externalId, $array_object)){
-                                errors_publish::where('id_user', $collection_key->user_id)->where('id_object', $item->externalId)
-                                                ->update(array(
-                                                    'id_offer'=>$item->offerId,
-                                                    'errors'=>$current_error,
-                                                    'warning'=>$current_warning,
-                                                ));
-                            }
-                            else{
-                                $newError = errors_publish::create(array(
-                                    'id_object'=>$item->externalId,
-                                    'id_offer'=>$item->offerId,
-                                    'errors'=>$current_error,
-                                    'warning'=>$current_warning,
-                                    'id_user'=>$collection_key->user_id
-                                ));
-                                $newError->save();
-                            }
+        if($res->result->offers) {
+            foreach ($res->result->offers as $item) {
+                if ($item->externalId > 0) {
+                    if(!empty($item->errors) or !empty($item->warnings)){      
+                        if(empty($item->errors)){
+                            $current_warning = $item->warnings[0];
+                            $current_error = 'Ошибок нет';
+                        }
+                        if(empty($item->warnings)){
+                            $current_error = $item->errors[0];
+                            $current_warning = 'Предупреждений нет';
+                        }
+                        if(array_key_exists($item->externalId, $array_object)){
+                            errors_publish::where('id_user', $collection_key->user_id)->where('id_object', $item->externalId)
+                                            ->update(array(
+                                                'id_offer'=>$item->offerId,
+                                                'errors'=>$current_error,
+                                                'warning'=>$current_warning,
+                                            ));
+                        }
+                        else{
+                            $newError = errors_publish::create(array(
+                                'id_object'=>$item->externalId,
+                                'id_offer'=>$item->offerId,
+                                'errors'=>$current_error,
+                                'warning'=>$current_warning,
+                                'id_user'=>$collection_key->user_id
+                            ));
+                            $newError->save();
                         }
                     }
                 }
             }
+        }
             
         }
         errors_publish::whereRaw('date(updated_at) < DATE_SUB(DATE(NOW()), INTERVAL 8 DAY)')->delete();

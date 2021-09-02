@@ -49,9 +49,9 @@ Route::get('getHeaderData','App\Http\Controllers\HeaderController@getHeaderData'
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::get('/getErrors', 'App\Http\Controllers\TableController@getErrors')->middleware('auth');
 Route::resource('/accounts','App\Http\Controllers\AccountController')->middleware('auth');
-Route::get('/postMail', 'App\Http\Controllers\TableController@postMail')->middleware('auth');
-Route::get('/regMail', 'App\Http\Controllers\TableController@regMail')->middleware('auth');
-Route::get('/buyMail', 'App\Http\Controllers\TableController@buyMail')->middleware('auth');
+Route::get('/postMail', 'App\Http\Controllers\TableController@postMail');
+Route::get('/regMail', 'App\Http\Controllers\TableController@regMail');
+Route::get('/buyMail', 'App\Http\Controllers\TableController@buyMail');
 Route::get('/login', 'App\Http\Controllers\Auth\LoginController@showLoginForm')->name('login');
 Route::post('/login', 'App\Http\Controllers\Auth\LoginController@login');
 Route::get('/password/reset', 'App\Http\Controllers\Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
@@ -62,6 +62,5 @@ Route::get('/post', function () {
     return view('mail.test_post');
 })->name('post');
 Route::get('test', function(){
-    
     
 });

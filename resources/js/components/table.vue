@@ -287,7 +287,7 @@ export default {
             return this.tabelData.filter(elem => {
                 if(String(this.id_object).toLowerCase()==='') return this.tabelData;
                 return String(elem.id_object).toLowerCase().indexOf(String(this.id_object).toLowerCase()) !== -1
-                        ||String(elem.id_offer).toLowerCase().indexOf(String(this.id_object).toLowerCase()) !== -1;
+                        || String(elem.id_offer).toLowerCase().indexOf(String(this.id_object).toLowerCase()) !== -1;
             }).slice(from,to);
         }
     },
@@ -322,7 +322,6 @@ export default {
                 const response = await axios.get(`/getData?&start=${this.start}&end=${this.end}`);
                 if(response.data != 0){
                     this.tabelData = response.data.table_data;
-                    console.log(this.tabelData)
                     this.auction_lenght = response.data.lenght_auction;
                     this.shows_count = response.data.shows_count;
                     this.phone_shows = response.data.phone_shows;

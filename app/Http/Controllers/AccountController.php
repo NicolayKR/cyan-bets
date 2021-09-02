@@ -188,6 +188,7 @@ class AccountController extends Controller
         $array = json_decode(json_encode($xml),TRUE);
         foreach($array['object'] as $item => $current_item) {
             $current_array['id_flat'] = (int)$current_item['ExternalId'];
+            $current_array['price'] = (int)$current_item['BargainTerms']['Price'];
             $current_array['id_company'] = $id;
             if(array_key_exists('Auction', $current_item)){
                 if(array_key_exists('Bet', $current_item['Auction'])){
@@ -217,6 +218,7 @@ class AccountController extends Controller
             $newObject = CurrentXml::create(array(
                 'id_flat' =>$current_array['id_flat'],
                 'bet'=> $current_bet,
+                'price'=>$current_array['price'],
                 'id_user'=> Auth::user()->id,
                 'id_company'=> $id,
                 'name_agent'=>$current_agent_name,

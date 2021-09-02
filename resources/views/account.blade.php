@@ -52,7 +52,7 @@
                             <tr>
                         @empty
                             <tr>
-                                <td colspan="4" class="text-center mt-2"><h3>Данные отсутствуют</h3></td>
+                                <td colspan="6" class="text-center mt-2"><h3 class="mt-1">Данные отсутствуют</h3></td>
                             </tr>
                         @endforelse
                     </tbody>
@@ -94,7 +94,7 @@
                             <tr>
                         @empty
                             <tr class="d-block mt-2 mb-2">
-                                <td colspan="4" class="text-center mt-2 d-block"><h3>Данные отсутствуют</h3></td>
+                                <td colspan="6" class="text-center mt-2 d-block"><h3 class="mt-1">Данные отсутствуют</h3></td>
                             </tr>
                         @endforelse
                     </tbody>
