@@ -5,6 +5,7 @@
 @section('content')
     <div class="row justify-content-center">
         <div class="col-12">
+            <allert-paid></allert-paid>
             <div class="user-text">
                 @if(session('status'))
                 <div class="alert alert-success">

@@ -1,74 +1,32 @@
 <template>
-    <div class="table-responsive">
-        <div class="col-md-10 d-lg-block d-none">
-            <input type="text" v-model="id_object" placeholder="Поиск по id-объекта или id-циана" class="form-control"/>
-        </div> 
-        <table v-if="flagTabel" class="table table-bordered bg-light mt-3 d-lg-block d-none">
-            <thead>
-                <tr>
-                    <th scope="col" style="width: 4%">Название ФИДА</th>
-                    <th scope="col" style="width: 5%">ID объекта</th>
-                    <th scope="col" style="width: 9%">ID Циана</th>
-                    <th scope="col" style="width: 43%">Ошибка</th>
-                    <th scope="col" style="width: 39%">Предупреждение</th>
-                </tr>
-            </thead>
-            <tbody v-if="tabelData!=0">
-                <tr v-for ="(tabel_item,index) in paginatedObject" :key="index" class="flip-list">
-                    <td>{{tabel_item.name_company}}</td>
-                    <td>{{tabel_item.id_object}}</td>
-                    <td>{{tabel_item.id_offer}}</td>
-                    <td><div class="table-container">{{tabel_item.errors}}</div></td>
-                    <td><div class="table-container">{{tabel_item.warning}}</div></td>
-                </tr>
-            </tbody>
-            <tfoot v-if="flagLenght && tabelData!=0">
-                <tr>
-                    <td colspan="5">
-                        <nav aria-label="Page navigation example">
-                            <ul class="pagination justify-content-center mt-3" >
-                                <li class="page-item">
-                                    <a class="page-link" href="#" @click="pageClickBack">Назад</a>
-                                </li>
-                                <li class="page-item" v-for="page in pages" :key="page">
-                                    <a class="page-link" href="#" 
-                                        @click="pageClick(page)"
-                                        :class="{'page_active':page === pageNumber}"
-                                        >{{page}}</a>
-                                </li>     
-                                <li class="page-item">                             
-                                    <a class="page-link" href="#" @click="pageClickUp">Вперед</a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </td>
-                </tr>
-            </tfoot>
-            <tbody v-if="this.tabelData == 0" class="d-block">
-                <tr class="d-block">
-                    <td colspan="5" class="text-center d-block"><h3 class="mt-1">Ошибки отсутствуют</h3></td>
-                </tr>
-            </tbody>
-        </table>
-        <div class="col-md-10 d-lg-none d-block">
-            <input type="text" v-model="id_object" placeholder="Поиск по id-объекта или id-циана" class="form-control"/>
-        </div> 
-        <div class="table-wrapper d-block d-lg-none">
-            <table v-if="flagTabel" class="table table-bordered bg-light mt-3 d-block">
-                <thead class="d-none">
+    <div>
+        <allert-paid/>
+        <div class="table-responsive">
+            <div class="col-md-10 d-lg-block d-none">
+                <input type="text" v-model="id_object" placeholder="Поиск по id-объекта или id-циана" class="form-control"/>
+            </div> 
+            <table v-if="flagTabel" class="table table-bordered bg-light mt-3 d-lg-block d-none">
+                <thead>
+                    <tr>
+                        <th scope="col" style="width: 4%">Название ФИДА</th>
+                        <th scope="col" style="width: 5%">ID объекта</th>
+                        <th scope="col" style="width: 9%">ID Циана</th>
+                        <th scope="col" style="width: 43%">Ошибка</th>
+                        <th scope="col" style="width: 39%">Предупреждение</th>
+                    </tr>
                 </thead>
-                <tbody class="d-block">
-                    <tr v-for ="(tabel_item,index) in paginatedObject" :key="index" class="flip-list d-block">
-                        <td class="d-block"><span class="xs-table-name">Название ФИДА:</span> {{tabel_item.name_company}}</td>
-                        <td class="d-block"><span class="xs-table-name">ID объекта:</span> {{tabel_item.id_object}}</td>
-                        <td class="d-block"><span class="xs-table-name">ID Циана:</span> {{tabel_item.id_offer}}</td>
-                        <td class="d-block"><div class="table-container"><span class="xs-table-name">Ошибка:</span> {{tabel_item.errors}}</div></td>
-                        <td class="d-block"><div class="table-container"><span class="xs-table-name">Предупреждение:</span> {{tabel_item.warning}}</div></td>
+                <tbody v-if="tabelData!=0">
+                    <tr v-for ="(tabel_item,index) in paginatedObject" :key="index" class="flip-list">
+                        <td>{{tabel_item.name_company}}</td>
+                        <td>{{tabel_item.id_object}}</td>
+                        <td>{{tabel_item.id_offer}}</td>
+                        <td><div class="table-container">{{tabel_item.errors}}</div></td>
+                        <td><div class="table-container">{{tabel_item.warning}}</div></td>
                     </tr>
                 </tbody>
-                <tfoot v-if="flagLenght" class="d-block">
-                    <tr class="d-block">
-                        <td colspan="5" class="d-block">
+                <tfoot v-if="flagLenght && tabelData!=0">
+                    <tr>
+                        <td colspan="5">
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination justify-content-center mt-3" >
                                     <li class="page-item">
@@ -88,12 +46,57 @@
                         </td>
                     </tr>
                 </tfoot>
-                <tbody class="d-block" v-if="this.tabelData==0">
+                <tbody v-if="this.tabelData == 0" class="d-block">
                     <tr class="d-block">
                         <td colspan="5" class="text-center d-block"><h3 class="mt-1">Ошибки отсутствуют</h3></td>
                     </tr>
                 </tbody>
             </table>
+            <div class="col-md-10 d-lg-none d-block">
+                <input type="text" v-model="id_object" placeholder="Поиск по id-объекта или id-циана" class="form-control"/>
+            </div> 
+            <div class="table-wrapper d-block d-lg-none">
+                <table v-if="flagTabel" class="table table-bordered bg-light mt-3 d-block">
+                    <thead class="d-none">
+                    </thead>
+                    <tbody class="d-block">
+                        <tr v-for ="(tabel_item,index) in paginatedObject" :key="index" class="flip-list d-block">
+                            <td class="d-block"><span class="xs-table-name">Название ФИДА:</span> {{tabel_item.name_company}}</td>
+                            <td class="d-block"><span class="xs-table-name">ID объекта:</span> {{tabel_item.id_object}}</td>
+                            <td class="d-block"><span class="xs-table-name">ID Циана:</span> {{tabel_item.id_offer}}</td>
+                            <td class="d-block"><div class="table-container"><span class="xs-table-name">Ошибка:</span> {{tabel_item.errors}}</div></td>
+                            <td class="d-block"><div class="table-container"><span class="xs-table-name">Предупреждение:</span> {{tabel_item.warning}}</div></td>
+                        </tr>
+                    </tbody>
+                    <tfoot v-if="flagLenght" class="d-block">
+                        <tr class="d-block">
+                            <td colspan="5" class="d-block">
+                                <nav aria-label="Page navigation example">
+                                    <ul class="pagination justify-content-center mt-3" >
+                                        <li class="page-item">
+                                            <a class="page-link" href="#" @click="pageClickBack">Назад</a>
+                                        </li>
+                                        <li class="page-item" v-for="page in pages" :key="page">
+                                            <a class="page-link" href="#" 
+                                                @click="pageClick(page)"
+                                                :class="{'page_active':page === pageNumber}"
+                                                >{{page}}</a>
+                                        </li>     
+                                        <li class="page-item">                             
+                                            <a class="page-link" href="#" @click="pageClickUp">Вперед</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </td>
+                        </tr>
+                    </tfoot>
+                    <tbody class="d-block" v-if="this.tabelData==0">
+                        <tr class="d-block">
+                            <td colspan="5" class="text-center d-block"><h3 class="mt-1">Ошибки отсутствуют</h3></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </template>

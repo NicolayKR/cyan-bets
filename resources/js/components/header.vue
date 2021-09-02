@@ -8,9 +8,18 @@
         </button>
         <ul class="nav header-padding">
             <li class="nav-item">
-                <span class="nav-link">
-                    <i class="fas fa-clock me-1"></i>
-                    <span class = "me-2">Осталось дней:</span>{{this.days_left}}
+                <span class="nav-link" v-tooltip ="{ 
+                                            content: 'Ваша подписка скоро закончится!', 
+                                            show: false, 
+                                            autoHide: true,
+                                            hideOnTargetClick:true,
+                                            trigger: 'click hover', 
+                                            placement: 'bottom-header',
+                                        }" >
+                    <i v-if="flag_paid" class="fas fa-clock me-1" style="color:red;"></i>
+                    <i v-else class="fas fa-clock me-1"></i>
+                    <span v-if="flag_paid" style="color:red;" class = "me-2">Осталось дней:</span><span v-if="flag_paid" style="color:red;">{{this.days_left}}</span>
+                    <span v-else class = "me-2">Осталось дней:</span><span v-if="!flag_paid">{{this.days_left}}</span>
                 </span>
             </li>
             <li class="nav-item">
@@ -50,6 +59,7 @@ export default {
             budget: 0,
             days_left: 0,
             logo:'',
+            flag_paid: false,
         }
     },
     mounted(){
@@ -67,6 +77,9 @@ export default {
                 this.nameUser = response.data.name;
                 this.budget = response.data.budget_days;
                 this.days_left = response.data.days_left;
+               if((Number(this.days_left))<=5){
+                   this.flag_paid = true;
+               }
                 this.logo = response.data.logo;
             });
         },

@@ -68,14 +68,6 @@
             </div>
         </div>
     </section>
-    <section class="section bg-gray text-center">
-        <div class="container">
-        <h2 class="mb-6"><strong>Получите преимущество над конкурентами.</strong></h2>
-        <p class="lead text-muted">Побеждайте интеллектом, а не бюджетами</p>
-        <hr class="w-5 my-7">
-            <a href="#" data-toggle="modal" data-target="#RegisterModal" class="btn btn-lg btn-round btn-primary">Попробуйте бесплатно</a>
-        </div>
-    </section>
     <div class="modal fade" id="BuyModal" tabindex="-1" role="dialog" aria-labelledby="BuyModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">

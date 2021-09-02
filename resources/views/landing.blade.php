@@ -238,27 +238,22 @@
 
 			</div>
 		</section>
-
-
-		<!--
-		|‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
-		| Pricing
-		|‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
-		!-->
-		<buy-block/>
-		<!--
-		|‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
-		| CTA
-		|‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
-		!-->
+		<buy-block></buy-block>
+		<section class="section bg-gray text-center">
+			<div class="container">
+			<h2 class="mb-6"><strong>Получите преимущество над конкурентами.</strong></h2>
+			<p class="lead text-muted">Побеждайте интеллектом, а не бюджетами</p>
+			<hr class="w-5 my-7">
+				<a href="#" data-toggle="modal" data-target="#RegisterModal" class="btn btn-lg btn-round btn-primary">Попробуйте бесплатно</a>
+			</div>
+		</section>
 		</main>
 		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-			<modal-contact/>
+			<modal-contact></modal-contact>
 		</div>
 		<div class="modal fade" id="RegisterModal" tabindex="-1" role="dialog" aria-labelledby="RegisterModalLabel">
-			<register-modal/>
+			<register-modal></register-modal>
 		</div>
-		<!-- Footer -->
 		<footer class="footer text-white bt-0 py-7" style="background-image: linear-gradient(135deg, #4481eb 0%, #04befe 100%);">
 		<div class="container">
 			<div class="row align-items-center">

@@ -28,11 +28,11 @@ class TableController extends Controller
         $end = $request->query('end'); 
         if($start == 'null' and $end== 'null'){
             $first_date = 'DATE_SUB(DATE(NOW()), INTERVAL 7 DAY)';
-            $second_date = 'DATE(now()+ INTERVAL 1 DAY)';
+            $second_date = 'DATE(now())';
         }
         elseif($end== 'null'){
             $first_date =  "'".(string)$start."'";
-            $second_date = 'DATE(now()+ INTERVAL 1 DAY)';
+            $second_date = 'DATE(now())';
         }
         else{
             $first_date =  "'".(string)$start."'";

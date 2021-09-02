@@ -37,7 +37,30 @@
         margin-bottom: 0;
       }
     }
-  
+    &[x-placement^="bottom-header"] {
+      margin-top: 5px;
+      .tooltip-inner {
+        max-width: 170px;
+        max-height: 150px;
+        background: red;
+        color: white;
+        border-radius: 7px;
+        padding: 5px 5px 4px;
+        p{
+            margin-bottom: 0;
+        }
+      }
+      .tooltip-arrow {
+        border-width: 0 5px 5px 5px;
+        border-left-color: transparent !important;
+        border-right-color: transparent !important;
+        border-top-color: transparent !important;
+        top: -5px;
+        left: calc(50% - 5px);
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+    }
     &[x-placement^="bottom"] {
       margin-top: 5px;
       .tooltip-arrow {

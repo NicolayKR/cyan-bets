@@ -186,46 +186,48 @@ class AccountController extends Controller
         $array_xml_feed = [];
         $xml = simplexml_load_file($collection_firms[0]->xml_feed);
         $array = json_decode(json_encode($xml),TRUE);
-        foreach($array['object'] as $item => $current_item) {
-            $current_array['id_flat'] = (int)$current_item['ExternalId'];
-            $current_array['price'] = (int)$current_item['BargainTerms']['Price'];
-            $current_array['id_company'] = $id;
-            if(array_key_exists('Auction', $current_item)){
-                if(array_key_exists('Bet', $current_item['Auction'])){
-                    $current_bet = $current_item['Auction']['Bet'];
+        if(array_key_exists('object', $array)){
+            foreach($array['object'] as $item => $current_item) {
+                $current_array['id_flat'] = (int)$current_item['ExternalId'];
+                $current_array['price'] = (int)$current_item['BargainTerms']['Price'];
+                $current_array['id_company'] = $id;
+                if(array_key_exists('Auction', $current_item)){
+                    if(array_key_exists('Bet', $current_item['Auction'])){
+                        $current_bet = $current_item['Auction']['Bet'];
+                    }
+                }else{
+                    $current_bet = null;
                 }
-            }else{
-                $current_bet = null;
-            }
-            $current_agent_name = $current_item['SubAgent']['FirstName'].' '.$current_item['SubAgent']['LastName'];
-            if(array_key_exists('PublishTerms', $current_item)){
-                $current_top = '';
-                $current_another_top = '';
-                if(array_key_exists('Services', $current_item['PublishTerms']['Terms']['PublishTermSchema'])){
-                    $current_top = $current_item['PublishTerms']['Terms']['PublishTermSchema']['Services']['ServicesEnum'];
-                }
-                if(array_key_exists('ExcludedServices', $current_item['PublishTerms']['Terms']['PublishTermSchema'])){
-                    $current_another_top = $current_item['PublishTerms']['Terms']['PublishTermSchema']['ExcludedServices']['ExcludedServicesEnum'];
-                }
-                if($current_top == "top3" or $current_another_top == "top3"){
-                    $top = 1;
+                $current_agent_name = $current_item['SubAgent']['FirstName'].' '.$current_item['SubAgent']['LastName'];
+                if(array_key_exists('PublishTerms', $current_item)){
+                    $current_top = '';
+                    $current_another_top = '';
+                    if(array_key_exists('Services', $current_item['PublishTerms']['Terms']['PublishTermSchema'])){
+                        $current_top = $current_item['PublishTerms']['Terms']['PublishTermSchema']['Services']['ServicesEnum'];
+                    }
+                    if(array_key_exists('ExcludedServices', $current_item['PublishTerms']['Terms']['PublishTermSchema'])){
+                        $current_another_top = $current_item['PublishTerms']['Terms']['PublishTermSchema']['ExcludedServices']['ExcludedServicesEnum'];
+                    }
+                    if($current_top == "top3" or $current_another_top == "top3"){
+                        $top = 1;
+                    }else{
+                        $top = 0;
+                    }
                 }else{
                     $top = 0;
                 }
-            }else{
-                $top = 0;
+                $newObject = CurrentXml::create(array(
+                    'id_flat' =>$current_array['id_flat'],
+                    'bet'=> $current_bet,
+                    'price'=>$current_array['price'],
+                    'id_user'=> Auth::user()->id,
+                    'id_company'=> $id,
+                    'name_agent'=>$current_agent_name,
+                    'top' => $top
+                ));
+                $newObject->save();
+                } 
             }
-            $newObject = CurrentXml::create(array(
-                'id_flat' =>$current_array['id_flat'],
-                'bet'=> $current_bet,
-                'price'=>$current_array['price'],
-                'id_user'=> Auth::user()->id,
-                'id_company'=> $id,
-                'name_agent'=>$current_agent_name,
-                'top' => $top
-            ));
-            $newObject->save();
-            } 
         }
     public function updateBalance(){
         $collection_keys = CompanyName::distinct()->select('id','user_id','cyan_key')->get();

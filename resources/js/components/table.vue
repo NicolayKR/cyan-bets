@@ -1,11 +1,12 @@
 <template>
     <div>
+        <allert-paid/>
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-2 pb-2 mb-3">
             <h1 class="h2">Циан Автомат</h1>
         </div>
         <div v-if="flagEmptyFeed">       
             <div class="alert alert-primary" role="alert">
-                Введите свой xml-feed в личном кабинете!
+                Введите свой xml-feed в разделе ФИДЫ!
             </div>
         </div>
         <div class="main">
@@ -188,7 +189,8 @@
                                             placement: 'bottom',
                                         }" 
                                          class="form-control form-control-sm form-control-bet input-value" name="bets" :id ="tabel_item.id" v-model="bets[tabel_item.id]">
-                                        <button  type="button" @click="postNewBet(bets[tabel_item.id],tabel_item.id_object, tabel_item.id_company,tabel_item.id, tabel_item.top)" class="btn btn-primary btn-sm ms-1">OK</button>
+                                        <button v-if="days_left>0" type="button" @click="postNewBet(bets[tabel_item.id],tabel_item.id_object, tabel_item.id_company,tabel_item.id, tabel_item.top)" class="btn btn-primary btn-sm ms-1">OK</button>
+                                        <button v-else type="button" @click="postNewBet(bets[tabel_item.id],tabel_item.id_object, tabel_item.id_company,tabel_item.id, tabel_item.top)" class="btn btn-primary btn-sm ms-1" disabled>OK</button>
                                     </div>
                                 </form>
                             </td>
@@ -204,7 +206,8 @@
                                             placement: 'bottom',
                                         }" 
                                          class="form-control form-control-sm form-control-bet input-value" name="bets" :id ="tabel_item.id" v-model="bets[tabel_item.id]">
-                                        <button  type="button" @click="postNewBet(bets[tabel_item.id],tabel_item.id_object, tabel_item.id_company,tabel_item.id, tabel_item.top)" class="btn btn-primary btn-sm ms-1">OK</button>
+                                        <button v-if="days_left>0" type="button" @click="postNewBet(bets[tabel_item.id],tabel_item.id_object, tabel_item.id_company,tabel_item.id, tabel_item.top)" class="btn btn-primary btn-sm ms-1">OK</button>
+                                        <button v-else type="button" @click="postNewBet(bets[tabel_item.id],tabel_item.id_object, tabel_item.id_company,tabel_item.id, tabel_item.top)" class="btn btn-primary btn-sm ms-1" disabled>OK</button>
                                     </div>
                                 </form>
                             </td>    
@@ -275,6 +278,7 @@ export default {
         msg_top: 'Вводимое число должно делиться на 15',
         msg_no_top: 'Вводимое число должно делиться на 5',
         windowWidth: window.innerWidth,
+        days_left: 0,
         }
     },
     computed:{
@@ -292,6 +296,7 @@ export default {
         }
     },
     mounted(){
+        this.getUserName();
         this.getData();
         window.onresize = () => {
             this.windowWidth = window.innerWidth;
@@ -317,7 +322,13 @@ export default {
                 this.pageNumber++;
             }
         },
+        getUserName(){
+            axios.get(`/getHeaderData`).then(response => {
+                this.days_left = Number(response.data.days_left);
+            });
+        },
         async getData(){
+            this.flagReady = false;
             try{
                 const response = await axios.get(`/getData?&start=${this.start}&end=${this.end}`);
                 if(response.data != 0){

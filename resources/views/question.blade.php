@@ -4,7 +4,8 @@
 
 @section('content')
 <div class="row justify-content-center">
-    <main class="py-4 col-md-10 px-md-4">
+    <allert-paid></allert-paid>
+    <div class="py-4 col-md-10 px-md-4">
         <div class="accordion" id="accordionPanelsStayOpenExample">
             <div class="accordion-item">
                 <h2 class="accordion-header" id="panelsStayOpen-headingNull">
@@ -63,7 +64,7 @@
                 </h2>
                 <div id="panelsStayOpen-collapseFive" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFive">
                     <div class="accordion-body">
-                        Данные строки в таблице получаются в результате ошибочной записи в вашем xml файле, то есть запись с данных уникальным ID ключа циана не является опубликованной. Это происходит в результате неправильного формирования объекта, например если при продаже квартиры вы не указали этаж, и следовательно статистику по нему невозможно получить.
+                        Данные строки в таблице получаются в результате ошибочной записи в вашем xml файле, то есть запись с данных уникального ID ключа циана не является опубликованной. Это происходит в результате неправильного формирования объекта, например если при продаже квартиры вы не указали этаж, и следовательно статистику по нему невозможно получить.
                     </div>
                 </div>
             </div>
@@ -134,6 +135,18 @@
                     <div id="panelsStayOpen-collapseTen" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTen">
                         <div class="accordion-body">
                             Объекты которые являются не опубликованными (разделе "Ошибочные объекты" в ID цина будет так и написано) по какой-либо причины указанный в стробце ошибок. Также стоит обратить внимания на предупреждения, так как они будут засорять ваш личный кабинет циана. Поэтому от них нужно своевременно избавляться. 
+                        </div>  
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="panelsStayOpen-heading11">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse11" aria-expanded="false" aria-controls="panelsStayOpen-collapse11">
+                            Можно ли обновить фид с новыми ставками сразу, не ожидая 30 минут?
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapse11" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-heading11">
+                        <div class="accordion-body">
+                            Такая возможность есть в разделе ФИДЫ, при нажатии на кнопку редактирования нужного вам фида, есть кнопка обновить сейчас. Нажав на нее ранее выданный вам фид будет обновлен.
                         </div>  
                     </div>
                 </div>
